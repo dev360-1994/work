@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "V67hJU5nuCJaFQOT5o6AoOmxauJEDjEyjhjJSriMxkA=",
+  "Source": "LaserTraderApi",
+  "BasePath": "_content/LaserTraderApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "LaserTraderApi\\wwwroot",
+      "Source": "LaserTraderApi",
+      "ContentRoot": "E:\\Development\\Projects\\LaserTrader\\SL-ITWEBDEV-02\\LaserTraderApi\\LaserTraderApi\\wwwroot\\",
+      "BasePath": "_content/LaserTraderApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\Development\\Projects\\LaserTrader\\SL-ITWEBDEV-02\\LaserTraderApi\\LaserTraderApi\\wwwroot\\uploads\\warranties\\zimmer front.jpeg",
+      "SourceId": "LaserTraderApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Development\\Projects\\LaserTrader\\SL-ITWEBDEV-02\\LaserTraderApi\\LaserTraderApi\\wwwroot\\",
+      "BasePath": "_content/LaserTraderApi",
+      "RelativePath": "uploads/warranties/zimmer front.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\warranties\\zimmer front.jpeg"
+    }
+  ]
+}

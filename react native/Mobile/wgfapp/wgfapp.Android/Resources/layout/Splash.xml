@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<RelativeLayout 
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:gravity="center_vertical"
+    android:padding="30dp"
+   android:background="@color/splash_background"
+   android:id="@+id/splashview">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:src = "@drawable/logo_watch"
+        android:layout_marginBottom="170dp" />
+   <TextView
+        android:id="@+id/txtAppVersion"
+        android:text="we  sports!"
+        android:fontFamily="@font/bootstrap_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity= "top"
+        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>

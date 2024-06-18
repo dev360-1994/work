@@ -1,0 +1,27 @@
+﻿<html>
+<body>
+<br />
+<p>Dear [contactFirstName] [contactLastName],
+<br /><br />
+A <b>[productName]</b> has just been posted on TheLaserTrader.com. Please click on the link below to view the item or cut and paste the link into your internet browser address window.
+<br /><br />
+<a href="{WEB_URL}/product-details/[InventoryId]">View here</a><br />
+<br />
+
+If you no longer wish to have this item on your watch list you may use this link to <a href="{WEB_URL}/unwatch?p=[productId]&c=[ContactId]">unwatch</a> the item.
+<br /><br />
+
+If you need assistance or have any questions, please feel free to contact us.
+<br /><br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+</p>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

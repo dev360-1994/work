@@ -1,0 +1,213 @@
+﻿#mvno-admin-main-content {
+    height: calc(100vh - 120px);
+    width: calc(100vw - 120px);
+    min-width: 1152px;
+}
+
+
+#mvno-admin-content-wrapper {
+    height: calc(100% - 120px);
+    display: flex;
+    flex-direction: column;
+}
+
+#mvno-admin-nav {
+    background-color: var(--theme-base);
+    width: 120px;
+    overflow: auto;
+}
+
+    #mvno-admin-nav li:hover,
+    #mvno-admin-nav .mvno-admin-link-active {
+        background-color: var(--theme-dark);
+    }
+
+    #mvno-admin-nav a {
+        border-top: 1px solid rgba(255, 255, 255, .10);
+    }
+
+        #mvno-admin-nav a#mvno-admin-logo {
+            padding: 20px 0;
+        }
+
+        #mvno-admin-nav a,
+        #mvno-admin-nav a:hover {
+            color: var(--color-white);
+            text-decoration: none;
+            padding: 16px 0;
+        }
+
+#mvno-admin-header {
+    background-color: var(--color-white);
+    height: 80px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.025);
+    padding: 0 24px;
+    flex: 0 0 80px;
+}
+
+    #mvno-admin-header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+.mvno-grid-wrapper .k-grid {
+    height: 100%;
+    overflow: auto;
+}
+
+    .mvno-grid-wrapper .k-grid .k-grid-pager {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+    }
+
+.mvno-admin-subscriber-row-actions svg {
+    margin-right: 8px;
+}
+
+.mvno-admin-subscriber-row-actions path {
+    stroke: #1B1565;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round
+}
+
+#mvno-admin-breadcrumb-actions {
+    height: 64px;
+}
+
+    #mvno-admin-breadcrumb-actions + #mvno-admin-page-content {
+        height: calc(100% - 64px);
+    }
+
+#mvno-admin-user-avatar {
+    width: 30px;
+    height: 30px;
+    background-color: var(--theme-base);
+    border-radius: 50%;
+    color: var(--color-white);
+}
+
+#mvno-admin-create-subscriber-steps {
+    flex: 0 0 300px;
+    width: 300px;
+    overflow: auto;
+}
+
+#mvno-admin-subscriber-nlad,
+#mvno-admin-subscriber-edit {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+#mvno-admin-subscriber-nlad {
+    top: 6px;
+}
+
+#mvno-admin-progress-wrapper {
+    border-top: 1px solid #eaeaea;
+}
+
+#mvno-admin-step-progress-container {
+    width: 200px;
+    height: 200px;
+}
+
+
+#mvno-admin-application-progress h6 {
+    color: var(--theme-base);
+}
+
+#mvno-admin-step-progress {
+    width: 120px;
+    height: 120px;
+    margin: 16px auto;
+}
+
+#mvno-admin-application-progress circle,
+#mvno-admin-application-progress circle + path {
+    stroke-width: 16px;
+}
+
+    #mvno-admin-application-progress circle + path {
+        stroke: var(--theme-base);
+    }
+
+
+
+.mvno-admin-color-ineligible {
+    color: #c91f3c;
+}
+
+.mvno-admin-color-eligible {
+    color: #1aa723;
+}
+
+#mvno-admin-eligible label {
+    margin-left: 8px;
+    margin-top: -4px;
+}
+
+.mvno-admin-plan-container {
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(19, 23, 31, 0.07);
+    padding: 16px;
+}
+
+    .mvno-admin-plan-container .k-radio-label {
+        font-size: 1.250rem;
+        color: #1b1565;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+
+    .mvno-admin-plan-container .mvno-admin-plan-details {
+        padding-left: 24px;
+    }
+
+        .mvno-admin-plan-container .mvno-admin-plan-details p {
+            margin: 16px 0;
+        }
+
+
+#mvno-admin-steps li:not(:last-child)::after {
+    content: '';
+    display: block;
+    height: 32px;
+    width: 6px;
+    border-radius: 4px;
+    background-color: var(--theme-base);
+    margin: 8px;
+}
+
+#mvno-admin-steps li .btn {
+    pointer-events: none;
+    background-color: var(--theme-base);
+    color: var(--color-white);
+}
+
+#mvno-admin-steps li.mvno-admin-step-active .btn {
+    background-color: var(--theme-base);
+    color: var(--color-white);
+}
+
+#mvno-admin-steps li.mvno-admin-step-active::after {
+    background-color: var(--theme-base);
+}
+
+#mvno-admin-steps li.mvno-admin-step-active ~ * .btn {
+    background-color: var(--color-alt-light);
+    color: var(--theme-base);
+}
+
+#mvno-admin-steps li.mvno-admin-step-active ~ *::after {
+    background-color: var(--color-alt-light);
+}
+
+.mvno-admin-overlay-panel-title {
+    color: var(--theme-base);
+    font-size: 20px;
+    font-weight: 600;
+}

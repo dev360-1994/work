@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.ExchangeInbox"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:wgfapp.ViewModels"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <!-- xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid" -->
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Exchange Inbox" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="SelectFilm"
+            Command="{Binding InboxPopupCommand}"
+            Order="Secondary"
+            Priority="0"
+            Text="Post Film" />
+        <!--  Clicked="HelpPage_Clicked"  -->
+        <ToolbarItem
+            Name="Help"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<dxg:DataGridView
+                Margin="0,30,0,0"
+                IsColumnHeaderVisible="False"
+                ItemsSource="{Binding ExchangeInboxlists}">
+                <dxg:DataGridView.StartSwipeItems>
+                    <dxg:SwipeItem
+                        BackgroundColor="#26a95e"
+                        Caption="Select"
+                        Command="{Binding InboxPopupCommand}" />
+                </dxg:DataGridView.StartSwipeItems>
+                <dxg:DataGridView.Columns>
+                    <dxg:TextColumn
+                        MinWidth="130"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FieldName="Title" />
+                </dxg:DataGridView.Columns>
+            </dxg:DataGridView>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

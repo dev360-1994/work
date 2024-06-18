@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.ManageUser"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Editors="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Manage User" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Save User"
+            Command="{Binding SaveUserCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="Save User" />
+        <ToolbarItem
+            Name="Delete"
+            Command="{Binding DeleteCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Delete" />
+        <ToolbarItem
+            Name="Invite"
+            Command="{Binding InviteCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Invite" />
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout
+            Grid.Row="0"
+            HorizontalOptions="Center"
+            WidthRequest="350">
+            <Label Padding="0,20,20,0" />
+            <Editors:TextEdit
+                x:Name="firstname"
+                PlaceholderText="First Name"
+                Style="{DynamicResource TextEditStyle}" />
+            <Editors:TextEdit
+                x:Name="lastname"
+                PlaceholderText="Last Name"
+                Style="{DynamicResource TextEditStyle}" />
+            <Editors:TextEdit
+                x:Name="email"
+                PlaceholderText="Email Address"
+                Style="{DynamicResource TextEditStyle}" />
+            <Editors:TextEdit
+                x:Name="mobilephone"
+                PlaceholderText="Mobile Phone"
+                Style="{DynamicResource TextEditStyle}" />
+            <Editors:ComboBoxEdit
+                DisplayMember="Name"
+                ItemsSource="{Binding}"
+                PlaceholderText="Expire Date"
+                Style="{DynamicResource ComboBoxStyle}" />
+            <Editors:ComboBoxEdit
+                DisplayMember="Name"
+                ItemsSource="{Binding}"
+                PlaceholderText="User Role"
+                Style="{DynamicResource ComboBoxStyle}" />
+            <Button
+                Command="{Binding SaveUserCommand}"
+                Style="{DynamicResource BtnNormal}"
+                Text="Save User" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

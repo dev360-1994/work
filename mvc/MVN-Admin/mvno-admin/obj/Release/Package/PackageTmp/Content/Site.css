@@ -1,0 +1,349 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --color-white: #fff;
+    --color-black: #000;
+    --theme-base: #1B1565;
+    --theme-dark: #0E094F;
+    --color-alt-light: #F9F9F9;
+    --color-dark: #212121;
+    --color-base: #1E293B
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    height: 100%;
+}
+
+body {
+    font: 1rem/1.5 'Source Sans 3', sans-serif;
+    background-color: var(--color-alt-light);
+    color: var(--color-base);
+    height: 100%;
+    min-width: 1280px;
+    overflow: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-dark);
+}
+
+a {
+    color: var(--theme-base);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--theme-dark);
+        text-decoration: underline;
+    }
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    ul li {
+        margin: 0;
+        padding: 0;
+    }
+
+.h-0 {
+    height: 0;
+}
+
+@media screen and (max-height: 600px) {
+    .h-0 {
+        height: auto;
+    }
+}
+
+
+.k-grid {
+    border: none;
+}
+
+    .k-grid table {
+        border: none;
+    }
+
+        .k-grid table .k-grid-header {
+            border: none;
+            border: 4px solid red;
+        }
+
+            .k-grid table .k-grid-header .k-table-row {
+                position: sticky;
+                top: 0;
+                border: none;
+                background-color: var(--color-alt-light);
+                z-index: 1;
+            }
+
+                .k-grid table .k-grid-header .k-table-row .k-table-th {
+                    border: none;
+                    padding: 12px 24px;
+                    color: var(--theme-base);
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    font-weight: 700;
+                }
+
+                    .k-grid table .k-grid-header .k-table-row .k-table-th:first-child {
+                        position: sticky;
+                        left: 0;
+                        z-index: 1;
+                        background-color: var(--color-alt-light);
+                    }
+
+        .k-grid table .k-table-tbody {
+            border: none;
+        }
+
+            .k-grid table .k-table-tbody .k-table-row,
+            .k-grid table .k-table-tbody .k-table-row.k-table-alt-row {
+                border: none;
+                background-color: transparent;
+            }
+
+                .k-grid table .k-table-tbody .k-table-row:hover .k-table-td {
+                    background-color: var(--color-alt-light);
+                }
+
+                .k-grid table .k-table-tbody .k-table-row .k-table-td .btn {
+                    height: auto;
+                    font-weight: 600;
+                    color: var(--theme-base);
+                }
+
+                .k-grid table .k-table-tbody .k-table-row .k-table-td {
+                    border: none;
+                    border-bottom: 1px solid var(--color-alt-light);
+                    padding: 12px 24px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    background-color: var(--color-white);
+                }
+
+                    .k-grid table .k-table-tbody .k-table-row .k-table-td:first-child {
+                        position: sticky;
+                        left: 0;
+                    }
+
+
+
+.k-dropdownlist.form-control {
+    display: flex;
+    padding: 0;
+    height: 45px;
+    border-radius: 30px;
+    border-color: #CBD5E1;
+}
+
+    .k-dropdownlist.form-control:hover {
+        background-color: transparent;
+    }
+
+.k-datepicker {
+    border-radius: 30px;
+}
+
+    .k-datepicker .k-button {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+.k-input,
+.k-dropdownlist {
+    height: 45px;
+    background-color: var(--color-white);
+    border-color: #CBD5E1;
+    color: inherit;
+    border-radius: 30px;
+}
+
+    .k-dropdownlist:focus,
+    .k-dropdownlist:hover {
+        background-color: var(--color-white);
+        border-color: #CBD5E1;
+    }
+
+
+    .k-dropdownlist:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    }
+
+
+.k-input-md .k-input-inner {
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    font-size: 16px;
+}
+
+.k-floating-label-container {
+    padding-top: 0;
+    width: 100%;
+}
+
+    .k-floating-label-container.k-empty > .k-label,
+    .k-floating-label-container:focus-within > .k-label,
+    .k-floating-label-container > .k-label,
+    .k-floating-label-container.k-focus > .k-label {
+        top: 0;
+        left: 0;
+        padding: 0 4px;
+        color: #A6ACBE;
+        font-size: 1rem;
+        background-color: var(--color-white);
+        margin-bottom: 0;
+        height: auto;
+        transform: translate(12px, 10px);
+        transition: transform 0.2s ease-out;
+    }
+
+    .k-floating-label-container:focus-within > .k-label,
+    .k-floating-label-container > .k-label,
+    .k-floating-label-container.k-focus > .k-label {
+        transform: translate(12px, -12px);
+    }
+
+    .k-floating-label-container.k-empty:not(.k-focus) > .k-label {
+        opacity: 1;
+    }
+
+.k-datepicker .k-input-button {
+    width: 58px;
+    cursor: text;
+    background-color: transparent;
+    border: none;
+}
+
+fieldset {
+    padding: 12px;
+    border: 1px solid #c3c6d1;
+    border-radius: 5px;
+    position: relative;
+}
+
+    fieldset ~ fieldset {
+        margin-top: 24px;
+    }
+
+    fieldset > legend {
+        color: var(--theme-base);
+        font-size: 0.875rem;
+        font-weight: 600;
+        float: none;
+        width: auto;
+        padding: 0 12px;
+        background-color: #fff;
+    }
+
+
+
+.btn {
+    border-radius: 30px;
+    height: 45px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:disabled,
+.btn-primary[disabled] {
+    background-color: var(--theme-base);
+    border-color: var(--theme-base);
+}
+
+    .btn-primary:hover {
+        background-color: var(--theme-dark);
+        border-color: var(--theme-dark)
+    }
+
+.k-pager {
+    border: none;
+    background-color: var(--color-white);
+}
+
+    .k-pager .k-picker {
+        height: 40px;
+    }
+
+    .k-pager button {
+        border-radius: 50%;
+        color: var(--theme-base);
+    }
+
+        .k-pager button.k-selected {
+            background-color: #EEF2FF;
+            color: var(--theme-base);
+        }
+
+
+    .k-pager .k-pager-info {
+        order: 0;
+    }
+
+    .k-pager .k-pager-numbers-wrap {
+        order: 1;
+    }
+
+
+
+.form-floating > .form-control {
+    padding: 0 1rem;
+    height: 45px;
+    border-radius: 30px;
+    border-color: #CBD5E1;
+}
+
+.form-floating > label {
+    padding: 0 4px;
+    color: #A6ACBE;
+    font-size: 1rem;
+    background-color: var(--color-white);
+    margin-bottom: 0;
+    height: auto;
+    transform: translate(12px, 10px);
+    transition: transform 0.2s ease-out;
+}
+
+.form-floating > .form-control:focus,
+.form-floating > .form-control:not(:placeholder-shown) {
+    padding: 0 1rem;
+}
+
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label,
+    .form-floating > .form-select ~ label {
+        opacity: 1;
+        transform: translate(12px, -12px);
+    }
+
+.k-tabstrip-items-wrapper .k-tabstrip-items {
+    gap: 2px;
+}
+
+    .k-tabstrip-items-wrapper .k-tabstrip-items .k-tabstrip-item {
+        border-radius: 20px 20px 0px 0px;
+        background: #BFCAD8;
+        color: #F9F9F9;
+        font-weight: 700;
+    }
+
+.k-tabstrip-top > .k-tabstrip-items-wrapper .k-item:active,
+.k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-active {
+    background: #E8E8F0;
+    color: #1B1565;
+}

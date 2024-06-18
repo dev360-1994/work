@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="wgfapp.Views.Playlists"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:wgfapp.ViewModels"
+    xmlns:bi="clr-namespace:wgfapp.BootstrapIcons"
+    BackgroundColor="{DynamicResource PageBackgroundColor}"
+    BarBackgroundColor="{DynamicResource PageBackgroundColor}"
+    SelectedTabColor="{DynamicResource PrimaryTextColor}"
+    UnselectedTabColor="DarkGray">
+
+    <!-- 
+        xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+        xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid"
+        xmlns:dxsch="clr-namespace:DevExpress.XamarinForms.Scheduler;assembly=DevExpress.XamarinForms.Scheduler"
+        xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation"
+    -->
+
+    <!--  Navigation page title bar  -->
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Playlists" />
+    </NavigationPage.TitleView>
+
+    <TabbedPage.ToolbarItems>
+        <!--<ToolbarItem
+            Name="ViewFilm"
+            Command="{Binding ViewFilmCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="View Film" />
+        <ToolbarItem
+            Name="ManageFilm"
+            Command="{Binding ManageFilmCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Edit Properties" />
+        <ToolbarItem
+            Name="DownloadFilm"
+            Command="{Binding DownloadFilmCommand}"
+            Order="Secondary"
+            Priority="3"
+            Text="Download" />-->
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="4"
+            Text="Help" />
+    </TabbedPage.ToolbarItems>
+    <!--  Pages can be added as references or inline  -->
+
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource >
+            <bi:IconSource Icon="CalendarEvent"  />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <!--Search-->
+            <!--<SearchBar Placeholder="Search recently viewed ..." Style="{DynamicResource SearchBarStyle}" />-->
+
+            <SearchBar x:Name="searchBar"
+           Placeholder="Search recently viewed ..."
+           Style="{DynamicResource SearchBarStyle}"             
+          SearchCommand="{Binding SearchButtonPressed}"
+           SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text} " />
+
+
+            <Label Text="{Binding LabelTextPress}"/>
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No Recent Film Found"
+                         x:Name="CollectionViewForBinding"
+                        ItemsSource="{Binding RecentPlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox 
+                                                x:Name="checkBoxRecent" 
+                                                Color="{DynamicResource CommonColor}" 
+                                                Margin="5"
+                                                IsChecked="{Binding Favourite}"
+                                                CheckedChanged="OnCheckBoxCheckedChanged" 
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxRecent}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=CollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource>
+            <bi:IconSource Icon="Heart" />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0">
+            <!--SearchBar-->
+            <SearchBar Placeholder="Search favorite ..." Style="{DynamicResource SearchBarStyle}" />
+            <!--SearchBar-->
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No Favorite Film Found"
+                         x:Name="FavouriteCollectionViewForBinding"
+                        ItemsSource="{Binding FavoritePlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox   x:Name="checkBoxRecent" 
+                                                    Color="{DynamicResource CommonColor}" 
+                                                    Margin="5"
+                                                    IsChecked="{Binding Favourite}"
+                                                    CheckedChanged="OnCheckBoxCheckedChanged"
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxRecent}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=FavouriteCollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                               
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+        </StackLayout>
+
+    </ContentPage>
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource>
+            <bi:IconSource Icon="Calendar2Week" />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0">
+            <!--SearchBar-->
+            <SearchBar Placeholder="Search current ..." Style="{DynamicResource SearchBarStyle}" />
+            <!--SearchBar-->
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No Current Film Found"
+                         x:Name="CurrentCollectionViewForBinding"
+                        ItemsSource="{Binding CurrentPlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox   x:Name="checkBoxCurrent" 
+                                                    Color="{DynamicResource CommonColor}" 
+                                                    Margin="5"
+                                                    IsChecked="{Binding Favourite}"
+                                                    CheckedChanged="OnCheckBoxCheckedChanged"
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxCurrent}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=CurrentCollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+
+    </ContentPage>
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource>
+            <bi:IconSource Icon="Calendar3" />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0">
+            <!--SearchBar-->
+            <SearchBar Placeholder="Search all ..." Style="{DynamicResource SearchBarStyle}" />
+            <!--SearchBar-->
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No All Film Found"
+                         x:Name="AllCollectionViewForBinding"
+                        ItemsSource="{Binding AllPlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox 
+                                            x:Name="checkBoxAll" 
+                                            Color="{DynamicResource CommonColor}" 
+                                            Margin="5"
+                                            IsChecked="{Binding Favourite}"
+                                            CheckedChanged="OnCheckBoxCheckedChanged"
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxAll}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=AllCollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource>
+            <bi:IconSource Icon="Tv" />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0">
+            <!--SearchBar-->
+            <SearchBar Placeholder="Search training ..." Style="{DynamicResource SearchBarStyle}" />
+            <!--SearchBar-->
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No Training Film Found"
+                         x:Name="TrainingCollectionViewForBinding"
+                        ItemsSource="{Binding TrainingPlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox 
+                                                x:Name="checkBoxTraining" 
+                                                Color="{DynamicResource CommonColor}" 
+                                                Margin="5"
+                                                IsChecked="{Binding Favourite}"
+                                                CheckedChanged="OnCheckBoxCheckedChanged"   
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxTraining}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=TrainingCollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+        
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.IconImageSource>
+            <bi:IconSource Icon="PatchQuestion" />
+        </ContentPage.IconImageSource>
+        <StackLayout Margin="0">
+            <!--SearchBar-->
+            <SearchBar Placeholder="Search others ..." Style="{DynamicResource SearchBarStyle}" />
+            <!--SearchBar-->
+
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}" Command="{Binding LoadPlaylistCommand}">
+                <!--Favourates and Description-->
+                <CollectionView 
+                        Grid.Row="0"
+                        EmptyView="No Other Film Found"
+                         x:Name="OtherCollectionViewForBinding"
+                        ItemsSource="{Binding OthersPlaylist}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="0">
+                                <Frame
+                                        Grid.Row="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="100"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                        Padding="10"
+                                        Margin="20,2"
+                                        BorderColor="{DynamicResource CommonColor}"
+                                    >
+                                    <StackLayout 
+                                          VerticalOptions="Center"
+                                          Orientation="Horizontal"
+                                          Spacing="4"
+                                          Padding="0"
+                                           >
+                                        <!--Checkbox-->
+                                        <CheckBox 
+                                                x:Name="checkBoxOther" 
+                                                Color="{DynamicResource CommonColor}" 
+                                                Margin="5"
+                                                IsChecked="{Binding Favourite}"
+                                                CheckedChanged="OnCheckBoxCheckedChanged"   
+                                              />
+                                        <Label>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBoxOther}, Path=IsChecked}"
+                                                        Value="true">
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <!--Checkbox-->
+
+                                        <!-- Decription -->
+                                        <StackLayout 
+                                              VerticalOptions="StartAndExpand"
+                                              HorizontalOptions="StartAndExpand"
+                                              Orientation="Vertical"
+                                              Spacing="4"
+                                              Padding="0"
+                                             >
+
+                                            <Label Text="{Binding Name}" />
+                                            <Label Text="{Binding Group}"/>
+                                            <Label Text="{Binding Tags}"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"/>
+                                        </StackLayout>
+                                        <!-- Decription -->
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                      Command="{Binding BindingContext.ViewFilmCommand, Source={x:Reference Name=OtherCollectionViewForBinding}}"
+                                      CommandParameter="{Binding .}"
+                                      NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>

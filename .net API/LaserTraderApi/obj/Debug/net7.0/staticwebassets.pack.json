@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Development\\Projects\\LaserTrader\\SL-ITWEBDEV-02\\LaserTraderApi\\LaserTraderApi\\wwwroot\\uploads\\warranties\\zimmer front.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\warranties\\zimmer front.jpeg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.LaserTraderApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.LaserTraderApi.props",
+      "PackagePath": "build\\LaserTraderApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.LaserTraderApi.props",
+      "PackagePath": "buildMultiTargeting\\LaserTraderApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.LaserTraderApi.props",
+      "PackagePath": "buildTransitive\\LaserTraderApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

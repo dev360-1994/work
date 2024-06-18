@@ -1,0 +1,21 @@
+﻿<html>
+<body>
+Dear [Recipient's Name], <br />
+<p>Thanks for your interest in LaserTrader by Sentient! A member of our team will be in contact within 2 business days.</p>
+<p>
+Check us out in the meantime:</p>
+<a href="{WEB_URL}/product-hotdeal">Hot Deals</a>
+<br>
+<a href="{InstagramPage_URL}">Instagram</a>
+<br /><br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

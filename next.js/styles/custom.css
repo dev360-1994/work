@@ -1,0 +1,372 @@
+.pageTop {
+  margin-top: 130px;
+}
+
+.page-header-title {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 85.7%;
+  color: #000000;
+}
+
+.page-header-button {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  line-height: 134.2%;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+
+.main-navbar-button {
+  padding: 16px 24px;
+  height: 59px;
+  background: linear-gradient(245.18deg, #06CDE5 7.38%, #0A2FFF 101.15%);
+  border-radius: 19px;
+}
+
+.main-navbar-button:hover {
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.12), 0px 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.sentient-title {
+  font-family: DM Sans;
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.sentient-subtitle {
+  font-family: DM Sans;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 115%;
+}
+
+.sentient-contenttitle {
+  font-family: DM Sans;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%;
+  color: #000000;
+}
+
+.sentient-content {
+  font-family: DM Sans;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+  color: #000000;
+}
+
+.sentient-dmmono {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 122.2%;
+  color: #000000;
+}
+
+.sentient-footer {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 134.2%;
+  color: #FFFFFF;
+}
+
+.sentient-footer:hover {
+  color: #aca2a2;
+  cursor: pointer;
+}
+
+.sentient-button {
+  border-radius: 16px;
+  border: solid 3px #2270e4;
+  color: #0c0b0b !important;
+}
+
+.sentient-button:hover {
+  border-radius: 16px;
+  border: solid 3px white;
+  background: linear-gradient(245.18deg, #06CDE5 7.38%, #0A2FFF 101.15%);
+  color: #FFFFFF !important;
+}
+
+.background-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  height: 40vw;
+}
+
+.buy-image {
+  background-image: url("../src/assets/images/pages/landing/LaserBuy.png");
+}
+
+.buy-mobileimage {
+  background-image: url("../src/assets/images/pages/landing/mobile/LaserBuy-mobile.png");
+}
+
+.sell-image {
+  background-image: url("../src/assets/images/pages/landing/LaserSell.png");
+}
+
+.sell-mobileimage {
+  background-image: url("../src/assets/images/pages/landing/mobile/LaserSell-mobile.png");
+}
+
+.buyparts-image {
+  background-image: url("../src/assets/images/pages/landing/LaserBuyparts.png");
+}
+
+.buyparts-mobileimage {
+  background-image: url("../src/assets/images/pages/landing/mobile/LaserBuyparts-mobile.png");
+}
+
+.service-image {
+  background-image: url("../src/assets/images/pages/landing/LaserServices.png");
+}
+
+.service-mobileimage {
+  background-image: url("../src/assets/images/pages/landing/mobile/LaserServices-mobile.png");
+}
+
+.product-height {
+  height: 50vh;
+}
+
+.productText-height {
+  height: 16vh;
+}
+
+@media only screen and (max-width: 1120px) {
+  .productText-height {
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .product-height {
+    width: auto;
+    height: auto;
+  }
+}
+
+.sentient-pan {
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15), 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  background-color: '#FAF9F6';
+}
+
+.header-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  height: 21vw;
+}
+
+.about-image {
+  background-image: url("../src/assets/images/pages/about/background.png");
+}
+
+.about-mobileimage {
+  background-image: url("../src/assets/images/pages/about/background-mobile.png");
+}
+
+.sellpage-image {
+  background-image: url("../src/assets/images/pages/sell/background.png");
+}
+
+.sellpage-mobileimage {
+  background-image: url("../src/assets/images/pages/sell/background-mobile.png");
+}
+
+.servicepage-image {
+  background-image: url("../src/assets/images/pages/service/background.png");
+}
+
+.servicepage-mobileimage {
+  background-image: url("../src/assets/images/pages/service/background-mobile.png");
+}
+
+.repairpage-image {
+  background-image: url("../src/assets/images/pages/repair/background.png");
+}
+
+.repairpage-mobileimage {
+  background-image: url("../src/assets/images/pages/repair/background-mobile.png");
+}
+
+.clinicalpage-image {
+  background-image: url("../src/assets/images/pages/service/clinical/background.png");
+}
+
+.clinicalpage-mobileimage {
+  background-image: url("../src/assets/images/pages/service/clinical/background-mobile.png");
+}
+
+.practicepage-image {
+  background-image: url("../src/assets/images/pages/service/practice/background.png");
+}
+
+.practicepage-mobileimage {
+  background-image: url("../src/assets/images/pages/service/practice/background-mobile.png");
+}
+
+.financingpage-image {
+  background-image: url("../src/assets/images/pages/service/financing/background.png");
+}
+
+.financingpage-mobileimage {
+  background-image: url("../src/assets/images/pages/service/financing/background-mobile.png");
+}
+
+.buypage-image {
+  background-image: url("../src/assets/images/pages/buy/background.png");
+}
+
+.buypage-mobileimage {
+  background-image: url("../src/assets/images/pages/buy/background-mobile.png");
+}
+
+.listdevicepage-image {
+  background-image: url("../src/assets/images/pages/sell/listdevice/background.png");
+}
+
+.listdevicepage-mobileimage {
+  background-image: url("../src/assets/images/pages/sell/listdevice/background-mobile.png");
+}
+
+@media only screen and (max-width: 575px) {
+  .background-image {
+    height: 401px;
+  }
+  .header-image {
+    height: 405px;
+  }
+}
+
+.sentient-gradientgreenbtn {
+  border-radius: 16px;
+  background: linear-gradient(49deg, #4DAC00 0%, #65CF10 100%);
+}
+
+.sentient-gradientbluebtn {
+  border-radius: 16px;
+  background: var(--gradient-1, linear-gradient(45deg, #0A2FFF 0%, #06CDE5 100%));
+}
+
+.sentient-slide-pan {
+  background: #4DAC00;
+  height: 250px;
+}
+
+.sentient-general-pan {
+  background-color: #FAF9F6;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25), 0px 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+}
+
+.sentient-general-pan:hover {
+  border: 1px solid #141414;
+  cursor: pointer;
+}
+
+.sentient-repaire-pan {
+  height: 200px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .sentient-slide-pan {
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 1360px) {
+  .sentient-repaire-pan {
+    height: 18vw;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .sentient-repaire-pan {
+    height: 25vw;
+  }
+  .sentient-slide-pan {
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .sentient-repaire-pan {
+    height: 30vw;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .sentient-slide-pan {
+    height: 250px;
+  }
+  .sentient-repaire-pan {
+    height: 25vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .sentient-slide-pan {
+    height: auto;
+  }
+  .sentient-repaire-pan {
+    height: 40vw;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .sentient-repaire-pan {
+    height: 240px;
+  }
+}
+
+.sentient-submenutext {
+  color: #1F1F1F;
+}
+
+.sentient-submenutext:hover {
+  color: #eca14a;
+}
+
+.main-submenuSelpos {
+  position: fixed;
+  top: -1px;
+  left: 270px;
+  width: 200px;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.12), 0px 8px 32px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.main-submenuServicepos {
+  position: fixed;
+  top: -1px;
+  left: 380px;
+  width: 220px;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.12), 0px 8px 32px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.submenupos {
+  left: 30px;
+}
+
+.background-footer {
+  background: #212121;
+  background-repeat: no-repeat;
+}

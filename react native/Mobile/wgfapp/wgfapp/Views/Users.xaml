@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.Users"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:wgfapp.ViewModels"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <!-- xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid" -->
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Users" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="New User"
+            Command="{Binding NewUserCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="New User" />
+        <ToolbarItem
+            Name="Edit User"
+            Command="{Binding EditUserCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Edit User" />
+        <ToolbarItem
+            Name="Send Invite"
+            Command="{Binding SendInviteCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Send Invite" />
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<Frame
+                Margin="20,20,50,20"
+                Padding="0"
+                BackgroundColor="White"
+                BorderColor="#515151"
+                HasShadow="False"
+                HeightRequest="50">-->
+            <SearchBar Placeholder="Search..." Text="{Binding SearchText}" Style="{DynamicResource SearchBarStyle}" />
+            <!--</Frame>-->
+            <!--<dxg:DataGridView x:Name="dataGrid" ColumnHeaderHeight="70" RowHeight="60" IsColumnHeaderVisible="True"  ItemsSource="{Binding Statisticslists}">
+                <dxg:DataGridView.StartSwipeItems>
+                    <dxg:SwipeItem
+                        BackgroundColor="#26a95e"
+                        Caption="New"
+                        Command="{Binding OnNewInfoCommand}" />
+                </dxg:DataGridView.StartSwipeItems>
+                <dxg:DataGridView.EndSwipeItems>
+                    <dxg:SwipeItem
+                        BackgroundColor="#797bff"
+                        Caption="Manage"
+                        Command="{Binding OnManageCommand}" />
+                    <dxg:SwipeItem
+                        BackgroundColor="#ff3b30"
+                        Caption="Invite"
+                        Command="{Binding OnInviteCommand}" />
+                </dxg:DataGridView.EndSwipeItems>
+            </dxg:DataGridView>-->
+            <Label Padding="0,20,20,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

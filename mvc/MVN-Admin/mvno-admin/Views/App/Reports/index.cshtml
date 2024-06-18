@@ -1,0 +1,205 @@
+@{
+    ViewBag.Title = "Reports";
+}
+
+<style>
+    fieldset a::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background-color: var(--theme-base);
+        display: inline-block;
+        border-radius: 100%;
+        margin: 0 8px 0 6px;
+    }
+</style>
+
+<section id="mvno-admin-breadcrumb-actions" class="d-flex flex-nowrap align-items-center px-4 py-2">
+    <div class="flex-fill text-end">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center justify-content-end m-0">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Reports</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section id="mvno-admin-page-content" class="px-4">
+    <div class="card h-100">
+        <div class="card-body overflow-auto h-100">
+            <!-- Billing -->
+            <fieldset>
+                <legend>Billing</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="/reports/invoices" class="mb-3 d-inline-block">Invoices</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Revenue Report</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Call Detail -->
+            <fieldset>
+                <legend>Call Detail</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">No Usage Orders</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Usage Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">No Usage Orders</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Subscriber Usage Details Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Package Level Usage Report</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Customer -->
+            <fieldset>
+                <legend>Customer</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Account Status</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Orders</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Account History</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Prepayment Balance</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Lifeline -->
+            <fieldset>
+                <legend>Lifeline</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">NLAD Transaction Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">NLAD Subscriber Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">NLAD Duplicate Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Pending Orders Missing Document</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Pending NLAD Orders</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">NLAD Resolution Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">LifeLine Type Report</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- ACP -->
+            <fieldset>
+                <legend>ACP</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">ACP Transaction Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">ACP Subscriber Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">ACP TransferOut Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Enrolled Orders with No Devices</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Active Accounts not enrolled in NLAD</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Claimable Device Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Orders with ACP Errors Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Enrolled Orders Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Orders without reimbursement date Report</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Inventory Reports -->
+            <fieldset>
+                <legend>Inventory Reports</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Inventory</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Aging</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Documents -->
+            <fieldset>
+                <legend>Documents</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Lifeline</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Note Type</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Other -->
+            <fieldset>
+                <legend>Other</legend>
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Affirmation Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">ESN/MDN Search</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Mass Text Report</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">Failed ILEC Requests</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="mb-3 d-inline-block">PortOut Devices Report</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,21 @@
+﻿<html>
+<body>
+Dear [Recipient's Name], <br />
+<p>We received your offer! You are one step closer to being the proud new owner of a <b>[DEVICE NAME]</b></p>
+<p>
+We do our best to get a same day response from the seller, within normal business hours. If not, please be patient. We are working behind the scenes to touch base with the seller.</p>
+<p>You are in great hands, and we will help manage any back and forth negotiations from here on out.</p>
+<p>
+
+<br /><br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

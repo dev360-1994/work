@@ -1,0 +1,132 @@
+@{
+    ViewBag.Title = "Invoices";
+}
+
+<style type="text/css">
+    #mvno-admin-invoices-grid {
+        max-height: calc(100vh - 424px);
+    }
+</style>
+
+<section id="mvno-admin-breadcrumb-actions" class="d-flex flex-nowrap align-items-center px-4 py-2">
+    <div class="flex-fill text-end">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center justify-content-end m-0">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Reports</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section id="mvno-admin-page-content" class="px-4">
+    <div class="card h-100">
+        <div class="card-body overflow-auto h-100">
+
+            <fieldset class="mb-3">
+                <legend>Search Invoices</legend>
+                    <div class="container-fluid p-0">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    @(Html.Kendo().DropDownList()
+                                        .Name("paymentType")
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel("")
+                                        .Label(label =>
+                                        {
+                                            label.Content("Payment Type");
+                                            label.Floating(true);
+                                        })
+                                        .HtmlAttributes(new { @class = "form-control" })
+                                    )
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    @(Html.Kendo().DropDownList()
+                                        .Name("invoiceStatus")
+                                        .DataTextField("Text")
+                                        .DataValueField("Value")
+                                        .OptionLabel("")
+                                        .Label(label =>
+                                        {
+                                            label.Content("Invoice Status");
+                                            label.Floating(true);
+                                        })
+                                        .HtmlAttributes(new { @class = "form-control" })
+                                    )
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    @(Html.Kendo().DatePicker()
+                                        .Name("invoiceFrom")
+                                        .Format("dd-MM-yyyy")
+                                        .Min(DateTime.Today)
+                                        .Label(label =>
+                                        {
+                                            label.Content("Invoice From");
+                                            label.Floating(true);
+                                        })
+                                        .HtmlAttributes(new { @placeholder = "dd-mm-yyyy" })
+                                    )
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-floating mb-3">
+                                    @(Html.Kendo().DatePicker()
+                                        .Name("invoiceTo")
+                                        .Format("dd-MM-yyyy")
+                                        .Min(DateTime.Today)
+                                        .Label(label =>
+                                        {
+                                            label.Content("Invoice To");
+                                            label.Floating(true);
+                                        })
+                                        .HtmlAttributes(new { @placeholder = "dd-mm-yyyy" })
+                                    )
+                                </div>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button class="btn btn-outline-secondary me-2">Reset</button>
+                                <button class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                        </div>
+            </fieldset>
+
+            <div id="mvno-admin-invoices-grid" class="w-100 overflow-auto">
+                @(Html.Kendo().Grid<mvno_admin.Models.Invoices>()
+                .Name("invociesGrid")
+                .Columns(columns =>
+                {
+                    columns.Bound(s => s.mdn).Title("MDN");
+                    columns.Bound(s => s.invoiceNumber).Title("Invoice Number");
+                    columns.Bound(s => s.orderId).Title("Order ID");
+                    columns.Bound(s => s.dueDate).Title("Due Date");
+                    columns.Bound(s => s.totalAmount).Title("Total Amount");
+                    columns.Bound(s => s.openAmount).Title("Open Amount");
+                    columns.Bound(s => s.invoiceStatus).Title("Invoice Status");
+                    columns.Bound(s => s.invoiceType).Title("Invoice Type");
+                    columns.Bound(s => s.author).Title("Author");
+                    columns.Bound(s => s.city).Title("City");
+                    columns.Bound(s => s.stateType).Title("State Type");
+                    columns.Bound(s => s.firstName).Title("First Name");
+                    columns.Bound(s => s.lastName).Title("Last Name");
+                    columns.Bound(s => s.customerPackage).Title("Customer Package");
+                    columns.Bound(s => s.sku).Title("SKU");
+                })
+                .Sortable()
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Read(read => read.Action("GetInvoicesList", "Reports"))
+                )
+                )
+            </div>
+
+        </div>
+    </div>
+</section>

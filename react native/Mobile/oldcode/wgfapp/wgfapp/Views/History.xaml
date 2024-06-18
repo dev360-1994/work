@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.History"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid"
+    xmlns:vm="clr-namespace:wgfapp.ViewModels"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="History" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <dxg:DataGridView
+            x:Name="dataGridView"
+            EditorShowMode="Tap"
+            ItemsSource="{Binding Statisticslists}"
+            ShowAutoFilterRow="True">
+            <dxg:DataGridView.Columns>
+                <dxg:NumberColumn
+                    FieldName="ActivityId"
+                    Width="110"
+                    IsReadOnly="true"
+                    AutoFilterCondition="Equals" />
+                <dxg:TextColumn
+                    FieldName="TeamName"
+                    MinWidth="120"
+                    AutoFilterCondition="Contains" />
+                <dxg:TextColumn
+                    FieldName="FullName"
+                    MinWidth="120"
+                    AutoFilterCondition="Contains" />
+                <dxg:TextColumn
+                    FieldName="Command"
+                    Width="120"
+                    DisplayFormat="{}{0} B" />
+                <dxg:TextColumn
+                    FieldName="Category"
+                    MinWidth="110"
+                    AutoFilterCondition="Contains" />
+                <dxg:DateColumn
+                    FieldName="CreatedDate"
+                    MinWidth="120"
+                    AutoFilterCondition="Equals" />
+
+            </dxg:DataGridView.Columns>
+        </dxg:DataGridView>
+    </StackLayout>
+</ContentPage>

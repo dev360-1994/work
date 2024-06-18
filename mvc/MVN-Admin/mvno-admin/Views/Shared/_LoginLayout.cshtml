@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - My Telerik MVC Application</title>
+    <link href="https://kendo.cdn.telerik.com/themes/7.0.1/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Login.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2023.3.1114/js/jszip.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2023.3.1114/js/kendo.all.min.js"></script>
+    <script src="https://cdn.kendostatic.com/2023.3.1114/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo-ui-license.js")"></script>
+</head>
+<body>
+    <main class="h-100">
+        @RenderBody()
+    </main>
+
+    <footer>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

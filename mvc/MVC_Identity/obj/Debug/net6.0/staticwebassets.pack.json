@@ -1,0 +1,761 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\MVC_Identity.bundle.scp.css",
+      "PackagePath": "staticwebassets\\MVC_Identity.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\js\\views\\display\\index.js",
+      "PackagePath": "staticwebassets\\js\\views\\display\\index.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap4.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.foundation.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.foundation.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.foundation.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.foundation.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.jqueryui.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.jqueryui.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.semanticui.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.semanticui.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.semanticui.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\dataTables.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\jquery.dataTables.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\jquery.dataTables.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\css\\jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\css\\jquery.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_asc.png",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_asc.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_asc_disabled.png",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_asc_disabled.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_both.png",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_both.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_desc.png",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_desc.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_desc_disabled.png",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\images\\sort_desc_disabled.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap4.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap4.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap4.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.bootstrap4.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.foundation.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.foundation.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.foundation.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.foundation.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.jqueryui.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.jqueryui.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.jqueryui.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.jqueryui.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.semanticui.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.semanticui.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.semanticui.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\dataTables.semanticui.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\jquery.dataTables.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\jquery.dataTables.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\DataTables-1.10.16\\js\\jquery.dataTables.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\DataTables-1.10.16\\js\\jquery.dataTables.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\datatables.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\datatables.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\datatables.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\datatables.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\datatables.min.css",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\datatables.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\DataTables\\datatables.min.js",
+      "PackagePath": "staticwebassets\\lib\\DataTables\\datatables.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\.bower.json",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\.bower.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.eot",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.eot"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.svg",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.svg"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.ttf",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.ttf"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.woff",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.woff"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.woff2",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\fonts\\glyphicons-halflings-regular.woff2"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\bootstrap\\dist\\js\\npm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\npm.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\css\\font-awesome.css",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\css\\font-awesome.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\animated.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\animated.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\bordered-pulled.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\bordered-pulled.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\core.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\core.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\fixed-width.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\fixed-width.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\font-awesome.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\font-awesome.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\icons.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\icons.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\larger.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\larger.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\list.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\list.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\mixins.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\mixins.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\path.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\path.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\rotated-flipped.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\rotated-flipped.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\screen-reader.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\screen-reader.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\stacked.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\stacked.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\less\\variables.less",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\less\\variables.less"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_animated.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_animated.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_bordered-pulled.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_bordered-pulled.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_core.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_core.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_fixed-width.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_fixed-width.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_icons.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_icons.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_larger.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_larger.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_list.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_list.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_mixins.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_mixins.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_path.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_path.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_rotated-flipped.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_rotated-flipped.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_screen-reader.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_screen-reader.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_stacked.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_stacked.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\_variables.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\_variables.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\font-awesome\\scss\\font-awesome.scss",
+      "PackagePath": "staticwebassets\\lib\\font-awesome\\scss\\font-awesome.scss"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\AUTHORS.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\AUTHORS.txt"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\external\\jquery\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\external\\jquery\\jquery.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_444444_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_444444_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_555555_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_555555_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_777620_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_777620_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_777777_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_777777_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_cc0000_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_cc0000_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\images\\ui-icons_ffffff_256x240.png",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\images\\ui-icons_ffffff_256x240.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\index.html",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\index.html"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.structure.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.structure.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.structure.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.structure.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.theme.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.theme.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\jquery-ui.theme.min.css",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\jquery-ui.theme.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-ui-1.12.1\\package.json",
+      "PackagePath": "staticwebassets\\lib\\jquery-ui-1.12.1\\package.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation-unobtrusive\\.bower.json",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\.bower.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\.bower.json",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\.bower.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery\\.bower.json",
+      "PackagePath": "staticwebassets\\lib\\jquery\\.bower.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\.gitignore",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\.gitignore"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\README.md",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\README.md"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\bower.json",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\bower.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\jquery.serializejson.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\jquery.serializejson.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\jquery.serializejson.min.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\jquery.serializejson.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\serializeJSON.jquery.json",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\serializeJSON.jquery.json"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\boot.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\boot.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\console.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\console.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine-html.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine-html.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine.css",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine_favicon.png",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jasmine-2.0.0\\jasmine_favicon.png"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jquery-2.1.0.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\jquery-2.1.0.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\zepto-1.1.3.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\lib\\zepto-1.1.3.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec.js",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec_runner_jquery.html",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec_runner_jquery.html"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec_runner_zepto.html",
+      "PackagePath": "staticwebassets\\lib\\marioizquierdo-jquery.serializeJSON\\spec\\spec_runner_zepto.html"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\sweetalert\\sweetalert.css",
+      "PackagePath": "staticwebassets\\lib\\sweetalert\\sweetalert.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\sweetalert\\sweetalert.min.js",
+      "PackagePath": "staticwebassets\\lib\\sweetalert\\sweetalert.min.js"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\toastr\\toastr.min.css",
+      "PackagePath": "staticwebassets\\lib\\toastr\\toastr.min.css"
+    },
+    {
+      "Id": "D:\\Officials\\Demo\\MVC_Identity\\wwwroot\\lib\\toastr\\toastr.min.js",
+      "PackagePath": "staticwebassets\\lib\\toastr\\toastr.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.MVC_Identity.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.MVC_Identity.props",
+      "PackagePath": "build\\MVC_Identity.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.MVC_Identity.props",
+      "PackagePath": "buildMultiTargeting\\MVC_Identity.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.MVC_Identity.props",
+      "PackagePath": "buildTransitive\\MVC_Identity.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

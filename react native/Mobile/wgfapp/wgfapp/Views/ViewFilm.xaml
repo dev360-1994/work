@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--<TabbedPage-->
+<TabbedPage
+    x:Class="wgfapp.Views.ViewFilm"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bi="clr-namespace:wgfapp.BootstrapIcons"
+    xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+
+     >
+
+    <!--
+    xmlns:dxg="http://schemas.devexpress.com/xamarin/2014/forms/datagrid"
+    xmlns:dxg="clr-namespace:DevExpress.XamarinForms.DataGrid;assembly=DevExpress.XamarinForms.Grid"
+    -->
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+             Text="{Binding VideoTitle}" />
+    </NavigationPage.TitleView>
+
+
+    <ContentPage  BackgroundColor="Black">
+        <ContentPage.Title>
+            Video
+        </ContentPage.Title>
+       
+        <StackLayout Margin="0">
+      
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+               
+                    <xct:MediaElement x:Name="mediaElement"
+                          Grid.Row="10"
+                          AutoPlay="True"
+                          ShowsPlaybackControls="True"
+                          VerticalOptions="FillAndExpand"
+                          Source="{Binding ClipSourceUrl}"
+                          Aspect="AspectFill"/>
+                
+                <!--<xct:MediaElement  Source="https://sec.ch9.ms/ch9/5d93/a1eab4bf-3288-4faf-81c4-294402a85d93/XamarinShow_mid.mp4"
+                      ShowsPlaybackControls="True" VerticalOptions="FillAndExpand"/>-->
+                <!--<xct:MediaElement Source="{Binding ClipSourceUrl}"   ShowsPlaybackControls="True" VerticalOptions="FillAndExpand"   />-->
+                <!--<xct:MediaElement Source="{Binding ClipSourceUrl}"   ShowsPlaybackControls="True" VerticalOptions="FillAndExpand"   />-->
+                <Label></Label>
+            
+            </Grid>
+        </StackLayout>
+    </ContentPage>
+
+
+    <ContentPage  BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <ContentPage.Title>
+            Clips
+        </ContentPage.Title>
+
+        <StackLayout Margin="0">
+         
+            <SearchBar Placeholder="Enter text to Search..." Style="{DynamicResource SearchBarStyle}"  />
+           <!--ItemsSource="{Binding Clips}"-->
+            <dg:DataGrid 
+            ItemsSource="{Binding Clips}" 
+            SelectionEnabled="True" 
+            RowHeight="70" 
+            HeaderHeight="50"  
+            BorderColor="#CCCCCC" 
+            HeaderTextColor="#007bff"
+            ActiveRowColor="#007bff"
+            SelectedItem="{Binding SelectedClip}"
+            >
+                <dg:DataGrid.HeaderFontSize>
+                    <OnIdiom x:TypeArguments="x:Double">
+                        <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                        <OnIdiom.Phone>12</OnIdiom.Phone>
+                    </OnIdiom>
+                </dg:DataGrid.HeaderFontSize>
+                <dg:DataGrid.Columns  >
+                    <dg:DataGridColumn Title="Order"   PropertyName="ClipOrder" Width="1*" ></dg:DataGridColumn>
+                    <dg:DataGridColumn Title="QTR" PropertyName="FootballQtr" Width="1*" ></dg:DataGridColumn>
+                    <dg:DataGridColumn Title="ODK" PropertyName="FootballODK" Width="1*" ></dg:DataGridColumn>
+                    <dg:DataGridColumn Title="Result" PropertyName="FootballResult" Width="1*" ></dg:DataGridColumn>
+                    
+                </dg:DataGrid.Columns>
+                <dg:DataGrid.RowsBackgroundColorPalette>
+                    <dg:PaletteCollection>
+                        <Color>#FFFFFF</Color>
+                        <Color>#FFFFFF</Color>
+                    </dg:PaletteCollection>
+                </dg:DataGrid.RowsBackgroundColorPalette>
+            </dg:DataGrid>
+        </StackLayout>
+    </ContentPage>
+
+</TabbedPage>

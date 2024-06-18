@@ -1,0 +1,488 @@
+@{
+    ViewBag.Title = "End User Packages";
+}
+
+
+<section id="mvno-admin-breadcrumb-actions" class="d-flex flex-nowrap align-items-center px-4 py-2">
+    <div class="flex-fill text-end">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center justify-content-end m-0">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Packages</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add Package</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+
+<section id="mvno-admin-page-content" class="px-4">
+    <div class="card h-100">
+        <div class="card-body overflow-auto h-100 py-0">
+
+            <!-- Overview -->
+            <section class="container-fluid sticky-top bg-white py-4">
+                <div class="row">
+                    <div class="col-2">
+                        <span>Active Customers in Package:<strong class="d-block">-</strong></span>
+                    </div>
+                    <div class="col-2">
+                        <span>Effective Package Date:<strong class="d-block">NA</strong></span>
+                    </div>
+                    <div class="col-2">
+                        <span>Expiration Package Date:<strong class="d-block">NA</strong></span>
+                    </div>
+                    <div class="col-2">
+                        <span>Restrictions On effective Date?: <strong class="d-block">-</strong></span>
+                    </div>
+                    <div class="col-2">
+                        <span>Package ID: <strong class="d-block">-</strong></span>
+                    </div>
+                </div>
+            </section>
+
+            <!--  -->
+            <section class="container-fluid">
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("tribal")
+                            .Label("Tribal")
+                            .Value("tribal")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("lifeLine")
+                            .Label("Lifeline")
+                            .Value("lifeLine")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("autoRefresh")
+                            .Label("Auto Refresh")
+                            .Value("autoRefresh")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("autoPaid")
+                            .Label("Auto Paid")
+                            .Value("autoPaid")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("needsCoverage")
+                            .Label("Needs Coverage")
+                            .Value("needsCoverage")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("topUp")
+                            .Label("Topup")
+                            .Value("topup")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("shared")
+                            .Label("Shared")
+                            .Value("shared")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("enabledForIVRPurchase")
+                            .Label("Is Enabled For IVR Purchase?")
+                            .Value("enabledForIVRPurchase")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("webPackage")
+                            .Label("Web Package")
+                            .Value("webPackage")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="col-3 mb-3">
+                        @(Html.Kendo().CheckBox()
+                            .Name("acp")
+                            .Label("ACP")
+                            .Value("acp")
+                            .Checked(false)
+                        )
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("customerPackage")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Customer Package");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea style="height: 100px; resize: none" class="form-control" id="description" placeholder="Description"></textarea>
+                            <label for="description">Description</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("lifeLineServiceType")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Lifeline Service Type");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="usage" placeholder="Usage">
+                            <label for="usage">Usage</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <textarea style="height: 100px; resize: none" class="form-control" id="zipCodes" placeholder="Zip Codes (CSV)"></textarea>
+                            <label for="zipCodes">Zip Codes (CSV)</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <textarea style="height: 100px; resize: none" class="form-control" id="ivrDescription" placeholder="IVR Description"></textarea>
+                            <label for="ivrDescription">IVR Description</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="packagePrice" placeholder="Package Price">
+                            <label for="packagePrice">Package Price</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("billCycle")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Bill Cycle");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DatePicker()
+                                .Name("initialBillDate")
+                                .Format("dd-MM-yyyy")
+                                .Min(DateTime.Today)
+                                .Label(label =>
+                                {
+                                    label.Content("Initial Bill Date");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @placeholder = "dd-mm-yyyy" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("state")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("State");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="pastDueDaysToTriggerHotline" placeholder="Past due days to trigger hotline">
+                            <label for="pastDueDaysToTriggerHotline">Past due days to trigger hotline</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("topups")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Topups");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="externalPackageId" placeholder="External Package ID">
+                            <label for="externalPackageId">External Package ID</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("subscriberPaymentMethod")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Subscriber Payment Method");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="webPackageName" placeholder="Web Package name">
+                            <label for="webPackageName">Web Package Name</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("childCompany")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("Child Company");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea style="height: 100px; resize: none" class="form-control" id="comments" placeholder="Comments"></textarea>
+                            <label for="comments">Comments</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="daysBeforeProcessingInvoiceToSendPendingInvoiceNotification" placeholder="Days before processing invoice to send a 'Pending invoice notification'">
+                            <label for="daysBeforeProcessingInvoiceToSendPendingInvoiceNotification'">Days before processing invoice to send a 'Pending invoice notification'</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="howManyDaysPastDueBeforePastDueNotificationSent" placeholder="How many days past due before a past due notification sent?">
+                            <label for="howManyDaysPastDueBeforePastDueNotificationSent">How many days past due before a past due notification sent</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="howManyDaysBeforeTheInvoiceDueDateToSendTheInvoice" placeholder="How many days before the invoice due date to send the invoice">
+                            <label for="howManyDaysBeforeTheInvoiceDueDateToSendTheInvoice">How many days before the invoice due date to send the invoice?</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="suspendAccountAfterHowManyPastDueDays" placeholder="Suspend account after how many past due days">
+                            <label for="suspendAccountAfterHowManyPastDueDays">Suspend account after how many past due days</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="cancelAccountAfterHowManyPastDueDays" placeholder="Cancel account after how many past due days">
+                            <label for="cancelAccountAfterHowManyPastDueDays">Cancel account after how many past due days</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-floating mb-3">
+                            @(Html.Kendo().DropDownList()
+                                .Name("ACPServiceType")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .OptionLabel("")
+                                .Label(label =>
+                                {
+                                    label.Content("ACP Service Type");
+                                    label.Floating(true);
+                                })
+                                .HtmlAttributes(new { @class = "form-control" })
+                            )
+                        </div>
+                    </div>
+                    <div class="col-12 my-4">
+                        <fieldset>
+                            <div class="container-fluid p-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex align-content-center gap-4 mb-3">
+                                            <div>
+                                                @(Html.Kendo().RadioButton()
+                                                    .Name("sendAlers")
+                                                    .Label("Send Alerts")
+                                                    .Checked(false)
+                                                )
+                                            </div>
+                                            <div>
+                                                @(Html.Kendo().RadioButton()
+                                                    .Name("blockAlerts")
+                                                    .Label("Block Alerts")
+                                                    .Checked(false)
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            @(Html.Kendo().CheckBox()
+                                                .Name("nonUsageByDays")
+                                                .Label("Non Usage by days")
+                                                .Value("Non Usage by days")
+                                                .Checked(false)
+                                            )
+                                            <div class="mt-1">
+                                                @(Html.Kendo().DropDownList()
+                                                    .Name("nonUsageByDaysCount")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel("")
+                                                    .HtmlAttributes(new { @class = "form-control" })
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            @(Html.Kendo().CheckBox()
+                                                .Name("lowBalance")
+                                                .Label("Low Balance by %")
+                                                .Value("Low Balance by %")
+                                                .Checked(false)
+                                            )
+                                            <div class="mt-1">
+                                                @(Html.Kendo().DropDownList()
+                                                    .Name("lowBalancePercentage")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel("")
+                                                    .HtmlAttributes(new { @class = "form-control" })
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong class="d-block">Message:</strong>
+                                        <span>Device has no usage since 15 days. <a class="mx-1" role="button" data-bs-toggle="modal" data-bs-target="#usageMessageModal">Edit</a></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong class="d-block">Message:</strong>
+                                        <span>Balance is low. <a class="mx-1" role="button" data-bs-toggle="modal" data-bs-target="#lowBalanceMessageModal">Edit</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <section class="container-fluid py-3 bg-white position-sticky bottom-0">
+                        <div class="row">
+                            <div class="col text-end">
+                                <button class="btn mx-2">Cancel</button>
+                                <button class="btn btn-primary">Add Package</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+<!-- Usage Message -->
+<div class="modal fade" id="usageMessageModal" tabindex="-1" aria-labelledby="usageMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="usageMessageModalLabel">Update Non Usage Message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <textarea style="height: 100px; resize: none" class="form-control" id="nonUsageMessage" placeholder="Message">Device has no usage since 15 days</textarea>
+                    <label for="nonUsageMessage">Message</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Low Balance Message -->
+<div class="modal fade" id="lowBalanceMessageModal" tabindex="-1" aria-labelledby="lowBalanceMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="lowBalanceMessageModalLabel">Update Balance Message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <textarea style="height: 100px; resize: none" class="form-control" id="lowBalanceMessage" placeholder="Message">Balance is low.</textarea>
+                    <label for="lowBalanceMessage">Message</label>
+                </div>
+                <small>
+                    <strong>Note:</strong>
+                    &commat;Feature and &commat;Value will be appended to the message.
+                </small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update Message</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.Profiles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Editors="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Profile" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="SaveProfile"
+            Command="{Binding SaveProfileCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="Save Profile" />
+        <ToolbarItem
+            Name="ResetPassword"
+            Command="{Binding ResetPasswordCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Reset Password" />
+        <ToolbarItem
+            Name="LeaveTeam"
+            Command="{Binding LeaveTeamCommand}"
+            Order="Secondary"
+            Priority="3"
+            Text="Leave Team" />
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="4"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView
+            VerticalOptions="StartAndExpand"
+            Padding="5,0,5,10">
+            <StackLayout
+                Grid.Row="0"
+                Padding="0,0,10,0"
+                Margin="10,5"
+                
+                HorizontalOptions="Center">
+                <Label
+                    Style="{DynamicResource LblProfileCapStyle}"
+                    FontSize="16"
+                    Text="Update your profile, reset your password or leave this team." />
+                <Editors:TextEdit
+                    x:Name="firstname"
+                    PlaceholderText="First Name"
+                    Keyboard="Default"
+                    Text="{Binding FirstName}"
+                    Style="{DynamicResource TextEditStyle}" />
+                <Editors:TextEdit
+                    x:Name="lastname"
+                    PlaceholderText="Last Name"
+                    Keyboard="Default"
+                    Text="{Binding LastName}"
+                    Style="{DynamicResource TextEditStyle}" />
+                <Editors:TextEdit
+                    x:Name="emailaddress"
+                    Keyboard="Email"
+                    PlaceholderText="Email Address"
+                    Text="{Binding Email}"
+                    ClearIconVisibility="Never"
+                    IsReadOnly="True"
+                    Style="{DynamicResource TextEditStyle}" />
+                <Editors:TextEdit
+                    x:Name="mobilephone"
+                    Keyboard="Telephone"
+                    PlaceholderText="Mobile Phone"
+                    Text="{Binding Mobile}"
+                    Style="{DynamicResource TextEditStyle}" />
+                <Editors:ComboBoxEdit
+                    ItemsSource="{Binding NotificationPreference}"
+                    SelectedItem="{Binding SelectedNotificationPreference}"
+                    DisplayMember="Name"
+                    PlaceholderText="Notification Preference"
+                    Style="{DynamicResource ComboBoxStyle}" />
+                <Editors:ComboBoxEdit
+                    PlaceholderText="Receive Notifications"
+                    ItemsSource="{Binding ReceiveNotification}"
+                    DisplayMember="Name"
+                    SelectedItem="{Binding SelectedReceiveNotification}"
+                    Style="{DynamicResource ComboBoxStyle}" />
+                <Button
+                    Command="{Binding SaveProfileCommand}"
+                    Style="{DynamicResource SaveProfileButton}"
+                    FontAttributes="Bold"
+                    Text="Save Profile" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

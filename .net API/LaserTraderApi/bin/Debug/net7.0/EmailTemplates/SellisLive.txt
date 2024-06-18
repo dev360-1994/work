@@ -1,0 +1,23 @@
+﻿<html>
+<body>
+Dear [Recipient's Name], <br />
+
+<p>
+Your post is live on our open market! <br />
+<a href="{WEB_URL}/product-details/[InventoryId]">View here</a><br />
+<a href="https://www.instagram.com/">share on Insta</a><br />
+</p><p>
+When an interested buyer makes an offer we will be in touch the same business day to share the offer. Please be available as soon as you can to respond! We will help manage the negotiation between you and the buyer every step of the way.</p>
+
+<br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

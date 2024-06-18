@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.Dashboard"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bi="clr-namespace:wgfapp.BootstrapIcons"
+    xmlns:cp="clr-namespace:Xam.Plugin.SimpleColorPicker;assembly=Xam.Plugin.SimpleColorPicker"
+    xmlns:behaviors="clr-namespace:wgfapp.Behaviors"
+    Title="Dashboard"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Style="{DynamicResource TitleBarStyle}"
+            Margin="-20,0,0,0"
+            Text="Dashboard" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem
+            Command="{Binding ChangeColorCommand}"
+            Clicked="ToolbarItem_Clicked"
+            Order="Primary"
+            Priority="1">
+            <ToolbarItem.IconImageSource>
+                <bi:IconSource
+                    Icon="Palette"
+                    Size="Large"
+                    Color="{Binding SelectedColor}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem
+            Command="{Binding SwitchCommand}"
+            IconImageSource="{Binding ThemeIcon}"
+            Order="Primary"
+            Priority="1">
+        </ToolbarItem>-->
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        x:Name="MainGrid"
+        Margin="0"
+        HorizontalOptions="FillAndExpand"
+        RowSpacing="20"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="*" />
+            <!--<RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />-->
+        </Grid.RowDefinitions>
+        <!--<BoxView Grid.Row="1" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="2" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding UnreadMessageCount, StringFormat='Unread messages ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>
+            <BoxView Grid.Row="3" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="4" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding UpcomingEventsCount, StringFormat='Upcoming Events ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>
+            <BoxView Grid.Row="5" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="6" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding PendingExchangeCount, StringFormat='Pending Exchanges ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>
+            <BoxView Grid.Row="7" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="8" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding NewlyAddedPlaylistCount, StringFormat='Newly Added Playlists ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>
+            <BoxView Grid.Row="9" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="10" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding LastViewedPlaylistCount, StringFormat='Last Viewed Playlists ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>
+            <BoxView Grid.Row="11" Style="{DynamicResource GraySeparator}" />
+            <Expander Grid.Row="12" HorizontalOptions="FillAndExpand">
+                <Expander.Header>
+                    <Grid>
+                        <Label
+                            FontSize="Medium"
+                            Text="{Binding UpcomingPracticesCount, StringFormat='Upcoming Practices ({0})'}"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Label"
+                                    Value="True">
+                                    <Setter Property="FontAttributes" Value="Bold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Image Style="{DynamicResource ExpanderImageStyle}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                                    <Setter Property="Source" Value="ic_collapse" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Expander.Header>
+                <StackLayout
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start">
+                    <Label Text="Some content goes here" TextColor="{DynamicResource PrimaryTextColor}" />
+                </StackLayout>
+            </Expander>-->
+        <Grid
+            Grid.Row="0"
+            Padding="20,0,20,20"
+            VerticalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="auto" />
+                <RowDefinition
+                    Height="auto" />
+                <RowDefinition
+                    Height="auto" />
+
+            </Grid.RowDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Spacing="5"
+                HorizontalOptions="End"
+                Orientation="Horizontal">
+                <!--<StackLayout
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding ChangeColorCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="Color"
+                        Style="{DynamicResource LblUserGreatingStyle}" />
+                    <Image
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        HeightRequest="25"
+                        WidthRequest="25">
+                        <Image.Source>
+                            <bi:IconSource
+                                Icon="Palette"
+                                Size="Large"
+                                Color="{DynamicResource SecondaryColor}" />
+                        </Image.Source>
+                    </Image>
+                </StackLayout>-->
+                <!--<BoxView
+                    Style="{DynamicResource VerticalSeparator}"
+                    Margin="5,1" />-->
+                <StackLayout
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="8">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding SwitchCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        HeightRequest="25"
+                        WidthRequest="25"
+                        Source="{Binding ThemeIcon}" />
+                    <Label
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Text="{Binding SelectedThemeName}"
+                        Style="{DynamicResource LblUserGreatingStyle}" />
+                </StackLayout>
+            </StackLayout>
+            <Label
+                x:Name="LblUserGreating"
+                Grid.Row="1"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="Center"
+                Style="{DynamicResource LblUserGreatingStyle}"
+                Text="{Binding UserName, StringFormat='Hello {0}!'}" />
+            <Frame
+                Grid.Row="1"
+                Style="{DynamicResource frmRole}"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                BackgroundColor="{Binding SelectedColor}">
+                <Label
+                    x:Name="LblUserRole"
+                    Style="{DynamicResource lblRole}"
+                    TextColor="White"
+                    Text="{Binding Role}" />
+            </Frame>
+
+            <Frame
+                Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                Margin="0,0,0,10"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Picker
+                        x:Name="PCTeams"
+                        Title="Select Team"
+                        Grid.Column="0"
+                        ItemsSource="{Binding Teams}"
+                        ItemDisplayBinding="{Binding TeamName}"
+                        SelectedItem="{Binding SelectedTeam}"
+                        Style="{DynamicResource PkrTitleStyle}">
+                        <Picker.Behaviors>
+                            <behaviors:EventToCommandBehaviour
+                                EventName="SelectedIndexChanged"
+                                Command="{Binding SwitchTeamCommand}" />
+                        </Picker.Behaviors>
+                    </Picker>
+                    <ImageButton
+                        x:Name="BtnDropdown"
+                        Grid.Column="1"
+                        Clicked="BtnDropdown_Clicked"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{DynamicResource BtnDropdown}"
+                        VerticalOptions="FillAndExpand" />
+                </Grid>
+            </Frame>
+
+            <!-- Dashboard Alert -->
+
+            <!-- Dashboard Messages Unread -->
+            <Frame
+                Grid.Row="{Binding MessageUnreadRow}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="#cce5ff"
+                Padding="10,5"
+                BorderColor="#b8daff"
+                IsClippedToBounds="True"
+                CornerRadius="4"
+                IsVisible="{Binding IsVisibleMessageUnread}"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="0">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding MessageUnreadCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Image HorizontalOptions="Start" >
+                            <Image.Source>
+                                <bi:IconSource Icon="InfoCircleFill" Color="#004085" Size="Large"  />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                        x:Name="lblMessageUnread"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        Style="{DynamicResource Dashboard}"
+                            TextColor="#004085"
+                        Padding="5"
+                        Text="{Binding DashboardAlerts.MessagesUnread, StringFormat='You have {0} unread message(s).'}" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+             <!--Dashboard Messages Unread -->
+
+             <!--Dashboard Calender Day-->
+            <Frame
+                Grid.Row="{Binding CalendarDayRow}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="#fff3cd"
+                Padding="10,5"
+                BorderColor="#ffeeba"
+                IsClippedToBounds="True"
+                CornerRadius="4"
+                IsVisible="{Binding IsVisibleCalendarDay}"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="0"
+                    
+                    >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding CalendarCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Image HorizontalOptions="Start" >
+                            <Image.Source>
+                                <bi:IconSource Icon="ExclamationTriangleFill" Color="#856404" Size="Large"  />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                        x:Name="lblCalendarDay"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        Style="{DynamicResource Dashboard}"
+                        TextColor="#856404"
+                        Padding="5"
+                        Text="{Binding DashboardAlerts.CalendarDay, StringFormat='You have {0} event(s) in the 24 hours.'}" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <!--  Dashboard Calender Day-->
+
+            <!--Dashboard Calendar Week -->
+            <Frame
+                Grid.Row="{Binding CalendarWeekRow}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+               BackgroundColor="#cce5ff"
+                Padding="10,5"
+                BorderColor="#b8daff"
+                IsClippedToBounds="True"
+                CornerRadius="4"
+                IsVisible="{Binding IsVisibleCalendarWeek}"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="0"
+                    
+                    >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding CalendarCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Image HorizontalOptions="Start" >
+                            <Image.Source>
+                                <bi:IconSource Icon="InfoCircleFill" Color="#004085" Size="Large"  />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                        x:Name="lblCalendarWeek"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        Style="{DynamicResource Dashboard}"
+                        TextColor="#004085"
+                        Padding="5"
+                        Text="{Binding DashboardAlerts.CalendarWeek, StringFormat='You have {0} event(s) in the next week.'}" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            
+            <!--Dashboard CalendarWeek -->
+
+
+            <!--Dashboard ExchangeInbox-->
+            <Frame
+                Grid.Row="{Binding ExchangeRow}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+               BackgroundColor="#cce5ff"
+                Padding="10,5"
+                BorderColor="#b8daff"
+                IsClippedToBounds="True"
+                CornerRadius="4"
+                IsVisible="{Binding IsVisibleExchange}"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="0"
+                    
+                    >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding ExchangeCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Image HorizontalOptions="Start" >
+                            <Image.Source>
+                                <bi:IconSource Icon="InfoCircleFill" Color="#004085" Size="Large"  />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                        x:Name="lblExchangeInbox"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        Style="{DynamicResource Dashboard}"
+                        TextColor="#004085"
+                        Padding="5"
+                        Text="{Binding DashboardAlerts.ExchangeInbox, StringFormat='You have {0} exchange(s) in your Inbox.'}" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <!--Dashboard ExchangeInbox-->
+
+            <!--Dashboard FileUpload-->
+            <Frame
+                Grid.Row="{Binding PlaylistRow}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                 BackgroundColor="#d4edda"
+                Padding="10,5"
+                BorderColor="#d4edda"
+                IsClippedToBounds="True"
+                CornerRadius="4"
+                IsVisible="{Binding IsVisiblePlaylist}"
+                Style="{DynamicResource frmDashboad}">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout
+                    VerticalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="4"
+                    Padding="0"
+                    
+                    >
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding PlaylistCommand}" />
+                        </StackLayout.GestureRecognizers>
+                        <Image HorizontalOptions="Start" >
+                            <Image.Source>
+                                <bi:IconSource Icon="CheckCircleFill" Color="#155724" Size="Large"  />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                        x:Name="lblPlaylist"
+                        Grid.Row="1"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        Style="{DynamicResource Dashboard}"
+                        TextColor="#155724"
+                        Padding="5"
+                        Text="{Binding DashboardAlerts.FileUpload, StringFormat='You have {0} film(s) recently uploaded.'}" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <!--Dashboard FileUpload-->
+
+            
+            <!-- Dashboard Alerts Ends -->
+        </Grid>
+
+        <!-- Change Color Popup Start -->
+        <ScrollView
+            x:Name="SLColorPickerContainer"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            IsVisible="{Binding IsChangeColorPopupVisible}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Padding="20"
+            BackgroundColor="#DD000000">
+            <Grid
+                x:Name="GRColorPicker"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand"
+                BackgroundColor="White"
+                Margin="20,0,20,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="44" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="5"
+                    Command="{Binding CloseChangeColorCommand}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                    <ImageButton.Source>
+                        <bi:IconSource
+                            Icon="XCircle"
+                            Size="Medium"
+                            Color="Black" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <cp:ColorPickerMixer
+                    x:Name="CPNavigationColor"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    Color="{Binding SelectedColor, Mode=TwoWay}"
+                    Padding="10,5" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Margin="10"
+                    Text="Apply"
+                    Command="{Binding SaveColorCommand}" />
+
+
+            </Grid>
+        </ScrollView>
+
+        <!-- Change Color Popup Over -->
+
+
+    </Grid>
+</ContentPage>

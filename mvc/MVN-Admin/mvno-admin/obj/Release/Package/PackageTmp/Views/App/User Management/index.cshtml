@@ -1,0 +1,342 @@
+@{
+    ViewBag.Title = "User Management";
+}
+
+<style type="text/css">
+    #mvno-admin-roles-grid {
+        max-height: calc(100vh - 350px);
+        height: 100%;
+    }
+</style>
+
+<section id="mvno-admin-breadcrumb-actions" class="d-flex flex-nowrap align-items-center px-4 py-2">
+    <div class="flex-fill">
+
+    </div>
+    <div class="flex-grow-0">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center justify-content-end m-0">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Management</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+
+<section id="mvno-admin-page-content" class="px-4">
+    <div class="card h-100">
+        <div class="card-body overflow-auto h-100">
+
+            <section id="mvno-admin-subscriber-actions">
+                <div class="d-flex align-items-center flex-nowrap">
+                    <div class="flex-fill d-flex align-items-center gap-2">
+                        <!-- Search -->
+                        <div class="mb-0">
+                            <label for="mvno-admin-search" class="form-label d-none">Search</label>
+                            <input type="text" aria-label="Search" class="form-control" id="mvno-admin-search" placeholder="Search...">
+                        </div>
+                        <button class="btn btn-outline-secondary">
+                            Reset
+                        </button>
+                    </div>
+                    <div class="flex-grow-0">
+                        <button class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                <path d="M14.5 3.5V7.5C14.5 7.76522 14.6054 8.01957 14.7929 8.20711C14.9804 8.39464 15.2348 8.5 15.5 8.5H19.5M14.5 3.5H7.5C6.96957 3.5 6.46086 3.71071 6.08579 4.08579C5.71071 4.46086 5.5 4.96957 5.5 5.5V19.5C5.5 20.0304 5.71071 20.5391 6.08579 20.9142C6.46086 21.2893 6.96957 21.5 7.5 21.5H12M14.5 3.5L19.5 8.5M19.5 8.5V13.5M14.5 19.5H21.5M21.5 19.5L18.5 16.5M21.5 19.5L18.5 22.5" stroke="#1B1565" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span>Export</span>
+                        </button>
+                        <!-- Manage Roles -->
+                        <button class="btn btn-primary mx-2" type="button" data-bs-toggle="modal" data-bs-target="#manageRolesModal">
+                            Manage Roles
+                        </button>
+                        <!-- Add User -->
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                            Create New User
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mvno-admin-subsciber-grid" class="w-100 overflow-auto mt-2">
+                @(Html.Kendo().Grid<mvno_admin.Models.Users>()
+                .Name("usersGrid")
+                .Columns(columns =>
+                {
+                    columns.Bound(s => s.userId).Title("User ID");
+                    columns.Bound(s => s.username).Title("Username");
+                    columns.Bound(s => s.firstName).Title("First Name");
+                    columns.Bound(s => s.lastName).Title("Last Name");
+                    columns.Bound(s => s.company).Title("Company");
+                    columns.Bound(s => s.email).Title("Email");
+                    columns.Bound(s => s.roles).Title("Roles");
+                    columns.Bound(s => s.userId)
+                        .Title("Actions")
+                        .ClientTemplate("<button class='btn p-0' type='button' onClick='changePassword()'>Change Password</button>")
+                        .Encoded(false);
+                    })
+                .Sortable()
+                //.Pageable(pageable => pageable
+                //    .PageSizes(new[] { 25, 50, 100, 200 })  // Specify the available page sizes
+                //    .ButtonCount(5)
+                //)
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .PageSize(20)
+                    .Read(read => read.Action("GetUsersList", "UserManagement"))
+                )
+                //.Events(events => events
+                //    .DataBound("onGridDataBound")
+                //)
+                )
+            </section>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Modal to Add User -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addUserLabel">Create New User</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="username" placeholder="Username">
+                                <label for="username">Username</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="password" placeholder="Password">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="email" placeholder="Email">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                @(Html.Kendo().DropDownList()
+                                     .Name("roles")
+                                     .DataTextField("Text")
+                                     .DataValueField("Value")
+                                     .OptionLabel("")
+                                     .Label(label =>
+                                     {
+                                         label.Content("Roles");
+                                         label.Floating(true);
+                                     })
+                                     .HtmlAttributes(new { @class = "form-control" })
+                                 )
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                @(Html.Kendo().DropDownList()
+                                 .Name("company")
+                                 .DataTextField("Text")
+                                 .DataValueField("Value")
+                                 .OptionLabel("")
+                                 .Label(label =>
+                                 {
+                                     label.Content("Company");
+                                     label.Floating(true);
+                                 })
+                                 .HtmlAttributes(new { @class = "form-control" })
+                             )
+                            </div>
+                        </div>
+                        <div class="clearfix my-2"></div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                                <label for="firstName">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="middleName" placeholder="Middle Name">
+                                <label for="middleName">Middle Name</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                                <label for="lastName">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                @(Html.Kendo().DatePicker()
+                                    .Name("dateOfBirth")
+                                    .Format("dd-MM-yyyy")
+                                    .Min(DateTime.Today)
+                                    .Label(label =>
+                                    {
+                                        label.Content("Date of Birth");
+                                        label.Floating(true);
+                                    })
+                                    .HtmlAttributes(new { @placeholder = "dd-mm-yyyy" })
+                                )
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastSsn" placeholder="Last 4 SSN">
+                                <label for="lastSsn">Last 4 SSN</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="rapId" placeholder="RAP Rep ID">
+                                <label for="rapId">RAP Rep ID</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="address" placeholder="Address">
+                                <label for="address">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="city" placeholder="City">
+                                <label for="city">City</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                @(Html.Kendo().DropDownList()
+                                     .Name("state")
+                                     .DataTextField("Text")
+                                     .DataValueField("Value")
+                                     .OptionLabel("")
+                                     .Label(label =>
+                                     {
+                                         label.Content("State");
+                                         label.Floating(true);
+                                     })
+                                     .HtmlAttributes(new { @class = "form-control" })
+                                 )
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="zip" placeholder="Zip">
+                                <label for="zip">Zip</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to Manage Roles -->
+<div class="modal fade" id="manageRolesModal" tabindex="-1" aria-labelledby="manageRolesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="manageRolesLabel">Manage Roles</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section id="mvno-admin-roles-grid" class="w-100 overflow-auto">
+                    @(Html.Kendo().Grid<mvno_admin.Models.Roles>()
+                    .Name("rolesGrid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(s => s.role).Title("Role");
+                        columns.Bound(s => s.usersAssigned).Title("Users Assigned");
+                        columns.Bound(s => s.description).Title("Description");
+                        columns.Bound(s => s.isActive).Title("Is Active");
+                        columns.Bound(s => s.role)
+                            .Title("Actions")
+                            .ClientTemplate("<button class='btn p-0'>Disable</button>")
+                            .Encoded(false);
+                    })
+                    .Sortable()
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .Read(read => read.Action("GetRolesList", "UserManagement"))
+                    )
+                )
+                </section>
+
+                <fieldset class="mt-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="form-floating flex-fill">
+                            <input type="text" class="form-control" id="newRole" placeholder="New Role">
+                            <label for="newRole">New Role</label>
+                        </div>
+                        <div class="form-floating flex-fill">
+                            @(Html.Kendo().DropDownList()
+                                 .Name("roleType")
+                                 .DataTextField("Text")
+                                 .DataValueField("Value")
+                                 .OptionLabel("")
+                                 .Label(label =>
+                                 {
+                                     label.Content("Role Type");
+                                     label.Floating(true);
+                                 })
+                                 .HtmlAttributes(new { @class = "form-control" })
+                             )
+                        </div>
+                        <button class="btn btn-primary">Add Role</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to Change Password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="changePasswordLabel">Change Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="newPassword" placeholder="New Password">
+                    <label for="newPassword">New Password</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    changePassword = () => {
+        const changePasswordModal = new bootstrap.Modal(document.getElementById('changePasswordModal'))
+        changePasswordModal.show();
+    }
+</script>

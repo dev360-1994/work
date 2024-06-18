@@ -1,0 +1,27 @@
+﻿<html>
+<body>
+<b>Contact Information:</b><br />
+First Name: [contactFirstName]<br />
+Last Name: [contactLastName]<br />
+Company: [contactCompanyName]<br />
+Address1: [contactAddress1]<br />
+Address2: [contactAddress2]<br />
+City: [contactCity]<br />
+State: [stateName]<br />
+Zip: [contactZip]<br />
+Country: [countryName]<br />
+Email: [contactEmail]<br />
+Office Phone: [contactPhone]<br />
+Mobile: [contactMobile]<br />
+<br />
+<b>Watching:</b><br />
+------------PRODUCTS------------<br />
+[ProductName]<br/>
+<br/>
+<b>Comments:</b> [comments]
+<br />
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

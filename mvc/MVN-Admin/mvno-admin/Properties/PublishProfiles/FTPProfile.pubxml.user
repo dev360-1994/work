@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAemyuDaGAvU+QHtKqjynYRwAAAAACAAAAAAAQZgAAAAEAACAAAADt2zfbnf330swq83Lm0Ub9wYHvDUNV+EolWuO7Vpr4JAAAAAAOgAAAAAIAACAAAAAwxy+Ic05SALYFWfv8WCplWisJStWTUrWnTYLrS53uLYAAAADDRdVlkpqrrIu/1w5Ht/aWc6RvMev8mYR8c4vWE8azYREi0EpaO8J0J+MK4YZ0RayyGxfV3OJ/Y3K5FV+BzAeTq+aJ5cRLu40jb7Npjg0m56pJgZwK5TAJA9LLvXAGl3RS5fpj9/t72h8QLda9mLOS6KICg+Wm8kuk04RNTJHNJEAAAAAFLqiYpW38N+q7cytau4e93rwRtuAmoioKGwaNEE2ehSv5P1lJRYjH4qr+pC/SK2QdfRXQhEt86haWTneHY4zr</EncryptedPassword>
+    <_PublishTargetUrl>ftps://waws-prod-blu-459.ftp.azurewebsites.windows.net/site/wwwroot/mvno-admin</_PublishTargetUrl>
+    <History>True|2023-12-26T15:31:28.7216991Z;True|2023-12-25T19:08:19.8974327+01:00;True|2023-12-24T21:08:49.7747778+01:00;True|2023-12-20T00:34:35.9632655+01:00;True|2023-12-20T00:28:21.5344525+01:00;True|2023-12-20T00:14:24.6636556+01:00;False|2023-12-19T23:54:03.3043130+01:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/10/2013 18:29:20</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 18:29:20</publishTime>
+    </File>
+    <File Include="bin/ar-AE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-BH/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-DJ/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-DZ/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-EG/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-ER/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-IL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-IQ/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-JO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-KM/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-KW/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-LB/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-LY/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-MA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-MR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-OM/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-PS/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-QA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-SA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-SD/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-SO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-SS/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-SY/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-TD/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-TN/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ar-YE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/bg-BG/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/cs-CZ/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/da-DK/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/de-AT/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/de-CH/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/de-DE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/de-LI/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/el-GR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/en-AU/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/en-CA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/en-GB/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-AR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-BO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-CL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-CO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-CR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-DO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-EC/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-ES/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-GT/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-HN/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-MX/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-NI/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-PA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-PE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-PR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-PY/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-US/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-UY/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/es-VE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fa-IR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fi-FI/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-BE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-CA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-CD/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-CH/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-CI/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-CM/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-FR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-HT/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-LU/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-MA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-MC/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-ML/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/fr-SN/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/he-IL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/hr-HR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/hu-HU/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/hy-AM/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/it-CH/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/it-IT/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ja-JP/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/Kendo.Mvc.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 13:48:56</publishTime>
+    </File>
+    <File Include="bin/mk-MK/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/mvno_admin.dll">
+      <publishTime>12/26/2023 16:27:52</publishTime>
+    </File>
+    <File Include="bin/mvno_admin.pdb">
+      <publishTime>12/26/2023 16:27:52</publishTime>
+    </File>
+    <File Include="bin/nb-NO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 08:09:56</publishTime>
+    </File>
+    <File Include="bin/nl-BE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/nl-NL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/pl-PL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/pt-BR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/pt-PT/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ro-RO/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/ru-RU/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/sk-SK/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/sq-AL/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/sr-Latn-RS/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/sv-SE/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>11/05/2016 05:55:52</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/28/2022 01:41:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/28/2022 01:42:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 16:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/28/2022 01:42:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/28/2022 01:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/28/2022 01:42:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/28/2022 01:42:50</publishTime>
+    </File>
+    <File Include="bin/Telerik.FontIcons.dll">
+      <publishTime>08/17/2023 13:43:06</publishTime>
+    </File>
+    <File Include="bin/Telerik.SvgIcons.dll">
+      <publishTime>08/17/2023 13:46:12</publishTime>
+    </File>
+    <File Include="bin/tr-TR/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/uk-UA/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/vi-VN/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>01/23/2014 14:57:34</publishTime>
+    </File>
+    <File Include="bin/zh-CN/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/zh-HK/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="bin/zh-TW/Kendo.Mvc.resources.dll">
+      <publishTime>11/14/2023 06:34:30</publishTime>
+    </File>
+    <File Include="Content/App.css">
+      <publishTime>12/26/2023 16:13:26</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css.map">
+      <publishTime>12/08/2023 19:10:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Content/Login.css">
+      <publishTime>12/25/2023 13:24:39</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>12/26/2023 16:12:02</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Images/accent.png">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Images/bullet.png">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Images/heroAccent.png">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Images/LoginBackground.jpg">
+      <publishTime>12/25/2023 12:56:54</publishTime>
+    </File>
+    <File Include="libman.json">
+      <publishTime>12/15/2023 14:22:45</publishTime>
+    </File>
+    <File Include="Project_Readme.html">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js">
+      <publishTime>12/15/2023 09:04:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js.map">
+      <publishTime>12/08/2023 19:10:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.js">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.js">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.min.map">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.js">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.js">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.1.slim.min.map">
+      <publishTime>12/08/2023 19:09:10</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>12/08/2023 19:09:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>12/08/2023 19:09:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>12/08/2023 19:09:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>12/08/2023 19:09:12</publishTime>
+    </File>
+    <File Include="Scripts/kendo-ui-license.js">
+      <publishTime>12/10/2023 16:33:19</publishTime>
+    </File>
+    <File Include="Scripts/popper.min.js">
+      <publishTime>12/10/2023 14:39:06</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>12/08/2023 19:09:11</publishTime>
+    </File>
+    <File Include="Views/App/Agents/index.cshtml">
+      <publishTime>12/09/2023 16:27:46</publishTime>
+    </File>
+    <File Include="Views/App/Alerts/index.cshtml">
+      <publishTime>12/09/2023 16:28:03</publishTime>
+    </File>
+    <File Include="Views/App/Dashboards/index.cshtml">
+      <publishTime>12/09/2023 16:28:18</publishTime>
+    </File>
+    <File Include="Views/App/Devices/Add/index.cshtml">
+      <publishTime>12/14/2023 20:27:51</publishTime>
+    </File>
+    <File Include="Views/App/Devices/index.cshtml">
+      <publishTime>12/25/2023 12:53:15</publishTime>
+    </File>
+    <File Include="Views/App/Devices/View/index.cshtml">
+      <publishTime>12/15/2023 15:01:42</publishTime>
+    </File>
+    <File Include="Views/App/Packages/Add/AddPackage.cshtml">
+      <publishTime>12/25/2023 18:54:34</publishTime>
+    </File>
+    <File Include="Views/App/Packages/Add/index.cshtml">
+      <publishTime>12/21/2023 21:38:47</publishTime>
+    </File>
+    <File Include="Views/App/Packages/index.cshtml">
+      <publishTime>12/26/2023 16:26:26</publishTime>
+    </File>
+    <File Include="Views/App/Port In/index.cshtml">
+      <publishTime>12/09/2023 16:28:50</publishTime>
+    </File>
+    <File Include="Views/App/Reports/index.cshtml">
+      <publishTime>12/21/2023 21:38:47</publishTime>
+    </File>
+    <File Include="Views/App/Reports/List/Invoices.cshtml">
+      <publishTime>12/21/2023 21:38:47</publishTime>
+    </File>
+    <File Include="Views/App/Subscribers/Add/index.cshtml">
+      <publishTime>12/26/2023 16:08:29</publishTime>
+    </File>
+    <File Include="Views/App/Subscribers/index.cshtml">
+      <publishTime>12/26/2023 11:47:02</publishTime>
+    </File>
+    <File Include="Views/App/Subscribers/View/index.cshtml">
+      <publishTime>12/26/2023 15:49:05</publishTime>
+    </File>
+    <File Include="Views/App/Support/index.cshtml">
+      <publishTime>12/09/2023 16:30:52</publishTime>
+    </File>
+    <File Include="Views/App/Tools/index.cshtml">
+      <publishTime>12/20/2023 20:47:21</publishTime>
+    </File>
+    <File Include="Views/App/User Management/index.cshtml">
+      <publishTime>12/20/2023 20:44:21</publishTime>
+    </File>
+    <File Include="Views/App/_ViewStart.cshtml">
+      <publishTime>12/08/2023 19:26:40</publishTime>
+    </File>
+    <File Include="Views/Login/index.cshtml">
+      <publishTime>12/25/2023 13:25:50</publishTime>
+    </File>
+    <File Include="Views/Login/_ViewStart.cshtml">
+      <publishTime>12/08/2023 19:27:08</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>12/08/2023 19:09:04</publishTime>
+    </File>
+    <File Include="Views/Shared/_AppLayout.cshtml">
+      <publishTime>12/26/2023 16:22:51</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>12/08/2023 19:10:57</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginLayout.cshtml">
+      <publishTime>12/25/2023 13:29:04</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>12/08/2023 19:10:57</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>12/08/2023 19:10:47</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/26/2023 16:28:55</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

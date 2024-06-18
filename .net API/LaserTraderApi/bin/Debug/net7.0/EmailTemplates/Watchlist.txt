@@ -1,0 +1,22 @@
+﻿<html>
+<body>
+Dear [Recipient's Name], <br />
+<p>You’re on the list! You will be notified whenever a new <b>[ProductName]</b> is posted to our site for sale. <br />
+In the meantime, check out our <a href="{WEB_URL}/product-hotdeal">hot deals</a> !<br />
+And follow us on <a href="{InstagramPage_URL}">social</a>
+ <br />
+The email also needs a link to <a href="{WEB_URL}/unwatch?p={productId}&c={ContactId}">unwatch</a>
+</p>
+
+<br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

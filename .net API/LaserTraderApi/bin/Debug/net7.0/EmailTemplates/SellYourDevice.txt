@@ -1,0 +1,21 @@
+﻿<html>
+<body>
+Dear [Recipient's Name], <br />
+
+<p>
+Thanks for submitting to list your device! Your submission is under review and will go live the same day if submitted within business hours (M-F, 9-5 mountain time).</p>
+<p>You will receive a confirmation email once your posting goes live.</p>
+<p>In the meantime, what are your plans for the sales earnings? Looking for another device? check out our inventory of <a href="{WEB_URL}/products?bluedot=1">certified devices</a> !</p>
+
+<br /><br />
+Best regards,<br />
+TheLaserTrader.com<br />
+Toll Free 866-597-6895<br />
+Email: <a href="mailto:info@thelasertrader.com">info@thelasertrader.com</a><br />
+Web: <a href="{WEB_URL}">TheLaserTrader</a>
+
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.Playbook"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:wgfapp.Extention"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Playbook" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <controls:PDFView
+            x:Name="pdfView"
+            HeightRequest="1000"
+            IsPDF="True"
+            VerticalOptions="FillAndExpand"
+            WidthRequest="1000" />
+    </ContentPage.Content>
+</ContentPage>

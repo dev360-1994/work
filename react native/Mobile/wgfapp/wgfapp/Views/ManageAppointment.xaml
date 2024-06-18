@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.ManageAppointment"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Ext="clr-namespace:wgfapp.Extention"
+    xmlns:controls="clr-namespace:wgfapp"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            x:Name="lblTitle"
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="{Binding Title}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem
+            x:Name="TiSave"
+            Command="{Binding SaveCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Save" />
+        <controls:BindableToolbarItem
+            x:Name="TiDelete"
+            Command="{Binding DeleteCommand}"
+            IsVisible="{Binding IsEditing}"
+            Order="Secondary"
+            Priority="2"
+            Text="Delete" />
+        <controls:BindableToolbarItem
+            x:Name="TiHelp"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <Grid
+                Margin="0"
+                Padding="30"
+                ColumnSpacing="10"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="20"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{DynamicResource ImgTextStyle}" />
+                <Ext:ExtEntry
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Style="{DynamicResource TxtSearchStyle}"
+                    Text="{Binding Name}" />
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="10,0"
+                    Style="{DynamicResource GraySeparator}" />
+                <Image
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Source="ic_color"
+                    Style="{DynamicResource ImgAppointment}" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Style="{DynamicResource LblLabelStyle}"
+                    Text="Label" />
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="0"
+                    Padding="0,0,10,0"
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LabelCommand}" NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Style="{DynamicResource LblLabelValStyle}" Text="{Binding Label}">
+                         <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLabelTapGestureRecognizerTapped" />
+                         </Label.GestureRecognizers>
+                    </Label>
+                    <Picker x:Name="pickerLabel" IsVisible="false" Style="{DynamicResource PkrTitleStyle}" FontSize="16" ItemsSource="{Binding LabelList}" ItemDisplayBinding="{Binding LabelText}" SelectedItem="{Binding SelectedLabel}"/>
+                    <Frame
+                        Padding="0"
+                        HasShadow="False"
+                        CornerRadius="10"
+                        BackgroundColor="{Binding SelectedLabelColor}"
+                        HeightRequest="20"
+                        HorizontalOptions="Start"
+                        WidthRequest="20" />
+                </StackLayout>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{DynamicResource LblStatusStyle}"
+                    Text="Status" />
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="0"
+                    Padding="0,0,10,0"
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding StatusCommand}" NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                    <Label Style="{DynamicResource LblStatusValueStyle}" Text="{Binding Status}" >
+                         <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStatusTapGestureRecognizerTapped" />
+                         </Label.GestureRecognizers>
+                    </Label>
+                    <Picker x:Name="pickerStatus" IsVisible="false" Style="{DynamicResource PkrTitleStyle}" FontSize="16" ItemsSource="{Binding StatuslList}" ItemDisplayBinding="{Binding LabelText}" SelectedItem="{Binding SelectedStatus}"/>
+                    <Frame
+                        Padding="0"
+                        HasShadow="False"
+                        CornerRadius="10"
+                        BackgroundColor="{Binding SelectedStatusColor}"
+                        HeightRequest="20"
+                        HorizontalOptions="Start"
+                        WidthRequest="20" />
+                </StackLayout>
+                <BoxView
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="10,0"
+                    Style="{DynamicResource GraySeparator}" />
+                <Image
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Source="ic_clock_time"
+                    Style="{DynamicResource ImgAppointment}" />
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Style="{DynamicResource LblAllDaysStyle}"
+                    Text="All day" />
+                <Switch
+                    x:Name="SWAllDayEvent"
+                    Grid.Row="5"
+                    Grid.Column="2"
+                    IsToggled="{Binding IsAllDay}"
+                    OnColor="{DynamicResource TertiaryTextColor}"
+                    ThumbColor="{DynamicResource TertiaryTextColor}" />
+                <DatePicker
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Date="{Binding StartDate}"
+                    FontSize="16"
+                    Format="ddd, MMM dd, yyyy"
+                    TextColor="Gray" />
+                <TimePicker
+                    Grid.Row="6"
+                    Grid.Column="2"
+                    FontSize="16"
+                    Format="hh:mm tt"
+                    TextColor="{DynamicResource CommonColor}"
+                    Time="{Binding StartTime}">
+                    <TimePicker.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Source={x:Reference SWAllDayEvent}, Path=IsToggled}"
+                            TargetType="TimePicker"
+                            Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </TimePicker.Triggers>
+                </TimePicker>
+                <DatePicker
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Date="{Binding EndDate}"
+                    FontSize="16"
+                    Format="ddd, MMM dd, yyyy"
+                    TextColor="{DynamicResource CommonColor}" />
+
+                <TimePicker
+                    Grid.Row="7"
+                    Grid.Column="2"
+                    FontSize="16"
+                    Format="hh:mm tt"
+                    TextColor="{DynamicResource CommonColor}"
+                    Time="{Binding EndTime}">
+                    <TimePicker.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Source={x:Reference SWAllDayEvent}, Path=IsToggled}"
+                            TargetType="TimePicker"
+                            Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </TimePicker.Triggers>
+                </TimePicker>
+                <BoxView
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="10,0"
+                    Style="{DynamicResource GraySeparator}" />
+                <Image
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Source="ic_refresh"
+                    Style="{DynamicResource ImgAppointment}" />
+                <Label
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Style="{DynamicResource LblRepeatStyle}"
+                    Text="Repeat" />
+                <Label
+                    Grid.Row="9"
+                    Grid.Column="2"
+                    Style="{DynamicResource LblWeeklyStyle}"
+                    Text="Weekly">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RepeatCommand}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button
+                    x:Name="btnSaveAppointment"
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Command="{Binding SaveCommand}"
+                    Style="{DynamicResource DefaultButtonStyle}"
+                    Text="Save Appointment"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="180" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

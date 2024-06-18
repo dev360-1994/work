@@ -1,0 +1,16 @@
+﻿<html>
+<body>
+Fullname: [FullName]<br />
+Company: [Company]<br />
+Address: [Address]<br />
+Phone: [Phone]<br />
+Email: [Email]<br />
+Make: [Make]<br />
+Model: [Model]<br />
+Year: [Year]
+<br />
+<br />
+<p style="Margin:0;mso-line-height-rule:exactly;font-family:'DM Sans';line-height:18px;letter-spacing:0;font-size:12px">
+<b>Disclaimer:</b> "This email and any attachments or contents are confidential and may also be privileged. If you are not the intended recipient, please notify us immediately and delete the email from your system. Any unauthorized disclosure, copying, distribution, or reliance on the contents of this email is strictly prohibited."</p>
+</body>
+</html>

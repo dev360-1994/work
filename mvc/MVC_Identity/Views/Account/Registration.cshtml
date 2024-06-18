@@ -1,0 +1,90 @@
+﻿@model MVC_Identity.DTO.RegistrationModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login_layout">
+        <div class="white_box">
+            <form asp-action="Registration" method="post">
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" asp-for="Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Username</label>
+                    <input type="text" class="form-control" asp-for="UserName" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="text" class="form-control" asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Role</label>
+                    <select class="form-select" asp-for="Role">
+                        <option value="" disabled selected>-- Select a Role --</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Role"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Phone Number</label>
+                    <input type="text" class="form-control" asp-for="PhoneNumber" id="RegisterUser_Contact" />
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" asp-for="Password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label>Password Confirm</label>
+                    <input type="password" class="form-control" asp-for="PasswordConfirm" />
+                    <span class="text-danger" asp-validation-for="PasswordConfirm"></span>
+                </div>
+
+                @if (TempData["msg"] != null)
+                {
+                    <div class="mb-3">
+                        @TempData["msg"]
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary w-100 me-1"> Sign Up</button>
+                <div class="text-center mt-2">
+                    <a class="btn btn-link w-100" href="/Account/Login"> Already a user! Click here to Sign In</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    @section Scripts{
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        document.getElementById("RegisterUser_Contact").addEventListener("keypress", function (event) {
+            // Check if the pressed key is a numeric key (0-9) or the Backspace key
+            if (!event.key.match(/[0-9]|Backspace/)) {
+                // Prevent the keypress
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

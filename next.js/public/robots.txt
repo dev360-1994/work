@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+Disallow: /provider-login
+Disallow: /contact
+
+
+Sitemap: https://www.thelasertrader.com/sitemap.x

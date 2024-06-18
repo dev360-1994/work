@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="wgfapp.Views.Practice"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Editors="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Label
+            Padding="-20,0,0,0"
+            Style="{DynamicResource TitleBarStyle}"
+            Text="Practice Plans" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding EditTemplateCommnad}"
+            Order="Secondary"
+            Priority="2"
+            Text="Edit Template" />
+        <ToolbarItem
+            Command="{Binding UploadTemplateCommnad}"
+            Order="Secondary"
+            Priority="2"
+            Text="Upload Template" />
+        <ToolbarItem
+            Command="{Binding ViewLibraryCommnad}"
+            Order="Secondary"
+            Priority="2"
+            Text="View Library" />
+        <ToolbarItem
+            Name="HelpPage"
+            Command="{Binding HelpCommand}"
+            Order="Secondary"
+            Priority="2"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="{StaticResource PageBackgroundColor}"
+            Margin="0"
+            Padding="20"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                Margin="0"
+                Padding="0"
+                ColumnSpacing="5"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="StartAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Editors:DateEdit
+                    Grid.Column="0"
+                    Margin="0"
+                    BorderThickness="2"
+                    Date="{Binding CurrentDate}"
+                    DisplayFormat="dddd, MMMM dd, yyyy"
+                    PlaceholderText="Date"
+                    Style="{StaticResource DateEditStyle}" />
+                <Grid
+                    Grid.Column="1"
+                    Margin="0"
+                    Padding="0"
+                    ColumnSpacing="5"
+                    HorizontalOptions="StartAndExpand"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        BorderColor="LightGray"
+                        BorderWidth="1"
+                        Command="{Binding PreviousDateCommand}"
+                        CornerRadius="5"
+                        ImageSource="ic_leftArrow"
+                        Style="{DynamicResource DefaultButtonStyle}"
+                        >
+                       
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        BorderColor="LightGray"
+                        BorderWidth="1"
+                        Command="{Binding NextDateCommand}"
+                        CornerRadius="5"
+                        ImageSource="ic_rightArrow"
+                        Style="{DynamicResource DefaultButtonStyle}" >
+                        
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Frame
+                Margin="0,10"
+                Grid.Row="1"
+                Style="{DynamicResource frameBorder}">
+                <WebView
+                    x:Name="Webview"
+                    HorizontalOptions="FillAndExpand"
+                    Source="{Binding CurrentPracticePlan.Html}"
+                    VerticalOptions="FillAndExpand" />
+            </Frame>
+            <Grid
+                Grid.Row="2"
+                Margin="0"
+                Padding="0,5"
+                ColumnSpacing="30"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="LightGray"
+                    BorderWidth="1"
+                    Command="{Binding AddNewCommand}"
+                    CornerRadius="5"
+                    IsEnabled="{Binding IsAddNewEnable}"
+                    Style="{DynamicResource PlusButtonStyle}">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding IsAddNewEnable}"
+                            Value="false">
+                            <Setter
+                                Property="ImageSource"
+                                Value="ic_DisablePlus" />
+                         
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    BorderColor="LightGray"
+                    BorderWidth="1"
+                    Command="{Binding EditCommand}"
+                    CornerRadius="5"
+                    IsEnabled="{Binding IsEditEnable}"
+                    Style="{DynamicResource PencilButtonStyle}">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding IsEditEnable}"
+                            Value="false">
+                            <Setter
+                                Property="ImageSource"
+                                Value="ic_DisablePencil" />
+                        </DataTrigger>
+                    </Button.Triggers>
+
+                </Button>
+                <Button
+                    Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    BorderColor="LightGray"
+                    BorderWidth="1"
+                    Command="{Binding RemoveCommand}"
+                    CornerRadius="5"
+                    IsEnabled="{Binding IsRemoveEnable}"
+                    Style="{DynamicResource TrashButtonStyle}">
+                    <Button.Triggers>
+                        <DataTrigger
+                            TargetType="Button"
+                            Binding="{Binding IsRemoveEnable}"
+                            Value="false">
+                            <Setter
+                                Property="ImageSource"
+                                Value="ic_DisableTrash" />
+                        </DataTrigger>
+                    </Button.Triggers>
+
+                </Button>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
