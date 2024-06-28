@@ -1,0 +1,317 @@
+<mat-progress-bar *ngIf="isProcessing" mode="buffer"></mat-progress-bar>
+<div class="row m-0 my-3" *ngIf="!isProcessing">
+    <div class="col-9 pl-0 pr-3 chat pb-5">
+        <div class="row m-0 box-shadow-1 border-radius p-3">
+            <div class="col-12 p-0">
+                <div class="d-flex justify-content-between">
+                    <h2 class="sub-heading-03">My Property Details</h2>
+                    <div class="d-flex">
+<!--                        <button class="align-items-center bg-color-09 border-1 border-color-09 color-white d-flex justify-content-center paragraph-04 px-2">-->
+<!--                            <span class="material-icons mr-1 paragraph-01">note</span> Add Note-->
+<!--                        </button>-->
+                        <!-- <button class="align-items-center bg-color-transparent border-1 border-color-03 color-01 d-flex paragraph-04">
+                            <span class="material-icons mr-1 paragraph-01">cloud_upload</span> Upload Document
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-0">
+                <div class="bg-color-19 m-0 mt-3 row">
+                    <div class="bg-color-19 col-1 p-0">
+                        <img class="w-100" [src]="project?.project?.heroImage" alt="">
+                    </div>
+                    <div class="col-5 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Address</p>
+                        <p class="color-01 m-0 paragraph-03">
+                            {{project?.project?.address}} <ng-container *ngIf="project?.project?.province">,</ng-container>
+                            {{project?.project?.province}} <ng-container *ngIf="project?.project?.city">,</ng-container>
+                            {{project?.project?.city}} <ng-container *ngIf="project?.project?.zipCode">,</ng-container>
+                            {{project?.project?.zipCode}} <ng-container *ngIf="project?.project?.country">,</ng-container>
+                            {{project?.project?.country}}
+                        </p>
+                    </div>
+                    <div class="col-2 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Completion Date</p>
+                        <p class="color-01 m-0 paragraph-03">{{isValidDate ? (project?.project?.completionDate | date:'shortDate') : '--'}}</p>
+                    </div>
+                    <div class="col-2 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Occupancy Date</p>
+                        <p class="color-01 m-0 paragraph-03">--</p>
+                    </div>
+                    <div class="col-2 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Property Value</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.flatPrice | currency}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-0">
+                <div class="row m-0">
+                    <div class="col-3 pl-0 py-2">
+                        <div class="border-1 border-color-19 d-flex justify-content-center mt-3 p-0 p-3">
+                            <div class="avatar-2 bg-color-14 d-flex align-items-center justify-content-center mr-2">
+                                <span class="color-18 material-icons">person</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="paragraph-04 color-02 m-0">Buyer</p>
+                                <p class="color-01 m-0 paragraph-03 d-flex align-items-center">
+                                    {{project?.projectWorkSheetPurchaser?.fullName | titlecase}} <span class="material-icons ml-1 paragraph-01">mail</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 pl-0 py-2">
+                        <div class="border-1 border-color-19 d-flex justify-content-center mt-3 p-0 p-3">
+                            <div class="avatar-2 bg-color-12 d-flex align-items-center justify-content-center mr-2">
+                                <span class="color-11 material-icons">engineering</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="paragraph-04 color-02 m-0">Agent</p>
+                                <p class="color-01 m-0 paragraph-03 d-flex align-items-center">{{project?.agentName | titlecase}} <span class="material-icons ml-1 paragraph-01">mail</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 py-2 px-0">
+                        <div class="border-1 border-color-19 d-flex justify-content-center mt-3 p-0 p-3">
+                            <div class="avatar-2 bg-color-10 d-flex align-items-center justify-content-center mr-2">
+                                <span class="color-09 material-icons">engineering</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="paragraph-04 color-02 m-0">Builder</p>
+                                <p class="color-01 m-0 paragraph-03 d-flex align-items-center">
+                                    {{(project?.builderCompanyName | titlecase) || 'N/A'}} <span class="material-icons ml-1 paragraph-01">mail</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 py-2 pr-0">
+                        <div class="border-1 border-color-19 d-flex justify-content-center mt-3 p-0 p-3">
+                            <div class="avatar-2 bg-color-19 d-flex align-items-center justify-content-center mr-2">
+                                <span class="color-17 material-icons">payments</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="paragraph-04 color-02 m-0">Payment Due</p>
+                                <p class="color-01 m-0 paragraph-03 d-flex align-items-center">0 days</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row m-0 box-shadow-1 border-radius p-3 mt-3">
+            <h2 class="col-12 p-0 pb-2 sub-heading-03">My Documents</h2>
+            <div class="col-12 d-flex justify-content-between mb-3 p-0">
+                <div class="input-group w-50">
+                    <div class="input-group-prepend align-items-center border-1 border-color-19 d-flex justify-content-center">
+                        <span id="basic-addon1" class="align-items-center d-flex justify-content-center px-1">
+                            <span class="material-icons sub-heading-02 color-03"> search </span>
+                        </span>
+                    </div>
+                    <input type="text" placeholder="Search My Documents..." aria-label="Search My Documents..." aria-describedby="basic-addon1" #myInput (input)="filterItem(myInput?.value)" class="border-1 border-color-19 border-left-0 form-control paragraph-03">
+                </div>
+                <button (click)="openDialog()" mat-stroked-button class="align-items-center bg-color-09 border-1 border-color-09 color-white d-flex justify-content-center paragraph-04 px-2">
+                    <span class="material-icons mr-1 paragraph-01"> add_circle </span>
+                    Upload Document
+                </button>
+            </div>
+            <div class="col-12 p-0">
+                <div class="table-responsive documents">
+                    <table class="border-0 position-relative table">
+                        <tr class="bg-color-19 border-0 position-sticky top-0">
+                            <td class="border-0 color-02 paragraph-03">File Name</td>
+                            <td class="border-0 color-02 paragraph-03">Who can view</td>
+                            <td class="border-0 color-02 paragraph-03">Who can access</td>
+                            <td class="border-0 color-02 paragraph-03">Upload Date</td>
+                            <td class="border-0 color-02 paragraph-03">Status</td>
+                            <td class="border-0 color-02 paragraph-03"></td>
+                        </tr>
+                        <tr class="border-0" *ngFor="let item of worksheetDocuments">
+                            <td class="border-0 color-02 paragraph-03">
+                                <a [href]="item?.documentPath" target="_blank" class="d-flex m-0 align-items-center">
+                                    <span *ngIf="(item?.documentPath.substring(item?.documentPath.lastIndexOf('.') + 1) == 'pdf')" class="color-13 material-icons sub-heading-02 mr-1">picture_as_pdf</span>
+
+                                    <img *ngIf="(item?.documentPath.substring(item?.documentPath.lastIndexOf('.') + 1) == 'docx')" style="width:22px; height: auto" src="/assets/imgs/docx.png"> {{item?.worksheetNumber}}.docx
+                                    <!-- Worksheet -->
+                                </a>
+                            </td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">Buyer, Seller</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">Buyer, Seller</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">{{item?.createdDate | date:'shortDate'}}</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">{{item?.status}}</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">
+                                <div class="dropleft">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg width="4" height="14" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.86279 3.66658C2.8837 3.66658 3.71899 2.91658 3.71899 1.99992C3.71899 1.08325 2.8837 0.333252 1.86279 0.333252C0.841881 0.333252 0.0065918 1.08325 0.0065918 1.99992C0.0065918 2.91658 0.841881 3.66658 1.86279 3.66658ZM1.86279 5.33325C0.841881 5.33325 0.0065918 6.08325 0.0065918 6.99992C0.0065918 7.91658 0.841881 8.66658 1.86279 8.66658C2.8837 8.66658 3.71899 7.91658 3.71899 6.99992C3.71899 6.08325 2.8837 5.33325 1.86279 5.33325ZM1.86279 10.3333C0.841881 10.3333 0.0065918 11.0833 0.0065918 11.9999C0.0065918 12.9166 0.841881 13.6666 1.86279 13.6666C2.8837 13.6666 3.71899 12.9166 3.71899 11.9999C3.71899 11.0833 2.8837 10.3333 1.86279 10.3333Z" fill="black" fill-opacity="0.54"/>
+                                        </svg>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" (click)="gotoDocusign(item?.docusignPath)">Docusign</a>
+                                        <a class="dropdown-item" [href]="item?.documentPath">View</a>
+                                        <!-- <a class="dropdown-item"  [href]="item?.documentPath">Download</a> -->
+                                    </div>
+                                </div>
+                                <!-- <span class="material-icons">more_vert</span> -->
+                            </td>
+                        </tr>
+                        <tr class="border-0" *ngFor="let item of buyerDocuments">
+                            <td class="border-0 color-02 paragraph-03">
+                                <a [href]="item?.documentFilePath" target="_blank" class="d-flex m-0 align-items-center">
+                                    <span *ngIf="(item?.documentFilePath.substring(item?.documentFilePath.lastIndexOf('.') + 1) == 'pdf')" class="color-13 material-icons sub-heading-02 mr-1">picture_as_pdf</span>
+
+                                    <img *ngIf="(item?.documentFilePath.substring(item?.documentFilePath.lastIndexOf('.') + 1) == 'docx')" style="width:22px; height: auto" src="/assets/imgs/docx.png"> {{item?.documentFileName}}
+
+                                </a>
+                            </td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">Buyer, Seller</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">Buyer, Seller</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">{{item?.createdDate | date:'shortDate'}}</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">--</td>
+                            <td class="border-0 color-02 paragraph-03 pt-3">
+                                <div class="dropleft">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg width="4" height="14" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.86279 3.66658C2.8837 3.66658 3.71899 2.91658 3.71899 1.99992C3.71899 1.08325 2.8837 0.333252 1.86279 0.333252C0.841881 0.333252 0.0065918 1.08325 0.0065918 1.99992C0.0065918 2.91658 0.841881 3.66658 1.86279 3.66658ZM1.86279 5.33325C0.841881 5.33325 0.0065918 6.08325 0.0065918 6.99992C0.0065918 7.91658 0.841881 8.66658 1.86279 8.66658C2.8837 8.66658 3.71899 7.91658 3.71899 6.99992C3.71899 6.08325 2.8837 5.33325 1.86279 5.33325ZM1.86279 10.3333C0.841881 10.3333 0.0065918 11.0833 0.0065918 11.9999C0.0065918 12.9166 0.841881 13.6666 1.86279 13.6666C2.8837 13.6666 3.71899 12.9166 3.71899 11.9999C3.71899 11.0833 2.8837 10.3333 1.86279 10.3333Z" fill="black" fill-opacity="0.54"/>
+                                        </svg>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <!-- <a class="dropdown-item" *ngIf="item?.docusignPath == undefined" (click)="gotoDocusign(item?.docusignPath)">Docusign</a> -->
+                                        <a class="dropdown-item" [href]="item?.documentFilePath">View</a>
+                                        <!-- <a class="dropdown-item"  [href]="item?.documentPath">Download</a> -->
+                                    </div>
+                                </div>
+                                <!-- <span class="material-icons">more_vert</span> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="row m-0 box-shadow-1 border-radius p-3 mt-3">
+            <div class="col-12 p-0">
+                <h2 class="sub-heading-03">My Unit Details</h2>
+            </div>
+            <div class="col-3 p-0">
+                <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYhkYtjYRkyZ1zybYuBCZibNypXY0b1jQwTaqQDARo1Bzx1fGupv9PRF_kaAtBJjI6Lk&usqp=CAU" alt="">
+            </div>
+            <div class="col-9 p-0 d-flex">
+                <div class="row m-0">
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{ (project?.projectUnitFlats?.interiorSize || 0)+ (project?.projectUnitFlats?.livingRoomSize || 0)+ (project?.projectUnitFlats?.diningRoomSize || 0)+ (project?.projectUnitFlats?.balconySize || 0) }} sq ft</p>
+                    </div>
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Extras</p>
+                        <p class="color-01 m-0 paragraph-03">
+                            {{project?.projectUnitFlats?.flatprojectUnitAdditionalFeature || 'N/A'}}</p>
+                    </div>
+                    <!-- <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Extras</p>
+                        <p class="color-01 m-0 paragraph-03">Parking, Locker</p>
+                    </div> -->
+                    <!-- <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">My Details</p>
+                        <p class="color-01 m-0 paragraph-03">John Milton</p>
+                    </div> -->
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Type</p>
+                        <p class="color-01 m-0 paragraph-03">
+                            <ng-container [ngSwitch]="project?.projectUnitFlats?.unitTypeId">
+                                <ng-container *ngSwitchCase="1">2B</ng-container>
+                                <ng-container *ngSwitchCase="2">2B+D</ng-container>
+                                <ng-container *ngSwitchCase="3">Studio</ng-container>
+                                <ng-container *ngSwitchDefault>N/A</ng-container>
+                            </ng-container>
+                        </p>
+                    </div>
+                    <!-- <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Type</p>
+                        <p class="color-01 m-0 paragraph-03">Waterfall</p>
+                    </div>
+                    <div class="col-6 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Type</p>
+                        <p class="color-01 m-0 paragraph-03">Waterfall</p>
+                    </div> -->
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit No.</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.flatNo}}</p>
+                    </div>
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Interior Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.interiorSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Living Room Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.livingRoomSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Dinning Room Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.diningRoomSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Balcony Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.balconySize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Bathrooms</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.nOofBaths || 0}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Bedrooms</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.noOfBedroom || 0}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Balconies</p>
+                        <p class="color-01 m-0 paragraph-03">{{project?.projectUnitFlats?.noofBalcony || 0}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="border-radius box-shadow-1 col-3 d-flex flex-column justify-content-between p-0 position-relative chat">
+        <div class="row m-0">
+            <div class="col-12 px-2">
+                <h4 class="color-01 my-2 paragraph-03 font-weight-medium px-2">Messages</h4>
+                <div class="d-flex w-100 px-2">
+                    <img class="avatar mr-1 mt-2 border-radius" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU" alt="">
+                    <div class="d-flex flex-column">
+                        <p class="mb-0">
+                            <span class="color-01 font-weight-medium paragraph-04">Adam Jones</span>
+                            <span class="paragraph-05 color-07 mx-1 bg-color-05 px-1 border-radius">Agent</span>
+                            <span class="paragraph-05 color-03">23 Dec 11:10</span>
+                        </p>
+                        <p class="paragraph-04">Great to hear that, Adam! Let me know if there’s anything you need my help with.</p>
+                    </div>
+                </div>
+                <div class="d-flex w-100 bg-color-19 px-2">
+                    <img class="avatar mr-1 mt-2 border-radius" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU" alt="">
+                    <div class="d-flex flex-column">
+                        <p class="mb-0">
+                            <span class="color-01 font-weight-medium paragraph-04">Adam Jones</span>
+                            <span class="paragraph-05 color-07 mx-1 bg-color-05 px-1 border-radius">Agent</span>
+                            <span class="paragraph-05 color-03">23 Dec 11:10</span>
+                        </p>
+                        <p class="paragraph-04">Great to hear that, Adam! Let me know if there’s anything you need my help with.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-12 px-2 mb-2 input-group">
+                <input type="text" class="border-1 border-color-19 border-right-0 form-control paragraph-03" placeholder="Message..." aria-label="Message...">
+                <div class="input-group-append align-items-center border-1 border-color-19 d-flex justify-content-center">
+                    <span class="align-items-center d-flex justify-content-center px-1"><span
+                            class="color-03 material-icons sub-heading-02"> attach_file </span></span>
+                    <span class="align-items-center d-flex justify-content-center px-1"><span
+                            class="color-03 material-icons sub-heading-02"> sentiment_satisfied_alt </span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.mat-dialog-content-max-height {
+  max-height: 85vh !important;
+}
+
+.ctooltip {
+    // opacity: 0;
+    position: absolute;
+    background-color: black;
+    color: white;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  area:hover .tooltip {
+    // opacity: 1;
+    // https://codepen.io/paulvddool/pen/mROEGa
+  }

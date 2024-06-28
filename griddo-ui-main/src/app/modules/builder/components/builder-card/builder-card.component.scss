@@ -1,0 +1,47 @@
+.builder-card {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 4.94697px 0.989394px rgba(69, 123, 157, 0.1);
+  border-radius: 7.0977px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: var(--builderCardGridTemplateColumns, 1fr 1fr 1fr);
+  grid-template-areas: var(--builderCardGridTemplateAreas, "a b c" "d e f" "g h i");
+  align-items: var(--builderCardAlignItems, unset);
+  grid-column-gap: var(--builderCardGridColumnGap, unset);
+  .img-box {
+    grid-area: var(--imgBoxgridAreas, a / a / g / g);
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  .upper-box {
+    grid-area: var(--upperboxGridArea, b);
+  }
+  .location-box {
+    grid-area: var(--locationboxGridArea, c);
+    align-items: baseline;
+    justify-content: flex-end;
+    p {
+      text-align: var(--locationTextAlign, right);
+    }
+  }
+  .count {
+    grid-area: var(--countGridArea, e / e / f / f);
+  }
+  .bottom {
+    grid-area: var(--bottomGridArea, h / h / i / i);
+  }
+  &.card-landscape {
+    --builderCardGridTemplateColumns: 1fr 2fr 2fr 2fr 2fr 2fr;
+    --builderCardGridTemplateAreas: "a b c d e e";
+    --builderCardAlignItems: center;
+    --builderCardGridColumnGap: 1rem;
+    --imgBoxgridAreas: a;
+    --upperboxGridArea: b;
+    --locationboxGridArea: d;
+    --countGridArea: c;
+    --bottomGridArea: e;
+    --locationTextAlign: center;
+  }
+}

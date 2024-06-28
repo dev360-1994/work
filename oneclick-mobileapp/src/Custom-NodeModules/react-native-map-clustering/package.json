@@ -1,0 +1,65 @@
+{
+  "_from": "react-native-map-clustering@^3.3.9",
+  "_id": "react-native-map-clustering@3.3.9",
+  "_inBundle": false,
+  "_integrity": "sha512-47wDpjKARNZ8LrkXEJSWG0rsR3D6AkQbduTlFmQAXxpqJPqk+z/HztJys3diPS5PMvjub9uK9743ltUf9pYD1w==",
+  "_location": "/react-native-map-clustering",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "react-native-map-clustering@^3.3.9",
+    "name": "react-native-map-clustering",
+    "escapedName": "react-native-map-clustering",
+    "rawSpec": "^3.3.9",
+    "saveSpec": null,
+    "fetchSpec": "^3.3.9"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-map-clustering/-/react-native-map-clustering-3.3.9.tgz",
+  "_shasum": "f1b7ad8a60dd9da2e794a1ff401f84f88896e80b",
+  "_spec": "react-native-map-clustering@^3.3.9",
+  "_where": "F:\\EKta\\oneclickmobileapp\\oneclickhse-mobile",
+  "author": {
+    "name": "Venits"
+  },
+  "bugs": {
+    "url": "https://github.com/venits/react-native-map-clustering/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@mapbox/geo-viewport": "^0.4.0",
+    "supercluster": "^7.0.0"
+  },
+  "deprecated": false,
+  "description": "React Native Map Clustering both for Android and iOS",
+  "homepage": "https://github.com/venits/react-native-map-clustering#readme",
+  "keywords": [
+    "react-native",
+    "react",
+    "cluster",
+    "android",
+    "iOS",
+    "map",
+    "clustering"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "react-native-map-clustering",
+  "peerDependencies": {
+    "react-native-maps": "*",
+    "react-native": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venits/react-native-map-clustering.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "types": "index.d.ts",
+  "version": "3.3.9"
+}

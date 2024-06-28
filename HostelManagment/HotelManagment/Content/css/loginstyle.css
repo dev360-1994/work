@@ -1,0 +1,1032 @@
+﻿* {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+img {
+    border: none;
+}
+
+a, input, textarea {
+    outline: none;
+}
+
+h5 {
+    color: #004C96;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+body {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+}
+
+    body.bodybg {
+        /*background: #0b88da url(../Images/aquabg.jpg) 0 0 no-repeat;*/
+        background-size: cover;
+        background: #3a7bd5;
+        background-repeat: repeat;
+        background-attachment: scroll;
+        background-image: none;
+        background-size: auto;
+        background-image: -webkit-linear-gradient(to right,#3a7bd5a3, #00d2ffb5),url(../Images/aquabg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-image: linear-gradient(to right,#3a7bd5a3, #00d2ffb5),url(../Images/aquabg.jpg);
+        background-image: linear-gradient(to right,#3a7bd5a3, #00d2ffb5),url(../Images/aquabg.jpg);
+    }
+
+.header {
+    width: 100%;
+    float: left;
+    height: 73px;
+    /*background: url(../images/header_repeatbg.png) 0 0 repeat-x;*/
+    /*position: fixed;*/
+    background: #31353D;
+}
+
+    .header .headleftcrv {
+        /*background: url(../images/header_leftcrv.png) 0 0 no-repeat;*/
+        float: left;
+        width: 100%;
+        height: 79px;
+    }
+
+    .header .headrightcrv {
+        /*background: url(../images/header_rightcrv.png) right 0 no-repeat;*/
+        float: left;
+        width: 100%;
+        height: 79px;
+    }
+
+    .header .logo {
+        float: left;
+        padding: 5px 0 0 3px;
+        position: fixed;
+    }
+
+        .header .logo a img {
+            width: 100px;
+            padding: 10px;
+        }
+
+    .header .aside {
+        float: right;
+        padding: 20px 10px 0 0;
+        height: 25px;
+        width: auto;
+    }
+
+        .header .aside input[type=submit] {
+            width: 80px;
+            height: 28px;
+            padding-bottom: 3px;
+            float: right;
+            font-size: 14px;
+            background: url(../images/btns_bg.jpg) 0 0 repeat-x;
+            border: 1px solid #055c9f;
+            cursor: pointer;
+            color: #fff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            margin-right: 5px;
+            behavior: url(../PIE/PIE.htc);
+        }
+
+        .header .aside .rw {
+            float: right;
+            margin-bottom: 5px;
+            margin-right: 5px;
+        }
+
+            .header .aside .rw label {
+                color: #ffffff;
+                float: right;
+                padding-right: 5px;
+                font-weight: bold;
+                line-height: 25px;
+            }
+
+            .header .aside .rw select {
+                float: right;
+                width: 150px;
+                margin-top: 2px;
+                padding: 1px 2px;
+                background: #0974c7;
+                border: 1px solid #1a65ac;
+                color: #fff;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                behavior: url(../PIE/PIE.htc);
+            }
+
+    .header .return {
+        width: 110px;
+        margin: auto;
+    }
+
+        .header .return input[type=button] {
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            border: none;
+            float: left;
+            margin: 3px 5px;
+            font-size: 14px;
+        }
+
+            .header .return input[type=button].homeicon {
+                background: url(../images/home_icon.png) 0 0 no-repeat;
+            }
+
+            .header .return input[type=button].glowbtn {
+                background: url(../images/monitoring_icon.png) 0 0 no-repeat;
+            }
+
+            .header .return input[type=button].fishtest {
+                background: url(../images/fisttest_icon.png) 0 0 no-repeat;
+            }
+
+
+    .header .aside2 {
+        float: right;
+        padding: 6px 10px 0 0;
+        height: 60px;
+    }
+
+        .header .aside2 span.harvestid {
+            width: 232px;
+            float: left;
+            padding: 6px 10px 0 0;
+        }
+
+            .header .aside2 span.harvestid label {
+                color: #1a65ac;
+                float: left;
+                padding-right: 5px;
+                font-weight: bold;
+                line-height: 25px;
+            }
+
+            .header .aside2 span.harvestid input[type=text] {
+                width: 150px;
+                float: left;
+                height: 25px;
+                line-height: 25px;
+                padding: 0 5px;
+                background: #0974c7;
+                border: 1px solid #1a65ac;
+                color: #fff;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                behavior: url(../PIE/PIE.htc);
+            }
+
+        .header .aside2 span.count {
+            width: 263px;
+        }
+
+        .header .aside2 span.keyboard {
+            float: left;
+            padding: 0 10px 0 0;
+        }
+
+        .header .aside2 input[type=submit] {
+            padding: 13px 12px;
+            float: right;
+            font-size: 14px;
+            background: #0974c7 url(../images/btns_bg.jpg) 0 bottom repeat-x;
+            border: 1px solid #055c9f;
+            cursor: pointer;
+            color: #fff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            behavior: url(../PIE/PIE.htc);
+        }
+
+
+.container {
+    width: 100%;
+    float: left;
+    /*padding: 90px 0 5px;*/
+}
+
+    .container .nav {
+        width: 278px;
+        float: left;
+    }
+
+        .container .nav ul {
+            list-style: none;
+            width: 228px;
+            height: 550px;
+            overflow: auto;
+            margin: auto;
+        }
+
+            .container .nav ul li {
+                width: 211px;
+                font-size: 16px;
+                padding-bottom: 14px;
+            }
+
+                .container .nav ul li a {
+                    height: 45px;
+                    display: block;
+                    background: url(../images/nav_bg.jpg) 0 0 repeat-x;
+                    border: 1px solid #005ca6;
+                    color: #fefefe;
+                    text-decoration: none;
+                    text-align: center;
+                    line-height: 45px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    behavior: url(../PIE/PIE.htc);
+                }
+
+                    .container .nav ul li a:hover {
+                        background: url(../images/nav_bgover.jpg) 0 0 repeat-x;
+                        border: 1px solid #a3400d;
+                    }
+
+                .container .nav ul li.activebar a {
+                    background: url(../images/nav_bgover.jpg) 0 0 repeat-x;
+                    border: 1px solid #a3400d;
+                }
+
+                .container .nav ul li.disable a {
+                    background: url(../images/nav_disable.jpg) 0 0 repeat-x;
+                    border: 1px solid #005ca6;
+                    color: #2681ca;
+                }
+
+        .container .nav h2 {
+            background: #0974c7;
+            border: 1px solid #136bb7;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            padding: 0 15px;
+            line-height: 33px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            behavior: url(../PIE/PIE.htc);
+        }
+
+        .container .nav .fishstuff {
+            width: 96.5%;
+            float: left;
+            margin-top: 28px;
+        }
+
+        .container .nav .fishtype {
+            width: 260px;
+            margin: 0 auto;
+            background: #0974c7;
+            height: 110px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            padding: 10px 1% 5px;
+            behavior: url(../PIE/PIE.htc);
+        }
+
+            .container .nav .fishtype .fishgrid {
+                float: left;
+                width: 260px;
+                height: 110px;
+                overflow: auto;
+            }
+
+            .container .nav .fishtype table {
+                width: 100%;
+            }
+
+            .container .nav .fishtype table, td, th {
+                border: 1px solid #0974c7;
+                border-collapse: collapse;
+            }
+
+            .container .nav .fishtype th {
+                color: #fff;
+                text-align: left;
+                padding: 3px 5px;
+                background: #2c9be4;
+            }
+
+            .container .nav .fishtype td {
+                background: #2c9be4;
+                padding: 1px 5px;
+            }
+
+            .container .nav .fishtype #divZoomInFishTypeId {
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+
+                .container .nav .fishtype #divZoomInFishTypeId table {
+                    width: 99%;
+                    margin: 10px;
+                    font-size: large;
+                }
+
+
+    .container .left {
+        width: 315px;
+        margin: 0 15px 0 7px;
+        float: left;
+    }
+
+    .container .menu {
+        width: 100%;
+        float: left;
+        height: 352px;
+        overflow: auto;
+    }
+
+        .container .menu ul {
+            margin: auto;
+            height: auto;
+            width: 270px;
+        }
+
+            .container .menu ul li {
+                width: 270px;
+            }
+
+    .container .rightstuff {
+        margin-left: 337px;
+    }
+
+        .container .rightstuff .transparent {
+            width: 97.3%;
+            background: url(../images/right_bg.png) 0 0 repeat;
+            padding: 1%;
+            margin-right: 7px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            float: right;
+            height: 400px;
+        }
+
+        .container .rightstuff .claimbar {
+            float: left;
+            width: 97.5%;
+            background: #0974c7;
+            border: 1px solid #136bb7;
+            padding: 0 1%;
+            line-height: 33px;
+            margin-bottom: 10px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            behavior: url(../PIE/PIE.htc);
+        }
+
+            .container .rightstuff .claimbar h2 {
+                width: auto;
+                float: left;
+                color: #fff;
+                font-size: 14px;
+                margin-bottom: 0;
+            }
+
+            .container .rightstuff .claimbar span.nonselect {
+                float: right;
+                margin-right: 10px;
+            }
+
+                .container .rightstuff .claimbar span.nonselect label {
+                    color: #fff;
+                    float: left;
+                    font-size: 14px;
+                    padding-right: 5px;
+                    font-weight: bold;
+                }
+
+                .container .rightstuff .claimbar span.nonselect input[type=checkbox] {
+                    float: left;
+                    margin-top: 11px;
+                }
+
+            .container .rightstuff .claimbar .counter {
+                float: right;
+            }
+
+                .container .rightstuff .claimbar .counter label {
+                    color: #fff;
+                    float: left;
+                    font-size: 14px;
+                    padding-right: 5px;
+                    font-weight: bold;
+                }
+
+                .container .rightstuff .claimbar .counter span#fishCounter {
+                    font-size: 14px;
+                    color: #fff;
+                    float: left;
+                    font-weight: bold;
+                }
+
+    .container .right {
+        background: url(../images/right_bg.png) 0 0 repeat;
+        padding: 1%;
+        margin: 0 7px 0 280px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        height: 510px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+        .container .right iframe {
+            width: 99.8%;
+            height: 510px;
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+    .container .cat {
+        width: 100%;
+        float: left;
+        height: 400px;
+        overflow: auto;
+    }
+
+        .container .cat ul {
+            list-style: none;
+            width: 98%;
+            overflow: auto;
+            margin: auto;
+        }
+
+            .container .cat ul li {
+                width: 200px;
+                font-weight: bold;
+                font-size: 14px;
+                padding-bottom: 18px;
+                float: left;
+                margin-right: 30px;
+            }
+
+                .container .cat ul li a {
+                    height: 45px;
+                    display: block;
+                    background: url(../images/nav_bg.jpg) 0 0 repeat-x;
+                    border: 1px solid #005CA6;
+                    color: #fff;
+                    text-decoration: none;
+                    text-align: center;
+                    line-height: 45px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    behavior: url(../PIE/PIE.htc);
+                }
+
+                    .container .cat ul li a:hover {
+                        background: url(../images/nav_bgover.jpg) 0 0 repeat-x;
+                        border: 1px solid #A3400D;
+                        color: #fff;
+                    }
+
+                .container .cat ul li.activebar a {
+                    background: url(../images/nav_bgover.jpg) 0 0 repeat-x;
+                    border: 1px solid #A3400D;
+                    color: #fff;
+                }
+
+                .container .cat ul li.disable a {
+                    background: url(../images/bigbtn_disable.png) 0 0 repeat-x;
+                    border: 1px solid #005CA6;
+                    color: #5093c9;
+                }
+
+    .container .botbtns {
+        width: 99.5%;
+        float: left;
+        padding: 20px 0.5% 0 0;
+    }
+
+        .container .botbtns ul {
+            float: right;
+            list-style: none;
+        }
+
+            .container .botbtns ul li {
+                float: right;
+                margin-left: 10px;
+                background: #0974c7 url(../images/btns_bg.jpg) 0 bottom repeat-x;
+                border: 1px solid #055c9f;
+                cursor: pointer;
+                color: #fff;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                behavior: url(../PIE/PIE.htc);
+            }
+
+        .container .botbtns input[type=submit] {
+            background: none;
+            border: none;
+            float: right;
+            padding: 12px 22px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .container .botbtns ul li.disable {
+            background: url(../images/bigbtn_disable.png) 0 0 repeat-x;
+            border: 1px solid #74c0d3;
+            color: #4a84a2;
+        }
+
+            .container .botbtns ul li.disable input[type=submit] {
+                color: #4a84a2;
+            }
+
+.frame {
+    width: 100%;
+}
+
+    .frame h2 {
+        background: #0974c7;
+        color: #fefefe;
+        font-size: 20px;
+        padding: 0 15px;
+        line-height: 33px;
+        border: 1px solid #136bb7;
+        font-weight: normal;
+        margin-bottom: 15px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+    .frame select {
+        float: left;
+        width: 35%;
+        padding: 3px;
+        background: #0974c7;
+        border: 1px solid #1a65ac;
+        color: #fff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+    .frame input[type=text] {
+        width: 288px;
+        float: left;
+        height: 25px;
+        line-height: 25px;
+        padding: 0 5px;
+        background: #0974c7;
+        border: 1px solid #1a65ac;
+        color: #fff;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+    .frame input[type=checkbox] {
+        float: left;
+        margin-top: 5px;
+    }
+
+    .frame input[type=submit] {
+        padding: 6px 22px 7px;
+        float: right;
+        font-size: 14px;
+        margin-left: 10px;
+        background: url(../images/btns_bg.jpg) 0 bottom repeat-x;
+        border: 1px solid #055c9f;
+        cursor: pointer;
+        color: #fff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+    .frame textarea {
+        width: 288px;
+        float: left;
+        height: 50px;
+        padding: 5px;
+        background: #0974c7;
+        border: 1px solid #1a65ac;
+        color: #fff;
+        overflow: auto;
+        font-family: Arial;
+        font-size: 13px;
+        resize: none;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        behavior: url(../PIE/PIE.htc);
+    }
+
+.btns {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+}
+
+.dailybtns {
+    margin-top: 10px;
+}
+
+.dailyMonitoringButton {
+    width: 100%;
+    float: left;
+    margin-top: -2px;
+}
+
+.frame .formtbl {
+    width: 800px;
+    margin: auto;
+}
+
+.frame .homegrid {
+    width: 100%;
+    float: left;
+    height: 385px;
+    overflow: auto;
+}
+
+.frame .formstuff {
+    width: 100%;
+    height: 200px;
+    overflow: auto;
+}
+
+
+.frame table {
+    width: 100%;
+}
+
+.frame table, td, th {
+    border: 1px solid #0974c7;
+    border-collapse: collapse;
+}
+
+.frame th {
+    color: #ffffff;
+    font-size: 14px;
+    text-align: left;
+    padding: 8px;
+    background: #2c9be4;
+}
+
+.frame td {
+    background: #fbfbfb;
+    padding: 8px;
+}
+
+.home {
+    width: 800px;
+    margin: auto;
+}
+
+.manageloc {
+    width: 565px;
+    margin: auto;
+}
+
+.assignroles {
+    width: 700px;
+    margin: auto;
+}
+
+.dailyMonitoringReport {
+    width: 700px;
+    margin: 0px;
+}
+
+.manageroles {
+    width: 453px;
+    margin: auto;
+}
+
+.double {
+    width: 99.3%;
+    float: left;
+}
+
+.columns {
+    width: 49.4%;
+    float: left;
+}
+
+    .columns + .columns {
+        margin-left: 1.2%;
+    }
+
+
+.grid {
+    width: 97.8%;
+    float: left;
+    background: #fff;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    padding: 10px 1%;
+    behavior: url(../PIE/PIE.htc);
+}
+
+.griddaily {
+    width: 98%;
+    float: left;
+    background: #fff;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    padding: 10px 1% 5px;
+    behavior: url(../PIE/PIE.htc);
+    margin-top: 17px;
+}
+
+    .griddaily input[type="text"] {
+        width: 99.5%;
+        padding: 0 0.5%;
+        background: #bce2ff;
+        margin: 0.5% 0;
+        color: #000;
+    }
+
+    .griddaily select {
+        width: 100%;
+        background: #bce2ff;
+        margin: 0.5%;
+        color: #000;
+    }
+
+    .griddaily caption {
+        float: left;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+.rol {
+    margin-top: 15px;
+}
+
+.rolgrid {
+    height: 99px;
+    overflow: auto;
+}
+
+.rolgrid2 {
+    height: 130px;
+    overflow: auto;
+}
+
+.locgrid {
+    height: 239px;
+    overflow: auto;
+}
+
+.usergrid {
+    height: 333px;
+    overflow: auto;
+}
+
+.mangerolgrid {
+    height: 191px;
+    overflow: auto;
+}
+
+.popgrid {
+    height: 500px;
+    overflow: auto;
+}
+
+.rowspace td {
+    padding: 7px 5px;
+}
+
+.grid select {
+    width: 100%;
+}
+
+.grd {
+    margin: 50px auto 0;
+    float: none;
+    width: 97%;
+}
+
+.row {
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+    .row label {
+        font-weight: bold;
+        float: left;
+        text-align: right;
+        padding-right: 10px;
+        color: #004c96;
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .row span.label {
+        font-size: 14px;
+        width: 140px;
+        float: left;
+        text-align: right;
+        padding-right: 10px;
+        color: #004c96;
+        font-weight: bold;
+        line-height: 25px;
+    }
+
+    .row select {
+        width: 300px;
+    }
+
+        .row select.priority {
+            width: 157px;
+        }
+
+    .row .catename {
+        float: left;
+        background: #0974c7;
+        width: 290px;
+        padding: 5px;
+    }
+
+        .row .catename table {
+            border: none;
+        }
+
+            .row .catename table tbody {
+                height: 70px;
+                overflow: auto;
+                float: left;
+                width: 290px;
+            }
+
+        .row .catename td {
+            padding: 1px 5px;
+            border: none;
+            width: 263px;
+        }
+
+            .row .catename td label {
+                width: 87%;
+                line-height: 18px;
+                text-align: left;
+                padding-left: 10px;
+            }
+
+    .row span.chkbox {
+        width: 18px;
+        height: 18px;
+        float: left;
+        background: #235670;
+        margin-top: 3px;
+    }
+
+    .row span.checked {
+        width: 18px;
+        height: 18px;
+        float: left;
+        background: url(../images/checked.jpg) 0 0 no-repeat;
+        margin-top: 3px;
+    }
+
+    .row span.mandatory {
+        width: 300px;
+        height: 27px;
+        border: 1px solid red;
+        float: left;
+    }
+
+.puprow {
+    padding: 20px 0 0 300px;
+    float: none;
+    width: auto;
+}
+
+    .puprow select {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .puprow label {
+        line-height: 40px;
+        font-size: 15px;
+    }
+
+    .puprow input[type=submit] {
+        margin: 5px 11px 0 0;
+        padding: 6px 22px 7px;
+    }
+
+.roles {
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+    .roles .colm {
+        width: 200px;
+        float: left;
+        margin-top: 15px;
+    }
+
+        .roles .colm + .colm {
+            margin-left: 10px;
+        }
+
+        .roles .colm label {
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            color: #004C96;
+        }
+
+        .roles .colm span.label {
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            color: #004C96;
+        }
+
+        .roles .colm select {
+            width: 200px;
+            margin-top: 0px;
+        }
+
+        .roles .colm input[type=text] {
+            width: 187px;
+        }
+
+        .roles .colm span.mandatory {
+            width: 200px;
+            height: 26px;
+            border: 1px solid red;
+            float: left;
+        }
+
+    .roles .saverolbtns {
+        width: 370px;
+        float: right;
+        padding-top: 21px;
+    }
+
+        .roles .saverolbtns input[type=submit] {
+            background: url("../images/btns_bg.jpg") repeat-x scroll 0 bottom transparent;
+            border: 1px solid #055c9f;
+            border-radius: 5px 5px 5px 5px;
+            color: #FFFFFF;
+            cursor: pointer;
+            float: right;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+            padding: 6px 22px 7px;
+        }
+
+.right input[type=button] {
+    width: 140px;
+    height: 25px;
+    padding-bottom: 3px;
+    float: right;
+    font-weight: bold;
+    font-size: 11px;
+    background: url(../images/btnbg_set.jpg) 0 0 repeat-x;
+    border: 1px solid #819c81;
+    cursor: pointer;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    behavior: url(../PIE/PIE.htc);
+}
+
+#PopupParentIframe iframe {
+    border: none;
+}

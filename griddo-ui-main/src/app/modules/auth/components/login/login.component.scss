@@ -1,0 +1,45 @@
+.bg-right {
+  background-image: url(https://silk-avenue.co.uk/wp-content/uploads/2016/03/GRIDDO-500x700.jpg);
+}
+
+.login-section {
+  height: 100vh;
+}
+
+.logo {
+  width: 4rem;
+}
+
+.loingLink {
+  color: #414548;
+  text-decoration: underline;
+}
+
+input,
+select,
+textarea {
+  border: 2px solid #414548;
+  box-sizing: border-box;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+
+  &:hover,
+  &:focus {
+    box-shadow: none;
+    color: none;
+    outline: none;
+  }
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+.with-button {
+  span {
+    right: 7px;
+    top: 9px;
+    cursor: pointer;
+  }
+}

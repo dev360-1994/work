@@ -1,0 +1,346 @@
+/*-- Common CSS --*/
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #E5E5E5;
+}
+.box-style {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 0px 5px 1px #cdcdcd;
+    padding: 20px;
+    margin-bottom: 25px;
+    float: left;
+    width: 100%;
+}
+.box-title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #5E5873;
+    margin-bottom: 30px;
+}
+.box-title span {
+    color: #C4C4C4;
+}
+.rise-indicator .bullet {
+    background-color: #F4AB3C;
+    width: 9px;
+    height: 9px;
+    border-radius: 100%;
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 3px;
+}
+.rise-indicator .bullet.orange {
+    background-color: #F4AB3C;
+}
+.rise-indicator .bullet.sky-blue {
+    background-color: #60E1F1;
+}
+.rise-indicator span {
+    position: relative;
+    padding-left: 16px;
+    font-size: 10px;
+    color: #6E6B7B;
+}
+.circle-img {
+    border-radius: 100% !important;
+}
+.circle-img-none {
+    border-radius: 3px !important;
+}
+/*-- End Common CSS --*/
+
+
+
+/*-- Header CSS --*/
+header .user-image {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    position: relative;
+    overflow: hidden;
+}
+header button#dropdownMenuButton {
+    font-size: 16px;
+    font-weight: 500;
+    color: #414548;
+}
+header .btn.focus, header .btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+header .form-control:focus {
+    border-color: #ced4da;
+    outline: 0;
+    box-shadow: none;
+}
+header .input-group-text {
+    border-right: 0px;
+}
+header input {
+    font-size: 14px;
+    background: #99A6B7;
+    color: #99A6B7;
+}
+header .input-group-text, header input {
+    background: #F5F6F8 !important;
+}
+header .profile-links {
+    border: 1px solid #E5E5E5;
+    background-color: #fff;
+    padding: 10px;
+    height: 72px;
+    position: relative;
+    right: -15px;
+    top: -18px;
+}
+header .dropdown-menu.show {
+    display: block;
+    top: 13px !important;
+}
+header .notification {
+    position: relative;
+    top: -10px;
+    right: 40px;
+}
+header .notification .notify {
+    width: 7px;
+    height: 7px;
+    background-color: #FF2F6D;
+    display: block;
+    border-radius: 100%;
+    position: absolute;
+    right: -1px;
+    top: 3px;
+}
+/*-- End Header CSS --*/
+
+
+
+/*-- Filters CSS --*/
+
+.filters .form-control, .filters .dropdown-toggle {
+    width: auto;
+    color: #707683;
+    font-size: 14px;
+    width: 150px;
+}
+.filters label {
+    font-size: 16px;
+    color: #9E9E9E;
+    font-weight: 500;
+}
+
+/*-- End Filters CSS --*/
+
+
+/*-- Achievement Section CSS --*/
+
+.achievement .number {
+    font-size: 35px;
+    font-weight: 600;
+    padding-left: 10px;
+    color: #5E5873;
+    line-height: 20px;
+    position: relative;
+    top: 5px;
+}
+
+.achievement .number .number-title {
+    font-size: 12px;
+    font-weight: 400;
+    color: #6E6B7B;
+}
+.achievement .number-icon {
+    width: 48px;
+    height: 48px;    
+    text-align: center;
+    border-radius: 100%;
+    line-height: 60px;
+}
+.achievement .number-icon.blue-icon {
+    background: rgba(115, 103, 240, 0.12);
+}
+
+.achievement .number-icon.orange-icon {
+    background: rgba(244, 171, 60, 0.19);
+}
+
+.achievement .number-icon.sky-blue-icon {
+    background: rgba(124, 197, 251, 0.21);
+}
+
+.achievement .number-icon.green-icon {
+    background: rgba(168, 240, 236, 0.18);
+}
+
+/*-- End Achievement Section CSS --*/
+
+
+
+/*-- Revenue & Earnings Secion CSS --*/
+.revenue .revenue-graph {
+    width: 50%;
+}
+.revenue .revenue-details {
+    width: 50%;
+}
+.revenue .time-period {
+    color: #6E6B7B;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+}
+.revenue .total-value {
+    color: #5E5873;
+    font-size: 15px;
+    font-weight: 500;
+}
+.revenue .revenue-status {
+    font-size: 12px;
+    color: #B9B9C3;
+    font-weight: 600;
+    margin: 20px 0px 0px;
+}
+.revenue .users-rise  {
+    color: #5E5873;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/*-- End Revenue & Earnings Secion CSS --*/
+
+
+/*-- Most Active & Upcoming Projects Secion CSS --*/
+.projects-status span {
+    font-size: 13px;
+    color: #C4C4C4;
+    font-weight: 500;
+    margin-left: 15px;
+}
+.project-name {
+    font-size: 13px;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+    font-style: normal;
+}
+.project-name span {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.54)
+}
+.project-details .user-photo {
+    width: 44px;
+    max-height: 40px;
+    font-style: italic;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+ }
+.project-details table {
+     color: #828282;
+     font-size: 10px;
+     margin-bottom: 0px;
+ }
+.project-details .table td, .project-details .table th {
+    padding: 10px 0px 0px;
+    vertical-align: middle;
+    border-top: 0px solid #dee2e6;
+    text-align: center;
+    font-style: italic;
+}
+.project-details .table th:first-child {
+    text-align: left;
+}
+.project-details .table th {
+    color: #5E5873;
+    font-weight: 500;
+    font-size: 13px;
+    border-bottom: 0px;
+    font-style: normal;
+}
+.project-details .builder-name {
+    font-size: 12px;
+}
+
+/*-- End Most Active & Upcoming Projects Secion CSS --*/
+
+
+/*-- Builder Revenue Secion CSS --*/
+
+.builder-revenue .dropdown button {
+    font-size: 12px;
+    color: #828282;
+    box-shadow: none;
+    font-style: italic;
+}
+.builder-revenue .user-photo {
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+}
+.builder-revenue span {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 17px;
+    font-weight: 500;
+}
+.builder-revenue .builder-value {
+    font-size: 10px;
+    color: #6E6B7B;
+    font-weight: 400;
+}
+.builder-revenue span span {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.54);
+}
+.builder-revenue .progress .progress-bar {
+    background-color: #8B8CEB;
+}
+
+/*-- Builder Revenue Secion CSS --*/
+
+
+
+/*-- Responsive CSS --*/
+
+@media (max-width: 991px) {
+.achievement .number {
+    font-size: 20px;
+}
+.achievement .number .number-title {
+    font-size: 11px;
+}
+.project-details table {
+    min-width: 500px;
+}
+
+}
+
+
+
+@media (max-width: 767px) {
+header .profile-links {
+    position: static;
+}
+header .notification {
+    top: 0px;
+}
+}
+
+
+@media (max-width: 576px) {
+.filters .form-control, .filters .dropdown-toggle {
+    width: 100%;
+}
+header .profile-links {
+    position: static;
+}
+.dashboard-values .icon {
+    position: static;
+}
+}
+
+
+/*-- End Responsive CSS --*/

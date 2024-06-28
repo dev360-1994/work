@@ -1,0 +1,463 @@
+<form class="d-block w-100 card py-1 px-3" [formGroup]="form">
+    <ng-container formGroupName="projectCommisions">
+        <div class="row m-0 mt-2 mb-3">
+            <div class="col-12">
+                <p class="sub-heading-02 font-weight-medium mb-1">Commission payable on</p>
+            </div>
+            <div class="col-12 d-flex">
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="paymentOnPurchase" id="paymentOnPurchase" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="paymentOnPurchase">Purchase Price</label>
+                </div>
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="paymentOnPurchasePricenetofTax"
+                        id="paymentOnPurchasePricenetofTax" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="paymentOnPurchasePricenetofTax">Purchase Price net of
+                        tax</label>
+                </div>
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="paymentOnParking" id="paymentOnParking" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="paymentOnParking">Parking</label>
+                </div>
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="paymentOnLocker" id="paymentOnLocker" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="paymentOnLocker">Locker</label>
+                </div>
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="paymentOnTaxHST" id="paymentOnTaxHST" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="paymentOnTaxHST">Tax HST</label>
+                </div>
+                <div class="align-items-center d-flex mr-3">
+                    <input type="checkbox" formControlName="extras" id="extras" class="mr-1">
+                    <label class="color-03 m-0 paragraph-03" for="extras">Extras</label>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngFor="let pcs of projectCommisionStructure?.controls; let projectCommisionStructureIdx=index">
+            <ng-container formArrayName="projectCommisionStructure">
+                <div class="row m-0 position-relative border-1 border-color-19 mb-2 p-1" *ngIf="!pcs?.value?.saved">
+                    <button 
+                        (click)="closeFormPanel(projectCommisionStructureIdx)"
+                        class="bg-color-transparent border-0 color-01 cursor-pointer mt-2 position-absolute right-0 top-0 z-index-1">
+                        <span *ngIf="pcs?.value?.new" class="material-icons color-03">delete</span>
+                    <span *ngIf="!pcs?.value?.new" class="material-icons color-03">close</span>
+                    </button>
+                    <ng-container [formGroupName]="projectCommisionStructureIdx">
+                        <div class="border-bottom-1 border-color-19 col-12 px-0 d-flex mb-3 pt-4">
+                            <div class="col-md-6 form-group">
+                                <label class="sub-heading-04" for="commisionName">Commission Structure Name</label>
+                                <input class="form-control" (keydown)="keydownEvent($event)"
+                                    placeholder="Commission Structure Name" id="commisionName" type="text"
+                                    formControlName="commisionName">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="sub-heading-04" for="commisionName">Commission Type</label>
+                                <!-- <input (keydown)="keydownEvent($event)" class="form-control" placeholder="Commision Name" id="commisionName" type="text"
+                                    formControlName="commisionType"> -->
+                                <select class="form-control" formControlName="commisionType" placeholder=""
+                                    id="commisionType" type="number">
+                                    <option value=1>Percentage </option>
+                                    <option value=2>Dollar Value</option>
+                                    <option value=3>Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label class="sub-heading-04" for="commisionValue">Commission Value</label>
+                                <input (keydown)="keydownEvent($event)" class="form-control"
+                                    placeholder="Commision Value" id="commisionValue" type="number"
+                                    formControlName="commisionValue">
+                            </div>
+                        </div>
+                        <div class="col-12" formArrayName="projectCommisionStructureDetails">
+                            <ng-container
+                                *ngFor="let item of pcs['controls'].projectCommisionStructureDetails.controls; let i=index">
+                                <div class="row m-0 position-relative" [formGroupName]="i">
+                                    <div class="col-3 form-group">
+                                        <label class="sub-heading-04" for="type">Type</label>
+                                        <select class="form-control" placeholder="" id="type" type="number"
+                                            (change)="resetValueOnChange(item)" formControlName="typeOfDeposit">
+                                            <option [value]="1">Percentage </option>
+                                            <option [value]="2">Dollar Value</option>
+                                            <option [value]="3">Balance to %</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3 mt-0 form-group">
+                                        <label class="sub-heading-04" for="amount">
+                                            <ng-container *ngIf="item.get('typeOfDeposit')?.value == 1">Percentage
+                                            </ng-container>
+                                            <ng-container *ngIf="item.get('typeOfDeposit')?.value == 2">Dollar Value
+                                            </ng-container>
+                                            <ng-container *ngIf="item.get('typeOfDeposit')?.value == 3">Balance to %
+                                            </ng-container>
+                                        </label>
+
+                                        <div [ngSwitch]="item.get('typeOfDeposit')?.value">
+                                            <div *ngSwitchCase="2">
+                                                <input class="form-control" placeholder="" id="dollarValue"
+                                                    type="number" min="0" (keydown)="keydownEvent($event)"
+                                                    formControlName="dollarValue">
+                                            </div>
+                                            <div *ngSwitchCase="1">
+                                                <input (keydown)="keydownEvent($event)" class="form-control"
+                                                    placeholder="" id="percentage" type="number" min="0"
+                                                    formControlName="percentage">
+                                            </div>
+                                            <div *ngSwitchCase="3">
+                                                <input (keydown)="keydownEvent($event)" class="form-control"
+                                                    placeholder="" id="balance" type="number" min="0"
+                                                    formControlName="balanceto">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div [ngSwitch]="item.get('installmentType')?.value" class="col-3 form-group">
+
+                                        <div *ngSwitchCase="1">
+                                            <label class="sub-heading-04" for="time">Time</label> <input
+                                                (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                                id="time" type="text" min="0" formControlName="time">
+                                        </div>
+                                        <div *ngSwitchCase="2">
+                                            <label class="sub-heading-04" for="time">Time</label> <input
+                                                (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                                id="time" type="text" min="0" formControlName="time">
+                                        </div>
+                                        <div *ngSwitchCase="3">
+                                            <label class="sub-heading-04" for="time">Time</label> <input
+                                                (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                                id="time" type="text" min="0" formControlName="time">
+                                        </div>
+                                        <div *ngSwitchCase="4">
+                                            <label class="sub-heading-04" for="time">Time</label> 
+                                            <input readonly class="form-control input-disabled"
+                                                id="occupancy" type="number" value="">
+                                        </div>
+                                        <div *ngSwitchCase="0">
+                                            <label class="sub-heading-04" for="time">Time</label> <input
+                                                (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                                id="time" type="text" min="0" formControlName="time">
+                                        </div>
+                                        <div *ngSwitchCase="5">
+                                            <label class="sub-heading-04" for="time">Fixed Date</label>
+                                            <div class="position-relative">
+                                                <input (keydown)="keydownEvent($event)" (click)="fixeddatepicker.open()" placeholder="Select date" readonly id="fixedDate" class="form-control"
+                                                    [matDatepicker]="fixeddatepicker" formControlName="fixedDate">
+                                                <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                    [for]="fixeddatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #fixeddatepicker></mat-datepicker>
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="6">
+                                            <label class="sub-heading-04" for="time">Date from Agreement</label> 
+  <div class="position-relative">
+
+                                                    <input (keydown)="keydownEvent($event)" (click)="datefromAgreementpicker1.open()" placeholder="Select date" readonly id="datefromAgreement1" class="form-control"
+                                                        [matDatepicker]="datefromAgreementpicker1" formControlName="datefromAgreement">
+                                                    <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                        [for]="datefromAgreementpicker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #datefromAgreementpicker1></mat-datepicker>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 form-group">
+                                        <label class="sub-heading-04" for="installmentType">Due On</label>
+                                        <select class="form-control" type="number" id="installmentType"
+                                            formControlName="installmentType" (change)="comissionDueChange(projectCommisionStructureIdx, i)">
+                                            <!-- <option value="0">Select Due On Type</option> -->
+                                            <option value="1">Days</option>
+                                            <option value="2">Weeks</option>
+                                            <option value="3">Months</option>
+                                            <option value="4">Occupancy</option>
+                                            <option value="5">Fixed Date</option>
+                                            <option value="6">Date from Agreement </option>
+                                        </select>
+                                    </div>
+                                    <div class="align-items-center d-flex form-group h-100 m-0 position-absolute pt-3 right-0"
+                                        style="right: -1.2%;">
+                                        <button
+                                            *ngIf="pcs['controls'].projectCommisionStructureDetails.controls?.length > 1"
+                                            (click)="removeProjectCommisionStructureDetails(projectCommisionStructureIdx,i)"
+                                            class="align-items-center bg-color-transparent border-0 color-01 cursor-pointer d-flex justify-content-center">
+                                            <span
+                                                class="material-icons sub-heading-02 font-style-italic color-03">close</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between my-3">
+                            <div class="d-flex"
+                                *ngIf="pcs['controls'].projectCommisionStructureDetails.controls?.length">
+                                <p class="color-03 paragraph-02 m-0 mr-3">Total Dollar value:
+                                    {{getTotal(pcs['controls']?.projectCommisionStructureDetails?.value,2)}}
+                                </p>
+                                <p class="color-03 paragraph-02 m-0">Total Percentage value:
+                                    {{getTotal(pcs['controls']?.projectCommisionStructureDetails?.value)}}</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button
+                                    class="bg-color-02 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                    mat-stroked-button
+                                    (click)="newProjectCommisionStructureDetails(projectCommisionStructureIdx)">
+                                    Add Row
+                                </button>
+                                <button [disabled]="pcs?.invalid"
+                                    class="bg-color-07 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                    mat-stroked-button
+                                    (click)="saveProjectCommisionStructure(projectCommisionStructureIdx)">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+        </ng-container>
+
+        <div class="bg-color-06 m-0 row" *ngIf="projectCommisionStructure?.value?.length">
+            <div class="col-12">
+                <p class="sub-heading-02 font-weight-medium mb-1">Commission Structures</p>
+            </div>
+            <div class="col-12 p-0">
+                <div class="row m-0">
+                    <ng-container *ngFor="let item of projectCommisionStructure?.value; let depositIndex=index">
+                        <div class="col-4 p-0" *ngIf="item.saved">
+                            <div class="bg-color-19 d-block p-3 m-2 position-relative h-100">
+                                <button (click)="saveProjectCommisionStructure(depositIndex,true)"
+                                    class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-4 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                                    <span class="material-icons paragraph-01">edit</span>
+                                </button>
+                                <button 
+                                    (click)="removeProjectCommisionStructure(depositIndex)"
+                                    class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-1 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                                    <span class="material-icons paragraph-01 color-03">delete</span>
+                                </button>
+                                <p class="font-weight-medium letter-spacing-1 m-0 paragraph-01">
+
+                                    {{item?.commisionName}}
+                                </p>
+                                <p class="font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                                    <ng-container *ngIf="item?.commisionType == 1">Percentage - </ng-container>
+                                    <ng-container *ngIf="item?.commisionType == 2">Fixed Dollar Value - </ng-container>
+                                    <ng-container *ngIf="item?.commisionType == 3">Hybrid </ng-container>
+                                    <!-- <ng-container *ngIf="item?.amoutType == 2">$</ng-container> -->
+
+                                    <ng-container *ngIf="(item?.commisionValue && item?.commisionType == 1)"> {{item?.commisionValue}}%</ng-container>
+                                    <ng-container *ngIf="(item?.commisionValue && item?.commisionType == 2)"> ${{item?.commisionValue}}</ng-container>
+
+                                    <!-- <ng-container *ngIf="item?.amoutType == 1">%</ng-container> -->
+                                    <!-- {{item?.description}} -->
+                                </p>
+                                <ul class="font-weight-medium letter-spacing-1 mt-2 paragraph-03">
+                                    <ng-container *ngFor="let childItem of item?.projectCommisionStructureDetails">
+                                        <li
+                                            *ngIf="(childItem?.typeOfDeposit == 2 && childItem?.dollarValue) || (childItem?.typeOfDeposit == 1 && childItem?.percentage) || (childItem?.typeOfDeposit == 3 && childItem?.balanceto)">
+                                            <ng-container *ngIf="childItem?.typeOfDeposit == 2">
+                                                ${{childItem?.dollarValue}}
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.typeOfDeposit == 1">
+                                                {{childItem?.percentage}}%
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.typeOfDeposit == 3">
+                                                {{childItem?.balanceto}}%
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '1'">in
+                                                {{childItem?.time}}
+                                                Days
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '2'">in
+                                                {{childItem?.time}}
+                                                Weeks
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '3'">in
+                                                {{childItem?.time}}
+                                                Months
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '4'">at
+                                                {{childItem?.time}}
+                                                Occupancy
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '5'">at
+                                                {{childItem?.fixedDate}}
+                                            </ng-container>
+                                            <ng-container *ngIf="childItem?.installmentType == '6'">at
+                                                {{childItem?.datefromAgreement}}
+                                            </ng-container>
+                                        </li>
+                                    </ng-container>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-end w-100">
+            <button class="align-items-center bg-color-transparent border-0 color-01 d-flex paragraph-03 my-3"
+                (click)="newProjectCommisionStructure()">
+                <mat-icon class="paragraph-01">add</mat-icon>
+                <span class="text-decoration-underline">Add another commission structure</span>
+            </button>
+        </div>
+
+        <div class="row m-0 my-2">
+            <div class="col-12 p-0">
+                <div class="row m-0 align-items-center">
+                    <div class="col-12 sub-heading-01">Bonus/Gifts</div>
+                    <ng-container
+                        *ngFor="let pcb of projectCommisionBonus?.controls; let projectCommisionBonusIdx=index">
+                        <ng-container formArrayName="projectCommisionBonus" *ngIf="!pcb?.value?.saved">
+                            <ng-container [formGroupName]="projectCommisionBonusIdx">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <div class="form-group mr-2 w-100">
+                                        <label class="sub-heading-04" for="installmentType">Type</label>
+                                        <input class="form-control" formControlName="bonusType" placeholder="Bonus Type"
+                                            name="Bonus Type" type="text">
+                                    </div>
+                                    <div class="form-group mr-2 w-100">
+                                        <label class="sub-heading-04" for="installmentType">Value</label>
+                                        <input class="form-control" formControlName="bonusValue"
+                                            placeholder="Bonus Value" name="Bonus Value" type="number">
+                                    </div>
+                                    <div class="form-group mr-2 w-100">
+                                        <ng-container [ngSwitch]="pcb.get('installmentType')?.value"
+                                            class="col-3 form-group">
+
+                                            <ng-container *ngSwitchCase="1">
+                                                <label class="sub-heading-04" for="time">Time</label> <input
+                                                    class="form-control" placeholder="" id="time" type="text" min="0"
+                                                    formControlName="time">
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="2">
+                                                <label class="sub-heading-04" for="time">Time</label> <input
+                                                    class="form-control" placeholder="" id="time" type="text" min="0"
+                                                    formControlName="time">
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="3">
+                                                <label class="sub-heading-04" for="time">Time</label> <input
+                                                    class="form-control" placeholder="" id="time" type="text" min="0"
+                                                    formControlName="time">
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="4">
+                                                <label class="sub-heading-04" for="time">Time</label> 
+                                                <input readonly class="form-control input-disabled"
+                                                id="occupancy" type="number" value="">
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="5">
+                                                <label class="sub-heading-04" for="time">Fixed Date</label> 
+                                                    <div class="position-relative">
+                                                        <input (keydown)="keydownEvent($event)" (click)="fixedDate1picker.open()" placeholder="Select date" readonly id="fixedDate1" class="form-control"
+                                                            [matDatepicker]="fixedDate1picker" formControlName="fixedDate">
+                                                        <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                            [for]="fixedDate1picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #fixedDate1picker></mat-datepicker>
+                                                    </div>
+                                            </ng-container>
+                                            <ng-container *ngSwitchCase="6">
+                                                <label class="sub-heading-04" for="time">Date from Agreement</label>
+                                                    <div class="position-relative">
+                                                        <input (keydown)="keydownEvent($event)" (click)="datefromAgreementpicker.open()" placeholder="Select date" readonly id="datefromAgreement" class="form-control"
+                                                            [matDatepicker]="datefromAgreementpicker" formControlName="datefromAgreement">
+                                                        <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                            [for]="datefromAgreementpicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #datefromAgreementpicker></mat-datepicker>
+                                                    </div>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-group mr-2 w-100">
+                                        <label class="sub-heading-04" for="installmentType">Due On</label>
+                                        <select class="form-control" placeholder="" id="installmentType" type="number"
+                                            formControlName="installmentType" (change)="bonusDueChange(projectCommisionBonusIdx)">
+                                            <!-- <option value="0">Select Due On Type</option> -->
+                                            <option value="1">Days</option>
+                                            <option value="2">Weeks</option>
+                                            <option value="3">Months</option>
+                                            <option value="4">Occupancy</option>
+                                            <option value="5">Fixed Date</option>
+                                            <option value="6">Date from Agreement </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mr-2 w-100">
+                                        <label class="sub-heading-04" for="taxable">Taxable</label>
+                                        <select class="form-control" placeholder="" id="taxable"
+                                            formControlName="taxable">
+                                            <option [value]=true>Yes</option>
+                                            <option [value]=false>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end my-3">
+                                    <button
+                                        class="bg-color-02 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                        mat-stroked-button
+                                        (click)="removeProjectCommisionBonus(projectCommisionBonusIdx)">
+                                        Remove
+                                    </button>
+                                    <button [disabled]="pcb?.invalid"
+                                        class="bg-color-07 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                        mat-stroked-button
+                                        (click)="saveProjectCommisionBonus(projectCommisionBonusIdx)">
+                                        Save
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+
+                    <div class="col-12">
+                        <button
+                            class="align-items-center bg-color-transparent border-0 color-01 d-flex paragraph-03 float-right"
+                            (click)="newProjectCommisionBonus()">
+                            <mat-icon class="paragraph-01">add</mat-icon>
+                            <span class="text-decoration-underline">Add another bonus type</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex my-3 p-0">
+                <div class="row m-0 w-100">
+                    <ng-container *ngFor="let bonus of projectCommisionBonus?.value;let bonusIdx = index">
+                        <div class="col-3">
+                            <div class="align-items-center bg-color-19 border-radius p-3 position-relative"
+                                *ngIf="bonus?.saved">
+                                <button (click)="saveProjectCommisionBonus(bonusIdx,true)"
+                                    class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-4 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                                    <span class="material-icons paragraph-01">edit</span>
+                                </button>
+                                <button
+                                    (click)="removeProjectCommisionBonus(bonusIdx)"
+                                    class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-1 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                                    <span class="material-icons paragraph-01 color-03">close</span>
+                                </button>
+                                <p class="m-0 paragraph-02 font-weight-medium mr-1">{{bonus?.bonusType}}</p>
+                                <p class="m-0 paragraph-02 font-weight-medium">${{bonus?.bonusValue}}</p>
+                                <p class="m-0 paragraph-03">
+                                    <ng-container *ngIf="bonus?.installmentType == '1'">in {{bonus?.time}} Days
+                                    </ng-container>
+                                    <ng-container *ngIf="bonus?.installmentType == '2'">in {{bonus?.time}} Weeks
+                                    </ng-container>
+                                    <ng-container *ngIf="bonus?.installmentType == '3'">in {{bonus?.time}} Months
+                                    </ng-container>
+                                    <ng-container *ngIf="bonus?.installmentType == '4'">at {{bonus?.time}} Occupancy
+                                    </ng-container>
+                                    <ng-container *ngIf="bonus?.installmentType == '5'">at
+                                        {{bonus?.fixedDate}}
+                                    </ng-container>
+                                    <ng-container *ngIf="bonus?.installmentType == '6'">at
+                                        {{bonus?.datefromAgreement}}</ng-container>
+                                </p>
+                                <p class="m-0 paragraph-03 font-style-italic color-03">{{bonus?.taxable ? 'Taxable' :
+                                    'Non Taxable'}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+</form>

@@ -1,0 +1,490 @@
+<main *ngIf="section === 'steup-sales-grid' || section ===  'sales-grid'">
+  <div class="bg-white border-radius box-shadow-1 d-block mb-3 py-3 w-100">
+    <ng-template #filterItemTemplate let-item="item">
+      <ng-container *ngIf="!item?.popover">
+        <mat-form-field appearance="outline"
+          class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03 mr-2">
+          <mat-select [multiple]="item?.multiple" [disabled]="isProgressing" [formControl]="item.formControl"
+            [placeholder]="item.name || item.id | titlecase">
+            <!-- <mat-option #allSelected (click)="tosslePerOne(allSelected,item)" [value]="0">Alll</mat-option> -->
+            <mat-option #allSelected *ngFor="let option of item?.options" [value]="option.value"
+              (click)="onFilter(item,allSelected,option.value)">
+              <p class="align-items-center d-flex m-0"><span *ngIf="option?.bgColor"
+                  class="d-block indicator border-radius mr-1" [style.backgroundColor]="option?.bgColor"></span>
+                <span>{{option.title}}</span>
+              </p>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="item?.popover">
+        <ng-template #popTemplate>
+          <div class="range-slider-box">
+            <div class="custom-slider">
+
+              <ngx-slider [value]="item.sliderOptions?.value || 0" [highValue]="item.sliderOptions?.highValue || 0"
+                [options]="item.sliderOptions?.option || {}" (userChangeEnd)="userChangeEnd($event,item)">
+              </ngx-slider>
+              <div class="d-block text-right"><button
+                  class="bg-color-transparent border-0 color-13 font-weight-bold paragraph-04 cursor-pointer"
+                  (click)="userChangeEnd(null,item)">Clear</button></div>
+            </div>
+          </div>
+        </ng-template>
+        <button [disabled]="isProgressing"
+          class="align-items-center border-color-19 color-03 d-flex font-weight-normal form-control justify-content-between letter-spacing-1 m-0 mr-2 paragraph-03"
+          [popover]="popTemplate" [outsideClick]="true">
+          {{item.name | titlecase}} <span class="material-icons">arrow_drop_down</span>
+        </button>
+      </ng-container>
+    </ng-template>
+    <div class="d-flex justify-content-around px-3" style="width: 50% !important;">
+      <div class="d-flex flex-auto">
+
+        <ng-container *ngFor="let item of filtered_dropdowns;let i = index">
+          <ng-container [ngTemplateOutlet]="filterItemTemplate" [ngTemplateOutletContext]="{item:item}"></ng-container>
+          <!-- <form [formControl]="item.formControl" fxFlex fxLayout="column" autocomplete="off" style="margin: 30px">
+            <mat-select placeholder="User Type" [formControl]="item.formControl" multiple>
+                <mat-option *ngFor="let option of item?.options" [value]="option.value" (click)="tosslePerOne(allSelected.viewValue)">
+                    {{option.title}}
+                </mat-option>
+                <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
+            </mat-select>
+        </form> -->
+        </ng-container>
+        <button *ngIf="dropdowns.length > maxFilterItem" [disabled]="isProgressing"
+          (click)="showMoreFilters = !showMoreFilters"
+          class="align-items-center material-icons w-10 border-color-19 color-03 d-flex font-weight-normal form-control justify-content-between letter-spacing-1 m-0 mr-2 paragraph-03">More<span
+            class="material-icons">{{showMoreFilters ? 'arrow_drop_up':'arrow_drop_down' }} {{showMoreFilters}}</span>
+        </button>
+      </div>
+      <!-- <div class="d-flex">
+        <button [disabled]="isProgressing"
+          class="btn-linear-gradient-1 border-0 mx-2 paragraph-04 px-3 white-space-nowrap">VIEW PROJECT HEAT
+          MAP</button>
+        <button [disabled]="isProgressing"
+          class="align-items-center bg-color-08 border-0 color-07 d-flex paragraph-03 px-3 white-space-nowrap">
+          <span class="material-icons mr-1 paragraph-01">signal_cellular_alt</span>Full report</button>
+      </div> -->
+    </div>
+    <div class="bg-white border-radius box-shadow-1 d-block mb-3 py-3 w-100"
+      *ngIf="more_dropdowns?.length && showMoreFilters">
+      <div class="d-flex flex-auto px-3">
+        <ng-container *ngFor="let item of more_dropdowns;let i = index">
+          <ng-container [ngTemplateOutlet]="filterItemTemplate" [ngTemplateOutletContext]="{item:item}"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="border-bottom-1 border-bottom-2 border-color-19 d-flex justify-content-between mt-4 px-3">
+      <div class="">
+        <p class="font-weight-light paragraph-03 m-0">Total <span
+            class="font-weight-medium">{{selectedTower?.totalUnits}}</span></p>
+      </div>
+      <div class="d-flex" *ngFor="let item of indicators">
+        <p class="align-items-center d-flex m-0font-weight-light  paragraph-03"><span
+            class="d-block indicator border-radius mr-1" [style.backgroundColor]="item?.bgColor"></span> {{item?.title |
+          titlecase}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-block mb-3">
+    <!-- <select [disabled]="isProgressing" [(ngModel)]="selectedTowerIndex" name="selectTower"
+      (ngModelChange)="onSelectTower()"
+      class="w-25 color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 mr-2">
+      <option *ngFor="let tower of towers;let i = index" [value]="i">{{tower?.towerName | titlecase}}</option>
+    </select> -->
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn mr-2 btn-sm border-radius-none border-1" (click)="onSelectTower(i)"
+        [ngClass]="{'border-color-05 color-15':selectedTowerIndex !== i, 'border-color-15 bg-color-15 color-white':selectedTowerIndex === i}"
+        *ngFor="let tower of towers;let i = index">
+        <input [(ngModel)]="selectedTowerIndex" type="radio" name="options" [value]="i"
+          [checked]="selectedTowerIndex === i"> {{tower?.towerName | titlecase}} {{i+1}}
+      </label>
+      <!-- <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2"> Radio
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option3"> Radio
+      </label> -->
+    </div>
+  </div>
+
+  <div class="bg-color-white border-radius d-flex justify-content-between p-2">
+    <div class="d-flex align-items-center">
+      <ng-container *ngIf="type === 'grid'">
+        <p class="color-05 font-weight-medium m-0 mr-2 paragraph-01">Actions</p>
+        <!-- <ng-template #popChangeStatusTemplate>
+          <div class="d-block">
+            <button
+              class="align-items-center bg-color-transparent border-bottom-1 border-color-03 border-color-05 border-left-0 border-radius-none border-right-0 border-top-0 color-01 d-flex mb-1 p-1 paragraph-03 text-left w-100 cursor-pointer"
+              *ngFor="let item of indicators" (click)="changeStatus(item.title);pop.toggle()">
+              <span class="d-block indicator mr-2" [style.backgroundColor]="item?.bgColor"></span>
+              Mark selected as {{item?.title | titlecase}}
+            </button>
+          </div>
+        </ng-template> -->
+        <!-- <button matTooltip="Select units to change the status" [disabled]="isProgressing" #pop="bs-popover"
+          class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03 mr-2 white-space-nowrap"
+          [popover]="popChangeStatusTemplate" [outsideClick]="true">Change Status</button> -->
+        <mat-form-field appearance="outline" matTooltip="Select units to change the status"
+          class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03 mr-2">
+          <mat-select [disabled]="isProgressing" #changeStatusControl (selectionChange)="changeStatus($event)"
+            [placeholder]="'Change Status'">
+            <mat-option *ngFor="let option of indicators" [value]="option.title">
+              <p class="align-items-center d-flex m-0"><span *ngIf="option?.bgColor"
+                  class="d-block indicator border-radius mr-1" [style.backgroundColor]="option?.bgColor"></span>
+                <span>{{option.title}}</span>
+              </p>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button matTooltip="Select units of same floor" [disabled]="isProgressing"
+          class="bg-white border-0 color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03 cursor-pointer"
+          (click)="mergeFlats()">Merge</button>
+        <button matTooltip="Select units of same floor" [disabled]="isProgressing"
+          class="bg-white border-0 color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03"
+          (click)="getNewFlatNumberForSplit(addNewFlatNoForSplitFlatTemplate)">Split</button>
+        <!-- <button [disabled]="isProgressing && !selectedUnits?.length"
+        class="bg-white border-0 color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03">Apply
+        Discount</button> -->
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label> -->
+        <ng-template #assignTemplate>
+          <div class="d-block">
+            <input type="text" matTooltip="Select units to assign agent"
+              class="w-5 bg-white form-control color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03"
+              placeholder="Search agent" [formControl]="agent.control" [matAutocomplete]="auto"
+              [disabled]="isProgressing && !selectedUnits?.length">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+              (optionSelected)="onSelectAgent($event,'assign')">
+              <mat-option *ngFor="let option of agent.options" [value]="option.value">
+                <div class="align-items-center border-bottom-1 border-color-05 d-flex pb-2">
+                  <img class="agent-img mr-2"
+                    [src]="option.imagePath || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU'"
+                    alt="">
+                  <p class="m-0 paragraph-03">{{option.text}}</p>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </ng-template>
+        <!-- <ng-template #revokeTemplate>
+        <div class="d-block">
+          <input type="text" matTooltip="Select single to revoke agent"
+            class="w-5 bg-white form-control color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03"
+            placeholder="Search agent" [formControl]="agent.control" [matAutocomplete]="auto"
+            [disabled]="isProgressing && !selectedUnits?.length">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+            (optionSelected)="onSelectAgent($event,'revoke')">
+            <mat-option *ngFor="let option of agent.options" [value]="option.value">
+              <div class="align-items-center border-bottom-1 border-color-05 d-flex pb-2">
+                <img class="agent-img mr-2"
+                  [src]="option.imagePath || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU'"
+                  alt="">
+                <p class="m-0 paragraph-03">{{option.text}}</p>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </ng-template> -->
+
+
+
+
+        <button [popover]="assignTemplate" [outsideClick]="true" [disabled]="isProgressing && !selectedUnits?.length"
+          matTooltip="Select units to assign agent" matTooltip="Select units to assign agent"
+          class="bg-white border-0 color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03">Assign</button>
+        <button (click)="openRevokeConfirmation(revokeAgentsTemplate)" [disabled]="isProgressing"
+          matTooltip="Select single to revoke agent"
+          class="bg-white border-0 color-01 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap color-03">Revoke</button>
+      </ng-container>
+    </div>
+    <div class="d-flex align-items-center">
+      <!-- <button [disabled]="isProgressing"
+        class="align-items-center bg-white border-0 color-01 color-03 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap">
+        <span class="material-icons mr-1 paragraph-01">add</span>
+        Add Floor
+      </button>
+      <button [disabled]="isProgressing"
+        class="align-items-center bg-white border-0 color-01 color-03 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap">
+        <span class="material-icons mr-1 paragraph-01">add</span>
+        Add Unit
+      </button> -->
+      <mat-slide-toggle [disabled]="isProgressing" [labelPosition]="'before'"
+        class="align-items-center bg-white border-0 color-01 color-03 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap mt-2"
+        [color]="'warn'" [(ngModel)]="showBlockTitle">
+        <span>Show Block Labels</span>
+      </mat-slide-toggle>
+    </div>
+  </div>
+</main>
+
+<section class="mt-3 d-block" *ngIf="section ===  'sales-grid'">
+  <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+  <div *ngIf="type === 'table'" class="table-responsive">
+    <table class="table table-sm table-hover table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Unit Number</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Final Price</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Level</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">View</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Sq Ft.</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Beds</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Bath</th>
+          <th scope="col" class="color-07 font-weight-semi-bold paragraph-03 text-center">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let block of selectedTower?.projectBlocks">
+          <tr *ngIf="showBlockTitle">
+            <td colspan="8">
+              <div class="align-items-center d-flex position-sticky block-title">
+                <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">{{block?.blockName}}
+                </p>
+                <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">{{block?.count}}</p>
+              </div>
+            </td>
+          </tr>
+          <ng-container *ngFor="let floor  of block?.projectFloorDetails">
+            <ng-container *ngFor="let unit  of floor?.projectUnitFlats">
+              <tr class="cursor-pointer" (click)="unitDetails(unit)">
+                <th scope="row" class="color-04 font-weight-normal paragraph-03 text-center">{{unit.flatNo}}</th>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.price}}</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.floorNo}}</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.view}}</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center"> {{unit.interiorSize}} +
+                  {{unit?.balconySize}} sq.ft</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.noOfBedroom}}</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.nOofBaths}}</td>
+                <td class="color-04 font-weight-normal paragraph-03 text-center">{{unit?.flatStatus | titlecase}}
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="type === 'grid'" class="main grid d-flex position-relative sales-grid-blocks">
+    <div class="floor-numbers bg-color-06 left-0 position-sticky z-index-2 pt-4">
+      <!-- <div class="d-block" *ngFor="let block of blocks"> -->
+      <div class="d-block" *ngFor="let block of selectedTower?.projectBlocks">
+        <p *ngIf="showBlockTitle" class="visibility-hidden">1</p>
+        <!-- <div class="d-flex flex-column my-2" *ngFor="let floor  of block?.floors"> -->
+        <div class="d-flex flex-column my-2" *ngFor="let floor  of block?.projectFloorDetails">
+          <p class="floor-number color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-03">
+            {{floor?.floorNo}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="d-flex stack-numbers top-0 bg-color-06 position-sticky z-index-1">
+        <div class="d-flex">
+          <div class="m-1 p-0 stack-number color-01 font-weight-medium letter-spacing-1 paragraph-03"
+            *ngFor="let stack  of stacks">{{stack}}</div>
+        </div>
+      </div>
+      <!-- <div class="d-block" *ngFor="let block of blocks"> -->
+      <div class="d-block" *ngFor="let block of selectedTower?.projectBlocks">
+        <div *ngIf="showBlockTitle"
+          class="align-items-center border-bottom-1 border-color-19 d-flex justify-content-between m-1 mb-1 mt-3">
+          <div class="align-items-center d-flex position-sticky block-title">
+            <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">{{block?.blockName}}
+            </p>
+            <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">{{block?.count}}</p>
+          </div>
+        </div>
+        <!-- <div class="d-flex flex-column" *ngFor="let floor  of block?.floors"> -->
+        <div class="d-flex flex-column" *ngFor="let floor  of block?.projectFloorDetails">
+          <div class="d-flex">
+            <div class="d-flex">
+              <button [class.selected]="unit.selected" [class.visibility-hidden]="unit?.visibilityHidden"
+                class="cursor-pointer color-03 m-1 sales-grid-box p-2 position-relative border-radius-none text-left border-0"
+                [matTooltipDisabled]="!unit?.assignAgentId"
+                matTooltip="Assign agent: {{unit?.agentName || unit?.assignAgentId}}"
+                [ngStyle]="{'background-color': unit?.bgColor}" *ngFor="let unit  of floor?.projectUnitFlats">
+                <button (click)="toggleUnitSelection(unit)" [class.color-white-hover]="!unit.selected"
+                  [class.color-18]="unit.selected"
+                  class="bg-color-transparent pl-0 pt-0 border-0 check-mark color-06  position-absolute z-index-1 cursor-pointer">
+                  <span class="material-icons" [class.sub-heading-03]="unit.selected">check_circle</span>
+                </button>
+                <div (click)="unitDetails(unit)">
+                  <!-- <span
+                    class="align-items-center bg-color-13 color-white count d-flex justify-content-center paragraph-04 position-absolute">
+                    3
+                  </span> -->
+
+                  <p class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-02 line-clamp line-clamp-1"
+                    [ngStyle]="{'color': unit?.bgColor,'filter':'brightness(2.5)'}">{{unit?.flatNo}}</p>
+                  <p class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                    ${{unit?.price || 0}}
+                  </p>
+                  <p class="font-weight-normal letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                    {{unit?.unitName || 'n/a'}}</p>
+                  <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                    Radiant
+                    Radiant </p> -->
+                  <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                    {{unit.interiorSize}} + {{unit?.balconySize}} sq.ft</p>
+                  <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                    {{unit?.view}}</p>
+                  <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">2bd+d, 2ba, SW</p> -->
+                </div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-block" *ngIf="type === '2d'">
+    <ng-container *ngTemplateOutlet="twoDmodel"></ng-container>
+  </div>
+
+
+</section>
+
+<!-- <app-setup-sales-grid *ngIf="section === 'steup-sales-grid'" (selectedIndex)="selectedIndex=$event"
+  (updateSection)="updateSection($event)" class="d-block mt-3" [blocks]="blocks" [selectedBlock]="selectedBlock"
+  [stacks]="stacks"></app-setup-sales-grid>
+<app-set-pricing *ngIf="section === 'steup-sales-grid-pricing'" (updateSection)="updateSection($event)"
+  class="d-block mt-3" [selectedIndex]="selectedIndex" [blocks]="blocks" [selectedBlock]="selectedBlock"
+  [stacks]="stacks"></app-set-pricing>
+<app-set-units-skips *ngIf="section === 'steup-sales-grid-units-skips'" (updateSection)="updateSection($event)"
+  class="d-block mt-3" [selectedIndex]="selectedIndex" [blocks]="blocks" [selectedBlock]="selectedBlock"
+  [stacks]="stacks"></app-set-units-skips> -->
+
+<ng-template #setupSalesGridModal>
+  <div class="d-block text-center">
+    <p class="color-01 font-weight-medium paragraph-01 letter-spacing-1">COMPLETE GRID SETUP</p>
+    <div>
+      <button mat-stroked-button mat-dialog-close="sales-grid"
+        class="border-0 color-01 letter-spacing-1 paragraph-03">skip</button>
+      <button mat-stroked-button mat-dialog-close="steup-sales-grid"
+        class="border-0 color-01 letter-spacing-1 paragraph-03">continue</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addNewFlatNoForSplitFlatTemplate>
+  <div class="d-block text-center">
+    <p class="color-01 font-weight-medium paragraph-01 letter-spacing-1">Add Flat Number</p>
+    <input class="form-control ng-dirty ng-touched ng-valid text-center mb-3" type="text" name="newflatNo" ngModel
+      pattern="^[0-9]*$" maxlength="5" required #flatNumber="ngModel" (ngModelChange)="checkFaltNumber($event)">
+    <p *ngIf="flatNumberAlreadyexist">already exists Flat Number</p>
+    <div>
+      <button mat-stroked-button mat-dialog-close
+        class="border-0 color-01 letter-spacing-1 paragraph-03">Cancel</button>
+      <button [disabled]="flatNumber?.invalid || flatNumberAlreadyexist" mat-stroked-button
+        [mat-dialog-close]="flatNumber?.value" class="border-0 color-01 letter-spacing-1 paragraph-03">continue</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #twoDmodel>
+  <img src="./assets/two-d-models/building.jpeg" usemap="#image-map" class="map" id="2dmodel">
+
+  <map name="image-map">
+    <!--<area target="_blank"    alt="tower-1-floor-4" title="tower-1-floor-4" href="builder-admin/projects/{{projectId}}/sales-grid/tower-1-floor-4" coords="639,325,755,238" shape="rect">
+    <area target="_blank" alt="tower-1-floor-3" title="tower-1-floor-3" href="builder-admin/projects/{{projectId}}/sales-grid/tower-1-floor-3" coords="641,332,732,420" shape="rect">
+    <area target="_blank" alt="tower-1-floor-2" title="tower-1-floor-2" href="builder-admin/projects/{{projectId}}/sales-grid/tower-1-floor-2" coords="641,425,737,512" shape="rect">
+    <area target="_blank" alt="tower-1-floor-1" title="tower-1-floor-1" href="builder-admin/projects/{{projectId}}/sales-grid/tower-1-floor-1" coords="641,519,733,590" shape="rect">-->
+    <area target="_blank" alt="tower-1-floor-1-unit-301" title="tower-1-floor-1-unit-301"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6097" coords="639,513,638,589,732,591,731,518"
+      shape="poly">
+    <area target="_blank" alt="tower-1-floor-2-unit-302" title="tower-1-floor-2-unit-302"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6098" coords="640,424,640,506,732,512,731,431"
+      shape="poly">
+    <area target="_blank" alt="tower-1-floor-3-unit-303" title="tower-1-floor-3-unit-303"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6099" coords="639,331,639,415,732,425,731,343"
+      shape="poly">
+    <area target="_blank" alt="tower-1-floor-4-unit-304" title="tower-1-floor-4-unit-304"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6100" coords="639,226,639,323,731,336,732,244"
+      shape="poly">
+    <area target="_blank" alt="tower-2-floor-1-unit-401" title="tower-2-floor-1-unit-401"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6101" coords="936,530,936,594,1020,595,1021,535"
+      shape="poly">
+    <area target="_blank" alt="tower-2-floor-2-unit-402" title="tower-2-floor-2-unit-402"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6102" coords="936,452,935,525,1017,529,1017,461"
+      shape="poly">
+    <area target="_blank" alt="tower-2-floor-3-unit-403" title="tower-2-floor-3-unit-403"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6103" coords="935,374,1017,388,1017,453,933,445"
+      shape="poly">
+    <area target="_blank" alt="tower-2-floor-4-unit-404" title="tower-2-floor-4-unit-404"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6104"
+      coords="933,287,934,368,1015,381,1017,305,1015,303" shape="poly">
+    <area target="_blank" alt="tower-3-floor-1-unit-501" title="tower-3-floor-1-unit-501"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6097" coords="1163,541,1163,596,1201,598,1203,542"
+      shape="poly">
+    <area target="_blank" alt="tower-3-floor-2-unit-502" title="tower-3-floor-2-unit-502"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6097" coords="1163,470,1163,534,1203,536,1203,475"
+      shape="poly">
+    <area target="_blank" alt="tower-3-floor-3-unit-503" title="tower-3-floor-3-unit-503"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6097" coords="1163,398,1161,464,1203,470,1203,407"
+      shape="poly">
+    <area target="_blank" alt="tower-3-floor-4-unit-504" title="tower-3-floor-4-unit-504"
+      href="builder-admin/projects/{{projectId}}/sales-grid/unit/6097" coords="1156,316,1156,393,1201,404,1202,326"
+      shape="poly">
+  </map>
+</ng-template>
+
+<ng-template #revokeAgentsTemplate>
+  <div class="d-block">
+    <div class="d-block text-center" mat-dialog-title>
+      <p class="color-01 font-weight-normal letter-spacing-1 paragraph-03">Are you sure you want to revoke the agent
+        assignment to the units
+        <ng-container *ngFor="let unit of selectedUnits;let isLast=last">
+          {{unit?.flatNo}} <ng-container *ngIf="!isLast">,</ng-container>
+        </ng-container>
+        ?
+      </p>
+      <p class="color-03 font-weight-normal letter-spacing-1 paragraph-03">Current Allocations</p>
+    </div>
+    <mat-dialog-content>
+      <div class="d-block">
+        <ng-container *ngFor="let unit of selectedUnits;let i=index">
+          <div class="align-items-center border-bottom-1 border-color-19 d-flex justify-content-between mb-2">
+            <table class="w-100">
+              <tr class="">
+                <td class="w-75">
+                  <div class="d-flex align-items-center">
+                    <img class="assign-agent-img mr-2 mb-2"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU">
+                    <p class="color-01 letter-spacing-1 m-0 mb-2 paragraph-02">{{unit?.agentName ||
+                      unit?.assignAgentId}}</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="border-color-19 border-left-1 d-flex">
+                    <p class="color-03 font-weight-light letter-spacing-1 m-0 ml-3 paragraph-02">{{unit?.flatNo}}</p>
+                    <button class="cursor-pointer border-0 bg-color-transparent color-13 ml-5"
+                      (click)="toggleUnitSelection(unit)">
+                      <span class="material-icons">remove_circle</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+
+          </div>
+        </ng-container>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button mat-stroked-button mat-dialog-close
+        class="border-2 border-color-07 color-01 color-07 font-weight-medium letter-spacing-1 paragraph-03 px-3">Cancel</button>
+      <button mat-stroked-button [mat-dialog-close]="true"
+        class="border-2 border-color-13 color-white bg-color-13 font-weight-medium letter-spacing-1 paragraph-03 px-3">Revoke</button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

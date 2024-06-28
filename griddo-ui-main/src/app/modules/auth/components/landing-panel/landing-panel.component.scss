@@ -1,0 +1,44 @@
+.content-section {
+  height: 100vh;
+  width: calc(100vw - calc((826 / 900) * 100vh));
+}
+
+.img-section {
+  height: 100vh;
+  width: calc((826 / 900) * 100vh);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.zid {
+  z-index: 2;
+}
+
+.smallsc {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content-section-m {
+  height: calc(100vh - 5rem);
+  width: 100vw;
+}
+.img-section-m {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}

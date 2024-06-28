@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./Free Online Image Map Generator_files/app.min.css">
+  <link rel="stylesheet" href="./Free Online Image Map Generator_files/bootstrap.min.css">
+  <script src="./Free Online Image Map Generator_files/jquery.min.js"></script>
+  <script src="./Free Online Image Map Generator_files/bootstrap.min.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebApplication" data-new-gr-c-s-check-loaded="14.1047.0"
+  data-gr-ext-installed="">
+  <link itemprop="image" href="https://www.image-map.net/images/apple-touch-icon-112x112.png">
+  <meta itemprop="operatingSystem" content="Browser">
+  <meta itemprop="browserRequirements" content="Browser that supports HTML5, SVG and JavaScript">
+  <meta itemprop="applicationCategory" content="Online, Tool, Image Map">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="step">
+          <button type="button" class="btn btn-success btn-lg" id="image-mapper-upload">
+            Select Image
+            from My PC</button>
+          <input type="file" name="" id="image-mapper-file">
+          <span class="divider">&nbsp; &nbsp;
+            &nbsp; -- OR -- &nbsp; &nbsp; &nbsp;</span>
+          <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#image-mapper-load">Load
+            Image from Website
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container toggle-content" style="display: none;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12" id="image-map-wrapper">
+              <div id="image-map-container">
+                <div id="image-map" style="max-width: 100%" class="image-mapper"><img class="image-mapper-img"><svg
+                    class="image-mapper-svg"></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table" id="image-mapper-table">
+          <thead>
+            <tr>
+              <th>Active</th>
+              <th>Shape</th>
+              <th>Link</th>
+              <th>Title</th>
+              <th>Target</th>
+              <th style="width: 25px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 65px">
+                <div class="control-label input-sm"><input type="radio" name="im[0][active]" value="1"
+                    checked="checked"></div>
+              </td>
+              <td><select name="im[0][shape]" class="form-control input-sm">
+                  <option value="">---</option>
+                  <option value="rect">Rect</option>
+                  <option value="poly">Poly</option>
+                  <option value="circle">Circle</option>
+                </select></td>
+              <td><input type="text" name="im[0][href]" value="" placeholder="Link" class="form-control input-sm"></td>
+              <td><input type="text" name="im[0][title]" value="" placeholder="Title" class="form-control input-sm">
+              </td>
+              <td><select name="im[0][target]" class="form-control input-sm">
+                  <option value="">---</option>
+                  <option value="_blank">_blank</option>
+                  <option value="_parent">_parent</option>
+                  <option value="_self">_self</option>
+                  <option value="_top">_top</option>
+                </select></td>
+              <td><button class="btn btn-default btn-sm remove-row" name="im[0][remove]" value=""><span
+                    class="glyphicon glyphicon-remove"></span></button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="6" style="text-align: right"><button type="button"
+                  class="btn btn-danger btn-sm add-row"><span class="glyphicon glyphicon-plus"></span> Add New
+                  Area</button></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container toggle-content segment" style="display: none;">
+    <div class="row">
+      <div class="col-md-12" style="text-align: center"><button type="button" class="btn btn-success btn-lg"
+          data-toggle="modal" data-target="#modal-code">Show Me The Code!</button></div>
+    </div>
+  </div>
+  <div class="modal fade" id="image-mapper-load" tabindex="-1" role="dialog" aria-labelledby="image-mapper-load-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="image-mapper-dialog">
+        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="image-mapper-load-label">Load Image from Website</h4>
+        </div>
+        <div class="modal-body">
+          <div class="input-group input-group-sm has-error"><input type="text" value="" placeholder="http://..."
+              id="image-mapper-url" class="form-control input-sm"><span class="input-group-addon"><span
+                class="glyphicon glyphicon-remove"></span></span></div>
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="image-mapper-continue">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-code" tabindex="-1" role="dialog" aria-labelledby="modal-code-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modal-code-dialog">
+        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" id="modal-code-label">Generated Image Map Output</h4>
+        </div>
+        <div class="modal-body"><textarea class="form-control input-sm" readonly="readonly" id="modal-code-result"
+            rows="10"></textarea></div>
+        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./Free Online Image Map Generator_files/app.min.js"></script>
+  <script>(function ($) { $(document).trigger('init'); })(jQuery);</script>
+
+  <!-- <div id="f8e147"></div>
+  <div id="fcmodal__id__f8e147" aria-hidden="true" class="fcmodal__toggle">
+    <div id="fcmodal__overlay__f8e147" tabindex="-1" data-micromodal-close="true" class="fcmodal__overlay">
+      <div id="fcmodal__close__f8e147" data-micromodal-close="true" class="fcmodal__close">dismiss</div>
+      <div id="fcmodal__container__f8e147" role="dialog" aria-modal="true" class="fcmodal__container"><iframe
+          class="fc__iframe" data-src="https://formcrafts.com/a/10442?iframe=true&amp;popup=true"
+          style="border: 0px; display: block; opacity: 0;"
+          src="./Free Online Image Map Generator_files/saved_resource.html"></iframe></div>
+      <div class="fc__pbc"></div>
+      <div class="fcmodal__loader"></div>
+    </div>
+  </div> -->
+</body>
+
+</html>

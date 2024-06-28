@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HotelManagment.Database_Model.AccessLog>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* ACCESS LOGS SECTION *@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Access Logs</p>
+            <div class="text-muted font-weight-light cstm-card-body">
+                <table id="tblhistory" class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>UserId</th>
+                            <th>IP Address</th>
+                            <th>Description</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{foreach (var log in Model)
+                            {
+                                <tr>
+                                    <td>@log.UserId</td>
+                                    <td>@log.IpAddress</td>
+                                    <td>@log.Description</td>
+                                    <td>@log.Time</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+    {
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datatable').DataTable();
+        });
+
+    </script>
+}

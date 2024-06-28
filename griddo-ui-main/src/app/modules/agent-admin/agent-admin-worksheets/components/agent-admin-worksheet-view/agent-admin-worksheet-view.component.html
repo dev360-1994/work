@@ -1,0 +1,207 @@
+<mat-progress-bar *ngIf="!worksheet" mode="buffer"></mat-progress-bar>
+<section class="add-agent-section px-5" *ngIf="worksheet">
+    <a routerLink="../../" class="mb-3 back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+        <mat-icon>keyboard_backspace</mat-icon> Back to all worksheets
+    </a>
+    <div class="d-flex justify-content-between align-items-baseline col-12">
+        <div class="d-flex">
+            <p class="font-weight-semi-bold paragraph-01 color-01">Worksheet</p>
+            <p class="font-weight-medium paragraph-01 color-04 ml-2">{{worksheet.projectWorkSheetNo}}</p>
+        </div>
+        <!-- <div class="d-flex">
+            <button class="cursor-notallowed bg-color-09 border-0 border-radius color-white color-white-hover font-weight-nomal mr-2 paragraph-03 px-4 white-space-nowrap">Assign Unit</button>
+            <select class="form-control mr-2 paragraph-03 cursor-notallowed"></select>
+        </div> -->
+        <div class="d-flex flex-column" *ngIf="isAgent">
+            <p class="color-04 font-weight-medium m-0 paragraph-01 text-right">{{worksheet.agentName}}</p>
+            <!-- <p class="color-04 font-style-italic font-weight-nomal m-0 paragraph-03 text-right">23 May 2021, 13:59</p> -->
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-baseline col-12" *ngIf="isAgent">
+        <div class="d-flex">
+            <p class="font-weight-semi-bold paragraph-01 color-03">Status</p>
+            <p class="font-weight-medium paragraph-01 color-04 ml-2">{{worksheet.status}}</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-baseline col-12" *ngIf="isBuilder">
+        <div class="d-flex">
+            <p class="mr-2 font-weight-semi-bold paragraph-01 color-03">Selected Unit</p>
+            <!-- <button class="cursor-notallowed bg-color-09 border-0 border-radius color-white color-white-hover font-weight-nomal mr-2 paragraph-03 px-4 white-space-nowrap">Assign Unit</button> -->
+            <!-- <select class="form-control mr-2 paragraph-03">
+                <option value=""></option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+            <option value="mid">Mid</option>
+            </select> -->
+            <p class="mr-2 font-weight-semi-bold paragraph-01 color-03">{{flatNo == 0 ? '': flatNo}}</p>
+            <a class="mr-2 view-grid" (click)="openDialog(worksheet)">View grid</a>
+        </div>
+    </div>
+    <div  *ngIf="flatNo>0" class="d-flex justify-content-between align-items-baseline col-12"><div class="d-flex">
+        <p   (click)="openPriceDialog(worksheet)" class="font-weight-medium paragraph-01 color-04 ml-2">$ {{totalPrice | currency: 'USD':'symbol':'0.0-2'}}</p></div></div>
+    <section class="d-block">
+        <div class="m-0 row">
+            <div class="col-12 mb-2 mt-4">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr *ngFor="let item of worksheet?.projectWorkSheetPurchaserChoise; let i=index">
+                            <td class="color-03 paragraph-03 pl-0">Choice {{item?.choice}}</td>
+                            <td class="color-03 paragraph-03 pl-0">{{item.model}}</td>
+                            <td class="color-03 paragraph-03 pl-0">{{item.floor}}</td>
+                            <td class="color-03 paragraph-03 pl-0">{{worksheet?.isParking ? 'Parking, ': ''}} {{worksheet?.locker ? 'Locker, ' : ''}} {{worksheet?.Storage ? 'Storage' : ''}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-12 d-flex">
+                <p class="color-01 paragraph-03 m-0 font-weight-medium">Notes:</p>
+                <p class="color-03 ml-3 paragraph-03 m-0 font-weight-medium">Lorem ipsum</p>
+            </div> -->
+        </div>
+        <div class="m-0 row">
+            <div class="col-3" *ngFor="let item of worksheet?.projectWorkSheetPurchasers; let i=index">
+                <h2 class="border-color-05 color-01 font-weight-medium paragraph-03">Purchaser {{i+1}}:</h2>
+                <p class="color-03 font-weight-medium mb-0 paragraph-03">{{item?.fullName}}</p>
+                <a class="color-03 color-03-hover font-style-italic font-weight-nomal letter-spacing-1 mb-0 paragraph-04" href="mailto:{{item?.emailID}}">{{item?.emailID}}</a>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">{{item?.address}} {{item?.province}} {{item?.city}} {{item?.zipCode}} {{item?.country}}
+                </p>
+                <a class="color-03 color-03-hover font-weight-normal mb-0 paragraph-03 font-style-italic" href="tel:{{item?.phoneNo?.internationalNumber}}">{{item?.phoneNo?.internationalNumber}}</a>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">{{item?.dateOfBirth | date:'shortDate'}}</p>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">Driver's License: {{item?.driverLicenseNumber}}</p>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">Expiry: {{item?.expiryDate | date:'shortDate'}}</p>
+                <div class="align-items-center d-flex img-box mr-3 mt-3">
+                    <a href="{{item?.governmentID}}" target="_blank">
+                        <img alt="" class="project-img" [src]="item?.governmentID">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-0 mt-4 row">
+            <div class="col-12">
+                <p class="font-weight-semi-bold paragraph-01 color-01">Draft/Cheque/Other Documents</p>
+            </div>
+            <div class="col-2" *ngFor="let doc of worksheet?.projectWorkSheetPurchasers">
+                <div class="align-items-center d-flex img-box mr-3">
+                    <a href="{{doc?.otherDoc}}" target="_blank">
+                        <img alt="" *ngIf="(doc?.otherDoc.substring(doc?.otherDoc.lastIndexOf('.') + 1) == 'jpg') ||
+                        (doc?.otherDoc.substring(doc?.otherDoc.lastIndexOf('.') + 1) == 'jpeg') ||
+                        (doc?.otherDoc.substring(doc?.otherDoc.lastIndexOf('.') + 1) == 'png')" class="project-img" [src]="doc?.otherDoc">
+                    </a>
+
+                    <!-- <img alt="" *ngIf="!doc?.otherDoc.match(/.(jpg|jpeg|png|gif)$/i)" class="project-img" src="/assets/imgs/docx.png"> -->
+
+                    <iframe *ngIf="(doc?.otherDoc.substring(doc?.otherDoc.lastIndexOf('.') + 1) == 'pdf')" scrolling="no" class="project-img" [src]="doc?.otherDoc | safe"></iframe>
+
+                </div>
+                <div *ngIf="(doc?.otherDoc.substring(doc?.otherDoc.lastIndexOf('.') + 1) == 'pdf')">
+                    <a href="{{doc?.otherDoc}}" target="_blank" class="view-grid">
+                    click here to view
+                    <!-- <embed [src]="worksheet?.projectWorkSheetPurchasers[0].otherDoc | safe" width="200" height="200" type="application/pdf"> -->
+                </a>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="color-01 paragraph-03 m-0 mt-3 font-weight-medium ">Notes: <span class="color-03 font-weight-medium paragraph-03 ">{{worksheet.notes}}</span></p>
+            </div>
+            <div class="col-4 mt-4" *ngIf="!worksheet.isCreatedByAgent && !worksheet.isAgentAssign">
+                <p class="font-weight-semi-bold paragraph-01 color-03 ">Select Agent</p>
+
+                <select [disabled]="isInternalAgentSelected" (change)="onChangeAgentId($event)" class="color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 " placeholder=" " id="agentId ">
+                    <option value=null>Select Agent.. </option>
+        <option *ngFor="let option of agentList" [value]="option?.value ">{{option?.text || option?.value || 'N/A'}}
+        </option>
+      </select>
+            </div>
+            <div class="col-4 mt-4" *ngIf="!worksheet.isCreatedByAgent && !worksheet.isAgentAssign">
+                <p class="font-weight-semi-bold paragraph-01 color-03 ">Select Agency</p>
+
+                <select (change)="onChangeAgencyId($event)" class="color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 " placeholder=" " id="agencyId ">
+                    <option value=null>Select Agency.. </option>
+        <option *ngFor="let option of agencyList" [value]="option?.value ">{{option?.text || option?.value || 'N/A'}}
+        </option>
+      </select>
+            </div>
+
+            <div class="col-4 mt-4" *ngIf="!worksheet.isCreatedByAgent && !worksheet.isAgentAssign">
+                <p class="font-weight-semi-bold paragraph-01 color-03 ">Select Internal Agent</p>
+
+                <select [disabled]="isAgentSelected" (change)="onChangeInternalAgentId($event) " class="color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 " placeholder=" " id="internalAgentId ">
+                    <option value=null>Select Internal Agent.. </option>
+        <option *ngFor="let option of internalAgentList" [value]="option?.value ">{{option?.text || option?.value || 'N/A'}}
+        </option>
+      </select>
+            </div>
+        </div>
+
+        <div class="m-0 mt-4 row ">
+            <div class="col-4 ">
+                <p class="color-01 paragraph-03 m-0 font-weight-medium ">Action:</p>
+                <div class="d-flex row form-group justify-content-right pt-2 " *ngIf="isBuilder ">
+                    <button (click)="rejectWorksheet() " mat-flat-button class="bg-white border-0 color-01 d-flex font-weight-medium mat-button-base mat-flat-button mat-focus-indicator paragraph-02 ">
+            <span class="material-icons sub-heading-02 ">cancel</span>
+            <span>
+              Reject
+            </span>
+          </button>
+                </div>
+                <div class="d-flex row form-group justify-content-right pt-2 ">
+                    <button (click)="enableCommentBox() " mat-flat-button class="bg-white border-0 color-01 d-flex font-weight-medium mat-button-base mat-flat-button mat-focus-indicator paragraph-02 ">
+            <span class="material-icons sub-heading-02 ">message</span>
+            <span>
+              Add a comment
+            </span>
+          </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <div class="col-12 ">
+        <div class="form-group pt-4 text-right ">
+            <button *ngIf="isBuilder " [disabled]="worksheet.isAgentAssign || flatNo==0 " (click)="assignAgentWorksheet() " mat-flat-button class="color-white px-4 paragraph-03 py-1 mb-1 mr-2 bg-color-07 border-3 border-color-07 ">Assign to agent</button>
+            <button (click)="assignBuyerWorksheet()" [disabled]="worksheet.isBuyerAssign || worksheet.status !='Approved' "  mat-flat-button class="color-white px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07 ">Assign to buyer</button>
+            <button (click)="openDealPage() " *ngIf="worksheet.isBuyerAssign " mat-flat-button class="color-white px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07 ">Create Deal</button>
+        </div>
+    </div>
+
+    <section class="d-block " *ngIf="showCommentBox ">
+        <form [formGroup]="formdata " (ngSubmit)="onClickSubmit(formdata.value) ">
+            <div class="m-0 row ">
+                <div class="col-12 mb-2 mt-4 ">
+                    <p class="color-03 font-weight-medium mb-0 paragraph-03 ">Leave a comment</p>
+                </div>
+                <!-- <div class="col-12 d-flex ">
+                <p class="color-01 paragraph-03 m-0 font-weight-medium ">Notes:</p>
+                <p class="color-03 ml-3 paragraph-03 m-0 font-weight-medium ">Lorem ipsum</p>
+            </div> -->
+            </div>
+            <!-- <div class="m-0 row ">
+            <div class="col-4 ">
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 " placeholder="Name " id="driverLicense " type="text ">
+            </div>
+            <div class="col-4 ">
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0 paragraph-03 " placeholder="Email " id="driverLicense " type="text ">
+            </div>
+        </div> -->
+
+            <div class="m-0 mt-4 row ">
+                <div class="col ">
+                    <textarea formControlName="comment" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-03 " placeholder="comment " id="notes " type="text "></textarea>
+                </div>
+            </div>
+
+            <div class="col-12 ">
+                <div class="form-group pt-4 ">
+                    <button type="submit " mat-flat-button class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07 ">{{isRejectSelect ? 'Reject' : 'Post comment'}}</button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+    <!-- <mat-dialog-actions align="end ">
+        <button class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer cursor-notallowed ">Amendment</button>
+        <button [mat-dialog-close]="true " class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer ">Close</button>
+    </mat-dialog-actions> -->
+
+</section>

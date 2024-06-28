@@ -1,0 +1,331 @@
+﻿@{
+    Layout = "~/Views/Shared/LoginLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div class="wrapper fadeInDown signin">
+    <div class="row cstm-cont">
+        <div class="pull-left">
+            @*<img class="logo" src="~/images/logo.png" />*@
+        </div>
+        <div class="pull-right lang_select">
+            <partial name="_SelectLanguagePartial" />
+        </div>
+    </div>
+    <form class="main_form">
+        <div id="formContent" class="login_form">
+            <div>
+                <img src="~/Images/SVG/logo.svg" class="logo" alt="logo">
+            </div>
+            <h2 class="active heading">SignIn</h2>
+            <div class="login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input class="form-control" type="text" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <input for="password" class="form-control" type="password" id="password" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <input type="button" id="login_btn" value="Login" asp-page-handler="Login" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="forgot" style="display: none;">
+                <div class="form-group">
+                    <input type="text" id="forgot_email" value="" class="form-control" placeholder="Enter email...." />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="forgot_mobile" value="" class="form-control" placeholder="Enter mobile number...." />
+                </div>
+                <div class="form-group forgot-btn-block">
+                    <input type="button" value="cancel" class="btn btn-cacel cancel" />
+                    <input type="button" id="forget_btn" value="Continue" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="reset-pass-div" style="display: none;">
+                <input type="hidden" id="reset-email" />
+                <div class="form-group">
+                    <input type="password" id="reset-new-pass" value="" class="form-control" placeholder="Enter new password...." />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="reset-cnfrm-pass" value="" class="form-control" placeholder="Confirm Password...." />
+                </div>
+                <div class="form-group forgot-btn-block">
+                    <input type="button" value="cancel" class="btn btn-cacel cancel" />
+                    <input type="button" id="reset_btn-mobile" value="Continue" class="btn btn-default" />
+                </div>
+            </div>
+            <div id="formFooter">
+                <a class="underlineHover" id="forgot" href="#">Forgot Password</a>
+                <a class="underlineHover" id="createaccount" href="#">Create Account</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<div class="wrapper fadeInDown signup" style="display: none;">
+    <div class="row cstm-cont">
+        <div class="pull-left">
+            @*<img class="logo" src="~/images/logo.png" />*@
+        </div>
+        <div class="pull-right lang_select">
+            <partial name="_SelectLanguagePartial" />
+        </div>
+    </div>
+    <form method="post" class="main_form">
+        <div id="formContent" class="login_form">
+            <div>
+                <img src="images/SVG/logo.svg" class="logo" alt="logo">
+            </div>
+            <h2 class="active heading">SignUp</h2>
+            <div class="login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input class="form-control" type="text" id="new-name" placeholder="Name" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" id="new_email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <input for="password" class="form-control" type="password" id="new-pass" autocomplete="off" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <input for="password" class="form-control" type="password" id="new-cnfrmpass" autocomplete="off" placeholder="Confirm Password" />
+                </div>
+                <div class="form-group">
+                    <input type="button" value="SignUp" id="signup" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="forgot" style="display: none;">
+                <div class="form-group">
+                    <input type="text" value="" class="form-control" placeholder="Enter email...." />
+                </div>
+                <div class="form-group">
+                    <input type="submit" asp-page-handler="Login" class="btn btn-default" />
+                </div>
+            </div>
+            <div id="formFooter">
+                <a class="underlineHover" id="signin" href="#">SignIn</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-md-12 loader" style="height: 100vh; width: 100vw; background-color: #fff; position: fixed; display:none;">
+    <div class="centered">
+        <div class="boxes">
+            <div class="box">
+                <div>
+                    <img style="width: 115px;" src="~/Content/images/Spinner-1s-200px.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    // var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/gi;
+    var admin = '@Url.Action("Index","Admin")';
+    var user = '@Url.Action("Dashboard","User")';
+
+    $("#login_btn").click(function () {
+        var email = $("#email").val();
+        var pass = $("#password").val();
+        if (email == "") {
+            alert("please enter email");
+            return false;
+        }
+        else if (!emailReg.test(email)) {
+            alert('Invalid Email');
+            return false
+        }
+        else if (pass == "") {
+            alert("please enter password.");
+            return false;
+        }
+        var data = { 'email': email, 'password': pass };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Login/Login",
+            type: "Post",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    window.location.href = result.Message == "Admin" ? admin : user;
+                }
+                else {
+                    $("#email").val("");
+                    $("#password").val("");
+                    alert(result.Message);
+                }
+            },
+            error: function (result) {
+                $("#email").val("");
+                $("#password").val("");
+                $('.loader').hide();
+                alert(result.Message);
+            }
+        });
+    });
+
+    $("#createaccount").click(function () {
+        $('.signup').show();
+        $('.signin').hide();
+    });
+
+    $("#signin").click(function () {
+        $('.signup').hide();
+        $('.signin').show();
+    });
+
+    $(".cancel").click(function () {
+        $("#forgot_email").val("");
+        $("#forgot_mobile").val("");
+        $("#reset-email").val("");
+        $("#reset-new-pass").val("");
+        $("#reset-cnfrm-pass").val("");
+        $(".forgot").hide();
+        $(".reset-pass-div").hide();
+        $("#signin").click();
+    });
+
+    $("#forget_btn").click(function () {
+        var email = $("#forgot_email").val();
+        var mobile = $("#forgot_mobile").val();
+        if (email == "") {
+            alert("Please enter email.")
+            return false;
+        } else if (mobile == "") {
+            alert("Please enter mobile number .")
+            return false;
+        }
+
+        var data = { 'email': email, "mobile": mobile };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Login/ResetPasswords",
+            type: "Post",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    $(".forgot").hide();
+                    $("#reset-email").val(email);
+                    $(".reset-pass-div").show();
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result);
+            }
+        });
+    });
+
+    $("#reset_btn-mobile").click(function () {
+        var email = $("#reset-email").val();
+        var newpass = $("#reset-new-pass").val();
+        var cnfrmpass = $("#reset-cnfrm-pass").val();
+        if (newpass == "") {
+            alert("Please enter new password.");
+            return false;
+        } else if (cnfrmpass == "") {
+            alert("Please enter confirm password.");
+            return false;
+        } else if (newpass != cnfrmpass) {
+            alert("New password and confirm password value mismatch.");
+            return false;
+        }
+        var data = { "email": email, "newPassword": newpass };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Login/UpdatePassword",
+            type: "Post",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    alert(result.Message);
+                    $(".reset-pass-div").hide();
+                    $(".login").show();
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result);
+            }
+        });
+    });
+
+    $("#signup").click(function () {
+
+        var name = $("#new-name").val();
+        var email = $("#new_email").val();
+        var pass = $("#new-pass").val();
+        var cnfrm = $("#new-cnfrmpass").val();
+        if (name == "") {
+            alert("please enter name");
+            return false;
+        }
+        else if (email == "") {
+            alert("please enter email");
+            return false;
+        }
+        else if (!emailReg.test(email)) {
+            alert('Invalid Email');
+            return false
+        }
+        else if (pass == "") {
+            alert("please enter password.");
+            return false;
+        }
+        else if (cnfrm == "") {
+            alert("please enter confirm password.");
+            return false;
+        }
+        else if (cnfrm != pass) {
+            alert("Password mismatch");
+            return false;
+        }
+        var data = { "email": email, "name": name, "password": pass }
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Login/CreateUser",
+            type: "Post",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    alert(result.Message);
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result);
+            }
+        });
+    });
+</script>

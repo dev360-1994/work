@@ -1,0 +1,173 @@
+﻿@model HotelManagment.Database_Model.HostelRoom
+@{
+    ViewBag.Title = "AddRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* HOSTELS REGISTRATION FORM *@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Add Room</p>
+            <!-- CARD HEADER START -->
+            <div class="card_head">
+                <form class="form-sample">
+                    <p class="card-description">
+                        Personal info
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.HiddenFor(x => x.Id)
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Room Number</label>
+                                <div class="col-sm-9">
+                                    @{
+                                        if (Model.Id == 0)
+                                        {
+                                            @Html.TextBoxFor(x => x.RoomNo, new { @class = "form-control number", @maxlength = "3" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(x => x.RoomNo, new { @readonly = "readonly", @class = "form-control number" })
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    @*<input type="text" class="form-control">*@
+                                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Floor</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(x => x.Floor, new { @class = "form-control number", @maxlength = "2" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">No. of Beds</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(x => x.NoOfBeds, new { @class = "form-control number", @maxlength = "2" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Room Charges</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(x => x.RoomChangres, new { @class = "form-control number", @maxlength = "4" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        @{
+                            if (Model.Id > 0)
+                            {
+                                <button type="button" id="save-btn" class="btn btn-primary mr-2">Update Room</button>
+                            }
+                            else
+                            {
+                                <button type="button" id="save-btn" class="btn btn-primary mr-2">Add Room</button>
+                            }
+
+                        }
+
+                        <button class="btn btn-light cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /CARD HEADER END -->
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>s
+<script>
+    $(document).ready(function () {
+        //called when key is pressed in textbox
+        $(".number").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+    $(window).on('load', function () {
+        if ($("#Id").val() == "") {
+            $("#RoomNo").val("");
+            $("#Floor").val("");
+            $("#NoOfBeds").val("");
+            $("#RoomChangres").val("");
+        }
+    });
+
+    $("#save-btn").click(function () {
+        var id = $("#Id").val();
+        var room = $("#RoomNo").val();
+        var desc = $("#Description").val();
+        var floor = $("#Floor").val();
+        var beds = $("#NoOfBeds").val();
+        var charges = $("#RoomChangres").val();
+        if (room == "" || room == 0) {
+            alert("Please enter room number.")
+            return false;
+        }
+        else if (floor == "" || floor == 0) {
+            alert("Please enter floor number.")
+            return false;
+        }
+        else if (beds == "" || beds == 0) {
+            alert("Please enter number of beds.")
+            return false;
+        } else if (charges =="" || charges ==0){
+            alert("Please enter room charges.")
+            return false;
+        }
+        $('.loader').show();
+        var data = { "Id": id, "Description": desc, "Floor": floor, "NoOfBeds": beds, "RoomNo": room,"RoomChangres":charges }
+        $.ajax({
+            type: "Post",
+            url: "/Hostel/SaveRoom",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    //$("#Id").val("");
+                    //$("#RoomNo").val("");
+                    //$("#Description").val("");
+                    //$("#Floor").val("");
+                    //$("#NoOfBeds").val("");
+                    //$("#RoomChangres").val("");
+                    alert(result.Message);
+                    window.location.href = '@Url.Action("Index","Hostel")';
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result);
+            }
+        });
+    });
+</script>

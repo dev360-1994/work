@@ -1,0 +1,19 @@
+select,
+input,
+textarea {
+    &.ng-invalid.ng-touched {
+        border-color: red;
+        border: 1px solid red;
+        width: inherit;
+    }
+}
+
+.is-invalid {
+    border-color: red;
+    border: 1px solid red;
+    width: inherit;
+}
+
+mat-datepicker-toggle {
+    top: 32px;
+}

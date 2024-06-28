@@ -1,0 +1,62 @@
+<section class="builder-sections">
+  <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+  <div class="toolbar d-flex align-items-center justify-content-between my-3">
+    <div class="filter d-flex align-items-center">
+      <p class="color-01 font-weight-medium letter-spacing-1 m-0 sub-heading-03">Display by:</p>
+      <button mat-raised-button class="color-01 font-family-primary font-weight-normal letter-spacing-1 ml-2 paragraph-02" [matMenuTriggerFor]="menu">{{sort.selected}} 
+        <span class="material-icons">arrow_drop_down</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let item of sort.items" (click)="sort.select(item)">{{item.name}}</button>
+      </mat-menu>
+      <!-- <button mat-raised-button class="ml-2" containerClass="card" [popover]="popTemplate" [outsideClick]="true" placement="auto">Filters (3)</button>
+      <ng-template #popTemplate>
+        <div class="d-flex">
+          <div>
+            <mat-list role="list">
+              <mat-list-item role="listitem">Location</mat-list-item>
+              <mat-list-item role="listitem">Type</mat-list-item>
+              <mat-list-item role="listitem">Subscription Status </mat-list-item>
+              <mat-list-item role="listitem">Subscription Level </mat-list-item>
+            </mat-list>
+          </div>
+          <div>
+            <mat-list role="list">
+              <mat-list-item role="listitem"><input class="mr-1" type="checkbox" name="" id=""> Toronto</mat-list-item>
+              <mat-list-item role="listitem"><input class="mr-1" type="checkbox" name="" id=""> Vancouver</mat-list-item>
+              <mat-list-item role="listitem"><input class="mr-1" type="checkbox" name="" id=""> New York</mat-list-item>
+              <mat-list-item role="listitem"><input class="mr-1" type="checkbox" name="" id=""> Philadelphia</mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </ng-template> -->
+    </div>
+    <div class="d-flex" *ngIf="!isBuilder">
+      <!-- <button for="bulkupload" class="border-0 align-items-center bg-color-11 color-white d-flex justify-content-between letter-spacing-5 m-0 mr-2 paragraph-03 px-2 py-1 border-radius" [matMenuTriggerFor]="uploadmenu">
+        <span class="material-icons mr-1">cancel</span> {{isUploading ? 'Uploading...' : 'Bulk Upload'}}</button>
+      <mat-menu #uploadmenu="matMenu">
+        <label mat-menu-item for="bulkupload">Select Csv</label>
+        <a mat-menu-item href="./assets/files/addagents.csv">Download CSV Template</a>
+      </mat-menu> -->
+
+      <!-- <label for="bulkupload" class="align-items-center bg-color-11 color-white d-flex justify-content-between letter-spacing-5 m-0 mr-2 paragraph-03 px-2 py-1 border-radius">
+        <span class="material-icons mr-1">cancel</span> {{isUploading ? 'Uploading...' : 'Bulk Upload'}}</label> -->
+      <input [disabled]="isUploading" class="d-none" placeholder="" id="bulkupload" type="file" (change)="fileChangeEvent($event)" accept=".csv">
+      <a routerLink="add" class="align-items-center bg-color-01 border-0 border-radius color-white color-white-hover d-flex justify-content-between paragraph-03 px-3 py-1">
+        <span class="material-icons paragraph-01 pr-1">add</span> Add New Agency</a>
+    </div>
+  </div>
+  <div class="builder-cards">
+    <div class="row">
+      <div class="col-3 p-2" *ngFor="let agency of agency?.data">
+        <app-agency-card [agency]="agency"></app-agency-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 p-2">
+        <mat-paginator [disabled]="isProgressing" [length]="agency.count" [pageSize]="agency.size" [pageSizeOptions]="[5, 10, 25, 50, 100, 200]" (page)="onPageChange($event)" aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</section>

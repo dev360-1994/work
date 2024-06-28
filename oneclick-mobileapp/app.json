@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "OneClickHse",
+    "slug": "OneClickHse",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.2.9",
+    "orientation": "portrait",
+    "icon": "./assets/images/appicononeclick.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "devApiUrl": "https://oneclickhseapi.azurewebsites.net/api/",
+      "localApiUrl": "http://192.168.1.4:45457/api/",
+      "apiEndPoint": "https://oneclickhseapi.azurewebsites.net/api/"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.oneclickhse.oneclickhseapp99",
+      "buildNumber": "1.2.9",
+      "icon": "./assets/images/appicononeclick.png",
+      "supportsTablet": true,
+      "publishBundlePath": "ios/oneclickhse/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/oneclickhse/Supporting/shell-app-manifest.json"
+    },
+    "android": {
+      "package": "com.oneclickhse.oneclickhseapp99",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "description": "",
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.13.0-sdk35.0.0-a30ebc9b-3db4-42f4-b677-e468076baf18.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v119-sdk35.0.0-6758e9de-1e10-40f8-863d-ec8972895cf1.tar.gz"
+    },
+    "scheme": "exp13f2fb152c4b4d769abd751c7246a5c5"
+  }
+}

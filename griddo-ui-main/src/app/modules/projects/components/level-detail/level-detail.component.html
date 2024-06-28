@@ -1,0 +1,69 @@
+
+<section class="add-project-section">
+<form class="card p-0 mt-4  " [formGroup]="levelForm">
+    <div class="col-11 ml-2   card-body pb-0 d-flex">
+      <!-- <div class="form-group offset-10 p-0">
+        <button class="addmore" (click)="save()">
+          <span class="text-primary"> Save my progress</span>
+        </button>
+      </div> -->
+    </div>
+    <div class="d-flex card-body">
+      <div class="col-md-4 pl-4 ml-5">
+        <div class="form-group offset-0">
+          <label class="sub-heading-05" for="unitoflength">Unit of Length</label>
+          <select class="form-control" placeholder="" formControlName="unitOfLenght" id="unitoflength" type="text">
+            <option value="1">Meter</option>
+            <option value="2">Km/s</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="sub-heading-05" for="levels">Levels</label>
+          <input   class="form-control" formControlName="levels" placeholder="" id="levels" type="number" min="0">
+        </div>
+        <div class="form-group">
+          <label class="sub-heading-05" for="unitsperlevel"> Units per level</label>
+          <input class="form-control" placeholder="" formControlName="unitPerlevel" id="unitperlevel" type="number" min="0">
+        </div>
+        <div class="form-group">
+          <label class="sub-heading-05" for="stacks">Stacks</label>
+          <input class="form-control" placeholder="" id="stacks" type="number" min="0" formControlName="stocks">
+        </div>
+      </div>
+      <div class="col-md-6 mt-5 offset-1">
+        <div class="form-group col-md-9">
+          <label class="sub-heading-05 fw-bold">Premium</label><br>
+        </div>
+
+        <div class="form-group" formArrayName="premium">
+
+          <ng-container *ngFor="let item of premium.controls; let i=index">
+            <div class="d-flex with-button mb-2" [formGroupName]='i'>
+              <div class="form-group col-md-5">
+                <label class="sub-heading-04" for="premium">floor</label>
+                <input class="form-control" placeholder="" type="text" formControlName="floors">
+              </div>
+              <div class="col-md-5 form-group">
+                <label class="sub-heading-04" for="premium">Premium</label>
+                <input class="form-control" placeholder="" type="text" formControlName="premium">
+              </div>
+
+              <div class="col-md-1 mt-4" *ngIf="premium.length > 1">
+                <button  class="sub-heading-04 mr-2 position-absolute" mat-icon-button
+                  (click)="removeField('premium',i)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <div class="d-flex justify-content-end w-100">
+            <button class="addmore" (click)="addField('premium')">
+              <mat-icon>add</mat-icon>
+              <span>Add another</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

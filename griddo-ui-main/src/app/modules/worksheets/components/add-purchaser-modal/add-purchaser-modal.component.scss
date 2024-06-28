@@ -1,0 +1,25 @@
+select,
+input,
+textarea {
+    &.ng-invalid.ng-touched {
+        border-color: red;
+        border: 1px solid red;
+        width: inherit;
+    }
+}
+
+.is-invalid {
+    border-color: red;
+    border: 1px solid red;
+    width: inherit;
+}
+
+h3 {
+    font-size: 18px;
+    color: #707683;
+    font-weight: 500;
+}
+
+mat-datepicker-toggle {
+    top: 32px;
+}

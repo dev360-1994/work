@@ -1,0 +1,103 @@
+.agent-card {
+  .name {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.0116rem;
+    line-height: 1.5rem;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    // color: #363636;
+  }
+  .location {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.7587rem;
+    line-height: 1.125rem;
+    display: flex;
+    align-items: center;
+    // text-align: center;
+    letter-spacing: 0.01em;
+    // color: #9E9E9E;
+  }
+  .numbers {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #469EF0;
+  }
+  .revenue {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    // color: #F4AB3C;
+  }
+  .rescission {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    // color: #F4AB3C;
+  }
+  // .project-label {
+  //   font-family: Poppins;
+  //   font-style: normal;
+  //   font-weight: 500;
+  //   font-size: 0.5058rem;
+  //   line-height: 0.75rem;
+  //   display: flex;
+  //   align-items: center;
+  //   letter-spacing: 0.01em;
+  //   color: #457B9D;
+  // }
+  // .projects {
+  //   .project {
+  //     display: block;
+  //     height: 1.8125rem;
+  //     width: 1.8125rem;
+  //     img {
+  //       width: 100%;
+  //     }
+  //   }
+  // }
+  .cta-link- {
+    &mail,
+    &phone {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.6323rem;
+      line-height: 0.9375rem;
+      /* identical to box height */
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: #4F4F4F;
+      span {
+        font-size: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://preprod.griddo.co/",
+    "secure": false,
+    "pathRewrite": {
+      "^collective": "http://preprod.griddo.co/api"
+    },
+    "changeOrigin": true
+  }
+}

@@ -1,0 +1,625 @@
+<section class="add-project-section">
+
+    <div class="card mt-4 p-0">
+        <form class=" p-o" [formGroup]="form">
+            <div class="section-header">
+                <span>GENERAL</span>
+            </div>
+            <div class="row justify-content-around p-2">
+                <div class="col-md-5">
+                    <div class="form-group ">
+                        <label class="sub-heading-04" for="builderName">Builder Name <span
+                                style="color:#ff0000">*</span></label>
+                        <select *ngIf="!isBuilder" class="form-control" placeholder="" id="builderName" type="text"
+                            formControlName="builderid">
+                            <option value="">Select Builder...</option>
+                            <option *ngFor=" let items of builders" [value]="items.value">{{items?.companyName}}
+                            </option>
+                        </select>
+
+                        <input *ngIf="isBuilder" [disabled]="isBuilder" class="form-control"
+                            placeholder="{{companyName}}" id="builderName" type="text">
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="sub-heading-04" for="userRole">Project Name <span
+                                style="color:#ff0000">*</span></label>
+                        <input class="form-control" maxlength="100" placeholder="" id="projectName" type="text"
+                            formControlName="projectName">
+                    </div>
+
+                    <div class="form-group form-row">
+                        <!-- <div class="col-6">
+                            <label class="sub-heading-04" for="projectModel">Project Model</label>
+                            <select class="form-control" placeholder="" id="projectModel" type="text" formControlName="projectModel">
+               <option value=null selected>select Project Type..</option> 
+              <option [value]=item.id *ngFor="let item of constant.projectModels"> {{item.name}}</option>
+              <option value="1">Low Rise</option>
+              <option value="2">High Rise</option>  
+            </select>
+                        </div> -->
+
+                        <div class="col-12">
+                            <label class="sub-heading-04" for="projectType">Project Type</label>
+                            <select class="form-control" placeholder="" id="projectType" type="text"
+                                formControlName="projectType">
+                                <option value=null selected></option>
+                                <option [value]=item.name *ngFor="let item of constant.projectTypes"> {{item.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="address">Address (Street Name, Street Number, etc.) <span
+                                style="color:#ff0000">*</span></label>
+                        <input class="form-control" maxlength="100" (blur)="updateAddress()" formControlName="address"
+                            ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event,1)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="city1">Province <span style="color:#ff0000">*</span></label>
+                        <input class="form-control" maxlength="100" placeholder="" id="city1" type="text"
+                            formControlName="province">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="city">City <span style="color:#ff0000">*</span></label>
+                        <input class="form-control" maxlength="50" placeholder="" id="city" type="text"
+                            formControlName="city">
+                    </div>
+                    <!-- <div class="form-group">
+                            <label class="labels" for="country1">Country <span style="color:#ff0000">*</span></label>
+                            <input class="form-control" maxlength="50" placeholder="" id="country1" type="text" formControlName="country">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zip">Zip<span style="color:#ff0000">*</span></label>
+                            <input class="form-control" maxlength="8" placeholder="" id="zip" type="text" formControlName="zipCode" placeholder="Enter postal code">
+                        </div> -->
+                    <div class="form-group form-row">
+                        <div class="col-7 ">
+                            <label class="labels" for="country1">Country <span style="color:#ff0000">*</span></label>
+                            <input class="form-control" maxlength="50" placeholder="" id="country1" type="text"
+                                formControlName="country">
+                        </div>
+                        <div class="col-5 ">
+                            <label class="labels" for="zip">Zip<span style="color:#ff0000">*</span></label>
+                            <input class="form-control" maxlength="8" placeholder="" id="zip" type="text"
+                                formControlName="zipCode" placeholder="Enter postal code">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- <-----col-md-end---->
+
+                <div class="col-md-5">
+                    <div class="form-group ">
+                        <label class="labels" for="websiteUrl">Project Website URL</label>
+                        <input class="form-control" maxlength="50" placeholder="www.abc.com" id="websiteUrl" type="text"
+                            formControlName="websiteUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="miniSiteURL">Project Mini Site URL</label>
+                        <input class="form-control" maxlength="50" placeholder="www.abc.com" id="miniSiteURL"
+                            type="text" formControlName="miniSiteURL">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="sub-heading-04" for="projectStatus">Project Status</label>
+                        <select class="form-control" placeholder="" id="projectStatus" type="text"
+                            formControlName="projectStatus" (change)="checkProjectStatus($event)">
+                            <option [value]=item.id *ngFor="let item of constant.projectStatus"> {{item.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="startDate">Project Start Date</label>
+                        <div class="position-relative">
+                            <input (click)="startDatepicker.open()" placeholder="Select start date" readonly id="startDate" class="form-control"
+                                [matDatepicker]="startDatepicker" formControlName="startDate"  [min]="startMinDate" [max]="startMaxDate" (dateChange)="onDateChange('startDate')">
+                            <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                [for]="startDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startDatepicker></mat-datepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="completionDate">Project Completion Date</label>
+                        <div class="position-relative">
+                            <input (click)="completionDatepicker.open()"  placeholder="Select end date" readonly id="completionDate"
+                                class="form-control" [matDatepicker]="completionDatepicker"
+                                formControlName="completionDate" [min]="completeMinDate" [max]="completeMaxDate"
+                                (dateChange)="onDateChange('completionDate')">
+                            <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                [for]="completionDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #completionDatepicker></mat-datepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group pl-0 ">
+                        <label class="labels" for="buildingHeight">Building Height</label>
+
+                        <div class="input-group suffix">
+                            <input OnlyNumber class="suffixinput" placeholder="" id="buildingHeight" min="0"
+                                type="number" maxlength="10" formControlName="buildingHeight">
+                            <!-- <span class="input-group-addon ">mt</span> -->
+                            <div class="unit">
+                                <select formControlName="buildingHeightUnit"
+                                    class="select-timezone text-center bg-color-transparent border-0 border-radius-none color-01 p-0 w-100">
+                                    <option value="mt">mt</option>
+                                    <option value="ft">ft</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- <-----col-md-end---->
+
+                <div class="col-11">
+                    <div class="form-group ">
+                        <label class="labels" for="buildingDescription">Building Description</label>
+                        <!-- <input class="form-control" placeholder="" id="country" type="text" > -->
+                        <textarea class="form-control" id="buildingDescription" name="w3review" rows="3" cols="80"
+                            formControlName="buildingDescription">
+
+                  </textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group flex-auto">
+                        <label class="color-01 d-flex font-weight-normal letter-spacing-1 paragraph-01">Project Logo
+                            <!-- -    <span style="color:#ff0000">*</span> -->
+                        </label>
+                        <ng-container *ngIf="projectBase64Img">
+                            <label
+                                class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0 height-100"
+                                for="projectLogoPath" [ngStyle]="{'background-image': 'url(' + projectBase64Img + ')'}">
+                                <button (click)="clearImg('logo')"
+                                    class="bg-transparent border-0 color-01 cursor-pointer">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </label>
+                        </ng-container>
+                        <ng-container *ngIf="!projectBase64Img">
+                            <label fileDragDrop (filesChangeEmiter)="onFileChange($event,'logo')"
+                                class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                                for="projectLogoPath">
+                                <ng-container></ng-container>
+                                <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                                <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                                <p class="m-0 paragraph-02 text-center"><span
+                                        class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                            </label>
+                            <input class="form-control d-none" placeholder="" id="projectLogoPath" type="file"
+                                (change)="fileChangeEvent($event,'logo')" accept="image/*">
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group flex-auto">
+                        <label class="color-01 d-flex font-weight-normal letter-spacing-1 paragraph-01">Project Hero
+                            Image
+                            <!-- <span style="color:#ff0000">*</span> -->
+                        </label>
+                        <ng-container *ngIf="projectHeroBase64Img">
+                            <label
+                                class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0 height-100"
+                                for="projectHeroImage"
+                                [ngStyle]="{'background-image': 'url(' + projectHeroBase64Img + ')'}">
+                                <button (click)="clearImg('heroImage')"
+                                    class="bg-transparent border-0 color-01 cursor-pointer">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </label>
+                        </ng-container>
+                        <ng-container *ngIf="!projectHeroBase64Img">
+                            <label fileDragDrop (filesChangeEmiter)="onFileChange($event,'heroImage')"
+                                class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                                for="projectHeroImage">
+                                <ng-container></ng-container>
+                                <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                                <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                                <p class="m-0 paragraph-02 text-center"><span
+                                        class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                            </label>
+                            <input class="form-control d-none" placeholder="" id="projectHeroImage" type="file"
+                                (change)="fileChangeEvent($event,'heroImage')" accept="image/*">
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <span>THE TEAM</span>
+            </div>
+
+            <div class="row justify-content-around p-2">
+                <div class="col-md-5">
+                    <div class="form-group" formArrayName="architects">
+                        <label class="sub-heading-04" for="architects">Architect(s)</label>
+                        <ng-container *ngFor="let item of architects.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]='i'>
+                                <input class="form-control" maxlength="50" type="text" formControlName="email">
+                                <button *ngIf="architects.length > 1" class="sub-heading-04 mr-2 position-absolute"
+                                    mat-icon-button (click)="removeField('architects',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('architects')">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" formArrayName="landscaping">
+                        <label class="sub-heading-04" for="landscaping">Landscaping</label>
+                        <ng-container *ngFor="let item of landscaping.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]='i'>
+                                <input class="form-control" maxlength="50" type="text" formControlName="email">
+                                <button *ngIf="landscaping.length > 1" class="sub-heading-04 mr-2 position-absolute"
+                                    mat-icon-button (click)="removeField('landscaping',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('landscaping')">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                        <!-- <input class="form-control" maxlength="50" type="text" placeholder="Landscaping"
+                            formControlName="landscapping"> -->
+                    </div>
+                </div>
+                <!-- <-----col-md-end---->
+
+                <div class="col-md-5">
+                    <div class="form-group" formArrayName="interiorDesigners">
+                        <label class="sub-heading-04" for="interiorDesigners">Interior Designer(s)</label>
+                        <ng-container *ngFor="let item of interiorDesigners.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]='i'>
+                                <input class="form-control" maxlength="50" type="text" formControlName="email">
+                                <button *ngIf="interiorDesigners.length > 1"
+                                    class="sub-heading-04 mr-2 position-absolute" mat-icon-button
+                                    (click)="removeField('interiorDesigners',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('interiorDesigners')">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" formArrayName="marketingCompany">
+                        <label class="sub-heading-04" for="marketingCompany">Marketing Company</label>
+                        <ng-container *ngFor="let item of marketingCompany.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]="i">
+                                <input class="form-control" maxlength="50" placeholder="Marketing Company" type="text"
+                                    formControlName="email">
+                                <button *ngIf="marketingCompany.length > 1"
+                                    class="sub-heading-04 mr-2 position-absolute" mat-icon-button
+                                    (click)="removeField('marketingCompany',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('marketingCompany')">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <-----col-md-end---->
+            </div>
+
+            <div class="section-header">
+                <span>SALES OFFICE DETAILS</span>
+            </div>
+            <div class="row justify-content-around p-2" formGroupName="projectSalesOfficeDetails">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="labels" for="address">Address (Street Name, Street Number, etc.)</label>
+                        <input class="form-control" formControlName="address" ngx-google-places-autocomplete
+                            (onAddressChange)="handleAddressChange($event,2)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="city">Province</label>
+                        <input class="form-control" placeholder="" maxlength="50" id="city" type="text"
+                            formControlName="province">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="labels" for="city">City</label>
+                        <input class="form-control" maxlength="50" placeholder="" id="city" type="text"
+                            formControlName="city">
+                    </div>
+
+                    <div class="form-group form-row">
+                        <div class="col-7 ">
+                            <label class="labels" for="country">Country</label>
+                            <input class="form-control" placeholder="" id="country" maxlength="50" type="text"
+                                formControlName="country">
+                        </div>
+                        <div class="col-5 ">
+                            <label class="labels" for="zip1">Zip</label>
+                            <input class="form-control" placeholder="" id="Zip1" maxlength="8" type="text"
+                                placeholder="Enter postal code" formControlName="postal">
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- <----END---->
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="labels" for="phone">Cell Number
+                        </label>
+                        <ngx-intl-tel-input class="d-block"
+                            cssClass="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            [separateDialCode]="true" [selectedCountryISO]="CountryISO.Canada"
+                            [preferredCountries]="[CountryISO.Canada, CountryISO.India, CountryISO.UnitedStates]"
+                            maxLength="15" [phoneValidation]="true" formControlName="phoneNumber"
+                            [inputId]="'phoneNumber'"></ngx-intl-tel-input>
+                        <!-- <input class="form-control" placeholder="" id="phone" type="text" OnlyNumber> -->
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="labels" for="phone">Email ID</label>
+                        <input class="form-control" placeholder="abc@griddo.com" id="emailId" maxlength="30"
+                            type="email" formControlName="email">
+                    </div>
+
+                    <div class="form-group" formArrayName="workingHours">
+                        <label class="labels" for="phone">Working Hours</label>
+                        <ng-container *ngFor="let item of workingHours.controls; let i=index">
+                            <!-- <div class="d-flex align-items-center mb-2" [formGroupName]='i' *ngFor="let week of weeks;let weekIndex=index">
+                            <div class="d-flex flix-grow-1 mr-0">
+                                <span *ngFor="let day of week?.days;let dayIndex=index"
+                                    (click)="toggleDay(weekIndex,dayIndex, i)" class="working-day mr-2"
+                                    [class.wd-select]="day?.selected">{{day?.short}}</span>
+                            </div>
+                            <div class="d-flex border-1 color-19 border-radius">
+                                <div class="d-flex">
+                                    <input placeholder="--:--"
+                                        class="border-0 form-control paragraph-03 pl-1 pr-0 text-center"
+                                        [ngxTimepicker]="picker" [format]="24" [value]="week.startTime"
+                                        [max]="week.endTime">
+                                    <ngx-material-timepicker #picker
+                                        (timeSet)="timeChanged($event,weekIndex,'startTime', i)">
+                                    </ngx-material-timepicker>
+                                </div>
+                                <span class="px-1 color-01">-</span>
+                                <div class="d-flex">
+                                    <input placeholder="--:--"
+                                        class="border-0 form-control paragraph-03 pl-0 pr-1 text-center"
+                                        [ngxTimepicker]="pickerEnd" [format]="24" [value]="week.endTime"
+                                        [min]="week.startTime">
+                                    <ngx-material-timepicker #pickerEnd
+                                        (timeSet)="timeChanged($event,weekIndex,'endTime', i)">
+                                    </ngx-material-timepicker>
+                                </div>
+                                <div class="input-group-text border-0 border-l border-radius-none px-0">
+                                    <select [(ngModel)]="week.timeZone"
+                                        [ngModelOptions]="{standalone:true,name:weekIndex+'timeZone'}"
+                                        class="select-timezone bg-color-transparent border-0 border-radius-none color-01 p-0 paragraph-04 w-100">
+                                        <option *ngFor="let timeZone of timeZones" [value]="timeZone?.value">
+                                            {{timeZone?.text}}</option>
+                                    </select>
+                                    <!-- <button class="bg-color-transparent border-0 border-radius-none color-01 paragraph-05"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{week?.timeZone}}</button>
+
+                  <div class="dropdown-menu">
+                    <a *ngFor="let timeZone of timeZones" class="dropdown-item"
+                      (click)="week.timeZone = timeZone">{{timeZone}}</a>
+                  
+                  </div> 
+                                </div>
+
+                            </div>
+                            </div>  -->
+
+                            <div class="d-flex align-items-center mb-2" [formGroupName]='i' >
+                                <div class="d-flex flex-wrap mr-0">
+                                    <span *ngFor="let day of item['controls'].weeks?.value.days;let dayIndex=index"
+                                        (click)="toggleDay(0,dayIndex, i, day?.day)" class="working-day mr-1"
+                                        [class.wd-select]="day?.selected"
+                                        [class.disabled]="day?.alreadyChosen">{{day?.short}}</span>
+                                </div>
+                                <div class="d-flex border-1 color-19 border-radius">
+                                    <div class="d-flex col-md-4 m-0 p-0">
+                                        <!-- <input placeholder="--:--"
+                                            class="border-0 form-control paragraph-03 pl-1 pr-0 text-center"
+                                            [ngxTimepicker]="picker" [format]="12"
+                                            [value]="item['controls'].weeks.value.startTime"
+                                            [max]="item['controls'].weeks.value.endTime">
+                                        <ngx-material-timepicker #picker
+                                            (timeSet)="timeChanged($event,0,'startTime', i)">
+                                        </ngx-material-timepicker> -->
+                                        <select class="form-control m-0 p-0"  formControlName="startTime" placeholder="" (change)="timeChanged($event,0,'startTime', i)" id="starttime" type="text">
+                                            <option value=""> -- : -- </option>
+                                            <option *ngFor=" let items of projectTimeDropDown" [value]="items.name">
+                                                {{items?.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <span class="px-1 color-01">-</span>
+                                    <div class="d-flex col-md-4 m-0 p-0">
+                                        <select class="form-control m-0 p-0" (change)="timeChanged($event,0,'endTime', i)"  formControlName="endTime" placeholder="" id="builderName" type="text">
+                                            <option value=""> -- : -- </option>
+                                            <option *ngFor=" let items of projectTimeDropDown" [value]="items.name">
+                                                {{items?.name}}
+                                            </option>
+                                        </select>
+                                        <!-- <input placeholder="--:--"
+                                            class="border-0 form-control paragraph-03 pl-0 pr-1 text-center"
+                                            [ngxTimepicker]="pickerEnd" [format]="12"
+                                            [value]="item['controls'].weeks.value.endTime"
+                                            [min]="item['controls'].weeks.value.startTime">
+                                        <ngx-material-timepicker #pickerEnd
+                                            (timeSet)="timeChanged($event,0,'endTime', i)">
+                                        </ngx-material-timepicker> -->
+                                    </div>
+                                    <div class="input-group-text border-0 border-l border-radius-none px-0">
+                                        <select  formControlName="timeZone"
+                                            class="select-timezone bg-color-transparent border-0 border-radius-none color-01 p-0 paragraph-04 w-100">
+                                            <option *ngFor="let timeZone of timeZones" [value]="timeZone?.value">
+                                                {{timeZone?.text}}</option>
+                                        </select>
+
+
+                                    </div>
+                                    <div class="d-flex">
+                                        <button *ngIf="workingHours.controls.length > 1"
+                                            class="close sub-heading-04 mr-2 position-absolute" mat-icon-button
+                                            (click)="removeWorkingHour('projectSalesOfficeDetails.workingHours',i)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button [disabled]="isAllDaysSelected" (click)="addNewWorkingHour()" class="addmore">
+                                <mat-icon [class.disable]="isAllDaysSelected">add</mat-icon>
+                                <span [class.disable]="isAllDaysSelected">Add another</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!-- <----END---->
+            </div>
+
+            <div class="section-header">
+                <span>AMENITIES</span>
+            </div>
+
+            <div class="row justify-content-around p-2">
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="labels" for="currentIncentives">Current Incentives </label>
+                        <!-- <input class="form-control" placeholder="" id="marketAmentiesingCompany" type="text" > -->
+                        <textarea class="form-control" id="currentIncentives" name="currentIncentive" rows="3" cols="80"
+                            formControlName="currentIncentive">
+              </textarea>
+
+                    </div>
+
+                    <div class="form-group" formArrayName="featuresAndFinishes">
+                        <label class="sub-heading-04" for="featuresAndFinishes">Feature and Finishes</label>
+                        <ng-container *ngFor="let item of featuresAndFinishes.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]="i">
+
+                                <input class="form-control" maxlength="50" placeholder="" type="text"
+                                    formControlName="items">
+                                <button *ngIf="featuresAndFinishes.length > 1"
+                                    class="sub-heading-04 mr-2 position-absolute" mat-icon-button
+                                    (click)="removeField('featuresAndFinishes',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('featuresAndFinishes')">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5">
+                    <div class="form-group" formArrayName="amenities">
+                        <label class="sub-heading-04" for="amenities">Amenities</label>
+                        <ng-container *ngFor="let item of amenities.controls; let i=index">
+                            <div class="position-relative with-button mb-2" [formGroupName]="i">
+
+                                <!-- <ng-select class="custom"  [items]="amenties" bindLabel="text" autofocus formControlName="items" [searchable]="true" [clearable]="false" bindValue="value">
+                </ng-select> -->
+                                <select class="form-control" placeholder="" id="projectType"
+                                    formControlName="amenityValue" type="number">
+                                    <option [value]="''">Select Amenities</option>
+                                    <option [disabled]="items?.disabled" *ngFor=" let items of amenties"
+                                        [value]="items.value">{{items.text}}</option>
+                                </select>
+                                <button *ngIf="amenities.length > 1" class="sub-heading-04 mr-2 position-absolute"
+                                    mat-icon-button (click)="removeField('amenities',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <div class="d-flex justify-content-end w-100">
+                            <button class="addmore" (click)="addField('amenities')" [disabled]="!amenties?.length">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <ng-template #imgCropperTemplate>
+        <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Image Cropper
+            <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+        </h2>
+        <mat-dialog-content>
+            <div class="image-cropper mx-auto">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" backgroundColor="#FFFFFF" [transform]="tranform"
+                    [maintainAspectRatio]="true" [aspectRatio]="1" format="jpeg" (imageCropped)="imageCropped($event)">
+                </image-cropper>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+            <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+                aria-label="button with a check icon" *ngIf="imageChangedEvent" (click)="saveCropImage()">
+                <mat-icon>check</mat-icon>
+            </button>
+            <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+                aria-label="button with a zoom-in on" *ngIf="imageChangedEvent" (click)="zoomIn()">
+                <mat-icon>zoom_in</mat-icon>
+            </button>
+            <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+                aria-label="button with a zoom-out icon" *ngIf="imageChangedEvent" (click)="zoomOut()">
+                <mat-icon>zoom_out</mat-icon>
+            </button>
+            <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+                aria-label="button with a close icon" *ngIf="imageChangedEvent" (click)="exitCropImage()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-dialog-actions>
+    </ng-template>
+</section>

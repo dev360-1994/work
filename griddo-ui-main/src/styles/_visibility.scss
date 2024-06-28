@@ -1,0 +1,17 @@
+.visibility- {
+  &hidden {
+    visibility: hidden;
+  }
+  &visible {
+    visibility: visible;
+  }
+  &collapse {
+    visibility: collapse;
+  }
+  &initial {
+    visibility: initial;
+  }
+  &inherit {
+    visibility: inherit;
+  }
+}

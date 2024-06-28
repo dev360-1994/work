@@ -1,0 +1,384 @@
+<section class="add-agent-section">
+    <div class="row m-0">
+        <div class="col-12">
+            <h1 class="color-01 font-weight-semi-bold letter-spacing-1 sub-heading-01">Add a new Agent</h1>
+        </div>
+    </div>
+    <form class="row m-0 mt-3 mx-auto"
+        [formGroup]="form">
+        <div class="col-12 col-lg-6 d-flex flex-column pr-5">
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="firstName">First Name<span class="color-13">*</span></label>
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder=""
+                    id="firstName"
+                    type="text"
+                    formControlName="firstName">
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="middleName">Middle Name</label>
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder=""
+                    id="middleName"
+                    type="text"
+                    formControlName="middleName">
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="lastName">Last Name<span class="color-13">*</span></label>
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder=""
+                    id="lastName"
+                    type="text"
+                    formControlName="lastName">
+            </div>
+            <div class="form-group m-0"
+                formArrayName="cellNumbers">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="cellNumbers">Cell Number<span class="color-13">*</span></label>
+                <ng-container *ngFor="let item of cellNumbers.controls; let i=index">
+                    <div class="position-relative with-button mb-2">
+                        <ngx-intl-tel-input class="d-block"
+                            cssClass="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            [separateDialCode]="true"
+                            [selectedCountryISO]="CountryISO.Canada"
+                            [preferredCountries]="[CountryISO.Canada, CountryISO.India, CountryISO.UnitedStates]"
+                            [formControlName]="i"
+                            maxLength="15"
+                            [phoneValidation]="true"></ngx-intl-tel-input>
+                        <!-- <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" type="text" [formControlName]="i"> -->
+                        <button *ngIf="cellNumbers.length > 1"
+                            class="sub-heading-04 position-absolute"
+                            mat-icon-button
+                            (click)="removeField('cellNumbers',i)">
+                            <mat-icon class="color-03 material-icons paragraph-01">close</mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+                <div class="d-flex justify-content-end w-100">
+                    <button class="bg-white border-0 color-01 d-flex paragraph-02"
+                        (click)="addField('cellNumbers')">
+                        <mat-icon class="paragraph-02">add</mat-icon>
+                        <span class="text-decoration-underline">Add another</span>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="brokerageName">Brokerage Name<span class="color-13">*</span></label>
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder=""
+                    id="brokerageName"
+                    type="text"
+                    formControlName="brokerageName">
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="address1">Brokerage Address<span class="color-13">*</span></label>
+                <input formControlName="address1"
+                    class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    (blur)="updateAddress()"
+                    ngx-google-places-autocomplete
+                    (onAddressChange)="handleAddressChange($event)" />
+            </div>
+            <div class="row">
+                <div class="col-6 form-group m-0">
+                    <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                        for="city">City<span class="color-13">*</span></label>
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="city"
+                        type="text"
+                        formControlName="city">
+                </div>
+                <div class="col-6 form-group m-0">
+                    <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                        for="province">Province<span class="color-13">*</span></label>
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="province"
+                        type="text"
+                        formControlName="province">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-group m-0">
+                    <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                        for="country">Country<span class="color-13">*</span></label>
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="country"
+                        type="text"
+                        formControlName="country">
+                </div>
+                <div class="col-6 form-group m-0">
+                    <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                        for="zipCode">Zip Code <span class="color-13">*</span></label>
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="zipCode"
+                        type="text"
+                        formControlName="zipCode">
+                </div>
+            </div>
+            <div class="form-group m-0"
+                formArrayName="brokerageCellNumbers">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="brokerageCellNumbers">Brokerage Cell Number<span class="color-13">*</span></label>
+                <ng-container *ngFor="let item of brokerageCellNumbers.controls; let i=index">
+                    <div class="position-relative with-button mb-2">
+                        <ngx-intl-tel-input class="d-block"
+                            cssClass="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            [separateDialCode]="true"
+                            [selectedCountryISO]="CountryISO.Canada"
+                            [preferredCountries]="[CountryISO.Canada, CountryISO.India, CountryISO.UnitedStates]"
+                            [formControlName]="i"
+                            maxLength="15"
+                            [phoneValidation]="true"></ngx-intl-tel-input>
+                        <!-- <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" type="text" [formControlName]="i"> -->
+                        <button *ngIf="brokerageCellNumbers.length > 1"
+                            class="sub-heading-04 position-absolute"
+                            mat-icon-button
+                            (click)="removeField('brokerageCellNumbers',i)">
+                            <mat-icon class="color-03 material-icons paragraph-01">close</mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+                <div class="d-flex justify-content-end w-100">
+                    <button class="bg-white border-0 color-01 d-flex paragraph-02"
+                        (click)="addField('brokerageCellNumbers')">
+                        <mat-icon class="paragraph-02">add</mat-icon>
+                        <span class="text-decoration-underline">Add another</span>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-12 col-lg-6 d-flex flex-column pl-5">
+            <div class="form-group m-0"
+                formArrayName="realEstateBoardLicenseNumbers">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="companyName">Real Estate Board License Number<span class="color-13">*</span></label>
+                <ng-container *ngFor="let item of realEstateBoardLicenseNumbers.controls; let i=index">
+                    <div class="position-relative with-button mb-2">
+                        <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            placeholder=""
+                            type="text"
+                            [formControlName]="i">
+                        <button *ngIf="realEstateBoardLicenseNumbers.length > 1"
+                            class="sub-heading-04 position-absolute"
+                            mat-icon-button
+                            (click)="removeField('realEstateBoardLicenseNumbers',i)">
+                            <mat-icon class="color-03 material-icons paragraph-01">close</mat-icon>
+                        </button>
+                    </div>
+                </ng-container>
+                <div class="d-flex justify-content-end w-100">
+                    <button class="bg-white border-0 color-01 d-flex paragraph-02"
+                        (click)="addField('realEstateBoardLicenseNumbers')">
+                        <mat-icon class="paragraph-02">add</mat-icon>
+                        <span class="text-decoration-underline">Add another</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group m-0 flex-auto">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1">Upload Photo</label>
+                <ng-container *ngIf="base64Img_photo">
+                    <label
+                        class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0"
+                        for="companyLogoPath"
+                        [ngStyle]="{'background-image': 'url(' + base64Img_photo + ')'}">
+                        <button (click)="clearImg('photo')"
+                            class="bg-transparent border-0 color-01 cursor-pointer">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                        <span class="color-13">*</span></label>
+                </ng-container>
+                <ng-container *ngIf="!base64Img_photo">
+                    <label fileDragDrop
+                        (filesChangeEmiter)="onFileChange($event,'photo')"
+                        class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                        for="photo">
+                        <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                        <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                        <p class="m-0 paragraph-02 text-center"><span
+                                class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                    </label>
+                    <input class="form-control d-none"
+                        placeholder=""
+                        id="photo"
+                        type="file"
+                        (change)="fileChangeEvent($event,'photo')"
+                        accept="image/*">
+                </ng-container>
+            </div>
+            <div class="form-group m-0 flex-auto">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1">Upload Business Card</label>
+
+                <ng-container *ngIf="base64Img_businessCard">
+                    <label
+                        class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0"
+                        for="companyLogoPath"
+                        [ngStyle]="{'background-image': 'url(' + base64Img_businessCard + ')'}">
+                        <button (click)="clearImg('businessCard')"
+                            class="bg-transparent border-0 color-01 cursor-pointer">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                        <span class="color-13">*</span></label>
+                </ng-container>
+                <ng-container *ngIf="!base64Img_businessCard">
+                    <label fileDragDrop
+                        (filesChangeEmiter)="onFileChange($event,'businessCard')"
+                        class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                        for="businessCard">
+                        <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                        <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                        <p class="m-0 paragraph-02 text-center"><span
+                                class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                    </label>
+                    <input class="form-control d-none"
+                        placeholder=""
+                        id="businessCard"
+                        type="file"
+                        (change)="fileChangeEvent($event,'businessCard')"
+                        accept="image/*">
+                </ng-container>
+            </div>
+
+            <!-- <div class="form-group m-0">
+        <label class="sub-heading-04" for="email">Email Address<span class="color-13">*</span></label>
+        <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="email" type="text" formControlName="email">
+      </div> -->
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="username">Username / Email<span class="color-13">*</span></label>
+                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder=""
+                    id="username"
+                    type="text"
+                    formControlName="username">
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="password">Password<span class="color-13">*</span></label>
+                <div class="position-relative with-button">
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="password"
+                        type="{{visibility ? 'password' :'text'}}"
+                        formControlName="password">
+                    <button class="position-absolute"
+                        mat-icon-button
+                        (click)="visibility = !visibility">
+                        <mat-icon class="color-03 sub-heading-02">{{visibility ? 'visibility_off' :'visibility'}}
+                        </mat-icon>
+                    </button>
+                </div>
+                <p class="color-16 letter-spacing-1 m-0  paragraph-04">
+                    Password should contain at least 1 special character (!@#$%^&*), 1 number, 1 uppercase alphabet and
+                    1 lowercase alphabet <span class="font-weight-semi-bold">(eg. 75GCoG$k)</span>
+                </p>
+            </div>
+            <div class="form-group m-0">
+                <label class="align-items-center color-01 d-flex justify-content-end letter-spacing-1 m-0 paragraph-02"
+                    for="set random password">
+                    <input id="randomPassword"
+                        type="checkbox"
+                        formControlName="randomPassword"
+                        type="checkbox"
+                        class="mr-2"> set random password
+                    <span class="color-13">*</span></label>
+            </div>
+            <div class="form-group m-0">
+                <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1"
+                    for="confirmPassword">Confirm Password<span class="color-13">*</span></label>
+                <div class="position-relative with-button">
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                        placeholder=""
+                        id="confirmPassword"
+                        type="{{visibility ? 'password' :'text'}}"
+                        formControlName="confirmPassword">
+                    <button class="position-absolute"
+                        mat-icon-button
+                        (click)="visibility = !visibility">
+                        <mat-icon class="color-03 sub-heading-02">{{visibility ? 'visibility_off' :'visibility'}}
+                        </mat-icon>
+                    </button>
+                </div>
+
+
+                <p class="align-items-center color-13 d-flex letter-spacing-1 m-0 ng-star-inserted paragraph-03"
+                    *ngIf="form?.value?.password && form?.value?.confirmPassword && form?.value?.password !== form?.value?.confirmPassword">
+                    Password & Confirm Password should match!
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group m-0 pt-4 text-right">
+                <button class="btn mx-auto px-5"
+                    (click)="add()">Create</button>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+<ng-template #imgCropperTemplate>
+    <h2 class="d-flex justify-content-between mat-dialog-title"
+        mat-dialog-title>Image Cropper
+        <button class="bg-transparent border-0 d-flex"
+            mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="image-cropper mx-auto"
+            *ngIf="imageChangedEvent">
+            <image-cropper [imageChangedEvent]="imageChangedEvent"
+                backgroundColor="#FFFFFF"
+                [transform]="tranform"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="aspectRatio"
+                format="jpeg"
+                (imageCropped)="imageCropped($event)"></image-cropper>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing"
+            class="cropper-btn"
+            mat-stroked-button
+            aria-label="button with a close icon"
+            *ngIf="imageChangedEvent"
+            (click)="clearImg(selectedFieldForFileUpload);exitCropImage()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button [disabled]="isProcessing"
+            class="cropper-btn"
+            mat-stroked-button
+            aria-label="button with a zoom-in on"
+            *ngIf="imageChangedEvent"
+            (click)="zoomIn()">
+            <mat-icon>zoom_in</mat-icon>
+        </button>
+        <button [disabled]="isProcessing"
+            class="cropper-btn"
+            mat-stroked-button
+            aria-label="button with a zoom-out icon"
+            *ngIf="imageChangedEvent"
+            (click)="zoomOut()">
+            <mat-icon>zoom_out</mat-icon>
+        </button>
+
+        <button [disabled]="isProcessing"
+            class="cropper-btn"
+            mat-stroked-button
+            aria-label="button with a check icon"
+            *ngIf="imageChangedEvent"
+            (click)="saveCropImage()">
+            <mat-icon>check</mat-icon>
+        </button>
+    </mat-dialog-actions>
+</ng-template>

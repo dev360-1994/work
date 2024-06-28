@@ -1,0 +1,220 @@
+<form class="p-0 mt-4" [formGroup]="form">
+    <div class="bg-color-white box-shadow-1 upload-excel mb-3">
+        <label for="upload-excel-id"
+            class="align-items-center color-01 cursor-pointer d-flex justify-content-center py-5 w-100">
+            <span class="color-01 material-icons mr-1 sub-heading-01">arrow_circle_up</span>
+            <span class="letter-spacing-1 paragraph-03">Upload from excel</span>
+        </label>
+        <input class="d-none" id="upload-excel-id" type="file">
+    </div>
+    <ng-container formArrayName="projectExternalSalesTeams">
+        <div class="broker-group d-block bg-color-white box-shadow-1 px-5 py-2 mb-3 position-relative"
+            *ngFor="let projectExternalSalesTeam of projectExternalSalesTeams.controls; let projectExternalSalesTeamIdx=index"
+            [formGroupName]="projectExternalSalesTeamIdx">
+            <button (click)="rmProjectExternalSalesTeams(projectExternalSalesTeamIdx)" class="cursor-pointer bg-color-white border-0 position-absolute top-0 right-0 pt-2">
+                <span class="color-01 material-icons mr-1">close</span>
+            </button>
+            <div class="row m-0">
+                <div class="col-4 form-group d-flex align-items-end">
+                    <div class="input-group">
+                        <label
+                            class="color-01 font-weight-normal paragraph-03 letter-spacing-1 w-100 white-space-nowrap"
+                            for="brokerGroupName">Broker
+                            Group
+                            Name</label>
+                        <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            placeholder="broker group name" formControlName="brokerGroupName" id="brokerGroupName"
+                            type="text">
+                    </div>
+                </div>
+                <div class="col-4 form-group d-flex align-items-end">
+                    <div class="input-group">
+                        
+                        <label
+                            class="color-01 font-weight-normal paragraph-03 letter-spacing-1 w-100 white-space-nowrap"
+                            for="brokerCommission">Broker
+                            Commission</label>
+                            <!-- <div *ngIf="commisionStructureValues?.length== 0 ; then defaultTemplate   else dropDownTemplate  " ></div> -->
+                        <!-- <ng-template #defaultTemplate>
+                            <input formControlName="brokerCommission"
+                            class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                            placeholder="Broker
+                            Commission.." id="brokerCommission" type="text">
+                        <div class="input-group-append">
+                            <button class="input-group-text paragraph-04" type="button" data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">{{projectExternalSalesTeam?.value?.brokerCommissionType}}</button>
+                            <div class="dropdown-menu">
+                                <a (click)="projectExternalSalesTeam['controls'].brokerCommissionType.setValue('%')"
+                                    class="dropdown-item">%</a>
+                                <a (click)="projectExternalSalesTeam['controls'].brokerCommissionType.setValue('$')"
+                                    class="dropdown-item">$</a>
+                            </div>
+                        </div>
+                        </ng-template> -->
+                        <!-- <ng-template #dropDownTemplate> -->
+                     <div>
+                            <select  formControlName="brokerCommission" class="form-control" >
+                                <option value=""> Select Commision...</option>
+                                <option *ngFor="let unitItem of commisionStructureValues || []"
+                                    [ngValue]="unitItem.commisionValue"
+                                    >
+                                     {{unitItem.label }}
+                                </option>
+        
+                            </select>
+                        </div>
+                        <!-- </ng-template> -->
+                        
+                    </div>
+
+                </div>
+                <div class="align-items-end col-4 d-flex form-group">
+                    <div class="d-flex align-items-center">
+                        <input formControlName="isProjectAccess" placeholder="" id="isProjectAccessId{{projectExternalSalesTeamIdx}}" type="checkbox">
+                        <label class="color-03 font-weight-medium paragraph-02 m-0 ml-2 letter-spacing-1"
+                            for="isProjectAccessId{{projectExternalSalesTeamIdx}}">Allow
+                            project access</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0" formArrayName="projectExternalTeamBroker">
+                <div class="col-12 mt-3 mb-1">
+                    <div class="input-group w-50 mb-3">
+                        <div class="input-group-prepend bg-color-06">
+                            <span class="input-group-text paragraph-04 bg-color-06" id="basic-addon2">
+                                <span class="material-icons paragraph-01">search</span>
+                            </span>
+                        </div>
+                        <input class="form-control" [formControl]="searchBrokercontrol" placeholder="Search broker"
+                            id="firstName" type="text" [matAutocomplete]="agent">
+                        <mat-autocomplete #agent="matAutocomplete"
+                            (optionSelected)="addBrokerToProject(projectExternalSalesTeamIdx)">
+                            <mat-option *ngFor="let agent of filteredAgents" [value]="agent">
+                                {{agent?.text}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group d-inline-block align-items-end m-1"
+                        *ngFor="let projectExternalTeamBrokerItem of projectExternalSalesTeam['controls'].projectExternalTeamBroker?.controls; let projectExternalTeamBrokerIdx=index">
+                        <div class="input-group" [formGroupName]="projectExternalTeamBrokerIdx">
+                            <label
+                                class="color-01 font-weight-normal paragraph-03 letter-spacing-1 w-100 white-space-nowrap"
+                                for="fullName">Broker {{projectExternalTeamBrokerIdx+1}}</label>
+                            <!-- <input formControlName="fullName" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="Broker name" id="fullName" type="text"> -->
+                            <input readonly
+                                class="bg-color-06 border-0 flex-auto letter-spacing-1 line-clamp line-clamp-1 m-0 paragraph-04"
+                                type="text" formControlName="fullName">
+                            <!-- <select class="form-control" placeholder="" id="agentid" type="text" formControlName="agentId">
+                                <option value="">Select Agents...</option>
+                                <option *ngFor=" let items of agents" [value]="items.value">{{items.text}}</option>
+                              </select> -->
+                            <div class="input-group-append border-0">
+                                <span
+                                    (click)="rmProjectExternalTeamBroker(projectExternalSalesTeamIdx, projectExternalTeamBrokerIdx)"
+                                    class="bg-color-06 border-0 input-group-text cursor-pointer" id="basic-addon2">
+                                    <span class="material-icons paragraph-01">close</span>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <div class="col-12 d-flex justify-content-end">
+                    <button (click)="addProjectExternalTeamBroker(projectExternalSalesTeamIdx)"
+                        class="bg-white border-0 color-01 d-flex paragraph-02">
+                        <mat-icon class="paragraph-02">add</mat-icon>
+                        <span class="text-decoration-underline">Add another</span>
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="row m-0 mb-3">
+        <div class="col-12 d-flex justify-content-end">
+            <button (click)="addProjectExternalSalesTeams()" class="bg-white border-0 color-01 d-flex paragraph-02">
+                <mat-icon class="paragraph-02">add</mat-icon>
+                <span class="text-decoration-underline">Add another broker group</span>
+            </button>
+        </div>
+    </div>
+</form>
+<!-- <form class="p-0 mt-4" [formGroup]="form">
+
+    <div class="card">
+        <div class="d-flex justify-content-center align-items-center" style="
+    Height: 
+    95px">
+            <mat-icon> upload </mat-icon>
+            <label> Upload from excel</label>
+        </div>
+    </div>
+
+    <div class="mb-2 mt-3" *ngFor="let brokerGroup of projectBrokerGroup.controls; let brokerIndex=index">
+        <div class="card" formArrayName="brokerGroup">
+            <div>
+                <div [formGroupName]="brokerIndex">
+                    <div class="col-7 d-flex  mt-4 justify-content-start mx-auto">
+                        <div class="ml-2 col-6 form-group ">
+                            <label class="sub-heading-04" for="depositName">Broker Group Name</label>
+                            <input class="form-control" placeholder="" id="brokerGroupName" type="text"
+                                formControlName="brokerGroupName">
+                        </div>
+                        <div class="form-group col-md-5 ">
+                            <label class="sub-heading-04 d-flex mt-4 pt-3" for="projectAccess">
+                                <input class="" id="projectAccess" type="checkbox" formControlName="projectAccess">
+
+                                Allow Project Access</label>
+                        </div>
+
+                    </div>
+                    <div class="card-body pt-0" formArrayName="brokersDetail">
+                        <div *ngFor="let item of brokerDetails(brokerIndex).controls; let i=index">
+                            <div class="d-flex justify-content-center" [formGroupName]="i">
+                                <div class="col-md-3 form-group">
+                                    <label class="sub-heading-04" for="type">Broker{{i+1}}</label>
+                                    <input class="form-control" id="depositName" type="text"
+                                        formControlName="brokerEmail">
+                                </div>
+                                <div class="col-3 mt-0 form-group">
+                                    <label class="sub-heading-04" for="commisson">Broker Commisson</label>
+                                   
+
+                                    <div class="input-group suffix">
+                                        <input class="suffixinput" placeholder="" id="buildingHeight" min="0"
+                                            type="number" formControlName="brokerCommision">
+                                        <span class="input-group-addon ">$</span>
+                                        <button *ngIf="brokerDetails(brokerIndex).length > 1"
+                                            class="sub-heading-04 mr-2 position-absolute" mat-icon-button
+                                            (click)="removebrokerDetails(brokerIndex,i)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-end col-6 mx-auto">
+                            <button class="addmore" (click)="addBrokerDetail(brokerIndex)">
+                                <mat-icon>add</mat-icon>
+                                <span>Add another</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-flex justify-content-end w-100">
+        <button class="addmore" (click)="addBrokerGroup()">
+            <mat-icon>add</mat-icon>
+            <span>Add another Broker Group</span>
+        </button>
+    </div>
+</form> -->

@@ -1,0 +1,678 @@
+<div class=" row col-12" [formGroup]="form">
+    <div class="d-flex justify-content-start w-100">
+        <button class="addmore" (click)="backToGrid()">
+            <mat-icon>arrow_back</mat-icon>
+            <span>Back to Grid </span>
+        </button>
+    </div>
+    <div class="row mt-4 w-100">
+        <div class=" mx-auto col-12 ">
+            <div class=" py-0">
+                <div class="d-flex">
+                    <div class="form-group col-4 d-flex justify-content-start align-items-center">
+                        <label class="sub-heading-04" for="unitPerFoor">Tower</label>
+                        <select class="form-control"   (change)="towerChange($event)"
+                            placeholder="" id="type1" type="text">
+                            <option *ngFor="let item of tabList?.value; let tIndex = index" [value]="tIndex" [selected]="towerIndex==tIndex?true:false">
+                                Tower {{item?.towerNo}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-4 d-flex justify-content-start align-items-center">
+                        <label class="sub-heading-04" for="unitPerFoor">Blocks</label>
+                        <select class="form-control"    (change)="blockChange($event)"
+                            placeholder="" id="type2"   >
+                            <option
+                                *ngFor="let item of  blockDetails(towerIndex)?.value  ;let dropIndex = index"
+                                [value]="dropIndex"   [selected]="blockIndex==dropIndex?true:false" >Block {{item?.blockNo}}</option>
+                        </select>
+                        
+
+                    </div>
+                    <div class="form-group col-4 d-flex justify-content-end">
+                        <span> {{getTotalUnits()}}
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="fw-header d-flex align-items-center justify-content-between">
+                    <div class="d-flex justify-content-start w-100" >
+                        <span class="fwh-text" *ngIf="blockDetails(towerIndex)?.value?.length>0">
+                            {{blockDetails(form.get('towerIndex')?.value).at(form.get('blockIndex')?.value)?.get("stackName")?.value}}
+                        </span>
+                    </div>
+                </div>
+                <div formArrayName="projectTower">
+                    <div *ngFor="let tabs of tabList?.controls;let i = index">
+                        <div [formGroupName]="i">
+                            <div formArrayName="projectBlocks">
+                                <div *ngFor="let item of blockDetails(i)?.value;let blockIndex = index">
+                                    <div [formGroupName]="blockIndex">
+                                        <ng-container
+                                            *ngIf="blockIndex==form.get('blockIndex')?.value && i==form.get('towerIndex')?.value && blockDetails(i)?.value?.length>0 ">
+                                            <div class="floor-view-table mt-2">
+                                                <table class="table borderless">
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let tabss of item?.projectFloorDetails ; let fi=index ">
+                                                            <td nowrap class="fvtc-wrap">
+                                                                 
+                                                                <div class="fvt-cell"
+                                                                    *ngFor="let tabs of  tabss?.projectUnitFlats || [] "
+                                                                    (click)="singleUnitClick(i,blockIndex,fi,tabss?.floorNo,tabs)"
+                                                                    [class.selectedStack]="tabs?.isMultipleStackSelected && !tabs?.isSingleStackSelected "
+                                                                    [class.singleStackSelect]="tabs?.isSingleStackSelected">
+                                                                    <span>
+                                                                        {{tabs?.flatNo}}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td nowrap class="fvtc-wrap">
+                                                                <div class="fvt-cell nobackground"
+                                                                    *ngFor="let floor of projectUnitFlatsDetail(i, blockIndex,0)?.value let fi=index "
+                                                                    (click)="setSelectedStack(fi+1,i,blockIndex)">
+                                                                    <span>{{fi+1}}</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- {{projectUnitPricingDetail(tabIndex,blockIndex)?.value |json}} -->
+<div class=" col d-flex justify-content-between  mb-2  pl-2">
+    <p class=" col color-01 font-weight-semi-bold letter-spacing-1 paragraph-02">
+        Stack {{selectedStackName}}
+        | Units {{unitNumber}}</p>
+    <!-- <button class="col-2 btn btn-primary" (click)="addUnitPricing(towerIndex,blockIndex)">Add Unit</button> -->
+</div>
+<div *ngIf="!isContinue">
+    <button mat-stroked-button (click)="clickContinue()"
+        class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">Continue</button>
+</div>
+<div *ngIf="isContinue ">
+    <button mat-stroked-button (click)="addStack()"
+        class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">Add
+        Stack</button>
+</div>
+<div class="row m-0" *ngIf="isContinue">
+
+    <!-- ----render for single flat selection------ -->
+    <div [formGroup]="unitFlatForm" class="col-md-12">
+        <div class="col-12 p-0 mt-4" *ngIf="unitNumber.length>0 || selectedStackName.length>0">
+            <div class="row m-0 form-group mb-3">
+                <div class="align-items-center col-4 d-flex ml-2 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap mr-2">Same
+                        as another unit</label>
+                    <select  class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)] ="selectedValueToCopy" (ngModelChange)="unitChange($event,towerIndex,blockIndex)">
+                        <option value="">---</option>
+                        <option *ngFor="let unitItem of unitsToCopy || [] let unitDropIndex=index"
+                            [ngValue]="unitItem"
+                            >
+                             {{unitItem.name }}
+                        </option>
+
+                    </select>
+                    
+                </div>
+                <div class="align-items-center col-3 d-flex ml-2 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap">Status<span
+                            style="color:#ff0000">*</span></label>
+                    <select class="form-control ">
+                        <option value="">Available
+                        </option>
+                        <option value="">off the market
+                        </option>
+                        
+                        <option value="">Sold
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Unit
+                        Type<span style="color:#ff0000">*</span></label>
+                    <select class="form-control" type="number" formControlName="unitType">
+                        <option value="">Select Unit Type</option>
+                        <option *ngFor="let item of unitTypes" [value]="item.unitType">{{item.unitType}}</option>
+                    </select>
+
+                </div>
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Unit
+                        Name<span style="color:#ff0000">*</span></label>
+                    <input formControlName="unitName" class="form-control" type="text">
+
+
+                </div>
+            </div>
+            <div class="row m-0 form-group mb-3">
+
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Interior
+                        Size<span style="color:#ff0000">*</span></label>
+                    <div class="input-group">
+                        <input formControlName="interiorSize" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+                        Size<span style="color:#ff0000">*</span></label>
+                    <div class="input-group">
+                        <input formControlName="balconySize"  type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Price<span
+                            style="color:#ff0000">*</span></label>
+                    <div class="input-group">
+                        <input formControlName="price" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">$</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Floor
+                        Premium<span style="color:#ff0000">*</span></label>
+                    <div class="input-group">
+                        <input formControlName="floorPremium" (blur)="confirmFloorPremium()" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">$</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-0 form-group mb-3">
+                <div class="col-3  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Ceiling
+                        Height<span style="color:#ff0000">*</span> </label>
+                    <div class="input-group">
+                        <input formControlName="ceilingHeight" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3   pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">View</label>
+                    <select class="form-control" formControlName="view" type="number">
+                        <option value="0">Select
+                            Direction</option>
+                        <option value="1">E</option>
+                        <option value="2">W</option>
+                        <option value="3">S</option>
+                        <option value="4">N</option>
+                        <option value="5">SE</option>
+                        <option value="6">SW</option>
+                        <option value="7">NE</option>
+                        <option value="8">NW</option>
+                    </select>
+                    <!-- <div class="input-group-append">
+                                          <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                                        </div> -->
+                </div>
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-2 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Living
+                        Room </label>
+                    <div class="input-group">
+                        <input formControlName="livingRoomSize" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-2  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Dining
+                        Room</label>
+                    <div class="input-group">
+                        <input formControlName="diningRoomSize" type="number" min="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row  m-0 form-group mb-3">
+                <div class="col-1  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Beds</label>
+                    <input type="number" id="noOfBedroom" formControlName="noOfBedroom" max="100" min="0"
+                        class="color-03 form-control " (change)="bedroomChange($event)">
+                </div>
+                <div class="col-9">
+                    <div formArrayName="flatBedRooms" class="row">
+                        <div class="col-2 input-group  input-group-sm pl-0 mb-2"
+                            *ngFor="let itemBed of  unitFlatForm.get('flatBedRooms')?.value;let bedIndex = index;trackBy:trackByIndex">
+                            <div [formGroupName]="bedIndex">
+                                <label
+                                    class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bedroom
+                                    {{bedIndex+1}}</label>
+                                <!-- <input
+                                                                                    class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04"
+                                                                                    formControlName="size">
+                                                                                <div class="input-group-append">
+                                                                                    <span
+                                                                                        class="input-group-text paragraph-04"
+                                                                                        id="basic-addon2">ft</span>
+                                                                                </div> -->
+                                <div class="input-group ">
+                                    <input type="number" min="0" class="form-control color-03 font-weight-normal"
+                                        formControlName="size" id="{{bedIndex}}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">ft</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-1  pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Baths</label>
+                    <input type="number" id="nOofBaths" formControlName="nOofBaths" max="100" min="0"
+                        class="color-03 form-control ng-pristine ng-valid ng-touched" (change)="bathRoomChange($event)">
+                </div>
+                <div class="col-9">
+                    <div formArrayName="flatbathroomSizes" class="row">
+                        <div class="col-2 input-group  input-group-sm pl-0 mb-2"
+                            *ngFor="let itemBathRoom of unitFlatForm.get('flatbathroomSizes')?.value;let bathroomIndex = index;trackBy:trackByIndex">
+                            <div [formGroupName]="bathroomIndex">
+
+                                <label
+                                    class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bathroom
+                                    {{bathroomIndex+1}}</label>
+                                <div class="input-group ">
+                                    <input type="number" min="0" class="form-control color-03 font-weight-normal"
+                                        formControlName="size" id ="{{bathroomIndex}}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">ft</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-1 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Terrace</label>
+                    <input type="number" formControlName="terrace" max="100" id="terrace" min="0"
+                        class="color-03 form-control ng-pristine ng-valid ng-touched"
+                        (change)="terranceChange($event )">
+                </div>
+                <div class="col-9">
+                    <div formArrayName="flatterraceSizes" class="row">
+                        <div class="col-2 input-group  input-group-sm pl-0 mb-2"
+                            *ngFor="let itemTerrance of unitFlatForm.get('flatterraceSizes')?.value;let terranceIndex = index;trackBy:trackByIndex">
+                            <div [formGroupName]="terranceIndex">
+
+                                <label
+                                    class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100  ">Terrace
+                                    {{terranceIndex+1}}</label>
+
+                                <div class="input-group ">
+                                    <input type="number" min="0" class="form-control color-03 font-weight-normal"
+                                        formControlName="size" id ="{{terranceIndex}}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">ft</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-1 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony</label>
+                    <input type="number" formControlName="noofBalcony" max="100" min="0"
+                        class="color-03 form-control ng-pristine ng-valid ng-touched" (change)="balconyChange($event)">
+                </div>
+                <div class="col-9">
+                    <div formArrayName="flatbalconysizes" class="row">
+                        <div class="col-2 input-group  input-group-sm pl-0 mb-2"
+                            *ngFor="let itemBalcony of unitFlatForm.get('flatbalconysizes')?.value;let balconyIndex = index;trackBy:trackByIndex">
+                            <div [formGroupName]="balconyIndex">
+
+                                <label
+                                    class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+                                    {{balconyIndex+1}}</label>
+                               
+                                <div class="input-group ">
+                                    <input type="number" min="0" class="form-control color-03 font-weight-normal"
+                                        formControlName="size">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">ft</span>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <div class="col-1 pl-0">
+                    <label
+                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den</label>
+                    <input type="number" formControlName="noofDen" max="100" min="0"
+                        class="color-03 form-control ng-pristine ng-valid ng-touched" (change)="denChange($event)">
+                </div>
+                <div class="col-9">
+                    <div formArrayName="flatdenSizes" class="row">
+                        <div class="col-2 input-group  input-group-sm pl-0 mb-2"
+                            *ngFor="let itemDen of unitFlatForm.get('flatdenSizes')?.value;let denIndex = index;trackBy:trackByIndex">
+                            <div [formGroupName]="denIndex">
+
+                                <label
+                                    class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den
+                                    {{denIndex+1}}</label>
+                               
+                                <div class="input-group ">
+                                    <input type="number" min="0" class="form-control color-03 font-weight-normal"
+                                        formControlName="size">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">ft</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 form-group mb-3">
+                <p class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap mb-3 extras">
+                    Extras:</p>
+                <div class="col-12 pl-0 d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+
+                        <div formArrayName="flatProjectUnitAdditionalFeatures">
+                            <div
+                                *ngFor="let itemAddFreature of unitFlatForm.get('flatProjectUnitAdditionalFeatures')?.value;let paed  = index">
+                                <div class="d-flex col-4 mb-3" [formGroupName]="paed">
+                                    <div class="d-flex mx-2">
+                                        <label
+                                            class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                                            <input [checked]="itemAddFreature?.isChecked"
+                                                (change)="changeCheckbox($event,paed)" type="checkbox" class="mr-1">
+
+                                            {{itemAddFreature?.name}}
+                                        </label>
+                                    </div>
+                                    <div class="d-flex mx-2">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" [value]="true" [checked]="itemAddFreature?.isIncluded"
+                                                (change)="handleChange($event,paed,1)" /><label
+                                                class="m-0 pl-1">Included</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex mx-2">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" [checked]="itemAddFreature?.isEligible" [value]="true"
+                                                (change)="handleChange($event,paed,2)" /><label
+                                                class="m-0 pl-1">Eligible</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button
+                                                                                        class="align-items-center bg-white border-0 color-01 color-03 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap"
+                                                                                        (click)="addprojectUnitAdditionalFeaturesDetail(tabIndex,blockIndex,floorIndex)">
+                                                                                        <span
+                                                                                            class="material-icons mr-1 paragraph-01">add</span>
+                                                                                        <span class="text-decoration-underline">Add
+                                                                                            custom</span>
+                                                                                    </button> -->
+                </div>
+            </div>
+            <!-- <div class="row m-0 form-group mb-3">
+                                                                <div class="col-6 pl-0 d-flex align-items-center">
+                                                                    <ng-container *ngIf="true">
+                                                                        <label fileDragDrop
+                                                                            (filesChangeEmiter)="onFileChange($event,0)"
+                                                                            class="py-5 border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                                                                            for="floorPlanFile">
+                                                                            <span>{{projectUnitPricingDetail(tabIndex,blockIndex)?.at(floorIndex)?.get('floorPlanFile')?.value.name}}</span>
+                                                                            <ng-container></ng-container>
+                                                                            <p
+                                                                                class="color-03 m-0 paragraph-02 text-center">
+                                                                                Drag &
+                                                                                Drop your Floor Plan here
+                                                                                OR</p>
+                                                                            <p
+                                                                                class="color-03 my-2 paragraph-02 text-center">
+                                                                                OR</p>
+                                                                            <p class="m-0 paragraph-02 text-center">
+                                                                                <span
+                                                                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span>
+                                                                            </p>
+                                                                        </label>
+                                                                        <input class="form-control d-none"
+                                                                            placeholder="" id="floorPlanFile"
+                                                                            type="file"
+                                                                            (change)="uploadPdfFile($event,0)"
+                                                                            accept="application/pdf">
+                                                                    </ng-container>
+                                                                </div>
+                                                                <div class="col-6 pr-0 d-flex align-items-center">
+                                                                    <ng-container *ngIf="true">
+                                                                        <label fileDragDrop
+                                                                            (filesChangeEmiter)="onFileChange($event,1)"
+                                                                            class="py-5 border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                                                                            for="planScheduleFile">
+                                                                            <span>{{projectUnitPricingDetail(tabIndex,blockIndex)?.at(floorIndex)?.get('planScheduleFile')?.value.name}}</span>
+                                                                            <ng-container></ng-container>
+                                                                            <p
+                                                                                class="color-03 m-0 paragraph-02 text-center">
+                                                                                Drag &
+                                                                                Drop your Plan ScheduleFile here
+                                                                                OR</p>
+                                                                            <p
+                                                                                class="color-03 my-2 paragraph-02 text-center">
+                                                                                OR</p>
+                                                                            <p class="m-0 paragraph-02 text-center">
+                                                                                <span
+                                                                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span>
+                                                                            </p>
+                                                                        </label>
+                                                                        <input class="form-control d-none"
+                                                                            placeholder="" id="companyLogoPath"
+                                                                            type="file"
+                                                                            (change)="uploadPdfFile($event,1)"
+                                                                            accept="application/pdf">
+                                                                    </ng-container>
+                                                                </div>
+                                                            </div> -->
+
+        </div>
+
+    </div>
+    <div class="row m-0 form-group mb-3 justify-content-end">
+    </div>
+</div>
+<div class="row m-0 form-group mb-3 justify-content-end">
+    <!-- <button (click)="updateSection.emit('steup-sales-grid')" mat-stroked-button class="bg-color-01 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">NEXT BLOCK</button> -->
+    <button mat-stroked-button [disabled]="isContinue" (click)="onSave()"
+        class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">SAVE</button>
+</div>
+
+<ng-template #pdfTemplate>
+    <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>PDF Viewer
+        <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="mx-auto col-md-12">
+            <pdf-viewer class=" " [src]="file" [original-size]="false"></pdf-viewer>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+            *ngIf="file" (click)="savePdfDoc()">
+            <mat-icon>check</mat-icon>
+        </button>
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a close icon"
+            *ngIf="file" (click)="exitpdfdoc()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-dialog-actions>
+</ng-template>
+<ng-template #customNameDialog>
+    <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Add Custom
+        <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="mx-auto col-md-12">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+            </label>
+            <input #customName class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+            (click)="saveCustomName(customName)">
+            <mat-icon>check</mat-icon>
+        </button>
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a close icon"
+            (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-dialog-actions>
+</ng-template>
+<ng-template #editDelDialog>
+    <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Enter choice
+        <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="mx-auto col-md-12">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                Do you Want to edit or Delete Selected Unit
+            </label>
+
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+            (click)="editUnits()">
+            Edit Unit
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+            aria-label="button with a close icon" (click)="deleteUnit()">
+            Delete Unit
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+        aria-label="button with a close icon" (click)="cancel()">
+        Cancel
+        <mat-icon>close</mat-icon>
+    </button>
+    </mat-dialog-actions>
+</ng-template>
+<ng-template #confirmFloorPremimumDialog>
+    <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title> Update Floor Premimum
+        <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="mx-auto col-md-12">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                Are you sure want too update Floor Premimum Price for selected Stack or Units ?
+            </label>
+
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+            (click)="updateFloorPremimum()">
+            <mat-icon>check</mat-icon>Confirm
+        </button>
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+        aria-label="button with a close icon" (click)="cancelFloorPremimum()">
+        <mat-icon>close</mat-icon>Cancel
+    </button>
+    </mat-dialog-actions>
+</ng-template>
+
+<!-- <ng-template #confirmSaveOnBackDialog>
+    <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Enter choice
+        <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+    </h2>
+    <mat-dialog-content>
+        <div class="mx-auto col-md-12">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                Do you Want to Save or Cancel your Changes
+            </label>
+
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+            (click)="this.dialogRef?.close()">
+           Save         
+            <mat-icon>save</mat-icon>
+        </button>
+         
+        <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button
+        aria-label="button with a close icon" (click)="undoChanges()">
+        Undo
+        <mat-icon>undo</mat-icon>
+    </button>
+    </mat-dialog-actions>
+</ng-template> -->

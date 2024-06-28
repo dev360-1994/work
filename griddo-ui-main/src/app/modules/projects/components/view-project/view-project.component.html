@@ -1,0 +1,23 @@
+<section class="add-builder-section">
+    <a (click)="confirmDialog()" class="mb-3 back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+        <mat-icon>keyboard_backspace</mat-icon> Back to deal
+    </a>
+    <div class="row m-0">
+        <div class="col-12">
+            <h1 class="color-01 font-weight-semi-bold letter-spacing-1 sub-heading-01">Worksheet Document</h1>
+        </div>
+        <div *ngIf="showDocuSign" class="w-100 h-100">
+            <iframe width="100%" height="730px" [src]="documentUrl"></iframe>
+        </div>
+        <div class="d-flex justify-content-end w-100">
+            <input *ngIf="!showDocuSign" type="file" id="fileSource" name="filename" (change)="onFileChange($event)">
+
+            <button *ngIf="!showDocuSign" class="addmore mr-2" (click)="createEnvelop()">
+          <span>Create Envelop </span>
+        </button>
+            <button class="addmore" (click)="closeConnection()">
+            <span>Cancel </span>
+          </button>
+        </div>
+    </div>
+</section>

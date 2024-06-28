@@ -1,0 +1,18 @@
+<a class="card agent-card p-3 h-100" (click)="navigatetoAgent(agent.agentId)">
+    <h2 class="name m-0 color-01">{{agent?.fullNAME}}</h2>
+    <p class="location mb-1 color-03">{{agent?.location}}</p>
+    <div class="numbers d-flex">
+        <p class="mb-1">{{0}} projects</p>
+        <p class="ml-3 mb-1">{{0}} deals</p>
+    </div>
+    <p class="revenue mb-1 color-11">${{0}} deals</p>
+    <p class="rescission mb-1 color-03">{{0}}% RR</p>
+    <!-- <p class="project-label m-0 mb-1">Project/s</p>
+  <div class="projects d-flex">
+    <a class="project mr-1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU" alt=""></a>
+    <a class="project mr-1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU" alt=""></a>
+    <a class="project mr-1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU" alt=""></a>
+  </div> -->
+    <a class="cta-link-phone mb-2 mt-1" href="tel:+1504825893"> <span class="material-icons mr-2">call</span>{{agent?.cellNo[0]?.internationalNumber}}</a>
+    <a class="cta-link-mail" href="mailto:{{agent?.loginEmailAddress || agent?.email || 'n/a'}}"><span class="material-icons mr-2">email</span>{{agent?.loginEmailAddress || agent?.email || 'n/a'}}</a>
+</a>

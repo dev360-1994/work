@@ -1,0 +1,289 @@
+$displays: none,
+inline,
+inline-block,
+block,
+table,
+table-row,
+table-cell,
+flex,
+inline-flex,
+grid,
+inline-grid,
+list-item;
+$break-xxs: 320px;
+$break-xs: 576px;
+$break-s: 768px;
+$break-f: 880px;
+$break-m: 992px;
+$break-l: 1024px;
+$break-xl: 1200px;
+$break-xxl: 1400px;
+$break-xxxl: 1500px;
+$break-xxxxl: 1600px;
+$break-xxxxxl: 1900px;
+$break-qhd: 2200px;
+$break-uhd: 3200px;
+$height-short: 768px;
+$break-5k: 4300px;
+$break-6k: 5200px;
+$break-8k: 6400px;
+@mixin responsive($size) {
+    @if $size==xxs {
+        @media only screen and (max-width: $break-xxs) {
+            @content;
+        }
+    }
+    @else if $size==xs {
+        @media only screen and (max-width: $break-xs) {
+            @content;
+        }
+    }
+    @else if $size==s {
+        @media only screen and (max-width: $break-s) {
+            @content;
+        }
+    }
+    @else if $size==minsmaxm {
+        @media only screen and (min-width:$break-s) and (max-width:$break-m) {
+            @content;
+        }
+    }
+    @else if $size==f {
+        @media only screen and (max-width: $break-f) {
+            @content;
+        }
+    }
+    @else if $size==m {
+        @media only screen and (max-width: $break-m) {
+            @content;
+        }
+    }
+    @else if $size==l {
+        @media only screen and (max-width: $break-l) {
+            @content;
+        }
+    }
+    @else if $size==xl {
+        @media only screen and (max-width: $break-xl) {
+            @content;
+        }
+    }
+    @else if $size==xxl {
+        @media only screen and (max-width: $break-xxl) {
+            @content;
+        }
+    }
+    @else if $size==xxxl {
+        @media only screen and (max-width: $break-xxxl) {
+            @content;
+        }
+    }
+    @else if $size==xxxxl {
+        @media only screen and (max-width: $break-xxxxl) {
+            @content;
+        }
+    }
+    @else if $size==xxxxxl {
+        @media only screen and (max-width: $break-xxxxl) {
+            @content;
+        }
+    }
+    @else if $size==minxxs {
+        @media only screen and (min-width: $break-xxs) {
+            @content;
+        }
+    }
+    @else if $size==minxs {
+        @media only screen and (min-width: $break-xs) {
+            @content;
+        }
+    }
+    @else if $size==mins {
+        @media only screen and (min-width: $break-s) {
+            @content;
+        }
+    }
+    @else if $size==minm {
+        @media only screen and (min-width: $break-m) {
+            @content;
+        }
+    }
+    @else if $size==minl {
+        @media only screen and (min-width: $break-l) {
+            @content;
+        }
+    }
+    @else if $size==minxl {
+        @media only screen and (min-width: $break-xl) {
+            @content;
+        }
+    }
+    @else if $size==minxxl {
+        @media only screen and (min-width: $break-xxl) {
+            @content;
+        }
+    }
+    @else if $size==minxxxl {
+        @media only screen and (min-width: $break-xxxl) {
+            @content;
+        }
+    }
+    @else if $size==minxxxxl {
+        @media only screen and (min-width: $break-xxxxl) {
+            @content;
+        }
+    }
+    @else if $size==minxxxxxl {
+        @media only screen and (min-width: $break-xxxxxl) {
+            @content;
+        }
+    }
+    @else if $size==minqhd {
+        @media only screen and (min-width: $break-qhd) {
+            @content;
+        }
+    }   
+    @else if $size==minuhd {
+        @media only screen and (min-width: $break-uhd) {
+            @content;
+        }
+    }     
+    @else if $size==min5k {
+        @media only screen and (min-width: $break-5k) {
+            @content;
+        }
+    }
+    @else if $size==min6k {
+        @media only screen and (min-width: $break-6k) {
+            @content;
+        }
+    }
+    @else if $size==min8k {
+        @media only screen and (min-width: $break-8k) {
+            @content;
+        }
+    }    
+    @else if $size==sunny {
+        @media only screen and (min-width: $sunny) {
+            @content;
+        }
+    }
+    @else if $size==short {
+        @media only screen and (max-height: $height-short) {
+            @content;
+        }
+    }
+    @else if $size==medium-height {
+        @media only screen and (max-height: $height-medium) {
+            @content;
+        }
+    }
+    @else if $size==tall {
+        @media only screen and (max-height: $height-tall) and (max-width: $width-large) {
+            @content;
+        }
+    }
+ 
+}
+
+@mixin print() {
+    @media print {
+        @content;
+    }
+}
+
+
+/* Generic Margin Helpers
+------------------------------------
+ */
+
+@mixin generate-margin-options($n, $j: 0) {
+    @if $j <=$n {
+        @for $i from $j through $n {
+            $step: $i*5;
+            .m-t-#{$step} {
+                margin-top: ($step*1px);
+            }
+            .m-r-#{$step} {
+                margin-right: ($step*1px);
+            }
+            .m-l-#{$step} {
+                margin-left: ($step*1px);
+            }
+            .m-b-#{$step} {
+                margin-bottom: ($step*1px);
+            }
+            .m-#{$step} {
+                margin: ($step*1px);
+            }
+        }
+    }
+}
+
+
+/* Generic Padding Helpers
+------------------------------------
+*/
+
+@mixin generate-paddings-options($n, $j:0) {
+    @if $j <=$n {
+        @for $i from $j through $n {
+            $step: $i*5;
+            .p-t-#{$step} {
+                padding-top: ($step*1px);
+            }
+            .p-r-#{$step} {
+                padding-right: ($step*1px);
+            }
+            .p-l-#{$step} {
+                padding-left: ($step*1px);
+            }
+            .p-b-#{$step} {
+                padding-bottom: ($step*1px);
+            }
+            .padding-#{$step} {
+                padding: ($step*1px);
+            }
+        }
+    }
+}
+
+@mixin generate-width-options($n, $j:0) {
+    @if $j <=$n {
+        @for $i from $j through $n {
+            $step: $i*5;
+            .width-#{$step} {
+                width: ($step*1%);
+            }
+        }
+    }
+}
+
+
+@mixin generate-opacity($n, $j:0) {
+  @if $j <=$n {
+    @for $i from $j through $n {
+      $step: $i;
+
+      .opacity-#{$step} {
+        opacity: ($step*0.1);
+      }
+    }
+  }
+}
+
+
+/* Generic ellipsis Helpers
+------------------------------------
+*/
+
+@mixin text_ellipsis($height: 2.4rem, $line:2) {
+    white-space: normal;
+    word-break: break-word;
+    max-height: $height;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+}

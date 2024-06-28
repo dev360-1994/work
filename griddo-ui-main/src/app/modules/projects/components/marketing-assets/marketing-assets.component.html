@@ -1,0 +1,177 @@
+<section class="bg-white border-radius box-shadow-1 mx-2 my-4 w-100">
+  <div class="d-flex justify-content-between mx-3 pt-2">
+    <ng-container *ngIf="!folder?.selected">
+      <p class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03">Folders ({{folders?.length || 0}})</p>
+      <button class="align-items-center bg-white border-0 color-02 d-flex paragraph-04 cursor-pointer"
+        (click)="addFolder(addFolderTemplate)">
+        <span class="material-icons sub-heading-02">create_new_folder</span>
+        <!-- <span class="material-icons paragraph-02">add</span>
+        <span class="text-decoration-underline">Add another</span> -->
+      </button>
+    </ng-container>
+    <div *ngIf="folder?.selected" class="d-flex align-items-center">
+      <button (click)="allFolders()"
+        class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03 cursor-pointer bg-color-white border-0">All
+        Folders
+        ({{folders?.length ||
+        0}})</button>
+      <p class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03 d-flex align-items-center">
+        <span class="material-icons">chevron_right</span>
+        {{folder?.name}}
+      </p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center" *ngIf="!folders?.length">
+    <p class="color-04 m-0 my-5 sub-heading-02">You are yet to add folders to Marketing Assets</p>
+  </div>
+  <div class="w-100 row m-0" *ngIf="!folder?.selected">
+    <div class="col-2 p-0" *ngFor="let folder of folders;let folderIndex = index">
+      <div
+        class="align-items-center d-flex flex-column folder justify-content-between border-radius m-2 mx-auto cursor-pointer"
+        (click)="selectFolder(folderIndex)">
+        <div class="folder-icon pt-4 pb-3 text-center w-100 border-radius"
+          [ngClass]="{'color-15 border-color-15 bg-color-08 border-1' : folder?.selected, 'color-02 bg-color-06 border-0' : !folder?.selected}">
+          <span class="material-icons">folder</span>
+        </div>
+        <p class="m-0 paragraph-04 text-center mt-1"
+          [ngClass]="{'color-15 font-weight-semi-bold':folder?.selected,'color-02':!folder?.selected}">{{folder?.name}}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-container *ngIf="folder?.selected">
+  <section class="bg-white border-radius box-shadow-1 my-3">
+    <label fileDragDrop (filesChangeEmiter)="onFileChange($event)"
+      class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer py-4"
+      for="upload-file">
+      <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+      <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+      <p class="m-0 paragraph-02 text-center"><span class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span>
+      </p>
+    </label>
+    <input class="form-control d-none" placeholder="" id="upload-file" type="file" (change)="fileChangeEvent($event)"
+      [accept]="accetpFiletype" multiple>
+  </section>
+
+  <section class="bg-white border-radius box-shadow-1 my-3">
+    <div class="w-100 row m-0">
+      <div class="col-3 p-0 border-1 border-color-white bg-color-19" *ngFor="let fileItem of folder?.files;let fileIndex = index">
+        <div class="file-item m-2 mx-auto position-relative">
+          <div class="d-flex file-item-img border-radius border-1 border-color-19">
+            <button class="bg-color-transparent border-0 color-05 position-absolute right-0 top-0 cursor-pointer"
+              (click)="removeFile(fileIndex)">
+              <span class="border-radius material-icons">cancel</span>
+            </button>
+            <ng-container *ngIf="fileItem?.preview" [ngSwitch]="fileItem?.type">
+              <ng-container *ngSwitchCase="'img'">
+                <img class="w-100 h-100 cursor-pointer" [src]="fileItem?.preview" alt=""
+                  (click)="preview(previewTemplate,fileItem)">
+              </ng-container>
+              <ng-container *ngSwitchCase="'video'">
+                <video class="w-100 h-100 cursor-pointer" [src]="fileItem?.preview" alt="" controls
+                  (click)="preview(previewTemplate,fileItem)"></video>
+              </ng-container>
+              <!-- <ng-container *ngSwitchCase="'doc'">...</ng-container>
+              <ng-container *ngSwitchCase="'pdf'">...</ng-container> -->
+              <ng-container *ngSwitchDefault>
+                <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{fileItem?.type}}.png" alt="">
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!fileItem?.preview && fileItem?.imagePath!='' && fileItem?.type == 'img'">
+              <img class="w-100 h-100" src={{fileItem?.imagePath}} alt="">
+            </ng-container>
+            <ng-container *ngIf="!fileItem?.preview && fileItem?.imagePath!='' && fileItem?.type != 'img'">
+              <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{fileItem?.type}}.png" alt="">
+            </ng-container>
+            <ng-container *ngIf="!fileItem?.preview && fileItem?.imagePath==''">
+              <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{fileItem?.type}}.png" alt="">
+            </ng-container>
+          </div>
+          <p class="m-0 paragraph-04 text-right mt-1 color-02">
+            <!-- {{fileItem?.type}} -->
+            {{fileItem?.name}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #addFolderTemplate>
+  <mat-dialog-content>
+    <div class="d-flex flex-column">
+      <p class="color-01 d-flex justify-content-center sub-heading-03">Add Folder</p>
+      <input type="text" #folderName class="form-control mb-3 mx-auto w-75">
+    </div>
+    <div class="color-01 d-flex justify-content-center">
+      <button mat-button mat-dialog-close
+        class="bg-color-02 color-01 color-white mat-button mat-button-base mat-focus-indicator mr-4 px-5">Cancel</button>
+      <button [disabled]="!folderName?.value" [class.bg-color-13]="folderName?.value" mat-button
+        [mat-dialog-close]="folderName?.value"
+        class="bg-color-13 color-white mat-button mat-button-base mat-focus-indicator px-5">Add</button>
+    </div>
+  </mat-dialog-content>
+</ng-template>
+
+<ng-template #previewTemplate>
+  <mat-dialog-content class="preview-mat-content">
+    <div class="d-block text-center bg-color-01">
+      <button class="bg-color-white border-0 border-radius color-01 d-flex p-0 position-absolute right-0 top-0 cursor-pointer" mat-dialog-close><span class="material-icons">highlight_off</span></button>
+      <ng-container *ngIf="folderFile?.preview" [ngSwitch]="folderFile?.type">
+        <ng-container *ngSwitchCase="'img'">
+          <img style="max-height: 100vh;max-width: 100%;margin: auto;" [src]="folderFile?.preview" alt="">
+        </ng-container>
+        <ng-container *ngSwitchCase="'video'">
+          <video  style="max-height: 100vh;max-width: 100%;margin: auto;" [src]="folderFile?.preview" alt="" controls></video>
+        </ng-container>
+        <!-- <ng-container *ngSwitchCase="'doc'">...</ng-container>
+        <ng-container *ngSwitchCase="'pdf'">...</ng-container> -->
+        <ng-container *ngSwitchDefault>
+          <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{folderFile?.type}}.png" alt="">
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!folderFile?.preview">
+        <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{folderFile?.type}}.png" alt="">
+      </ng-container>
+    </div>
+  </mat-dialog-content>
+</ng-template>
+
+
+
+
+
+
+<!-- <ng-template #imgCropperTemplate>
+  <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Image Cropper
+    <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+  </h2>
+  <mat-dialog-content>
+    <div class="image-cropper mx-auto" *ngIf="imageChangedEvent">
+      <image-cropper [imageChangedEvent]="imageChangedEvent" backgroundColor="#FFFFFF" [transform]="tranform"
+        [maintainAspectRatio]="true" [aspectRatio]="aspectRatio" format="jpeg" (imageCropped)="imageCropped($event)">
+      </image-cropper>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+    <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a close icon"
+      *ngIf="imageChangedEvent" (click)="clearImg(selectedFieldForFileUpload);exitCropImage()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a zoom-in on"
+      *ngIf="imageChangedEvent" (click)="zoomIn()">
+      <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a zoom-out icon"
+      *ngIf="imageChangedEvent" (click)="zoomOut()">
+      <mat-icon>zoom_out</mat-icon>
+    </button>
+
+    <button [disabled]="isProcessing" class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+      *ngIf="imageChangedEvent" (click)="saveCropImage()">
+      <mat-icon>check</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</ng-template> -->

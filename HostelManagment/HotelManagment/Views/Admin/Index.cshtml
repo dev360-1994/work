@@ -1,0 +1,135 @@
+﻿@model HotelManagment.Models.AdminModal
+@{
+    var logs = Model.Logs;
+    ViewBag.Title = "Index";
+}
+<!-- partial -->
+
+
+<div class="col-md-12 grid-margin mb-30">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h4 class="font-weight-bold mb-0">Hostel Dashboard</h4>
+        </div>
+        <div>
+           
+        </div>
+    </div>
+</div>
+
+
+
+    @* DASHBOARD CARDS SECTION *@
+    <div class="col-md-12 p-0 cstm-flex">
+
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-15">
+                    <p class="card-title cstm-card-title text-md-center text-xl-left">Bookings</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.Bookings</h3>
+                        <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    @*<p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30 days)</small></span></p>*@
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-15">
+                    <p class="card-title cstm-card-title text-md-center text-xl-left">Sales</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">40016</h3>
+                        <i class="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    <p class="mb-0 mt-2 text-success">64.00%<span class="text-black ml-1"><small>(30 days)</small></span></p>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-15">
+                    <p class="card-title cstm-card-title text-md-center text-xl-left">Rooms</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.Rooms</h3>
+                        <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    @*<p class="mb-0 mt-2 text-success">23.00%<span class="text-black ml-1"><small>(30 days)</small></span></p>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-15">
+                    <p class="card-title cstm-card-title text-md-center text-xl-left">Total Beds</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.TotalBeds</h3>
+                        <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    @*<p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30 days)</small></span></p>*@
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body p-15">
+                    <p class="card-title cstm-card-title text-md-center text-xl-left">Vacant Beds</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@{var res = (Model.TotalBeds - Model.Bookings);
+                            @res }</h3>
+                        @*<i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>*@
+                        <i class="fa fa-bed" aria-hidden="true"></i>
+                    </div>
+                    @*<p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ml-1"><small>(30 days)</small></span></p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+@* ACCESS LOGS SECTION *@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Access Logs</p>
+            <div class="text-muted font-weight-light cstm-card-body">
+                <table id="tblhistory" class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>UserId</th>
+                            <th>IP Address</th>
+                            <th>Description</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{foreach (var log in logs)
+                            {
+                                <tr>
+                                    <td>@log.UserId</td>
+                                    <td>@log.IpAddress</td>
+                                <td>@log.Description</td>
+                                <td>@log.Time</td>
+                            </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+
+    @section scripts
+    {
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datatable').DataTable();
+        });
+
+    </script>
+}
+

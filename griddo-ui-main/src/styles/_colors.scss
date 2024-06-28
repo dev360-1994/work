@@ -1,0 +1,62 @@
+
+$colors: (
+	('01', '#414548'),
+	('02', '#777676'),
+	('03', '#828282'),
+	('04', '#9E9E9E'),
+	('05', '#C4C4C4'),
+	('06', '#FBFBFB'),
+
+  ('07', '#3988FF'),
+	('08', '#E8F5FF'),
+	('09', '#5D5FEF'),
+	('10', '#EBECFF'),
+	('11', '#47D7CE'),
+	('12', '#E9FCF6'),
+
+  ('13', '#FF3A0F'),
+	('14', '#FFE176'),
+	('15', '#1976D2'),
+	('16', '#2196F3'),
+
+	('17', '#89DD68'),
+	('18', '#F0AC46'),  
+	('19', '#E5E5E5'),  
+	('20', '#ffd2c8'),  
+	('white', '#ffffff'),  
+	('black', '#000000'),  
+	('transparent', transparent),  
+	);
+
+$prefix:'color';
+
+@each  $index, $color in $colors {
+  .#{$prefix}-#{$index},
+	.#{$prefix}-#{$index}-hover:hover,
+	 %#{$prefix}-#{$index} {
+    color: var(--#{$prefix}-#{$index});
+  }
+	.bg-#{$prefix}-#{$index},
+	.bg-#{$prefix}-#{$index}-hover:hover,
+	 %#{$prefix}-#{$index} {
+    background-color: var(--#{$prefix}-#{$index});
+  }
+
+	.border-#{$prefix}-#{$index},
+	.border-#{$prefix}-#{$index}-hover:hover,
+	 %#{$prefix}-#{$index} {
+    border-color: var(--#{$prefix}-#{$index}) !important;
+  }
+}
+
+
+:root {
+  @each  $index, $color in $colors {
+    --#{$prefix}-#{$index}: #{$color};
+    }
+
+		.form-control:disabled, .form-control[readonly] {
+			background-color: var(--color-white);
+			opacity: 1;
+	}
+}

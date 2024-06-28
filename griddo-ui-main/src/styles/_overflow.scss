@@ -1,0 +1,33 @@
+.overflow- {
+	&hidden {
+		overflow: hidden;
+	}
+	&visible {
+		overflow: visible !important;
+	}
+	&auto {
+		overflow: auto !important;
+	}
+	&x- {
+		&hide {
+			overflow-x: hidden;
+		}
+		&visible {
+			overflow-x: visible;
+		}
+		&auto {
+			overflow-x: auto !important;
+		}
+	}
+	&y- {
+		&hide {
+			overflow-y: hidden;
+		}
+		&visible {
+			overflow-y: visible;
+		}
+		&auto {
+			overflow-y: auto !important;
+		}
+	}
+}

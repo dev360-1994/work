@@ -1,0 +1,72 @@
+﻿@model IEnumerable<HotelManagment.Database_Model.Courses>
+
+@{
+    ViewBag.Title = "AllCourses";
+}
+
+@* ACCESS LOGS SECTION *@
+
+<div class="col-md-12 grid-margin mb-30">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h4 class="font-weight-bold mb-0">Courses Information</h4>
+        </div>
+        <div>
+            @*<button type="button" class="btn btn-primary btn-icon-text btn-rounded show-loader">
+                    <i class="ti-plus btn-icon-prepend"></i>Add new
+                </button>*@
+            <a href="/Course/AddCourse" class="btn btn-primary btn-icon-text btn-rounded show-loader"><i class="ti-plus btn-icon-prepend"></i>Add New Course</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 grid-margin stretch-card">
+
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">All Courses</p>
+            <div class="text-muted font-weight-light cstm-card-body">
+                <table id="tblhistory" class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Fees</th>
+                            <th>IsActive</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{foreach (var cors in Model)
+                            {
+                                <tr>
+                                    <td>@cors.Id</td>
+                                    <td>@cors.Name</td>
+                                    <td>@cors.Description</td>
+                                    <td>@cors.Fees</td>
+                                    <td>@cors.IsActive</td>
+                                    <td><a href="/AddEditCourse?Id=@cors.Id">Edit</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datatable').DataTable();
+        });
+
+    </script>
+}
+
+

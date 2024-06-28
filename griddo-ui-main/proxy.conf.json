@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://dev.griddo.co/",
+    "secure": false,
+    "pathRewrite": {
+      "^api": "https://dev.griddo.co/api"
+    },
+    "changeOrigin": true
+  }
+}

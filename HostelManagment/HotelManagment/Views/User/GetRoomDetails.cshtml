@@ -1,0 +1,236 @@
+﻿@model HotelManagment.Models.RoomBookedDetails
+
+@{
+    ViewBag.Title = "GetRoomDetails";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <input type="button" class="btn btn-primary" id="pdf" value="Download PDF" />
+            <div id="main-div">
+                <p class="card-title">User Details</p>
+                <!-- CARD HEADER START -->
+                <div class="card_head">
+                    <form id="form" class="form-sample">
+                        <p class="card-description">
+                            Personal info
+                        </p>
+                        @Html.HiddenFor(x => x.UserId)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">First Name</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(x => x.FirstName, new { disabled = "disabled", @class = "form-control", @maxlength = "20" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Last Name</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(x => x.LastName, new { disabled = "disabled", @class = "form-control", @maxlength = "20" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Gender</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(x => x.Gender, new { disabled = "disabled", @class = "form-control", @maxlength = "20" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(x => x.Dob, new { disabled = "disabled", @class = "form-control datepicker" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Mobile</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label">@Model.Mobile</label>
+                                        @*@Html.TextBoxFor(x => x.Mobile, new { disabled = "disabled", @class = "form-control number", @maxlength = "12" })*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Course</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(x => x.Course, new { disabled = "disabled", @class = "form-control number", @maxlength = "12" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                        foreach (var add in Model.AddressList)
+                        {
+                            if (add.IsPrimary)
+                            {
+                                    <p class="card-description">
+                                        Address
+                                    </p>
+                            }
+                            else
+                            {
+                                    <p class="card-description">
+                                        Gauradian Address
+                                    </p>
+                            }
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Address 1</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.Address1, new { disabled = "disabled", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Postcode</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.PostCode, new { disabled = "disabled", @class = "form-control number", @maxlength = "10" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Address 2</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.Address2, new { disabled = "disabled", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">City</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.State, new { disabled = "disabled", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">State</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.State, new { disabled = "disabled", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Country</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(x => add.Country, new { disabled = "disabled", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            if (!add.IsPrimary)
+                            {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Gaurdian Mobile Number</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(x => add.GuradianMobile, new { disabled = "disabled", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+                        }
+                        }
+                        <p class="card-title">Room Details</p>
+                        <div class="card_head">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Room Number</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(x => x.RoomNo, new { disabled = "disabled", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Room Description</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(x => x.Description, new { disabled = "disabled", @class = "form-control number", @maxlength = "10" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Room Charges</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(x => x.RoomChangres, new { disabled = "disabled", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Address 2</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(x => x.Floor, new { disabled = "disabled", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">CheckIn</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(x => x.CheckIn, new { disabled = "disabled", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /CARD HEADER END -->
+            </div>
+        </div>
+    </div>
+    <div id="editor"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#pdf').click(function () {
+            var doc = new jsPDF();
+            doc.addHTML($('#main-div'), 5, 5, {
+                'background': '#fff',
+                'border': '2px solid white',
+                'padding':'10px'
+            }, function () {
+                doc.save('sample-file.pdf');
+            });
+        });
+    });
+</script>

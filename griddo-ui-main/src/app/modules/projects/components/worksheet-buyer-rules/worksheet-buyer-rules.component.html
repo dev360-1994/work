@@ -1,0 +1,57 @@
+<section>
+  <div class="mt-4 p-0 card">
+
+    <div class="d-flex card-body" [formGroup]="projectWorkSheetAndBuyer">
+
+      <div class="col-md-4 pl-4 ml-5">
+        <div class="form-group offset-0">
+          <label class="sub-heading-05" for="noofChoices">Number of Choices for Worksheet</label>
+          <input class="form-control" formControlName="numberofChoicesWorksheet" placeholder="" id="noofChoices"
+            type="number">
+        </div>
+        <div class="form-group">
+          <label class="sub-heading-05" for="coolingoffDays">Cooling off Days</label>
+          <input class="form-control" formControlName="coolingOffDays" placeholder="" id="coolingoffDays" type="number">
+        </div>
+        <div class="form-group">
+          <label class="sub-heading-05" for="noofbuyers">Number of Buyers Per Worksheet</label>
+          <input class="form-control" formControlName="numberOfBuyersPerWorksheet" placeholder="" id="noofbuyers"
+            type="number">
+        </div>
+
+      </div>
+      <div class="col-md-4 ml-5">
+        <div class="form-group offset-0">
+          <label class="sub-heading-05" for="toggel">Unit of measurement </label>
+          <p class="sub-heading-05 d-flex">
+            <label class="mr-4">
+              <input type="radio" value="mt" formControlName="unitOfMeasurement">
+              <span class="ml-2">mt</span>
+            </label>
+            <label>
+              <input type="radio" value="ft" formControlName="unitOfMeasurement">
+              <span  class="ml-2">ft</span>
+            </label>
+          </p>
+          <!-- ft &nbsp; <mat-slide-toggle
+            [checked]="projectWorkSheetAndBuyer?.get('unitOfMeasurement')?.value === 'mt' ? true : false"
+            (change)="setunitOfMeasurement($event )"> mt </mat-slide-toggle> -->
+
+        </div>
+        <!-- <div class="form-group">
+          <label class="sub-heading-05" for="purchasers">Number Of purchasers Allowed per buyer</label>
+          <input class="form-control" formControlName="numberofPurchasersAllowedPerBuyer" placeholder="" id="purchasers"
+            type="number">
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="sub-heading-05"> Duplicate Submission rules</label><br>
+          <li class="sub-heading-05">Email and mobile number</li>
+          <li class="sub-heading-05">Submitted with which agent</li>
+          <li class="sub-heading-05">Allocation of the duplicate worksheet
+            should be based on first submitted or manager/admin can override it.
+          </li>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<a class="builder-card p-2 {{type || 'card-portrait'}}" [routerLink]="['/griddo-master','builders',builder.builderId]">
+  <div class="align-items-center d-flex img-box pr-2">
+    <img src="{{builder?.companyLogoPath || onErrorImg}}" alt="" (error)="onError($event)">
+  </div>
+  <div class="align-items-start d-flex upper-box">
+    <div class="name-box flex-auto">
+      <h2 class="color-01 font-weight-medium letter-spacing-1 paragraph-02 m-0">{{builder?.companyName | titlecase}}</h2>
+      <h3 class="color-03 font-weight-medium letter-spacing-1 paragraph-03">{{(builder?.fullName || 'n/a') | titlecase}}</h3>
+    </div>
+  </div>
+  <div class="location-box">
+    <p class="color-16 font-family-primary font-weight-medium paragraph-05 m-0">{{(builder?.address1 || 'n/a') | titlecase}}</p>
+  </div>
+  <div class="count d-flex">
+    <div class="align-items-center d-flex mr-3 project-running">
+      <p class="color-16 font-weight-medium letter-spacing-1 m-0 mr-1 number sub-heading-01">{{builder?.projectRunning || 0}}</p>
+      <div class="d-flex flex-column justify-content-center lables">
+        <p class="font-weight-medium letter-spacing-1 m-0 paragraph-05">Projects</p>
+        <p class="font-weight-medium letter-spacing-1 m-0 paragraph-05">Running</p>
+      </div>
+    </div>
+    <div class="align-items-center d-flex active-users">
+      <p class="color-16 font-weight-medium letter-spacing-1 m-0 mr-1 number sub-heading-01">{{builder?.activeUser || 0}}</p>
+      <div class="d-flex flex-column justify-content-center lables">
+        <p class="font-weight-medium letter-spacing-1 m-0 paragraph-05 color-16">Active </p>
+        <p class="font-weight-medium letter-spacing-1 m-0 paragraph-05 color-16">Users</p>
+      </div>
+    </div>
+  </div>
+  <div class="align-items-end bottom d-flex flex-column">
+    <p class="color-17 font-weight-medium letter-spacing-1 m-0 paragraph-05">Active</p>
+    <p class="color-04 font-style-italic letter-spacing-1 m-0 paragraph-05">Member since {{builder?.createdDate | date:'shortDate'}}</p>
+    <!-- <p class="color-04 font-style-italic letter-spacing-1 m-0 paragraph-05">Subscription end date 23 Dec 2021</p> -->
+  </div>
+</a>

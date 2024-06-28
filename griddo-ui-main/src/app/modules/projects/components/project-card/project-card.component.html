@@ -1,0 +1,51 @@
+<a class="project-card d-flex" [routerLink]="[project.projectId]">
+    <div class="align-items-center d-flex img-box">
+        <img src="{{project?.logo || onErrorImg}}" alt="" (error)="onError($event)">
+    </div>
+
+    <div class="content-box ">
+        <div class="align-items-start d-flex upper-box">
+            <div class="name-box ">
+                <h4 class="project-name">{{(project?.projectName ||'n/a') | titlecase}}</h4>
+                <h6 class="company-name">{{project?.builderName | titlecase}}</h6>
+                <div class="location-box">
+                    <p>{{(project?.address || 'n/a') | titlecase}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="count d-flex">
+            <div class="align-items-center d-flex mr-3 project-running">
+                <!-- <p class="number m-0 mr-1">{{project?.projectRunning || 0}}</p>
+          <div class="d-flex flex-column justify-content-center lables">
+            <p class="m-0">Projects</p>
+            <p class="m-0">Running</p>
+          </div> -->
+
+                <div class="sold-units">
+                    <div class="d-flex align-items-center">
+                        <div class="t-units"><span>{{project?.totalUnits}}</span> Units</div>
+                        <div class="t-units"><span>{{project?.soldUnits}}</span> Sold</div>
+                    </div>
+                    <div class="t-units d-flex align-items-center">$<span class="pr-1"></span> revenue</div>
+                </div>
+            </div>
+            <!-- <div class="align-items-center d-flex active-users">
+          <p class="number m-0 mr-1">{{project?.activeUser || 0}}</p>
+          <div class="d-flex flex-column justify-content-center lables">
+            <p class="m-0">Active </p>
+            <p class="m-0">Users</p>
+          </div>
+        </div> -->
+        </div>
+        <div class="d-flex align-items-center mb-1 ">
+            <div class="status mr-3">{{project?.projectStatus}}</div>
+            <div class="member-since m-0">{{project?.soldPercentage}}% sold</div>
+        </div>
+        <div class="align-items-start bottom d-flex flex-column">
+
+
+            <p class="subscription m-0">Completion Date {{project?.completionDate | date}}</p>
+        </div>
+    </div>
+</a>

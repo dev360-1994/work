@@ -1,0 +1,36 @@
+.avatar-pill {
+  border-radius:  1rem 0% 0% 1rem;;
+  .avatar {
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 100%;
+  }
+  input,
+  textarea {
+    background: #FFFFFF;
+    //border: 1.26087px solid #EBEFF2;
+    box-sizing: border-box;
+    border-radius: 6.30435px;
+    font-family: var(--fontPrimary);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.625rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #828282;
+  }
+  
+  label {
+    font-family: var(--fontPrimary);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.1032625rem;
+    line-height: 1.625rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #363636;
+  }
+}

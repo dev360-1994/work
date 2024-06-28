@@ -1,0 +1,803 @@
+<div class="row">
+    <div class="col-12 mt-2" [formGroup]="form">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        GENERAL DETAILS
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class=" row justify-content-around p-4">
+                    <div class="col-md-5 p-md-0">
+                        <div formArrayName="projectGridColors">
+                            <label class="sub-heading-04 ">Grid Colors </label>
+                            <div *ngFor="let colors of getProjectGridColors?.controls;let colorIndex = index">
+                                <div [formGroupName]="colorIndex" class="d-flex ">
+                                    <div class="form-group mb-2 d-flex align-items-center">
+                                        <div [colorPicker]="getProjectGridColors.at(colorIndex).get('colorCode')?.value"
+                                            (colorPickerChange)="getProjectGridColors.at(colorIndex).get('colorCode')?.setValue($event)"
+                                            [style.background]="getProjectGridColors.at(colorIndex).get('colorCode')?.value"
+                                            style="width: 15px;height:15px;background-color: green;" class=""> </div>
+                                        <label class="sub-heading-04 ml-2 mb-0">
+                                            {{getProjectGridColors.at(colorIndex).get('colorTitle')?.value}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="sub-heading-04" for="numberofTowers">Number of Towers <span
+                                    style="color:#ff0000">*</span></label>
+                            <input class="form-control" placeholder="Number of Towers" id="numberofTowers" type="number" min="0" max="10"
+                                maxLength="15" formControlName="numberofTowers">
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 p-md-0">
+                        <!-- <div class="form-group mb-2">
+              <label class="sub-heading-04 bold" for="unitNumbers"> Unit Numbers</label>
+              <div class='row'>
+                <div class="form-group mb-2 d-flex" >
+                  <input type=checkbox class="mt-1 " />
+                  <label class="sub-heading-04 mx-2" for="skips13">Skip starts With 13 </label>
+                </div>
+                <div class="form-group mb-2 d-flex">
+                  <input type=checkbox class="mt-1 " />
+                  <label class="sub-heading-04 mx-2" for="skips13">Skip ends With 13 </label>
+                </div>
+                </div>
+                <div class='row'>
+                <div class="form-group mb-2 d-flex">
+                  <input type=checkbox class="mt-1 " />
+                  <label class="sub-heading-04 mx-2" for="skips13">Skip starts With 4s </label>
+                </div>
+                <div class="form-group mb-2 d-flex">
+                  <input type=checkbox class="mt-1 " />
+                  <label class="sub-heading-04 mx-2" for="skips13">Skip ends With 4s </label>
+                </div>
+                </div>
+
+              </div> -->
+                        <div class="form-group mb-2">
+                            <label class="sub-heading-04 bold" for="taxType"> Skip Options</label>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <div class="align-items-center color-03 d-flex mx-2" *ngFor="let skipOption of skipOptions">
+                                <input type="checkbox" [(ngModel)]="skipOption.checked"
+                                    [ngModelOptions]="{standalone: true}"
+                                    (ngModelChange)="updateSkipOptionInUnits($event)">
+                                <p class="m-0 paragraph-03 ml-2">{{skipOption?.skiptext}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="sub-heading-04 bold" for="taxType"> Taxes</label>
+                            <mat-radio-group aria-label="taxType" formControlName="priceInclusiveTaxes">
+                                <mat-radio-button (change)="disableEnableTax(false)" [value]=true>price inclusive of taxes</mat-radio-button>
+                                <mat-radio-button (change)="disableEnableTax(true)" class="ml-4" [value]=false>price excluded of taxes</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div formArrayName="projectTax">
+                            <div class="form-group mb-2"
+                                *ngFor="let tax of getProjectTax?.controls;let taxIndex = index ">
+                                <div  [formGroupName]="taxIndex" class="d-flex  mb-2">
+                                    <input type=checkbox class="mt-1 " formControlName="checked"
+                                        (change)="onChangetax(taxIndex)" />
+                                    <label class="sub-heading-04 mx-2"
+                                        for="noofbikestorage">{{getProjectTax?.at(taxIndex)?.get('taxType')?.value}}</label>
+                                    <input class="form-control col-2 tax-type-input" placeholder="" type="text" min="0"
+                                        maxLength="15" formControlName="value"
+                                        [attr.disabled]="!getProjectTax?.at(taxIndex)?.get('taxType')?.value">
+                                    <button class="addmore" *ngIf="getProjectTax.length >4 && taxIndex > 3"
+                                        (click)="removeCustomTaxType(taxIndex)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <button class="addmore" (click)="addTaxtype()">
+                                <mat-icon>add</mat-icon>
+                                <span>Add Custom Tax</span>
+                            </button>
+                        </div>
+                        <ng-template #dialogAddCustomName>
+                            <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Add Custom
+                                <button class="bg-transparent border-0 d-flex" mat-dialog-close><i
+                                        class="material-icons">close</i></button>
+                            </h2>
+                            <mat-dialog-content>
+                                <div class="mx-auto col-md-12">
+                                    <label
+                                        class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                                    </label>
+                                    <input #customName id="customAddName"
+                                        class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+                                </div>
+                            </mat-dialog-content>
+                            <mat-dialog-actions
+                                class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4"
+                                id="custom1">
+                                <button class="cropper-btn" mat-stroked-button aria-label="button with a check icon"
+                                    (click)="saveCustomName(customName)" id="custom2">
+                                    <mat-icon>check</mat-icon>
+                                </button>
+                                <button class="cropper-btn" mat-stroked-button aria-label="button with a close icon"
+                                    (click)=" closeDialog()" id="custom3">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-dialog-actions>
+                        </ng-template>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="pt-3" *ngIf="form.get('numberofTowers')?.value>0">
+            <div class=" row col-md-12 p-md-0">
+                <div class="form-group text-left">
+
+                    <button class="btn btn-sm ml-2 "
+                        *ngFor="let tabs of counter( form.get('numberofTowers')?.value); let i=index"
+                        (click)="setTowerIndex(i)" [ngClass]="{ 'selected': tabIndex == i }">Tower
+                        {{i+1}}</button>
+                </div>
+            </div>
+            <mat-accordion class="example-headers-align">
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Tower Details
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div formArrayName="projectTower" class="col-12">
+                        <div *ngFor="let tabs of towerList?.controls;let i = index">
+                            <div class=" row justify-content-around p-4" [formGroupName]="i" *ngIf="tabIndex==i">
+                                <div class="col-md-5 p-md-0">
+                                    <div class="form-group">
+                                        <label class="sub-heading-04" for="noofparking">Number of Floors<span
+                                                style="color:#ff0000">*</span></label>
+                                        <input maxLength="15" class="form-control" placeholder="Number of Floors" id="noofparking"
+                                            type="number" min="0" formControlName="numberofFloors">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sub-heading-04" for="noofblocks">Number Unique Blocks<span
+                                                style="color:#ff0000">*</span></label>
+                                        <input maxLength="15" class="form-control" placeholder="Number Unique Blocks" id="noofblocks"
+                                            type="number" min="0" formControlName="numberofUniqueBlocks"
+                                            (change)="uniqueBlockChange(i)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sub-heading-04" for="totalUnits">Total Units<span
+                                                style="color:#ff0000">*</span></label>
+                                        <input class="form-control" placeholder="Total Units" id="totalUnits" type="number" min="0"
+                                            formControlName="totalUnits"  (change)="checkTotalUnitCount()">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5 p-md-0">
+                                    <div class="form-group">
+                                        <label class="sub-heading-04" for="noofbikestorage">All units have the same
+                                            ceiling height<span style="color:#ff0000">*</span></label>
+                                        <mat-radio-group aria-label="Landscaping" formControlName="sameCeilingHeight">
+                                            <mat-radio-button (change)="setSameCeilingHeight(i,true)" [value]=true>Yes</mat-radio-button>
+                                            <mat-radio-button (change)="setSameCeilingHeight(i,false)" class="ml-4" [value]=false>No</mat-radio-button>
+                                        </mat-radio-group>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sub-heading-04" for="nooffloors">Ceiling height</label>
+                                        <div class="input-group ">
+                                            <input maxLength="10" class="form-control" placeholder="" id="ceilingHeight"
+                                                type="number" min="0" formControlName="ceilingHeight">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-2" formArrayName="projectTowerUnitTypes">
+                                        <div>
+                                            <label class="sub-heading-04 bold" for="taxType">Unit Types</label>
+                                        </div>
+                                        <div
+                                            *ngFor="let item of projectTowerUnitTypesDetails(i)?.controls;let unitTypeIndex = index">
+                                            <div class="form-group d-flex mb-1" [formGroupName]="unitTypeIndex">
+                                                <input type=checkbox class="mt-1" formControlName="isSelected" />
+                                                <label
+                                                    class="sub-heading-04 mx-2">{{projectTowerUnitTypesDetails(i)?.at(unitTypeIndex)?.get('unitType')?.value}}</label>
+                                                    <button class="addmore unit-type-cancel" *ngIf="projectTowerUnitTypesDetails(i).length >6 && unitTypeIndex > 5"
+                                                        (click)="removeCustomUnitType(unitTypeIndex)">
+                                                        <mat-icon>close</mat-icon>
+                                                    </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <button class="addmore" (click)="addUnittype()">
+                                            <mat-icon>add</mat-icon>
+                                            <span>Add custom</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-around p-4 col-md-12">
+                                    <div class="col-md-5 p-md-0">
+                                        <div formArrayName="projectTowerParkings">
+                                            <div
+                                                *ngFor="let item of projectTowerParkingsDetails(i)?.controls;let towerParkingIndex = index">
+                                                <div [formGroupName]="towerParkingIndex">
+                                                    <div class="form-group d-flex">
+                                                        <label class="sub-heading-04 bold"
+                                                            for="totalParking">{{projectTowerParkingsDetails(i)?.at(towerParkingIndex)?.get('name')?.value}}
+                                                            <span class="ml-1" *ngIf="towerParkingIndex==0">Eligibility
+                                                            </span> </label>
+                                                        <button class="addmore"
+                                                            (click)="removeCustomNameForLockersAndLockers(tabIndex,towerParkingIndex,1)"
+                                                            *ngIf="towerParkingIndex>0">
+                                                            <mat-icon>close</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04 mr-1" for="totalParking">Price
+                                                        </label>
+                                                        <input class="form-control"
+                                                            formControlName="amount" placeholder="Price"
+                                                            id="totalParking" type="number" min="0">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04 mr-1" for="totalParking">Total
+                                                            Number Of <span class="ml-1" *ngIf="towerParkingIndex==0">
+                                                                Parking Slots</span> <span class="ml-1"
+                                                                *ngIf="towerParkingIndex>0">
+                                                                {{projectTowerParkingsDetails(i)?.at(towerParkingIndex)?.get('name')?.value}}</span>
+                                                        </label>
+                                                        <input class="form-control"
+                                                            formControlName="numberOfParkingSlots" placeholder=""
+                                                            id="totalParking" type="number" min="0">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04" for="parkingAvailableTo">Available
+                                                            To</label>
+                                                        <select class="form-control" formControlName="availableto"
+                                                            placeholder="" id="totalParking"
+                                                            (change)="changeParkingAvailableOption($event,i,towerParkingIndex)"
+                                                            type="text">
+                                                            <option value='' selected="Select">Select Option</option>
+                                                            <option [value]=item.name
+                                                                *ngFor="let item of dropDownCONSTANT.availableTo">
+                                                                {{item.name}}</option>
+                                                            <!-- 
+                                <option value="All Units">All Units</option>
+                              <option value="Unit size Above">Unit size Above</option>
+                              <option value="Unit Type">Unit Type</option>
+                              <option value="Price Above">Price Above</option> -->
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group form-row align-items-center">
+                                                        <div class="col-md-6">
+                                                            <div *ngIf="projectTowerParkingsDetails(i).at(towerParkingIndex)?.get('availableto')?.value!='Price Above' && projectTowerParkingsDetails(i).at(towerParkingIndex)?.get('availableto')?.value!='Unit Type'"
+                                                                class="d-flex align-items-center">
+                                                                <label class="sub-heading-04 no-wrap mr-2"
+                                                                    for="totalParking">Unit size in sqft</label>
+                                                                <input class="form-control" min="0"
+                                                                    formControlName="unitSizeinSqft" type="number" />
+                                                            </div>
+                                                            <div *ngIf="projectTowerParkingsDetails(i).at(towerParkingIndex)?.get('availableto')?.value=='Price Above'"
+                                                                class="d-flex align-items-center">
+                                                                <label class="sub-heading-04 no-wrap mr-2"
+                                                                    for="totalParking">Price</label>
+                                                                <input class="form-control" formControlName="price"
+                                                                    type="number" placeholder="0" />
+                                                            </div>
+                                                            <div *ngIf="projectTowerParkingsDetails(i).at(towerParkingIndex)?.get('availableto')?.value=='Unit Type'"
+                                                            class="d-flex align-items-center">
+                                                            <label class="sub-heading-04 no-wrap mr-2"
+                                                                for="totalParking">Units</label>
+                                                                <!-- <select class="form-control"  
+                                                                placeholder=""  
+                                                                type="text">
+                                                                <option value='' selected="Select">Select Option</option>
+                                                                <option *ngFor="let item of projectTowerUnitTypesDetails(i)?.value || [] " [value]="item.unitTypeId">{{item.unitType}}</option>
+                                                                
+                                                            </select> -->
+     <ng-select
+    [items]="unitTypeArray"
+    [multiple]="true"
+    bindLabel="unitType"
+    formControlName="unitTypeValues"
+    [selectableGroup]="true"
+    dropdownPosition="top"
+    [closeOnSelect]="false"
+    placeholder="Select Option"
+    bindValue="unitType"
+     >
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <div class="d-flex">
+            <input id="item-{{index}}" type="checkbox" [ngModelOptions]="{standalone: true}"   [ngModel]="item$.selected"/> <span class="ml-1 mb-1">{{item.unitType}} </span>
+        </div>
+    
+    </ng-template>
+</ng-select>
+      
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="d-flex align-items-center"> <input type="radio"
+                                                                    [value]=true formControlName="included"
+                                                                    (change)="radioButtonChange(i,towerParkingIndex,1,true)" /><label
+                                                                    class="m-0 pl-1">included</label></div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="d-flex align-items-center"> <input type="radio"
+                                                                    [value]=true formControlName="eligible"
+                                                                    (change)="radioButtonChange(i,towerParkingIndex,2,true)" /><label
+                                                                    class="m-0 pl-1">eligible</label></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="addmore"
+                                                    (click)="addCustomNameForLockersAndLockers(tabIndex,1)">
+                                                    <mat-icon>add</mat-icon>
+                                                    <span>Add custom</span>
+                                                </button>
+                                                <ng-template #dialogAddCustomName>
+                                                    <h2 class="d-flex justify-content-between mat-dialog-title"
+                                                        mat-dialog-title>Add Custom
+                                                        <button class="bg-transparent border-0 d-flex"
+                                                            mat-dialog-close><i
+                                                                class="material-icons">close</i></button>
+                                                    </h2>
+                                                    <mat-dialog-content>
+                                                        <div class="mx-auto col-md-12">
+                                                            <label
+                                                                class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">
+                                                            </label>
+                                                            <input #customName id="customAddName"
+                                                                class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+                                                        </div>
+                                                    </mat-dialog-content>
+                                                    <mat-dialog-actions
+                                                        class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4"
+                                                        id="custom1">
+                                                        <button class="cropper-btn" mat-stroked-button
+                                                            aria-label="button with a check icon"
+                                                            (click)="saveCustomName(customName)" id="custom2">
+                                                            <mat-icon>check</mat-icon>
+                                                        </button>
+                                                        <button class="cropper-btn" mat-stroked-button
+                                                            aria-label="button with a close icon"
+                                                            (click)=" closeDialog()" id="custom3">
+                                                            <mat-icon>close</mat-icon>
+                                                        </button>
+                                                    </mat-dialog-actions>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 p-md-0">
+                                        <div formArrayName="projectTowerLockers">
+                                            <div
+                                                *ngFor="let item of projectTowerLockersDetails(i)?.controls;let towerLockerIndex = index">
+                                                <div [formGroupName]="towerLockerIndex">
+                                                    <div class="form-group d-flex">
+                                                        <label class="sub-heading-04 bold"
+                                                            for="totalParking">{{projectTowerLockersDetails(i)?.at(towerLockerIndex)?.get('name')?.value}}
+                                                            <span class="ml-1" *ngIf="towerLockerIndex==0">Eligibility
+                                                            </span> </label>
+                                                        <button class="addmore"
+                                                            (click)="removeCustomNameForLockersAndLockers(tabIndex,towerLockerIndex,2)"
+                                                            *ngIf="towerLockerIndex>0">
+                                                            <mat-icon>close</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04 mr-1" for="totalParking">Price
+                                                        </label>
+                                                        <input class="form-control"
+                                                            formControlName="amount" placeholder=""
+                                                            id="totalParkinglocker" type="number" min="0">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04" for="totalLockers">Total Number Of
+                                                            <span class="ml-1" *ngIf="towerLockerIndex==0">
+                                                                Lockers</span> <span class="ml-1"
+                                                                *ngIf="towerLockerIndex>0">{{projectTowerLockersDetails(i)?.at(towerLockerIndex)?.get('name')?.value}}</span>
+                                                        </label>
+                                                        <input class="form-control"
+                                                            formControlName="numberOfLockerSlots" 
+                                                            id="totalParking" type="number" min="0">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sub-heading-04" for="lockerAvailableTo">Available
+                                                            To </label>
+                                                        <select class="form-control" formControlName="availableto"
+                                                            placeholder="" id="totalLockers"
+                                                            (change)="changeLockerAvailableOption($event,i,towerLockerIndex)"
+                                                            type="text">
+                                                            <option value='' selected="Select">Select Option</option>
+                                                            <option [value]=item.name
+                                                                *ngFor="let item of dropDownCONSTANT.availableTo">
+                                                                {{item.name}}</option>
+                                                            <!-- <option value="All Units">All Units</option>
+                              <option value="Unit size Above">Unit size Above</option>
+                              <option value="Unit Type">Unit Type</option>
+                              <option value="Price Above">Price Above</option> -->
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group form-row align-items-center">
+                                                        <div class="col-md-6">
+                                                            <div *ngIf="projectTowerLockersDetails(i).at(towerLockerIndex)?.get('availableto')?.value!='Price Above' && projectTowerLockersDetails(i).at(towerLockerIndex)?.get('availableto')?.value!='Unit Type'"
+                                                                class="d-flex align-items-center">
+                                                                <label class="sub-heading-04 no-wrap mr-2"
+                                                                    for="totalParking">Unit size in sqft</label>
+                                                                <input class="form-control" min="0"
+                                                                    formControlName="unitSizeinSqft" type="number" />
+                                                            </div>
+                                                            <div *ngIf="projectTowerLockersDetails(i).at(towerLockerIndex)?.get('availableto')?.value=='Price Above'"
+                                                                class="d-flex align-items-center">
+                                                                <label class="sub-heading-04 no-wrap mr-2"
+                                                                    for="totalParking">Price</label>
+                                                                <input class="form-control" formControlName="price"
+                                                                    type="number" />
+                                                            </div>
+                                                            <div *ngIf="projectTowerLockersDetails(i).at(towerLockerIndex)?.get('availableto')?.value=='Unit Type'"
+                                                            class="d-flex align-items-center">
+                                                            <label class="sub-heading-04 no-wrap mr-2"
+                                                                for="totalParking">Units</label>
+                                                                <!-- <select class="form-control"  
+                                                                placeholder=""  
+                                                                type="text">
+                                                                <option value='' selected="Select">Select Option</option>
+                                                                <option *ngFor="let item of projectTowerUnitTypesDetails(i)?.value || [] " [value]="item.unitTypeId">{{item.unitType}}</option>
+                                                                
+                                                            </select> -->
+                                                            <ng-select
+                                                            [items]="unitTypeArray"
+                                                            [multiple]="true"
+                                                            bindLabel="unitType" 
+                                                            bindValue="unitType"
+                                                            [selectableGroup]="true"
+                                                            formControlName="unitTypeValues"
+                                                            dropdownPosition="top"
+                                                            [closeOnSelect]="false"
+                                                            placeholder="Select Option"
+                                                             >
+                                                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                                <div class="d-flex">
+                                                                <input id="item-{{index}}" type="checkbox" [ngModelOptions]="{standalone: true}"   [ngModel]="item$.selected"/> <span class="ml-1 mb-1">{{item.unitType}} </span>
+                                                            </div>
+                                                            </ng-template>
+                                                        </ng-select>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="d-flex align-items-center"> <input type="radio"
+                                                                    [value]=true name="included"
+                                                                    formControlName="included"
+                                                                    (change)="radioButtonChange(i,towerLockerIndex,1)" /><label
+                                                                    class="m-0 pl-1">included</label></div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="d-flex align-items-center"> <input type="radio"
+                                                                    [value]=true formControlName="eligible"
+                                                                    (change)="radioButtonChange(i,towerLockerIndex,2)" /><label
+                                                                    class="m-0 pl-1">eligible</label></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="addmore"
+                                                    (click)="addCustomNameForLockersAndLockers(tabIndex,2)">
+                                                    <mat-icon>add</mat-icon>
+                                                    <span>Add custom</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6" *ngIf="form.get('numberofTowers')?.value >0  ">
+                <div class="row py-3">
+                    <div class="col-md-12 d-flex  twrbtn-div">
+                        <div class="col-3 p-0">
+                            <span class="block-title-text">Tower{{tabIndex+1}} Blocks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex" formArrayName="projectTower">
+                    <div *ngFor="let tabs of towerList.controls;let i = index" class="col-md-12">
+                        <div [formGroupName]="i" *ngIf="tabIndex==i">
+                            <div formArrayName="projectBlocks">
+                                <div class="card mb-2" [ngClass]="{
+                  'd-none':i != tabIndex}" *ngFor="let item of blockDetails(i)?.controls ;let blockIndex = index">
+                                    <mat-accordion [formGroupName]="blockIndex">   
+                                        <mat-expansion-panel [expanded]="step==blockIndex"
+                                            (opened)="setStep(blockIndex)">
+                                            <mat-expansion-panel-header> 
+                                                <mat-panel-title>
+                                                    Block
+                                                     {{blockDetails(i).at(blockIndex).get("blockNo")?.value}}
+                                                     <!-- {{getTotalBlocksLength(i,blockIndex)}} -->
+                                                    <!-- {{blockIndex+1}} -->
+                                                     -
+                                                    {{blockDetails(i).at(blockIndex).get("stackName")?.value}}
+                                                </mat-panel-title>
+                                                <mat-panel-description
+                                                    *ngIf="blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value>0 &&blockDetails(i).at(blockIndex).get('toFloor')?.value>0 && blockDetails(i).at(blockIndex).get('startingFloor')?.value>0">
+                                                    {{blockDetails(i).at(blockIndex).get("toFloor")?.value -
+                                                    blockDetails(i).at(blockIndex).get("startingFloor")?.value +1 }} X
+                                                    {{blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value}}
+                                                    units |
+                                                    {{(blockDetails(i).at(blockIndex).get("toFloor")?.value
+                                                    - blockDetails(i).at(blockIndex).get("startingFloor")?.value +1) *
+                                                    blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value }}
+                                                    units
+                                                    | {{blockDetails(i).at(blockIndex).get("startingFloor")?.value
+                                                    }} - {{blockDetails(i).at(blockIndex).get("toFloor")?.value }}
+                                                    floors
+
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+
+                                            <div class="d-flex justify-content-around">
+                                                <div class="form-group col-md-6">
+                                                    <label class="sub-heading-04" for="stakeName">Stack Name<span
+                                                            style="color:#ff0000">*</span></label>
+                                                    <input class="form-control" formControlName="stackName"
+                                                        placeholder="" id="stakeName" type="text">
+                                                </div>
+
+                                                <div class="form-group  col-md-6">
+                                                    <label class="sub-heading-04" for="unitPerFoor">Block Type<span
+                                                            style="color:#ff0000">*</span></label>
+                                                    <ng-container
+                                                        *ngIf="!blockDetails(tabIndex).at(blockIndex).get('isCustomBlock')?.value">
+                                                        <select class="form-control" formControlName="blockName"
+                                                            placeholder="" id="type" type="text">
+                                                            <option value='' selected="Select">Select Block Type
+                                                            </option>
+                                                            <option [value]=item.name
+                                                                *ngFor="let item of dropDownCONSTANT.blockType">
+                                                                {{item.name}}</option>
+
+                                                            <!-- <option *ngFor="let type of blockType">{{type}}</option> -->
+                                                            <!-- <option value="Pent house">Pent house</option>
+                              <option value="Tower">Tower</option>
+                              <option value="Parking">Parking</option>
+                              <option value="Lower Podium">Lower Podium</option>
+                              <option value="Upper Podium">Upper Podium</option> -->
+                                                        </select>
+                                                        <div class="d-flex justify-content-end">
+                                                            <button class="addmore"
+                                                                (click)="customUnitNameChange(i,blockIndex,1)">
+                                                                <mat-icon>add</mat-icon>
+                                                                <span>Add custom</span>
+                                                            </button>
+                                                        </div>
+                                                    </ng-container>
+                                                    <ng-container
+                                                        *ngIf="blockDetails(i).at(blockIndex).get('isCustomBlock')?.value">
+                                                        <input class="form-control" placeholder="" id="customblockName"
+                                                            type="text" formControlName="blockName">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button class="addmore"
+                                                                (click)="customUnitNameChange(i,blockIndex,0)">
+                                                                <span>Cancel</span>
+                                                            </button>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-around">
+                                                <div class="form-group col-md-6">
+                                                    <label class="sub-heading-04" for="startingFloor">Starting
+                                                        Floor<span style="color:#ff0000">*</span></label>
+                                                    <input class="form-control"
+                                                        (change)="checkFloorOccupancy(i,1,blockIndex,$event)"
+                                                        formControlName="startingFloor" placeholder="0"
+                                                        id="startingFloor" type="number" min="1" maxLength="15">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label class="sub-heading-04" for="toFloor">To floor<span
+                                                            style="color:#ff0000">*</span></label>
+                                                    <input maxLength="15" class="form-control" formControlName="toFloor"
+                                                        (change)="checkFloorOccupancy(i,2,blockIndex,$event)"
+                                                        placeholder="0" id="toFloor" type="number" min="1">
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start">
+                                                <div class="form-group col-md-6">
+                                                    <label class="sub-heading-04" for="unitPerFoor">Number of units per
+                                                        floor<span style="color:#ff0000">*</span></label>
+                                                    <input maxLength="15" class="form-control"
+                                                        formControlName="numberUnitsPerFloor" placeholder="0"
+                                                        id="unitPerFoor" type="number" min="0"
+                                                        (change)="unitValueChange(i,blockIndex,$event)">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="sub-heading-04" for="">Floor Premium</label>
+                                                    <input class="form-control" placeholder="0" id="" type="number" 
+                                                        min="0" maxLength="5" formControlName="floorPremium" (blur)="handleNullValueForNumber($event,i,blockIndex)">
+                                                    <span class="text-muted font-10"> *individual units/stacks can be
+                                                        overridden </span>
+                                                </div>
+
+                                            </div>
+                                            <div class="d-flex justify-content-start">
+                                                <div class="form-group col-md-6" [ngClass]="{
+                          'd-none':towerList.at(i).get('sameCeilingHeight')?.value}">
+                                                    <label class="sub-heading-04" for="ceilingHeight">Ceiling
+                                                        Height</label>
+                                                    <input class="form-control" formControlName="ceilingHeight"
+                                                        placeholder="" id="ceilingHeight" type="number" min="0"
+                                                        maxLength="15">
+                                                </div> 
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div *ngIf="isUnitValueEntered" class="card mb-2 border-0">
+                    <div class="row pt-3">
+                        <div class="col-md-12 d-flex  twrbtn-div">
+                            <div class="col-8 ">
+                                <span class="block-title-text">SALES GRID PREVIEW</span>
+                            </div>
+                            <div class="col-4 text-right ">
+                                <span class="block-box-subtitle">Total Units Added:
+                                    {{getTotalAndMissingUnits(1)}}</span>
+                                <span class="block-box-subtitle">Missing Units: {{getTotalAndMissingUnits(2)}}</span>
+                                <span class="fwh-preview">Preview</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body c-body py-0">
+
+                        <div formArrayName="projectTower">
+                            <div *ngFor="let tabs of towerList?.controls;let i = index">
+                                <div [formGroupName]="i">
+                                    <div formArrayName="projectBlocks">
+                                        <div [ngClass]="{
+                      'd-none':i != tabIndex}" *ngFor="let item of blockDetails(i)?.controls;let blockIndex = index">
+                                            <div [formGroupName]="blockIndex">
+                                                <ng-container
+                                                    *ngIf="  blockDetails(i).at(blockIndex).get('toFloor')?.value>0 && blockDetails(i).at(blockIndex).get('startingFloor')?.value >0 && blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value>0">
+                                                    <div
+                                                        class="fw-header d-flex align-items-center justify-content-between">
+                                                        <span
+                                                            class="fwh-text">{{blockDetails(i).at(blockIndex).get('stackName')?.value}}</span>
+                                                    </div>
+
+                                                    <div class="floor-view-table mt-2">
+                                                        <table class="table borderless">
+                                                            <tbody>
+                                                                <!-- <tr *ngFor="let tabss of counter((blockDetails(i).at(blockIndex).get('toFloor')?.value -
+                                blockDetails(i).at(blockIndex).get('startingFloor')?.value +1) ) let ih=index "> -->
+                                                                <tr
+                                                                    *ngFor="let tabss of projectFloorDetails(i, blockIndex)?.value | orderBy:'floorNo'; let ih=index ">
+                                                                    <td nowrap class="fvtc-wrap">
+                                                                        <div class="fvt-cell"
+                                                                            *ngFor="let tabs of   tabss?.projectUnitFlats ;  let flatIndex=index;"
+                                                                            [class.selectedStack]="tabs?.isMultipleStackSelected"
+                                                                            [class.singleStackSelect]="tabs?.isSingleStackSelected">
+                                                                            <span> {{tabs?.flatNo}} </span>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end w-100">
+                        <button class="addmore" (click)="blockPreview()">
+                            <span>Preview </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-container *ngIf="isBlockPreview">
+            <div formArrayName="projectTower">
+                <div class="d-block mt-4">
+                    <div *ngFor="let tabs of towerList?.controls;let i = index">
+                        <div [formGroupName]="i" *ngIf="i==tabIndex">
+                            <div formArrayName="projectBlocks">
+                                <div *ngFor="let item of blockDetails(i)?.controls;let blockIndex = index">
+                                    <div [formGroupName]="blockIndex">
+                                        <ng-container
+                                            *ngIf="blockDetails(i).at(blockIndex).get('toFloor')?.value>0 && blockDetails(i).at(blockIndex).get('startingFloor')?.value >0 && blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value>0">
+                                            <div class="align-items-center d-flex justify-content-between pl-4">
+                                                <div class="align-items-center d-flex">
+                                                    <p
+                                                        class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">
+                                                        {{blockDetails(i).at(blockIndex).get('stackName')?.value}}</p>
+                                                    <!-- <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">4 floors X 8 units |
+                            32 units</p> -->
+                                                    <mat-panel-description
+                                                        *ngIf="blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value>0 &&blockDetails(i).at(blockIndex).get('toFloor')?.value>0 && blockDetails(i).at(blockIndex).get('startingFloor')?.value>0">
+                                                        {{blockDetails(i).at(blockIndex).get("toFloor")?.value -
+                                                        blockDetails(i).at(blockIndex).get("startingFloor")?.value +1 }}
+                                                        X
+                                                        {{blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value}}
+                                                        units | {{(blockDetails(i).at(blockIndex).get("toFloor")?.value
+                                                        - blockDetails(i).at(blockIndex).get("startingFloor")?.value +1)
+                                                        *
+                                                        blockDetails(i).at(blockIndex).get('numberUnitsPerFloor')?.value
+                                                        }} units |
+                                                        {{blockDetails(i).at(blockIndex).get("startingFloor")?.value
+                                                        }} - {{blockDetails(i).at(blockIndex).get("toFloor")?.value }}
+                                                        floors
+                                                    </mat-panel-description>
+                                                </div>
+                                                <div class="align-items-center d-flex">
+                                                    <!-- <button (click)="goToUnitPricing('unit-numbers',blockIndex,i)"
+                            class="bg-white border-0 color-16 d-flex font-weight-normal paragraph-04 px-3 white-space-nowrap">
+                            Unit Numbers
+                          </button> -->
+                                                    <button (click)="goToUnitPricing('unit-pricing',blockIndex,i)"
+                                                        class="bg-white border-0 color-16 d-flex font-weight-normal paragraph-02 cursor-pointer px-3 white-space-nowrap">
+                                                        Pricing
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="border-1 border-radius-4 border-color-19 d-flex flex-column ml-3 p-1 position-relative overflow-auto">
+                                                <div class="align-items-center d-flex"
+                                                    *ngFor="let tabss of projectFloorDetails(i, blockIndex)?.value; let ih=index ">
+
+                                                    <div *ngFor="let tabs of  tabss?.projectUnitFlats ;  let flatIndex=index "
+                                                    [class.selectedStack]="  tabs?.isMultipleStackSelected"
+                                                    [class.singleStackSelect]="tabs.isSingleStackSelected"  
+                                                    class="fvt-cell">
+                                                        {{tabs?.flatNo}}
+                                                        <!-- col align-items-center bg-color-08 color-03 d-flex justify-content-center m-1 ng-star-inserted paragraph-02 unit-box -->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex mt-4  ml-4">
+                                                <div
+                                                    class="color-05 d-flex font-weight-normal justify-content-center letter-spacing-1 m-0 mr-2 paragraph-04 unit-box">
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

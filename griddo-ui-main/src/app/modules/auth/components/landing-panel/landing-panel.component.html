@@ -1,0 +1,72 @@
+<section class="h-100 landing-page" *ngIf="!isSmallScreen">
+  <div class="align-items-center d-flex px-5 pt-3">
+    <app-logo class="brand d-block mr-5"></app-logo>
+    <div class="nav-likns zid">
+      <a
+        class="font-weight-medium sub-heading-04 ml-3 text-uppercase font-family-primary color-01"
+        [href]="'/'"
+        *ngIf="isLogin"
+        >Menu
+      </a>
+      <a
+        class="font-weight-medium sub-heading-04 ml-3 text-uppercase font-family-primary color-01"
+        *ngFor="let link of links"
+        [href]="link.url"
+        >{{ link?.title | uppercase }}</a
+      >
+    </div>
+  </div>
+  <section class="content-section d-flex flex-auto flex-column px-5 p-b3 justify-content-center">
+    <div class="">
+      <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+    </div>
+  </section>
+  <section class="img-section">
+    <swiper [config]="swiperOptions">
+      <ng-template swiperSlide *ngFor="let slide of slides">
+        <img class="w-100" [src]="slide" alt="" />
+      </ng-template>
+    </swiper>
+  </section>
+</section>
+
+<section class="h-100 landing-page position-relative" *ngIf="isSmallScreen">
+  <div class="zid smallsc">
+    <div class="align-items-center d-flex px-5 pt-3 zid">
+      <app-logo class="brand d-block mr-5" [whiteLogo]="true"></app-logo>
+      <div class="nav-likns zid">
+        <a
+          class="font-weight-medium sub-heading-04 ml-3 text-uppercase font-family-primary color-white"
+          [href]="'/'"
+          *ngIf="isLogin"
+          >Menu
+        </a>
+        <a
+          class="font-weight-medium sub-heading-04 ml-3 text-uppercase font-family-primary color-white"
+          *ngFor="let link of links"
+          [href]="link.url"
+          >{{ link?.title | uppercase }}</a
+        >
+      </div>
+    </div>
+    <section
+      class="content-section-m d-flex flex-auto flex-column justify-content-around mt p-b3 px-5 zid"
+    >
+      <div class="bg-color-white border-radius injected-content p-5">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+      </div>
+    </section>
+  </div>
+  <section class="img-section-m bg-color-01">
+    <swiper [config]="swiperOptions">
+      <ng-template swiperSlide *ngFor="let slide of slides">
+        <img class="w-100" [src]="slide" alt="" />
+      </ng-template>
+    </swiper>
+  </section>
+</section>
+
+<ng-template #contentTemplate>
+  <!-- <ng-content></ng-content> -->
+  <router-outlet></router-outlet>
+</ng-template>

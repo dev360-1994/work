@@ -1,0 +1,61 @@
+<section>
+  <div class="landing-lines">
+    <div class="actions">
+      <a *ngIf="user?.token"
+        class="loingLink font-weight-medium sub-heading-04 letter-spacing-1 text-uppercase"
+        [routerLink]="['/griddo-master']">DASHBOARD</a>
+    </div>
+  </div>
+  <!-- *ngIf="isLogin" -->
+  <form *ngIf="user == null"
+    class="d-flex flex-column w-100"
+    [formGroup]="loginForm">
+    <h1 class="font-weight-bold heading-01 font-family-primary">Login</h1>
+    <div class="form-group">
+      <label class="sub-heading-04 letter-spacing-1 text-uppercase font-family-primary">Email Id</label>
+      <input formControlName="email"
+        placeholder="Username"
+        type="email"
+        class="w-100" />
+    </div>
+    <div class="form-group">
+      <label class="sub-heading-04 letter-spacing-1 text-uppercase font-family-primary">Password</label>
+      <div class="position-relative with-button">
+        <input formControlName="password"
+          placeholder="Password"
+          type="{{visibility ? 'password' :'text'}}"
+          class="w-100" />
+        <span class="position-absolute" mat-icon-button (click)="visibility = !visibility">
+          <mat-icon class="color-03 sub-heading-02">{{visibility ? 'visibility_off' :'visibility'}}</mat-icon>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex form-group justify-content-between">
+      <div class="text-2 font-family-primary">
+        <input type="checkbox"
+          ngModel
+          [ngModelOptions]="{ standalone: true }"
+          name=""
+          id=""
+          #rememberme="ngModel" />
+        Remember me
+      </div>
+      <a class="text-2 font-family-primary"
+        routerLink="/reset-password">Forgot Password?</a>
+    </div>
+    <div class="form-group">
+      <button
+        [ngClass]="{'cursor-notallowed':loginForm.invalid || isProcessing,'cursor-pointer':loginForm.valid && !isProcessing}"
+        [disabled]="loginForm.invalid || isProcessing"
+        (click)="login(rememberme?.value)"
+        class="d-flex align-items-center bg-color-01 border-0 border-radius color-white font-weight-semi-bold px-5 py-2 sub-heading-04"
+        type="submit">
+        {{ loingas | uppercase }}
+        <mat-spinner *ngIf="isProcessing"
+          class="ml-2"
+          [diameter]="20"
+          color="warn"></mat-spinner>
+      </button>
+    </div>
+  </form>
+</section>

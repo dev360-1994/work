@@ -1,0 +1,40 @@
+button {
+  display: inline-block;
+  font-family: var(--fontPrimary);
+  border-color: #1E1E2C;
+  background: #1E1E2C;
+  color: #FFFFFF;
+  border-radius: 0.5rem;
+  &:hover,
+  &:active,
+  &:focus,
+  &-active {
+    box-shadow: none;
+    color: none;
+    outline: none;
+  }
+}
+
+button,
+a {
+  &:hover,
+  &:active,
+  &:focus,
+  &-active {
+    box-shadow: none;
+    color: none;
+    outline: none;
+  }
+}
+
+.btn-linear-gradient-1 {
+  background: linear-gradient( 90deg, rgba(251, 41, 41, 0.8) 0%, rgba(240, 172, 70, 0.8) 24.48%, rgba(251, 244, 76, 0.8) 48.96%, rgba(99, 239, 197, 0.8) 76.04%, rgba(70, 158, 240, 0.8) 100%);
+}
+
+.box-shadow-1{
+  box-shadow: 0px 0px 17.2519px rgba(0, 0, 0, 0.06);
+}
+
+.box-shadow-none{
+  box-shadow: none !important;
+}

@@ -1,0 +1,25 @@
+.folder {
+  width: 7.5rem;
+  // height: 7.5rem;
+  .folder-icon {
+    span {
+      font-size: 3.4375rem;
+      // width: 3.4375rem;
+      // height: 2.75rem;
+    }
+  }
+}
+
+.file-item {
+  width: 13.5625rem;
+}
+.file-item-img {
+  width: 13.5625rem;
+  height: 13rem;
+}
+
+.preview-mat-content{
+  padding: 0rem 1.5rem;
+  position: relative;
+  max-height: 100vh;
+}

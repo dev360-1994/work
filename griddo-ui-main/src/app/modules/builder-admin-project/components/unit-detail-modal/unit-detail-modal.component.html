@@ -1,0 +1,95 @@
+<mat-dialog-content>
+    <section class="d-block">
+        <!-- <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar> -->
+        <div class="row m-0 box-shadow-1 border-radius p-3 mt-3">
+            <div class="col-12 p-0">
+                <h2 class="sub-heading-03">Unit Details</h2>
+            </div>
+            <div class="col-3 p-0">
+                <img class="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYhkYtjYRkyZ1zybYuBCZibNypXY0b1jQwTaqQDARo1Bzx1fGupv9PRF_kaAtBJjI6Lk&usqp=CAU" alt="">
+            </div>
+            <div class="col-9 p-0 d-flex">
+                <div class="row m-0">
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit No.</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.flatNo}}</p>
+                    </div>
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Type</p>
+                        <p class="color-01 m-0 paragraph-03">
+                            <!-- <ng-container [ngSwitch]="flatDetail?.unitTypeId">
+                                <ng-container *ngSwitchCase="1">2B</ng-container>
+                                <ng-container *ngSwitchCase="2">2B+D</ng-container>
+                                <ng-container *ngSwitchCase="3">Studio</ng-container>
+                                <ng-container *ngSwitchDefault>N/A</ng-container>
+                            </ng-container> -->
+                            {{flatDetail?.unitType == '' || flatDetail?.unitType == null ? 'N/A' : flatDetail?.unitType}}
+                        </p>
+                    </div>
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{ (flatDetail?.interiorSize || 0)+ (flatDetail?.livingRoomSize || 0)+ (flatDetail?.diningRoomSize || 0)+ (flatDetail?.balconySize || 0) }} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit Price</p>
+                        <p class="color-01 m-0 paragraph-03">$ {{(flatDetail?.price || 0) | currency: 'USD':'symbol':'0.0-2'}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Extras</p>
+                        <p class="color-01 m-0 paragraph-03">
+                            {{flatDetail?.flatprojectUnitAdditionalFeature || 'N/A'}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Interior Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.interiorSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Living Room Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.livingRoomSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Dinning Room Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.diningRoomSize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Balcony Size</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.balconySize || 0}} sq ft</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Bathrooms</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.nOofBaths || 0}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Bedrooms</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.noOfBedroom || 0}}</p>
+                    </div>
+
+                    <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">No. of Balconies</p>
+                        <p class="color-01 m-0 paragraph-03">{{flatDetail?.noofBalcony || 0}}</p>
+                    </div>
+                    <!-- <div class="col-3 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit No.</p>
+                        <p class="color-01 m-0 paragraph-03">1502</p>
+                    </div>
+                    <div class="col-6 d-flex flex-column justify-content-center">
+                        <p class="paragraph-04 color-02 m-0">Unit No.</p>
+                        <p class="color-01 m-0 paragraph-03">1502</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <!-- <button (click)="selectUnit()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer cursor-notallowed">Select</button> -->
+    <button [mat-dialog-close]="true" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,47 @@
+<!-- <div class="main grid d-flex position-relative sales-grid-blocks">
+  <div class="floor-numbers left-0 bg-color-06 position-sticky z-index-2 pt-4">
+    <div class="d-block" *ngFor="let block of blocks">
+      <p class="visibility-hidden mb-2">1</p>
+      <div class="floor-number d-flex my-2 align-items-center" *ngFor="let floor  of block?.floors;">
+        <p class="color-05 font-weight-normal letter-spacing-1 m-0 mr-2 paragraph-04">
+          {{floor?.number}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div class="d-flex stack-numbers top-0 bg-color-06 position-sticky z-index-1">
+      <div class="d-flex">
+        <div
+          class="stack-number color-05 d-flex font-weight-normal justify-content-center letter-spacing-1 m-0 mr-2 paragraph-04"
+          *ngFor="let stack  of stacks">{{stack}}</div>
+      </div>
+    </div>
+    <div class="d-block" *ngFor="let block of blocks;let tIdx = index">
+      <div class="align-items-center border-bottom-1 border-color-19 d-flex justify-content-between m-1 mb-1 mt-3">
+        <div class="align-items-center d-flex position-sticky block-title">
+          <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">{{block?.title}}</p>
+          <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">{{block?.count}}</p>
+        </div>
+        <div class="align-items-center d-flex position-sticky right-0">
+          <button (click)="selectedIndex.emit(tIdx);updateSection.emit('steup-sales-grid-units-skips')"
+            class="bg-color-transparent border-0 color-16 d-flex font-weight-normal paragraph-04 px-3 white-space-nowrap">
+            Unit Numbers
+          </button>
+          <button (click)="selectedIndex.emit(tIdx);updateSection.emit('steup-sales-grid-pricing')"
+            class="bg-color-transparent border-0 color-16 d-flex font-weight-normal paragraph-04 px-3 white-space-nowrap">
+            Pricing
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column" *ngFor="let floor  of block?.floors">
+        <div class="d-flex">
+          <div class="d-flex">
+            <div
+              class="align-items-center bg-color-08 color-03 d-flex justify-content-center m-1 ng-star-inserted paragraph-02 unit-box"
+              *ngFor="let unit  of floor?.units">{{unit?.number}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

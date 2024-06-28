@@ -1,0 +1,141 @@
+image: docker:stable
+services:
+  - docker:dind
+
+stages:
+- test
+- build
+- deploy
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  GIT_SUBMODULE_STRATEGY: recursive
+
+.before_script_template: &server_login_dev
+  before_script:
+    ##
+    ## Install ssh-agent if not already installed, it is required by Docker.
+    ## (change apt-get to yum if you use an RPM-based image)
+    ##
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    ##
+    ## Run ssh-agent (inside the build environment)
+    ##
+    - eval $(ssh-agent -s)
+
+    ##
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    ##
+    - echo "$SSH_PRIVATE_DEPLOY_KEY" | tr -d '\r' | ssh-add -
+
+    ##
+    ## Create the SSH directory and give it the right permissions
+    ##
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    ##
+    ## Allow to connect to our server without checking the host key
+    ##
+    - ssh-keyscan ${DEPLOY_SERVER} >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+.before_script_template_qa: &server_login_qa
+  before_script:
+    ##
+    ## Install ssh-agent if not already installed, it is required by Docker.
+    ## (change apt-get to yum if you use an RPM-based image)
+    ##
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    ##
+    ## Run ssh-agent (inside the build environment)
+    ##
+    - eval $(ssh-agent -s)
+
+    ##
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    ##
+    - echo "${DEPLOY_KEY_QA}" | ssh-add -
+
+    ##
+    ## Create the SSH directory and give it the right permissions
+    ##
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    ##
+    ## Allow to connect to our server without checking the host key
+    ##
+    - ssh-keyscan ${DEPLOY_SERVER_QA} >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+# sast:
+#   stage: test
+# include:
+# - template: Security/SAST.gitlab-ci.yml
+
+
+# set up is incomplete
+# lint:
+#   image: node:14.15.4  
+#   stage: test
+#   script:
+#     - npm install --progress=false
+#     - ./node_modules/.bin/eslint --ext js src/**/*.js
+  
+#   only:
+#     - merge_requests
+
+
+test-build:
+  image: node:14.15.4
+  stage: test
+  script:
+    - npm install --progress=false
+    - npm run build &
+  only:
+    - merge_requests
+
+build:
+  stage: build
+  script:
+    - if [ "$CI_COMMIT_REF_NAME" = "develop" ]; then sed -i 's/build-prod/build-dev/g' Dockerfile; fi
+    - if [ "$CI_COMMIT_REF_NAME" = "QA.Griddo" ]; then sed -i 's/build-prod/build-qa/g' Dockerfile; fi
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    - docker push $CI_REGISTRY_IMAGE:latest
+  only:
+    - develop
+    - QA.Griddo
+
+deploy_dev:
+  stage: deploy
+  <<: *server_login_dev
+  script:
+    - cat deploy/scripts/deploy_dev.sh | ssh ${DEPLOY_SERVER_USER}@${DEPLOY_SERVER} "bash -"
+  only:
+    - develop
+
+deploy_qa:
+  stage: deploy
+  <<: *server_login_qa
+  script:
+    - cat deploy/scripts/deploy_qa.sh | ssh ${DEPLOY_USER_QA}@${DEPLOY_SERVER_QA} "bash -"
+  only:
+    - QA.Griddo

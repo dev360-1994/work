@@ -1,0 +1,407 @@
+<section class="d-block">
+  <button (click)="updateSection.emit('steup-sales-grid')"
+    class="bg-color-transparent border-0 color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 paragraph-01">
+    <span class="material-icons mr-1 paragraph-01">keyboard_backspace</span> Back to Grid
+  </button>
+</section>
+
+<div class="d-block mt-4">
+  <div class="align-items-center d-flex justify-content-between pl-4">
+    <div class="align-items-center d-flex">
+      <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">PRICING</p>
+      <select class="bg-color-transparent border-0 color-03 font-weight-medium letter-spacing-1 m-0 paragraph-03"
+        [(ngModel)]="selectedIndex" (change)="onChangeBlock()">
+        <!-- <option *ngFor="let block of blocks;let i = index" [value]="i">{{block?.title}}</option> -->
+      </select>
+    </div>
+    <div class="align-items-center d-flex">
+      <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-02">{{selectedBlock?.count}}</p>
+    </div>
+  </div>
+  <div class="main grid d-flex position-relative sales-grid-blocks my-2">
+    <div class="floor-numbers left-0 bg-color-06 position-sticky z-index-2 pt-2">
+      <div class="d-block">
+        <!-- <div class="floor-number d-flex my-2 align-items-center"
+          *ngFor="let floor  of selectedBlock?.floors">
+          <p class="color-05 font-weight-normal letter-spacing-1 m-0 mr-2 paragraph-04">
+            {{floor?.number}}</p>
+        </div> -->
+      </div>
+    </div>
+    <div class="">
+      <div class="d-flex stack-numbers top-0 bg-color-06 position-sticky z-index-1">
+        <div class="d-flex">
+          <div
+            class="stack-number color-05 d-flex font-weight-normal justify-content-center letter-spacing-1 m-0 mr-2 paragraph-04"
+            *ngFor="let stack  of stacks">{{stack}}</div>
+        </div>
+      </div>
+      <div class="d-block">
+        <!-- <div class="d-flex flex-column" *ngFor="let floor  of selectedBlock?.floors">
+          <div class="d-flex">
+            <div class="d-flex">
+              <div
+                class="align-items-center bg-color-08 color-03 d-flex justify-content-center m-1 ng-star-inserted paragraph-02 unit-box"
+                *ngFor="let unit  of floor?.units">{{unit?.number}}</div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="d-block mt-4 pl-4">
+    <p class="color-01 font-weight-semi-bold letter-spacing-1 paragraph-02">Stack 03 | Units 503 - 803</p>
+    <div class="row m-0">
+      <div class="col-12 p-0">
+        <div class="row m-0 form-group mb-3">
+          <div class="align-items-center col-3 d-flex input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap">Same as
+              another unit</label>
+            <select class="color-03 font-weight-normal form-control letter-spacing-1 ml-2 paragraph-04">
+              <option value="">301</option>
+            </select>
+          </div>
+          <div class="align-items-center col-3 d-flex input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap">Status</label>
+            <select class="color-03 font-weight-normal form-control letter-spacing-1 ml-2 paragraph-04">
+              <option value="">off the market</option>
+            </select>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Ceiling
+              Height</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Price</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">$</span>
+            </div>
+          </div>
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Interior
+              Size</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Unit
+              Name</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <!-- <div class="input-group-append">
+            <span class="input-group-text paragraph-04" id="basic-addon2">$</span>
+          </div> -->
+          </div>
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+              Size</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Floor
+              Premium</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">$</span>
+            </div>
+          </div>
+          <div class="col-3 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">View</label>
+            <select class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04"></select>
+            <!-- <div class="input-group-append">
+            <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+          </div> -->
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Living
+              Room</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Dining
+              Room</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-1 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Beds</label>
+            <input type="number" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bedroom
+              1</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bedroom
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bedroom
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-1 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Baths</label>
+            <input type="number" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bathroom
+              1</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bathroom
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Bathroom
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-1 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Terrace</label>
+            <input type="number" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Terrace
+              1</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Terrace
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Terrace
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-1 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony</label>
+            <input type="number" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+              1</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Balcony
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-1 input-group input-group-sm pl-0">
+            <label
+              class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den</label>
+            <input type="number" class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den
+              1</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+          <div class="col-2 input-group input-group-sm pl-0">
+            <label class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 w-100 white-space-nowrap">Den
+              2</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 paragraph-04">
+            <div class="input-group-append">
+              <span class="input-group-text paragraph-04" id="basic-addon2">ft</span>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-12 pl-0 d-flex align-items-center">
+            <p class="color-01 font-weight-normal letter-spacing-1 m-0 paragraph-04 white-space-nowrap">Additional
+              features:</p>
+            <div class="d-flex mx-2">
+              <input type="checkbox">
+              <label
+                class="color-01 font-weight-normal letter-spacing-1 m-0 ml-2 paragraph-04 w-100 white-space-nowrap">Parking</label>
+            </div>
+            <div class="d-flex mx-2">
+              <input type="checkbox">
+              <label
+                class="color-01 font-weight-normal letter-spacing-1 m-0 ml-2 paragraph-04 w-100 white-space-nowrap">Locker</label>
+            </div>
+            <div class="d-flex mx-2">
+              <input type="checkbox">
+              <label
+                class="color-01 font-weight-normal letter-spacing-1 m-0 ml-2 paragraph-04 w-100 white-space-nowrap">Storage</label>
+            </div>
+            <button
+              class="align-items-center bg-white border-0 color-01 color-03 d-flex font-weight-normal paragraph-03 px-3 white-space-nowrap">
+              <span class="material-icons mr-1 paragraph-01">add</span>
+              <span class="text-decoration-underline">Add custom</span>
+            </button>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3">
+          <div class="col-6 pl-0 d-flex align-items-center">
+            <!-- <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1">Upload Logo</label> -->
+            <!-- <ng-container *ngIf="base64Img">
+            <label class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0" for="companyLogoPath" [ngStyle]="{'background-image': 'url(' + base64Img + ')'}">
+            <button (click)="clearImg()" class="bg-transparent border-0 color-01 cursor-pointer"><mat-icon>cancel</mat-icon></button>
+            </label>
+          </ng-container> -->
+            <!-- <ng-container *ngIf="!base64Img"> -->
+            <ng-container *ngIf="true">
+              <label fileDragDrop (filesChangeEmiter)="onFileChange($event)"
+                class="py-5 border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                for="companyLogoPath">
+                <ng-container></ng-container>
+                <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop your Floor Plan here
+                  OR</p>
+                <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                <p class="m-0 paragraph-02 text-center"><span
+                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+              </label>
+              <input class="form-control d-none" placeholder="" id="companyLogoPath" type="file"
+                (change)="fileChangeEvent($event)" accept="image/*">
+            </ng-container>
+          </div>
+          <div class="col-6 pr-0 d-flex align-items-center">
+            <!-- <label class="color-01 font-weight-normal paragraph-03 letter-spacing-1">Upload Logo</label> -->
+            <!-- <ng-container *ngIf="base64Img">
+            <label class="align-items-baseline bg-img border-radius d-flex drag-drop-container form-control justify-content-end p-0" for="companyLogoPath" [ngStyle]="{'background-image': 'url(' + base64Img + ')'}">
+            <button (click)="clearImg()" class="bg-transparent border-0 color-01 cursor-pointer"><mat-icon>cancel</mat-icon></button>
+            </label>
+          </ng-container> -->
+            <!-- <ng-container *ngIf="!base64Img"> -->
+            <ng-container *ngIf="true">
+              <label fileDragDrop (filesChangeEmiter)="onFileChange($event)"
+                class="py-5 border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                for="companyLogoPath">
+                <ng-container></ng-container>
+                <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop your Floor Plan here
+                  OR</p>
+                <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                <p class="m-0 paragraph-02 text-center"><span
+                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+              </label>
+              <input class="form-control d-none" placeholder="" id="companyLogoPath" type="file"
+                (change)="fileChangeEvent($event)" accept="image/*">
+            </ng-container>
+          </div>
+        </div>
+        <div class="row m-0 form-group mb-3 justify-content-end">
+          <!-- <button (click)="updateSection.emit('steup-sales-grid')" mat-stroked-button class="bg-color-01 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">NEXT BLOCK</button> -->
+          <button (click)="updateSection.emit('steup-sales-grid')" mat-stroked-button
+            class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">SAVE</button>
+        </div>
+      </div>
+    </div>
+
+  </div>

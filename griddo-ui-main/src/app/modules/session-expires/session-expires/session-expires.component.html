@@ -1,0 +1,9 @@
+<!-- <h2 mat-dialog-title class="color-01 font-weight-bold sub-heading-02">Griddo</h2> -->
+<mat-dialog-content class="mat-typography">
+    <img src="/assets/imgs/session.jpeg" class="d-block mx-auto w-25">
+    <h3 class="heading-02 color-03 font-weight-bold text-center">Your session has expired.</h3>
+    <p class="color-03 font-weight-bold text-center sub-heading-02">Please log in.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button class="paragraph-01 px-5 py-1 color-13 color-13-hover border-color-13" mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial (click)="logout()">Login</button>
+</mat-dialog-actions>

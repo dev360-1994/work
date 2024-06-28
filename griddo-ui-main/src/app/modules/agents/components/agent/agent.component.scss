@@ -1,0 +1,106 @@
+.agent-detail-page {
+  .agent-name {
+    &.row-2 {
+      border-bottom: none;
+      .logo {
+        width: 4.875rem;
+        height: 3.875rem;
+        border-radius: 0.375rem;
+      }
+    }
+  }
+  .agent-details {
+    display: grid;
+    grid-template-columns: 3fr 4fr 4fr;
+    grid-gap: 1rem;
+    grid-template-areas: "a c b" "a d b" "a e b";
+    .account-details {
+      grid-area: a;
+      .last-active {
+        .value {
+          color: #828282;
+          font-style: italic;
+        }
+      }
+      .profile-staus {
+        .toggle {
+          .value {
+            color: #828282;
+          }
+        }
+      }
+    }
+    .projects {
+      grid-area: c;
+      
+    }
+    .deals {
+      grid-area: d;
+    }
+    .units {
+      grid-area: e;
+    }
+    .personal-details {
+      grid-area: b;
+    }
+    .builders-linked {
+      grid-area: c;
+    }
+  }
+
+  .with-button {
+    button {
+      right: 0;
+      top: -3px;
+    }
+  }
+  
+}
+
+
+// css for image crop
+.add-agent-section {
+  padding: 2rem 5rem;
+}
+
+.drag-drop-container {
+  height: calc(100% - 2rem);
+  max-height: 10rem;
+  min-width: 5rem;
+  min-height: 9rem;
+}
+
+.with-button {
+  button {
+    right: 0;
+    top: 0;
+  }
+}
+
+.bg-img {
+  background-size: auto 99%;
+  background-color: #d6d6d6;
+  background-repeat: no-repeat;
+  background-position: center
+}
+
+.businessCard{
+  height: 100%;
+  max-width: 100%;
+}
+
+.image-cropper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
+  height: 25rem;
+  justify-content: center;
+  span {
+    margin: 0 10px;
+  }
+  img {
+    width: auto;
+    height: 100%;
+  }
+}

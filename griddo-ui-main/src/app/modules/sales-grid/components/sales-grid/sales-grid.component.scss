@@ -1,0 +1,134 @@
+.indicator {
+  width: 0.4794rem;
+  height: 0.4794rem;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.range-slider-box {
+  width: 10rem;
+}
+
+.sales-grid-box {
+  width: 6.125rem;
+  height: 6.3125rem;
+
+  .check-mark {
+    left: 0rem;
+    top: 0rem;
+    display: none;
+  }
+
+  &.selected,
+  &:hover {
+    .check-mark {
+      display: block;
+    }
+  }
+
+  .count {
+    right: -0.25rem;
+    top: -0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 100%;
+  }
+}
+
+.floor-numbers {
+  .floor-number {
+    height: 6.3125rem;
+  }
+}
+
+.stack-numbers {
+  .stack-number {
+    width: 6.125rem;
+  }
+}
+
+.block-title {
+  left: 1.3rem;
+}
+
+.sales-grid-blocks {
+  overflow: auto;
+  height: 53vh;
+}
+
+.agent-img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+}
+
+.assign-agent-img {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 100%;
+}
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .mat-form-field-infix{
+    padding: 0.875rem 0 0.375 0 !important;
+    border-top: none !important;
+  }
+  .mat-select-arrow-wrapper{
+    transform: translateY(0%) !important;
+  }
+}
+
+// We need to use ::ng-deep to overcome view encapsulation
+::ng-deep {
+  .custom-slider .ngx-slider .ngx-slider-bar {
+    background: #ffe4d1;
+    height: 2px;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-selection {
+    background: orange;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-pointer {
+    width: 8px;
+    height: 16px;
+    top: auto;
+    /* to remove the default positioning */
+    bottom: 0;
+    background-color: #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-pointer:after {
+    display: none;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-bubble {
+    bottom: 14px;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-limit {
+    font-weight: bold;
+    color: orange;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-tick {
+    width: 1px;
+    height: 10px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #ffe4d1;
+    top: -1px;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background: orange;
+  }
+}

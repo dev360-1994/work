@@ -1,0 +1,219 @@
+﻿@model HotelManagment.Models.User.UserModel
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">User Details</p>
+            <!-- CARD HEADER START -->
+            <div class="card_head">
+                <form id="form" class="form-sample">
+                    <p class="card-description">
+                        Personal info
+                    </p>
+                    @Html.HiddenFor(x => x.UserId)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">First Name</label>
+                                <div class="col-sm-9">
+                                    @*<input type="text" id="new-name" class="form-control" autocomplete="off" placeholder="name">*@
+                                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @maxlength = "20" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    @*<input type="text" class="form-control" id="new_email" autocomplete="off" placeholder="email">*@
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @maxlength = "20" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{ if (Model.UserId == 0)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Password</label>
+                                        <div class="col-sm-9">
+                                            @*<input class="form-control" type="password" id="new-pass" autocomplete="off" placeholder="password">*@
+                                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @maxlength = "12" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Confirm Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" autocomplete="off" id="new-cnfrmpass" placeholder="confirm password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    }
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mobile</label>
+                                <div class="col-sm-9">
+                                    @*<input id="mobileno" class="form-control number" autocomplete="off">*@
+                                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", @maxlength = "12" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                @*<label class="col-sm-3 col-form-label">IsAdmin</label>*@
+                                <div class="col-sm-4">
+                                    <div class="form-check form-check-primary">
+                                        <label class="form-check-label">
+                                            Is Active
+                                            @{
+                                                if (Model.IsActive)
+                                                {
+                                                    <input type="checkbox" name="IsActive" class="isactive form-check-input" checked="">
+                                                    <i class="input-helper" name="IsActive"></i>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="IsActive" class="isactive form-check-input">
+                                                    <i class="input-helper" name="IsActive"></i>
+                                                }
+
+                                            }
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-check form-check-primary">
+                                        <label class="form-check-label">
+                                            Is Admin
+                                            @{
+                                                if (Model.IsAdmin)
+                                                {
+                                                    <input type="checkbox" name="IsAdmin" class="isadmin form-check-input" checked="">
+                                                    <i class="input-helper" name="IsAdmin"></i>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="IsAdmin" class="isadmin form-check-input">
+                                                    <i class="input-helper" name="IsAdmin"></i>
+                                                }
+
+                                            }
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-right">
+                        @{ if (Model.UserId == 0)
+                            {
+                                <button type="button" id="signup" class="btn btn-primary mr-2">Add User</button>
+                            }
+                            else
+                            {
+                                <button type="button" id="signup" class="btn btn-primary mr-2">Update User</button>
+                            }
+                        }
+                       
+                        @*<button class="btn btn-light">Cancel</button>*@
+                        <a href="/AdminDashBoard" class="btn btn-light">Cancel</a>
+                    </div>
+                </form>
+            </div>
+            <!-- /CARD HEADER END -->
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/gi;
+    $(document).ready(function () {
+        $(".number").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+
+    $("#signup").click(function () {
+        var userid = $("#UserId").val();
+        var name = $("#FirstName").val();
+        var email = $("#Email").val();
+        var pass = $("#Password").val();
+        var cnfrm = $("#new-cnfrmpass").val();
+        var mobile = $("#Mobile").val();
+        var isactive = $(".isactive").is(":checked") ? true : false;
+        var isadmin = $(".isadmin").is(":checked") ? true : false;
+        if (name == "") {
+            alert("please enter name");
+            return false;
+        }
+        else if (email == "") {
+            alert("please enter email");
+            return false;
+        }
+        else if (!emailReg.test(email)) {
+            alert('Invalid Email');
+            return false
+        }
+        else if (userid==0 && pass == "") {
+            alert("please enter password.");
+            return false;
+        }
+        else if (userid==0 && mobile == "") {
+            alert("please enter mobile");
+            return false;
+        }
+        else if (userid == 0 &&  cnfrm == "") {
+            alert("please enter confirm password.");
+            return false;
+        }
+        else if (userid == 0 &&  cnfrm != pass) {
+            alert("Password mismatch");
+            return false;
+        } $('.loader').show();
+        var data = {"Id":userid, "email": email, "name": name, "password": pass, "Mobile": mobile, "IsActive": isactive, "IsAdmin": isadmin }
+        $.ajax({
+            type: "Post",
+            url: "/User/CreateUser",
+            type: "Post",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    alert(result.Message);
+                    window.location.href = '@Url.Action("Index","User")';
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result.Message);
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,60 @@
+    <div class="container">
+
+        <div class="body-section">
+            <h3 class="align-items-center color-16 d-flex edit-bar font-weight-medium justify-content-between sub-heading-03">
+                Price Split Up
+                <button *ngIf="!edit && cloneWorksheetData?.isItemVisible" class="color-03" mat-icon-button (click)="changeEditable(true)">
+                    <mat-icon class="sub-heading-03">edit</mat-icon>
+                </button>
+                <button *ngIf="edit && cloneWorksheetData?.isItemVisible" class="color-03" mat-icon-button
+                (click)="updateWorksheetPrice()">
+                    <mat-icon class="sub-heading-03">done</mat-icon>
+                </button>
+            </h3>
+            <br>
+            <table>
+                <thead>
+                   
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Base Price</td>
+                        <td>{{cloneWorksheetData?.flatDetail?.price | currency: 'USD':'symbol':'0.0-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Floor Premium</td>
+                        <td >{{cloneWorksheetData?.flatDetail?.floorPremium | currency: 'USD':'symbol':'0.0-2'}}</td>
+                    </tr>
+                    <tr *ngFor="let extraPrice of extraUnitPriceArr; let i = index">
+                        <td><input [disabled]="cloneWorksheetData?.isDisabled" *ngIf="!extraPrice.included || extraPrice.eligible" class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03" 
+                            id="{{extraPrice.name+i}}" type="checkbox" [(ngModel)]="extraPrice.isSelected" 
+                            (change)="reCalculatePrice(extraPrice, $event)"></td>
+                        <td> {{extraPrice.name}} </td>
+                        <td>{{extraPrice.amount | currency: 'USD':'symbol':'0.0-2'}} </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Tax Total {{taxTotal}} %</td>
+                        <td>{{taxAmount  | currency: 'USD':'symbol':'0.0-2'}}</td>
+                    </tr>
+                    <tr class="font-weight-medium">
+                        <td></td>
+                        <td >Grand Total</td>
+                        <td>{{priceTotal | currency: 'USD':'symbol':'0.0-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+          
+        </div>
+
+           
+    </div>      
+
+    <mat-dialog-actions align="end">
+        <button (click)="onClose()" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Close</button>
+    </mat-dialog-actions>
+
+
+

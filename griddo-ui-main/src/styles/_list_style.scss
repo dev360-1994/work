@@ -1,0 +1,14 @@
+.list-style {
+  &-none {
+    list-style: none;
+  }
+  &-disc {
+    list-style: disc;
+  }
+  &-decimal {
+    list-style: decimal;
+  }
+  &-auto {
+    list-style: auto;
+  }
+}

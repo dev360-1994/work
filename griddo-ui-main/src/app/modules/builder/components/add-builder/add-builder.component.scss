@@ -1,0 +1,38 @@
+.add-builder-section {
+  padding: 2rem 5rem;
+}
+
+.drag-drop-container {
+  height: calc(100% - 2rem);
+  max-height: 8rem;
+}
+
+.with-button {
+  button {
+    right: 0;
+    top: 0;
+  }
+}
+
+.bg-img {
+  background-size: auto 99%;
+  background-color: #d6d6d6;
+  background-repeat: no-repeat;
+  background-position: center
+}
+
+.image-cropper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
+  height: 25rem;
+  justify-content: center;
+  span {
+    margin: 0 10px;
+  }
+  img {
+    width: auto;
+    height: 100%;
+  }
+}

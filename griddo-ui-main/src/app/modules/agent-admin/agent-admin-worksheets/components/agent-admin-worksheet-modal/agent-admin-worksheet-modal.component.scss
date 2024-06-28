@@ -1,0 +1,88 @@
+.indicator {
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.range-slider-box {
+    width: 10rem;
+}
+
+.sales-grid-box {
+    width: 3rem;
+    height: 3rem;
+    .check-mark {
+        left: 0rem;
+        top: 0rem;
+        display: none;
+    }
+    &.selected,
+    &:hover {
+        .check-mark {
+            display: block;
+        }
+    }
+    .count {
+        right: -0.25rem;
+        top: -0.25rem;
+        width: 1.1rem;
+        height: 1.1rem;
+        border-radius: 100%;
+    }
+}
+
+.floor-numbers {
+    .floor-number {
+        height: 3rem;
+    }
+}
+
+.stack-numbers {
+    .stack-number {
+        width: 3rem;
+    }
+}
+
+.block-title {
+    left: 1.3rem;
+}
+
+.sales-grid-blocks {
+    overflow: auto;
+    height: 53vh;
+}
+
+.avatar {
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+.folder {
+    width: 7.5rem;
+    // height: 7.5rem;
+    .folder-icon {
+        span {
+            font-size: 3.4375rem;
+            // width: 3.4375rem;
+            // height: 2.75rem;
+        }
+    }
+}
+
+.file-item {
+    width: 13.5625rem;
+}
+
+.file-item-img {
+    width: 13.5625rem;
+    height: 13rem;
+}
+
+.preview-mat-content {
+    padding: 0rem 1.5rem;
+    position: relative;
+    max-height: 100vh;
+}

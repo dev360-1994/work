@@ -1,0 +1,85 @@
+.project-img {
+    height: 8rem;
+    width: 8rem;
+}
+
+h3 {
+    font-size: 18px;
+    color: #707683;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 12px;
+    color: #828282;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 16px;
+    color: #707683;
+    font-weight: 500;
+}
+
+h2 {
+    color: #707683;
+    font-size: 18px;
+}
+
+#assign-agreement table th,
+#assign-agreement table td {
+    border: 0px;
+    color: #707683;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.hide-file {
+    display: none;
+}
+
+.file-validation {
+    border-color: red;
+    border: 1px solid red;
+    width: inherit;
+    margin: 0px 4px 0px 4px;
+}
+
+.view-grid {
+    height: 21.84px;
+    left: 616.92px;
+    top: 210.08px;
+    font-family: Poppins;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14.56px;
+    line-height: 22px;
+    /* identical to box height */
+    text-decoration-line: underline !important;
+    color: #469EF0 !important;
+}
+
+.price-input {
+    box-shadow: none;
+    background-color: #fbfbfb;
+    border: none;
+}
+
+.project-img {
+    height: 8rem;
+    width: 8rem;
+}
+
+thead {
+    background-color: rgba(0, 0, 0, .075);
+}
+
+tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+#assign-agreement table td {
+    text-align: center;
+    vertical-align: revert;
+    font-size: 14px;
+}

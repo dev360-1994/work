@@ -1,0 +1,18 @@
+.input-disabled {
+    cursor: default;
+    background-color: #fafafa !important;
+    color: #545454 !important;
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
+.input-disabled:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.position-top {
+    top: -10px;
+    position: relative;
+    margin-left: 15px;
+    padding-right: 4px;
+}

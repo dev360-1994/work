@@ -1,0 +1,169 @@
+<form class="p-0 mt-4" [formGroup]="form">
+    <div class="bg-color-white box-shadow-1 upload-excel mb-3">
+        <label for="upload-excel-id"
+            class="align-items-center color-01 cursor-pointer d-flex justify-content-center py-5 w-100">
+            <span class="color-01 material-icons mr-1 sub-heading-01">arrow_circle_up</span>
+            <span class="letter-spacing-1 paragraph-03">Upload from excel</span>
+        </label>
+        <input class="d-none" id="upload-excel-id" type="file">
+    </div>
+
+    <div class="broker-group d-block box-shadow-1 mb-3">
+        <div class="row m-0 px-3 py-2 bg-color-06">
+            <h4 class="color-03 font-weight-semi-bold paragraph-01 m-0 letter-spacing-1">Builder Staff</h4>
+        </div>
+        <div class="bg-color-white row m-0 px-4">
+            <div class="col-12 mt-3 mb-1">
+                <div class="input-group w-50">
+                    <div class="input-group-prepend bg-color-06">
+                        <span class="input-group-text paragraph-04 bg-color-06" id="basic-addon2">
+                            <span class="material-icons paragraph-01">search</span>
+                        </span>
+                    </div>
+                    <input class="form-control" [formControl]="searchAgentcontrol" placeholder="Search team"
+                        id="firstName" type="text" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addAgentToProject()">
+                        <mat-option *ngFor="let builder of agentList" [value]="builder">
+                            {{builder?.text}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-12">
+                <ng-container formArrayName="projectBuilderStaff">
+                    <div class="d-inline-block bg-color-06 m-1"
+                        *ngFor="let builderProject of projectBuilderStaff.controls; let i=index">
+                        <ng-container [formGroupName]="i">
+                            <div class="d-flex align-items-center m-2 avatar-pill">
+                                <p class="flex-auto letter-spacing-1 line-clamp line-clamp-1 m-0 ml-2 paragraph-04 mr-2">
+                                    {{builderProject?.value?.agentName}}</p>
+                                <span (click)="rmProjectSalesAgents(i)"
+                                    class="material-icons paragraph-01 mx-2 cursor-pointer">close</span>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="broker-group d-block box-shadow-1 mb-3">
+        <div class="row m-0 px-3 py-2 bg-color-06">
+            <h4 class="color-03 font-weight-semi-bold paragraph-01 m-0 letter-spacing-1">Listing Company</h4>
+        </div>
+        <div class="bg-color-white row m-0 px-4">
+            <div class="col-12 mt-3 mb-1">
+                <div class="input-group w-50">
+                    <div class="input-group-prepend bg-color-06">
+                        <span class="input-group-text paragraph-04 bg-color-06" id="basic-addon2">
+                            <span class="material-icons paragraph-01">search</span>
+                        </span>
+                    </div>
+                    <input class="form-control" [formControl]="searchAgencycontrol" placeholder="Search listing company"
+                        id="firstName" type="text" [matAutocomplete]="agent">
+                    <mat-autocomplete #agent="matAutocomplete" (optionSelected)="addAgencyToProject()">
+                        <mat-option *ngFor="let agent of filteredAgents" [value]="agent">
+                            {{agent?.text}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-12">
+                <ng-container formArrayName="projectSalesAgencies">
+                    <div class="d-inline-block bg-color-06 m-1"
+                        *ngFor="let projectSalesAgencie of projectSalesAgencies.controls; let i=index">
+                        <ng-container [formGroupName]="i">
+                            <div class="d-flex bg-color-06 align-items-center m-2 avatar-pill">
+                                <!-- <img class="avatar" [src]="builderProject?.value?.img || defultImg"
+                                    (error)="onError($event)" alt=""> -->
+                                <p
+                                    class="flex-auto letter-spacing-1 line-clamp line-clamp-1 m-0 ml-2 paragraph-04 mr-3">
+                                    <ng-container *ngIf="projectSalesAgencie?.value?.agencyName">
+                                        {{projectSalesAgencie?.value?.agencyName}}</ng-container>
+                                    <ng-container
+                                        *ngIf="!projectSalesAgencie?.value?.agencyName && projectSalesAgencie?.value?.agencyId">
+                                        {{getSelectedAgencyName(projectSalesAgencie?.value?.agencyId)}}
+                                    </ng-container>
+                                </p>
+                                <span (click)="rmProjectSalesAgencies(i)"
+                                    class="material-icons paragraph-01 mx-2 cursor-pointer">close</span>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <div class="broker-group d-block mb-3" formArrayName="projectSalesAgencies">
+        <div class="row m-0 px-3 py-2 bg-color-06">
+            <h4 class="color-03 font-weight-semi-bold paragraph-01 m-0 letter-spacing-1">Listing Company</h4>
+        </div>
+        <div class="col-12 mt-3 mb-1">
+            <div class="input-group w-50">
+                <div class="input-group-prepend bg-color-06">
+                    <span class="input-group-text paragraph-04 bg-color-06" id="basic-addon2">
+                        <span class="material-icons paragraph-01">search</span>
+                    </span>
+                </div>
+                <input class="form-control" [formControl]="searchAgencycontrol" placeholder="Search listing company"
+                    id="firstName" type="text" [matAutocomplete]="agent">
+                <mat-autocomplete #agent="matAutocomplete" (optionSelected)="addAgencyToProject()">
+                    <mat-option *ngFor="let agent of filteredAgents" [value]="agent">
+                        {{agent?.text}}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+        </div>
+        <ng-container *ngFor="let projectSalesAgencie of projectSalesAgencies.controls; let i=index">
+            <div class="row m-0 bg-color-white box-shadow-1 px-4 py-3 mb-3" [formGroupName]="i">
+                <div class="d-flex bg-color-06 align-items-center m-2 avatar-pill">
+                    <p class="flex-auto letter-spacing-1 line-clamp line-clamp-1 m-0 ml-2 paragraph-04">
+                        <ng-container *ngIf="projectSalesAgencie?.value?.agencyName">
+                            {{projectSalesAgencie?.value?.agencyName}}</ng-container>
+                        <ng-container
+                            *ngIf="!projectSalesAgencie?.value?.agencyName && projectSalesAgencie?.value?.agencyId">
+                            {{getSelectedAgencyName(projectSalesAgencie?.value?.agencyId)}}
+                        </ng-container>
+                    </p>
+                    <span (click)="rmProjectSalesAgencies(i)" class="material-icons paragraph-01 mx-2">close</span>
+                </div>
+
+                <div class="col-4 form-group d-flex align-items-end">
+                    <div class="input-group">
+                        <label
+                            class="color-01 font-weight-normal paragraph-03 letter-spacing-1 w-100 white-space-nowrap"
+                            for="brokerageCommission">Listing Brokerage Commission</label>
+                        <input formControlName="brokerageCommission" class="form-control"
+                            placeholder="Brokerage commission" id="brokerageCommission" type="text">
+                        <div class="input-group-append">
+                            <button class="input-group-text paragraph-04" type="button" data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">{{projectSalesAgencie?.value?.brokerageCommissionType}}</button>
+                            <div class="dropdown-menu">
+                                <a (click)="projectSalesAgencie['controls'].brokerageCommissionType.setValue('%')"
+                                    class="dropdown-item">%</a>
+                                <a (click)="projectSalesAgencie['controls'].brokerageCommissionType.setValue('$')"
+                                    class="dropdown-item">$</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="row m-0">
+            <div class="col-12 d-flex justify-content-end">
+                <button (click)="addProjectSalesAgencies()" class="bg-white border-0 color-01 d-flex paragraph-02">
+                    <mat-icon class="paragraph-02">add</mat-icon>
+                    <span class="text-decoration-underline">Add another</span>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+</form>

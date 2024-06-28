@@ -1,0 +1,42 @@
+.filter {
+    p {
+      font-family: var(--fontPrimary);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.125rem;
+      line-height: 1.6875rem;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: #414548;
+    }
+    button{
+      font-family: var(--fontPrimary);
+      font-style: normal;
+      font-weight: normal;
+      font-size: 0.875rem;
+      // line-height: 1.3125;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: #363636;
+    }
+  }
+  
+  .add-project {
+    background: #414548;
+    border-radius: 6.38333px;
+    padding: 0.3rem 1rem;
+    font-family: var(--fontPrimary);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.7525rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+  }
+
+
+// Designer 

@@ -1,0 +1,156 @@
+<mat-dialog-content>
+    <section class="d-block">
+        <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+        <form class="row m-0 mt-3 mx-auto" [formGroup]="form">
+            <div class="col-12 p-0">
+                <h2 class="align-items-center mb-3 color-01 d-flex font-weight-semi-bold justify-content-between paragraph-01">
+                    Buyer Details
+                </h2>
+                <div class="m-0 row">
+                    <div class="col-4">
+                        <div class="row m-0">
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="fullName">Full Name <span
+                                        style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="fullName" type="text" formControlName="fullName">
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="idType">ID Type <span
+                                        style="color:#ff0000">*</span></label>
+                                <select class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="idType" type="number" formControlName="docID">
+                                    <option value="">Select ID</option>
+                                    <option value="1">Driver License</option>
+                                    <option value="2">Passport</option>
+                                    <option value="3">PR Card</option>
+                                    <option value="4">Citizenship</option>
+                                    <option value="5">Photo ID Card</option>
+                                    <option value="6">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="address">Address
+                                    (Apartment, suite,
+                                    etc.) <span style="color:#ff0000">*</span></label>
+                                <input formControlName="address" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" formControlName="address" ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)" />
+                            </div>
+
+                            <div class="row m-0">
+                                <div class="col-6 form-group mb-1 pl-0">
+                                    <label class="color-01 font-weight-normal paragraph-03" for="country">Country <span
+                                            style="color:#ff0000">*</span></label>
+                                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="country" type="text" formControlName="country">
+                                </div>
+                                <div class="col-6 form-group mb-1 pr-0">
+                                    <label class="color-01 font-weight-normal paragraph-03" for="zipCode">Zip Code <span
+                                            style="color:#ff0000">*</span></label>
+                                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="zipCode" type="text" formControlName="zipCode">
+                                </div>
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="phoneNo">Cell Number <span
+                                        style="color:#ff0000">*</span></label>
+                                <ngx-intl-tel-input class="d-block" cssClass="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" [separateDialCode]="true" [selectedCountryISO]="CountryISO.Canada" [preferredCountries]="[CountryISO.Canada, CountryISO.India, CountryISO.UnitedStates]"
+                                    name="phoneNo" formControlName="phoneNo" maxLength="15" [phoneValidation]="true" [inputId]="'phoneNo'"></ngx-intl-tel-input>
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="emailID">Email <span
+                                        style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="emailID" type="email" formControlName="emailID">
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="governmentIDFile"> Upload
+                                    government ID <span style="color:#ff0000">*</span></label>
+                                <input type="file" id="governmentIDFile" name="filename" [ngClass]="{'is-invalid':  form['controls'].governmentIDFile.invalid == true && form['controls'].governmentIDFile.touched == true}" (change)="onGovernmentFileChange($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row m-0">
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="dob">Date of Birth <span
+                                        style="color:#ff0000">*</span></label>
+                                <input (click)="dateOfBirthDatepicker.open()" readonly id="dateOfBirth" class="form-control"
+                                [matDatepicker]="dateOfBirthDatepicker" formControlName="dateOfBirth"> 
+                                
+                                <mat-datepicker-toggle class="position-absolute right-0" matSuffix
+                                [for]="dateOfBirthDatepicker"></mat-datepicker-toggle>
+    
+                                <mat-datepicker #dateOfBirthDatepicker></mat-datepicker>
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="driverLicense">
+                                    <ng-container [ngSwitch]="form.value.docID">
+                                        <ng-container *ngSwitchCase="'1'">Driver License</ng-container>
+                                        <ng-container *ngSwitchCase="'2'">Passport</ng-container>
+                                        <ng-container *ngSwitchCase="'3'">PR Card</ng-container>
+                                        <ng-container *ngSwitchCase="'4'">Citizenship</ng-container>
+                                        <ng-container *ngSwitchCase="'5'">Photo ID Card</ng-container>
+                                        <ng-container *ngSwitchCase="'6'">Government Id</ng-container>
+                                        <ng-container *ngSwitchDefault> Government Id</ng-container>
+                                    </ng-container>
+                                    <span style="color:#ff0000">*</span>
+                                </label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="driverLicense" type="text" formControlName="driverLicenseNumber">
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="dob">Expiry Date<span
+                                        style="color:#ff0000">*</span></label>
+                                <input (click)="expiryDateDatepicker.open()" readonly id="expiryDate" class="form-control"
+                                [matDatepicker]="expiryDateDatepicker" formControlName="expiryDate"> 
+                                
+                                <mat-datepicker-toggle class="position-absolute right-0" matSuffix
+                                [for]="expiryDateDatepicker"></mat-datepicker-toggle>
+    
+                                <mat-datepicker #expiryDateDatepicker></mat-datepicker>
+                            </div>
+
+                            <!-- <div class="col-12 form-group mb-1 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="city">City <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="city" type="text" formControlName="city">
+                            </div>
+                            <div class="col-12 form-group mb-1 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="province">Province <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="province" type="text" formControlName="province">
+                            </div> -->
+                            <div class="col-12 p-0">
+                                <div class="row m-0">
+                                    <div class="col-6 form-group mb-1 pl-0">
+                                        <label class="color-01 font-weight-normal paragraph-03" for="city">City <span
+                                                style="color:#ff0000">*</span></label>
+                                        <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="city" type="text" formControlName="city">
+                                    </div>
+                                    <div class="col-6 form-group mb-1 pr-0">
+                                        <label class="color-01 font-weight-normal paragraph-03" for="province">Province
+                                            <span style="color:#ff0000">*</span></label>
+                                        <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="province" type="text" formControlName="province">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="occupation">Occupation
+                                    <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="occupation" type="text" formControlName="occupation">
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="occupation">Employer <span
+                                        style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="employer" type="text" formControlName="employer">
+                            </div>
+                            <div class="form-group mb-1 col-12 p-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="uploadPicture">Upload
+                                    picture of draft/cheque (pdf, png)</label>
+                                <input type="file" id="uploadPicture" name="filename" (change)="onPictureFileChange($event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button [disabled]="isProgressing" *ngIf="purchaserDetail?.isUpdate" (click)="updatePurchaser()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Update</button>
+    <button [disabled]="isProgressing" *ngIf="!purchaserDetail.isUpdate" (click)="addPurhcaser()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Add</button>
+
+    <button [disabled]="isProgressing" (click)="onCancel()" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Close</button>
+</mat-dialog-actions>

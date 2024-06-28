@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 198.67 125.49">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 115.24px;
+        font-family: Raleway-Black, Raleway Black;
+        letter-spacing: 0.06em;
+      }
+
+      .cls-1, .cls-3 {
+        fill: #e1b158;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>sAsset 2range</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g>
+        <text class="cls-1" transform="translate(0 98.53)">H<tspan class="cls-2" x="93.34" y="0">M</tspan></text>
+        <rect id="_Path_" data-name="&lt;Path&gt;" class="cls-3" x="56.45" y="105.35" width="65.89" height="16.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

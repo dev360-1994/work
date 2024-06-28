@@ -1,0 +1,58 @@
+<section class="d-block">
+  <button (click)="updateSection.emit('steup-sales-grid')"
+    class="bg-color-transparent border-0 color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 paragraph-01">
+    <span class="material-icons mr-1 paragraph-01">keyboard_backspace</span> Back to Grid
+  </button>
+</section>
+
+<div class="d-block mt-4">
+  <div class="align-items-center d-flex justify-content-between pl-4">
+    <div class="align-items-center d-flex">
+      <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">PRICING</p>
+      <select class="bg-color-transparent border-0 color-03 font-weight-medium letter-spacing-1 m-0 paragraph-03"
+        [(ngModel)]="selectedIndex" (change)="onChangeBlock()">
+        <!-- <option *ngFor="let block of blocks;let i = index" [value]="i">{{block?.title}}</option> -->
+      </select>
+    </div>
+    <div class="align-items-center d-flex">
+      <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-02">{{selectedBlock?.count}}</p>
+    </div>
+  </div>
+</div>
+<div class="main grid d-flex position-relative sales-grid-blocks my-2">
+  <div class="floor-numbers left-0 bg-color-06 position-sticky z-index-2 pt-2">
+    <div class="d-block">
+      <!-- <div class="floor-number d-flex my-2 align-items-center"
+        *ngFor="let floor  of selectedBlock?.floors">
+        <p class="color-05 font-weight-normal letter-spacing-1 m-0 mr-2 paragraph-04">
+          {{floor?.number}}</p>
+      </div> -->
+    </div>
+  </div>
+  <div class="">
+    <div class="d-flex stack-numbers top-0 bg-color-06 position-sticky z-index-1">
+      <div class="d-flex">
+        <div
+          class="stack-number color-05 d-flex font-weight-normal justify-content-center letter-spacing-1 m-0 mr-2 paragraph-04"
+          *ngFor="let stack  of stacks">{{stack}}</div>
+      </div>
+    </div>
+    <div class="d-block">
+      <!-- <div class="d-flex flex-column" *ngFor="let floor  of selectedBlock?.floors">
+        <div class="d-flex">
+          <div class="d-flex">
+            <div
+              class="align-items-center bg-color-08 color-03 d-flex justify-content-center m-1 ng-star-inserted paragraph-02 unit-box"
+              *ngFor="let unit  of floor?.units">{{unit?.number}}</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="row m-0 form-group mb-3 justify-content-end">
+  <!-- <button mat-stroked-button class="bg-color-01 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">NEXT BLOCK</button> -->
+  <button (click)="updateSection.emit('steup-sales-grid')" mat-stroked-button
+    class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">SAVE</button>
+</div>

@@ -1,0 +1,82 @@
+<div class="p-0 mt-4 pt-4 col-md-9 mx-auto" [formGroup]="form">
+  
+    <div class="d-flex justify-content-center">
+        <div class="form-group col-6 p-0 mr-2">
+        <label class="sub-heading-05" for="salesagents">Listing Agency Name</label>
+        <input class="form-control" placeholder="" id="salesagents" type="text">
+    </div>
+
+    <div class="form-group col-6 p-0 ml-2">
+        <label class="sub-heading-05" for="brokageCommission">Listing Brokage Commission</label>
+        <input class="form-control" placeholder="" id="brokageCommission" type="text">
+    </div>
+</div>
+<div class="form-group row pt-4" formArrayName="BrokerEmails">
+    <ng-container *ngFor="let item of projectExternalSalesTeamForm.controls; let i=index">
+        <div class="position-relative with-button mb-2 col-md-4" [formGroupName]='i'>
+            <input class="form-control" maxlength="50" placeholder="abc@griddo.com" type="text"
+                formControlName="email">
+            <button *ngIf="projectExternalSalesTeamForm.length > 1" class="sub-heading-04 mr-2 position-absolute"
+                mat-icon-button (click)="removeExternalSalesTeamEmail(i)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+    
+</div>
+
+<div class="pt-4">
+<div class="d-flex mx-auto">
+    <div class="form-group col-6 p-0 mr-2">
+    <label class="sub-heading-05" for="salesagents">Listing Agency Name</label>
+    <input class="form-control" placeholder="" id="salesagents" type="text">
+</div>
+<div class="form-group col-6 p-0 ml-2">
+    <label class="sub-heading-05" for="brokageCommission">Listing Brokage Commission</label>
+    <input class="form-control" placeholder="" id="brokageCommission" type="text">
+</div>
+</div>
+</div>
+<div class="row pt-3">
+    <div class="form-group col-4">
+         
+      <input type="text" name=" f10" class="form-control inputPosition col-11" value="Jonah A" />
+        <span class="close" aria-hidden="true">&times;</span>
+  
+    </div>
+      <div class="form-group col-4">
+        <input type="text" name=" f11" required class="form-control inputPosition col-11" value="Jonah A" />
+        <span class="close" aria-hidden="true">&times;</span>
+      </div>
+      <div class="form-group col-4">
+        <input type="text" name=" f12" required class="form-control inputPosition col-11" value="Jonah A" />
+        <span class="close" aria-hidden="true">&times;</span>
+      </div>
+      <div class="form-group col-4">
+        <input type="text" name=" f13" required class="form-control inputPosition col-11" value="Jonah A" />
+        <span class="close" aria-hidden="true">&times;</span>
+      </div>
+      <div class="form-group col-4">
+        <input type="text" name=" f14" required class="form-control inputPosition col-11" value="Jonah A" />
+        <span class="close" aria-hidden="true">&times;</span>
+      </div>
+    </div>
+    <div class="form-group row pt-4" formArrayName="BrokerEmails">
+        <ng-container *ngFor="let item of projectExternalSalesTeamForm.controls; let i=index">
+            <div class="position-relative with-button mb-2 col-md-4" [formGroupName]='i'>
+                <input class="form-control" maxlength="50" placeholder="abc@griddo.com" type="text"
+                    formControlName="email">
+                <button *ngIf="projectExternalSalesTeamForm.length > 1" class="sub-heading-04 mr-2 position-absolute"
+                    mat-icon-button (click)="removeExternalSalesTeamEmail(i)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </ng-container>
+        <div class="d-flex justify-content-end w-100">
+            <button class="addmore" (click)="addProjectExternalSalesTeamEmail()">
+                <mat-icon>add</mat-icon>
+                <span>Add another</span>
+            </button>
+        </div>
+    </div>
+</div>

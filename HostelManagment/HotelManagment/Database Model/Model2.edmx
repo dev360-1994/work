@@ -1,0 +1,1017 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HostelManagmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IpAddress" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Beds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Fees" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Duration" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HostelRooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Floor" Type="int" Nullable="false" />
+          <Property Name="NoOfBeds" Type="int" Nullable="false" />
+          <Property Name="RoomNo" Type="int" Nullable="false" />
+          <Property Name="RoomChangres" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" />
+          <Property Name="LastName" Type="varchar(max)" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Mobile" Type="varchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Dob" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="20" />
+          <Property Name="IsProfileCompleted" Type="bit" />
+          <Property Name="RecoveryPassword" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Address1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address2" Type="varchar(max)" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="PostCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="IsPrimary" Type="bit" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User_Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Room_Bed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="BedId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_RoomRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Budegt" Type="int" Nullable="false" />
+          <Property Name="IsRoomAssigned" Type="bit" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="CheckIn" Type="datetime" />
+          <Property Name="CancelRequest" Type="bit" />
+        </EntityType>
+        <EntityType Name="User_Rooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__User_Addr__CityI__66603565">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addr__Count__68487DD7">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addr__State__6754599E">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccessLog_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AccessLog" Type="Self.AccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_States">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="States" Type="Self.States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Address_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Courses_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="User_Courses" Type="Self.User_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Courses">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Courses_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Courses" Type="Self.User_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Courses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Room_Bed_HostelRooms">
+          <End Role="Beds" Type="Self.Beds" Multiplicity="1" />
+          <End Role="User_Room_Bed" Type="Self.User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="BedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Room_Bed_User_Room_Bed">
+          <End Role="HostelRooms" Type="Self.HostelRooms" Multiplicity="1" />
+          <End Role="User_Room_Bed" Type="Self.User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HostelRooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Room_Bed_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Room_Bed" Type="Self.User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_RoomRequest_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_RoomRequest" Type="Self.User_RoomRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_RoomRequest">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Rooms_HostelRooms">
+          <End Role="HostelRooms" Type="Self.HostelRooms" Multiplicity="1" />
+          <End Role="User_Rooms" Type="Self.User_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HostelRooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Rooms">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Rooms_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Rooms" Type="Self.User_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Rooms">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HostelManagmentModelStoreContainer">
+          <EntitySet Name="AccessLog" EntityType="Self.AccessLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beds" EntityType="Self.Beds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostelRooms" EntityType="Self.HostelRooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Courses" EntityType="Self.User_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Room_Bed" EntityType="Self.User_Room_Bed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_RoomRequest" EntityType="Self.User_RoomRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Rooms" EntityType="Self.User_Rooms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__User_Addr__CityI__66603565" Association="Self.FK__User_Addr__CityI__66603565">
+            <End Role="City" EntitySet="City" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addr__Count__68487DD7" Association="Self.FK__User_Addr__Count__68487DD7">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addr__State__6754599E" Association="Self.FK__User_Addr__State__6754599E">
+            <End Role="States" EntitySet="States" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccessLog_Users" Association="Self.FK_AccessLog_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="AccessLog" EntitySet="AccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_States" Association="Self.FK_City_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Country" Association="Self.FK_States_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Address_Users" Association="Self.FK_User_Address_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Courses_Courses" Association="Self.FK_User_Courses_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="User_Courses" EntitySet="User_Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Courses_Users" Association="Self.FK_User_Courses_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Courses" EntitySet="User_Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Room_Bed_HostelRooms" Association="Self.FK_User_Room_Bed_HostelRooms">
+            <End Role="Beds" EntitySet="Beds" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Room_Bed_User_Room_Bed" Association="Self.FK_User_Room_Bed_User_Room_Bed">
+            <End Role="HostelRooms" EntitySet="HostelRooms" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Room_Bed_Users" Association="Self.FK_User_Room_Bed_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_RoomRequest_User" Association="Self.FK_User_RoomRequest_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_RoomRequest" EntitySet="User_RoomRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Rooms_HostelRooms" Association="Self.FK_User_Rooms_HostelRooms">
+            <End Role="HostelRooms" EntitySet="HostelRooms" />
+            <End Role="User_Rooms" EntitySet="User_Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Rooms_Users" Association="Self.FK_User_Rooms_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Rooms" EntitySet="User_Rooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HostelManagmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IpAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_AccessLog_Users" FromRole="AccessLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Bed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="User_Room_Bed" Relationship="Self.FK_User_Room_Bed_HostelRooms" FromRole="Beds" ToRole="User_Room_Bed" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="Self.FK_City_States" FromRole="City" ToRole="States" />
+          <NavigationProperty Name="User_Address" Relationship="HostelManagmentModel.FK__User_Addr__CityI__66603565" FromRole="City" ToRole="User_Address" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="States" Relationship="Self.FK_States_Country" FromRole="Country" ToRole="States" />
+          <NavigationProperty Name="User_Address" Relationship="HostelManagmentModel.FK__User_Addr__Count__68487DD7" FromRole="Country" ToRole="User_Address" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fees" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User_Courses" Relationship="Self.FK_User_Courses_Courses" FromRole="Courses" ToRole="User_Courses" />
+          <Property Name="Duration" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_States" FromRole="States" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_States_Country" FromRole="States" ToRole="Country" />
+          <NavigationProperty Name="User_Address" Relationship="HostelManagmentModel.FK__User_Addr__State__6754599E" FromRole="State" ToRole="User_Address" />
+        </EntityType>
+        <EntityType Name="User_Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK_User_Courses_Courses" FromRole="User_Courses" ToRole="Courses" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_User_Courses_Users" FromRole="User_Courses" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User_Room_Bed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="BedId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bed" Relationship="Self.FK_User_Room_Bed_HostelRooms" FromRole="User_Room_Bed" ToRole="Beds" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_User_Room_Bed_Users" FromRole="User_Room_Bed" ToRole="User" />
+          <NavigationProperty Name="HostelRoom" Relationship="HostelManagmentModel.FK_User_Room_Bed_User_Room_Bed" FromRole="User_Room_Bed" ToRole="HostelRoom" />
+        </EntityType>
+        <EntityType Name="User_Rooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_User_Rooms_Users" FromRole="User_Rooms" ToRole="User" />
+          <NavigationProperty Name="HostelRoom" Relationship="HostelManagmentModel.FK_User_Rooms_HostelRooms" FromRole="User_Rooms" ToRole="HostelRoom" />
+        </EntityType>
+        <Association Name="FK_User_Room_Bed_HostelRooms">
+          <End Role="Beds" Type="Self.Bed" Multiplicity="1" />
+          <End Role="User_Room_Bed" Type="Self.User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="BedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_States">
+          <End Role="States" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="States" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Courses_Courses">
+          <End Role="Courses" Type="HostelManagmentModel.Courses" Multiplicity="1" />
+          <End Role="User_Courses" Type="Self.User_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Courses">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HostelManagmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessLogs" EntityType="Self.AccessLog" />
+          <EntitySet Name="Beds" EntityType="Self.Bed" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Courses" EntityType="HostelManagmentModel.Courses" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="User_Courses" EntityType="Self.User_Courses" />
+          <EntitySet Name="User_Room_Bed" EntityType="Self.User_Room_Bed" />
+          <EntitySet Name="User_Rooms" EntityType="Self.User_Rooms" />
+          <AssociationSet Name="FK_User_Room_Bed_HostelRooms" Association="Self.FK_User_Room_Bed_HostelRooms">
+            <End Role="Beds" EntitySet="Beds" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_States" Association="Self.FK_City_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Country" Association="Self.FK_States_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Courses_Courses" Association="Self.FK_User_Courses_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="User_Courses" EntitySet="User_Courses" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="HostelManagmentModel.User" />
+          <AssociationSet Name="FK_AccessLog_Users" Association="HostelManagmentModel.FK_AccessLog_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AccessLog" EntitySet="AccessLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Courses_Users" Association="HostelManagmentModel.FK_User_Courses_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Courses" EntitySet="User_Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Room_Bed_Users" Association="HostelManagmentModel.FK_User_Room_Bed_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Rooms_Users" Association="HostelManagmentModel.FK_User_Rooms_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Rooms" EntitySet="User_Rooms" />
+          </AssociationSet>
+          <EntitySet Name="HostelRooms" EntityType="HostelManagmentModel.HostelRoom" />
+          <AssociationSet Name="FK_User_Room_Bed_User_Room_Bed" Association="HostelManagmentModel.FK_User_Room_Bed_User_Room_Bed">
+            <End Role="HostelRoom" EntitySet="HostelRooms" />
+            <End Role="User_Room_Bed" EntitySet="User_Room_Bed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Rooms_HostelRooms" Association="HostelManagmentModel.FK_User_Rooms_HostelRooms">
+            <End Role="HostelRoom" EntitySet="HostelRooms" />
+            <End Role="User_Rooms" EntitySet="User_Rooms" />
+          </AssociationSet>
+          <EntitySet Name="User_Address" EntityType="HostelManagmentModel.User_Address" />
+          <AssociationSet Name="FK__User_Addr__CityI__66603565" Association="HostelManagmentModel.FK__User_Addr__CityI__66603565">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addr__Count__68487DD7" Association="HostelManagmentModel.FK__User_Addr__Count__68487DD7">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addr__State__6754599E" Association="HostelManagmentModel.FK__User_Addr__State__6754599E">
+            <End Role="State" EntitySet="States" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Address_Users" Association="HostelManagmentModel.FK_User_Address_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <EntitySet Name="User_RoomRequest" EntityType="HostelManagmentModel.User_RoomRequest" />
+          <AssociationSet Name="FK_User_RoomRequest_User" Association="HostelManagmentModel.FK_User_RoomRequest_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_RoomRequest" EntitySet="User_RoomRequest" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Dob" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsProfileCompleted" Type="Boolean" />
+          <Property Name="RecoveryPassword" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccessLogs" Relationship="HostelManagmentModel.FK_AccessLog_Users" FromRole="User" ToRole="AccessLog" />
+          <NavigationProperty Name="User_Courses" Relationship="HostelManagmentModel.FK_User_Courses_Users" FromRole="User" ToRole="User_Courses" />
+          <NavigationProperty Name="User_Room_Bed" Relationship="HostelManagmentModel.FK_User_Room_Bed_Users" FromRole="User" ToRole="User_Room_Bed" />
+          <NavigationProperty Name="User_Rooms" Relationship="HostelManagmentModel.FK_User_Rooms_Users" FromRole="User" ToRole="User_Rooms" />
+          <NavigationProperty Name="User_Address" Relationship="HostelManagmentModel.FK_User_Address_Users" FromRole="User" ToRole="User_Address" />
+          <NavigationProperty Name="User_RoomRequest" Relationship="HostelManagmentModel.FK_User_RoomRequest_User" FromRole="User" ToRole="User_RoomRequest" />
+        </EntityType>
+        <Association Name="FK_AccessLog_Users">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.AccessLog" Role="AccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccessLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Courses_Users">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Courses" Role="User_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Courses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Room_Bed_Users">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Room_Bed" Role="User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Rooms_Users">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Rooms" Role="User_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Rooms">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HostelRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="NoOfBeds" Type="Int32" Nullable="false" />
+          <Property Name="RoomNo" Type="Int32" Nullable="false" />
+          <Property Name="RoomChangres" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="User_Room_Bed" Relationship="HostelManagmentModel.FK_User_Room_Bed_User_Room_Bed" FromRole="HostelRoom" ToRole="User_Room_Bed" />
+          <NavigationProperty Name="User_Rooms" Relationship="HostelManagmentModel.FK_User_Rooms_HostelRooms" FromRole="HostelRoom" ToRole="User_Rooms" />
+        </EntityType>
+        <Association Name="FK_User_Room_Bed_User_Room_Bed">
+          <End Type="HostelManagmentModel.HostelRoom" Role="HostelRoom" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Room_Bed" Role="User_Room_Bed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HostelRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Room_Bed">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Rooms_HostelRooms">
+          <End Type="HostelManagmentModel.HostelRoom" Role="HostelRoom" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Rooms" Role="User_Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HostelRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Rooms">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Address1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="PostCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="City" Relationship="HostelManagmentModel.FK__User_Addr__CityI__66603565" FromRole="User_Address" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="HostelManagmentModel.FK__User_Addr__Count__68487DD7" FromRole="User_Address" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="HostelManagmentModel.FK__User_Addr__State__6754599E" FromRole="User_Address" ToRole="State" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_User_Address_Users" FromRole="User_Address" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__User_Addr__CityI__66603565">
+          <End Type="HostelManagmentModel.City" Role="City" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Address" Role="User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addr__Count__68487DD7">
+          <End Type="HostelManagmentModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Address" Role="User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addr__State__6754599E">
+          <End Type="HostelManagmentModel.State" Role="State" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Address" Role="User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Address_Users">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_Address" Role="User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_RoomRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Budegt" Type="Int32" Nullable="false" />
+          <Property Name="IsRoomAssigned" Type="Boolean" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CheckIn" Type="DateTime" Precision="3" />
+          <Property Name="CancelRequest" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="HostelManagmentModel.FK_User_RoomRequest_User" FromRole="User_RoomRequest" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_RoomRequest_User">
+          <End Type="HostelManagmentModel.User" Role="User" Multiplicity="1" />
+          <End Type="HostelManagmentModel.User_RoomRequest" Role="User_RoomRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_RoomRequest">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HostelManagmentModelStoreContainer" CdmEntityContainer="HostelManagmentEntities">
+          <EntitySetMapping Name="AccessLogs">
+            <EntityTypeMapping TypeName="HostelManagmentModel.AccessLog">
+              <MappingFragment StoreEntitySet="AccessLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beds">
+            <EntityTypeMapping TypeName="HostelManagmentModel.Bed">
+              <MappingFragment StoreEntitySet="Beds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="HostelManagmentModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="City1" ColumnName="City" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="HostelManagmentModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Country1" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="HostelManagmentModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="HostelManagmentModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Gender1" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="HostelManagmentModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="State1" ColumnName="State" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Courses">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User_Courses">
+              <MappingFragment StoreEntitySet="User_Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Room_Bed">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User_Room_Bed">
+              <MappingFragment StoreEntitySet="User_Room_Bed">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="BedId" ColumnName="BedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Rooms">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User_Rooms">
+              <MappingFragment StoreEntitySet="User_Rooms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="RecoveryPassword" ColumnName="RecoveryPassword" />
+                <ScalarProperty Name="IsProfileCompleted" ColumnName="IsProfileCompleted" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostelRooms">
+            <EntityTypeMapping TypeName="HostelManagmentModel.HostelRoom">
+              <MappingFragment StoreEntitySet="HostelRooms">
+                <ScalarProperty Name="RoomChangres" ColumnName="RoomChangres" />
+                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+                <ScalarProperty Name="NoOfBeds" ColumnName="NoOfBeds" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Address">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User_Address">
+              <MappingFragment StoreEntitySet="User_Address">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_RoomRequest">
+            <EntityTypeMapping TypeName="HostelManagmentModel.User_RoomRequest">
+              <MappingFragment StoreEntitySet="User_RoomRequest">
+                <ScalarProperty Name="CancelRequest" ColumnName="CancelRequest" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsRoomAssigned" ColumnName="IsRoomAssigned" />
+                <ScalarProperty Name="Budegt" ColumnName="Budegt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

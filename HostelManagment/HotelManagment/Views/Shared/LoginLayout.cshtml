@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hostel Management</title>
+    <link href="~/content/css/loginstyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/css/plugins/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/ti-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/fontawesome-free-5.8.1-web/css/all.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/select2.min.css" rel="stylesheet" />
+    <link href="~/content/css/custom-style.css" rel="stylesheet" />
+    <link href="~/content/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="bodybg">
+    @RenderBody()
+    <script src="~/content/js/jquery.min.js"></script>
+    <script src="~/content/js/popper.min.js"></script>
+    <script src="~/content/js/bootstrap.min.js"></script>
+    <script src="~/content/js/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/js/select2.min.js"></script>
+    <script src="~/content/js/template.js"></script>
+    <script src="~/content/js/off-canvas.js"></script>
+    <script src="~/content/js/hoverable-collapse.js"></script>
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script src="~/content/js/dashboard.js"></script>
+    <script src="~/content/js/common.js"></script>
+    <script src="~/content/js/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/content/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @*<script>
+            $(".select2").select2({
+                dropdownCssClass: 'no-search'
+            });
+        </script>*@
+    <script>
+        $('#forgot').click(function () {
+            $('.forgot').show();
+            $('#forgot').hide();
+            $('#signin').show();
+            $('.login').hide().slideUp(200);
+            $('.forgot').addClass('fadeInDown');
+            $('.heading').text("Forgot Password");
+
+        });
+        $('#signin').click(function () {
+            $('#signin').hide();
+            $('.forgot').slideUp(300);
+            $('.login').hide().slideDown(200);
+            $('#forgot').show();
+            $('.heading').text("SIGNIN");
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+    @*<footer>
+            <hr />
+            <nav class="navbar transparent navbar-inverse">
+                <p>&copy; 2018 - AspNetCoreMvcSharedLocalization</p>
+
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </nav>
+        </footer>*@
+</body>
+
+</html>

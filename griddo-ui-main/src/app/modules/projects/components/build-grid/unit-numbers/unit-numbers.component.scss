@@ -1,0 +1,50 @@
+.unit-box {
+  width: 4.8156rem;
+  height: 4.8156rem;
+}
+
+.floor-numbers {
+  .floor-number {
+    height: 4.8156rem;
+  }
+}
+
+.stack-numbers {
+  .stack-number {
+    width: 4.8156rem;
+  }
+}
+
+.block-title {
+  left: 1.3rem;
+}
+
+.sales-grid-blocks {
+  overflow-y: auto;
+  height: 55vh;
+}
+
+.alreadySelected {
+  overflow: hidden;
+  width: 1rem !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.alreadySelectedStackNumber {
+  width: 1rem !important;
+  margin: 0 !important;
+}
+
+.floorAlreadySelected {
+  background-color: var(--color-05);
+  overflow: hidden;
+  width: 100% !important;
+  height: 1rem !important;
+  margin: 0 !important;
+}
+
+.floorNumberAlreadySelected {
+  height: 1rem !important;
+  margin: 0 !important;
+}

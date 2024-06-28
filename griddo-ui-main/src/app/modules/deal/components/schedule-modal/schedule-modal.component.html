@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{heading}}</h2>
+
+<mat-dialog-content>
+    <section class="d-block">
+        <div class="ml-5">
+            <form class="row m-0 mt-3 mx-auto" [formGroup]="form">
+                <!-- <h3>Are you sure you want to delete purchaser?</h3> -->
+                <div class="form-group mb-1 col-6 p-0 mr-2">
+                    <label class="color-01 font-weight-normal paragraph-03" for="dob">Schedule Date <span
+                                    style="color:#ff0000">*</span></label>
+                    <div class="form-group mb-1 col-4 p-0">
+                        <label class="color-01 font-weight-normal paragraph-03" for="dob">Schedule Time <span
+                                        style="color:#ff0000">*</span></label>
+                        <div class="position-relative">
+                            <input (click)="scheduleDatepicker.open()" placeholder="Select date" readonly id="scheduleDate" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                                [matDatepicker]="scheduleDatepicker" formControlName="scheduleDate">
+                            <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                [for]="scheduleDatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #scheduleDatepicker></mat-datepicker>
+                          </div>
+                    </div>
+                </div>
+                <div class="form-group mb-1 col-4 p-0">
+                    <label class="color-01 font-weight-normal paragraph-03" for="dob">Schedule Time <span
+                                    style="color:#ff0000">*</span></label>
+                    <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"  id="scheduleTime" type="time" formControlName="scheduleTime">
+                </div>
+            </form>
+        </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button (click)="onConfirm()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Schedule</button>
+    <button (click)="onCancel()" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Cancel</button>
+</mat-dialog-actions>

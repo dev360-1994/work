@@ -1,0 +1,146 @@
+<section class="d-flex h-100 pages-with-sidebar">
+  <div class="bg-color-white border-color-06 border-color-19 border-right-1 sidebar {{heading}}">
+    <app-logo class="d-block mx-5 my-3 px-4"
+      [whiteLogo]=false></app-logo>
+    <div *ngIf="heading === 'project'"
+      class="border-bottom-1 border-color-19 border-top-1 mb-3 position-relative">
+      <p class="bg-color-01 color-white font-weight-semi-bold m-0 paragraph-01 position-absolute text-center w-100">
+        {{project?.projectName | uppercase}}</p>
+      <img class="w-100"
+        style="height: 10rem"
+        [src]="project?.logo || project?.heroImage || 'https://www.tpf.eu/wp-content/uploads/2012/05/BLACK-PEARLV2-LANDSCAPE.jpg'"
+        alt="">
+    </div>
+    <div class="links-container">
+      <div class="d-flex flex-column px-3 sidebar-links">
+        <div *ngFor="let item of links">
+          <!-- routerLinkActive="color-16 bg-color-08" -->
+          <a *ngIf="item?.link"
+            class="align-items-center border-0 color-01 cursor-pointer d-block d-flex ng-star-inserted px-2 py-3 sub-heading-04 w-100 color-01-hover"
+            [ngClass]="{'color-16 bg-color-08':item.active}"
+            [routerLink]="item.link">
+            <span *ngIf="item?.icon"
+              class="material-icons-outlined mr-3">{{item?.icon}}</span>
+            <span class="font-family-primary">{{item?.title}}</span>
+          </a>
+          <ng-container *ngIf="!item?.link && item?.items?.length">
+            <button (click)="item.opened = !item.opened"
+              class="align-items-center bg-color-transparent border-0 color-01 cursor-pointer d-block d-flex ng-star-inserted px-2 py-3 sub-heading-04 w-100"
+              [ngClass]="{'color-16 bg-color-08':item.active}">
+              <span *ngIf="item?.icon"
+                class="material-icons-outlined mr-3">{{item?.icon}}</span>
+              <span class="font-family-primary">{{item?.title}}</span>
+            </button>
+            <div *ngIf="item.opened">
+              <ng-container *ngFor="let innerItem of item.items">
+                <a *ngIf="innerItem?.link"
+                  [ngClass]="{'color-16 bg-color-08':innerItem.active}"
+                  class="border-0 color-01 cursor-pointer align-items-center d-flex sub-heading-04 link pl-5 px-2 py-3 color-01-hover"
+                  [routerLink]="innerItem.link"
+                  (click)="clearCache(innerItem)">
+                  <span class="font-family-primary">{{innerItem?.title}}</span>
+                </a>
+              </ng-container>
+            </div>
+
+          </ng-container>
+
+        </div>
+      </div>
+      <div class="border-top bottom-actions d-flex flex-column mt-5 pt-3 px-3 sidebar-links">
+        <h6 class="color-04 paragraph-02"
+          *ngIf="bottomlinks?.length">Settings</h6>
+        <div *ngFor="let item of bottomlinks">
+          <a *ngIf="item?.link"
+            class="align-items-center border-0 color-01 cursor-pointer d-block d-flex ng-star-inserted px-2 py-3 sub-heading-04 w-100 color-01-hover"
+            [ngClass]="{'color-16 bg-color-08':item.active}"
+            [routerLink]="item.link">
+            <span *ngIf="item?.icon"
+              class="material-icons-outlined mr-3">{{item?.icon}}</span>
+            <span class="font-family-primary">{{item?.title}}</span>
+          </a>
+          <ng-container *ngIf="!item?.link && item?.items?.length">
+            <button (click)="item.opened = !item.opened"
+              class="align-items-center bg-color-transparent border-0 color-01 cursor-pointer d-block d-flex ng-star-inserted px-2 py-3 sub-heading-04 w-100"
+              [ngClass]="{'color-16 bg-color-08':item.active}">
+              <span *ngIf="item?.icon"
+                class="material-icons-outlined mr-3">{{item?.icon}}</span>
+              <span class="font-family-primary">{{item?.title}}</span>
+            </button>
+            <div *ngIf="item.opened">
+              <ng-container *ngFor="let innerItem of item.items">
+                <a *ngIf="innerItem?.link"
+                  class="align-items-center border-0 color-01 cursor-pointer d-block d-flex ng-star-inserted px-2 py-3 sub-heading-04 w-100 color-01-hover"
+                  [ngClass]="{'color-16 bg-color-08':innerItem.active}"
+                  [routerLink]="innerItem.link">
+                  <span class="font-family-primary">{{innerItem?.title}}</span>
+                </a>
+              </ng-container>
+            </div>
+
+          </ng-container>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="bg-color-06 flex-auto side-bar-details">
+    <div class="align-items-center d-flex justify-content-between user-info-bar">
+      <div class="d-flex left w-50">
+        <div *ngIf="searchBar?.enabled"
+          class="ml-4 align-items-center d-flex search-box px-2  w-100">
+          <span class="material-icons color-03 sub-heading-02">search</span>
+          <input type="text"
+            placeholder="{{this.searchBar.placeholder}}"
+            [formControl]="control"
+            class="flex-auto w-100 paragraph-03">
+          <!-- <input type="text" placeholder="{{this.searchBar.placeholder}}" [formControl]="control" class="flex-auto"
+            [matAutocomplete]="auto"> -->
+          <!-- <span class="material-icons color-03 sub-heading-02">tune</span> -->
+          <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+            <mat-option *ngFor="let item of filteredItems" [value]="item[searchBar.valKey]">
+              {{item[searchBar.nameKey]}}
+            </mat-option>
+          </mat-autocomplete> -->
+        </div>
+        <ng-container *ngIf="searchBar?.buttons?.enabled && searchBar?.buttons?.items?.length">
+          <button *ngFor="let button of searchBar?.buttons?.items"
+            mat-icon-button
+            (click)="onClickButton(button)">
+            <span class="material-icons {{button?.selected ? 'color-16' : 'color-03'}} ">{{button.icon}}</span>
+          </button>
+        </ng-container>
+      </div>
+      <div class="align-items-center d-flex right">
+        <!-- <button class="sub-heading-04 mr-2" mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button> -->
+        <button class="user-btn py-2 d-flex font-family-primary mat-raised-button mat-button-base"
+          
+          [matMenuTriggerFor]="menu">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU"
+            alt="">
+          <div class="d-flex flex-column text-left">
+            <span class="paragraph-03">{{(user?.fullName || user?.userName) | titlecase}}</span>
+            <span class="font-weight-semi-bold paragraph-04">{{userRole}}</span>
+          </div>
+          <span class="material-icons">arrow_drop_down</span>
+
+        </button>
+
+        <mat-menu #menu="matMenu">
+
+          <button *ngFor="let role of roles;let i = index"
+            (click)="updateCurrentRole(role.route)"
+            mat-menu-item>{{role.name}}</button>
+          <button (click)="logout()"
+            mat-menu-item>Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="d-block details-content px-4">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

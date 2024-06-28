@@ -1,0 +1,313 @@
+<form class="d-block w-100 mt-3" [formGroup]="form">
+    <ng-container *ngFor="let dStructure of depositStructureItem?.controls; let depositIndex=index">
+        <ng-container formArrayName="depositStructure">
+            <div class="row m-0 position-relative border-1 border-color-19 mb-2"
+                *ngIf="!depositStructureItem?.value[depositIndex].saved">
+                <button (click)="closeFormPanel(depositIndex)"
+                    class="bg-color-transparent border-0 color-01 cursor-pointer mt-2 position-absolute right-0 top-0 z-index-1">
+                    <span *ngIf="depositStructureItem?.value[depositIndex].new"
+                        class="material-icons color-03">delete</span>
+                    <span *ngIf="!depositStructureItem?.value[depositIndex].new"
+                        class="material-icons color-03">close</span>
+                </button>
+                <ng-container [formGroupName]="depositIndex">
+                    <div class="border-bottom-1 border-color-19 row w-100 m-0 px-3 pb-3 mb-3 pt-4">
+                        <div class="row m-0 w-100">
+                            <div class="col-3 form-group">
+                                <label class="sub-heading-04" for="depositName">Deposit Name</label>
+                                <input (keydown)="keydownEvent($event)" class="form-control" placeholder="Deposit Name"
+                                    id="depositName" type="text" formControlName="depositName">
+                            </div>
+                            <div class="col-9 form-group">
+                                <label class="sub-heading-04" for="description">Description</label>
+                                <input (keydown)="keydownEvent($event)" class="form-control" placeholder="description"
+                                    id="description" type="text" formControlName="description">
+                            </div>
+                            <!-- <div class="col-3 form-group">
+                                <label class="sub-heading-04" for="depositType">Deposit Type</label>
+                                <select class="form-control" formControlName="depositType" placeholder=""
+                                    id="depositType" type="text">
+                                    <option [value]="1">Percentage </option>
+                                    <option [value]="2">Dollar Value</option>
+                                    <option [value]="3">Hybrid</option>
+                                </select>
+                            </div> -->
+                        </div>
+                        <div class="row m-0 w-100">
+                            <div class="col-md-3 form-group">
+                                <label class="sub-heading-04" for="depositName">Total Deposit Required</label>
+                                <div class="input-group">
+                                    <input type="number" (keydown)="keydownEvent($event)" class="form-control"
+                                        placeholder="Deposit Required" id="totalDepositRequired" type="number"
+                                        formControlName="totalDepositRequired"
+                                        (change)="checkTotalUnitPrice(depositIndex)">
+                                    <div class="input-group-append border-0">
+                                        <select class="border-radius-none border-color-05 color-01" formControlName="totalDepositRequiredType">
+                                            <option value="%">%</option>
+                                            <option value="$">$</option>
+                                        </select>
+                                        <!-- <span class="bg-color-06 border input-group-text" id="basic-addon2">
+                                            {{dStructure?.value?.totalDepositRequiredType}}
+                                        </span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" formArrayName="projectDepositStructureDetails">
+                        <ng-container *ngFor="let item of depositDetails(depositIndex).controls; let i=index">
+                            <div class="row m-0 position-relative" [formGroupName]="i">
+                                <div class="col-3 form-group">
+                                    <label class="sub-heading-04" for="type">Type</label>
+                                    <!-- <span class="form-control">
+                                        <ng-container [ngSwitch]="item?.value?.typeOfDeposit">
+                                            <ng-container *ngSwitchCase="1">Percentage Value</ng-container>
+                                            <ng-container *ngSwitchCase="2">Dollar Value</ng-container>
+                                            <ng-container *ngSwitchCase="3">Balance to % value</ng-container>
+                                        </ng-container>
+                                    </span> -->
+                                    <select class="form-control" placeholder="" id="type" type="text"
+                                        (change)="resetValueOnChange(item)" formControlName="typeOfDeposit">
+                                        <option [value]="1">Percentage </option>
+                                        <option [value]="2">Dollar Value</option>
+                                        <option [value]="3">Balance to %</option>
+                                    </select>
+                                </div>
+                                <div class="col-3 mt-0 form-group">
+                                    <label class="sub-heading-04" for="amount">
+                                        <!-- <span *ngIf="item.get('typeOfDeposit')?.value ==''" class="mr-1">Amount </span> -->
+                                        <!-- {{item.get('typeOfDeposit')?.value}} -->
+                                        <ng-container *ngIf="item.get('typeOfDeposit')?.value == 1">Percentage Value
+                                        </ng-container>
+                                        <ng-container *ngIf="item.get('typeOfDeposit')?.value == 2">Dollar Value
+                                        </ng-container>
+                                        <ng-container *ngIf="item.get('typeOfDeposit')?.value == 3">Balance to % value
+                                        </ng-container>
+                                    </label>
+
+                                    <div [ngSwitch]="item.get('typeOfDeposit')?.value">
+                                        <!-- <div *ngSwitchCase="''"> <input  (keydown)="keydownEvent($event)" class="form-control" placeholder="" id="amount"
+                                                type="number" min="0" formControlName="amount"></div> -->
+                                        <div *ngSwitchCase="2"><input (keydown)="keydownEvent($event)"
+                                                class="form-control" placeholder="" id="dollarValue" type="number"
+                                                min="0" formControlName="dollarValue"
+                                                (change)="checkTotalUnitPrice(depositIndex,'dollarValue',i)">
+                                        </div>
+                                        <div *ngSwitchCase="1"><input
+                                                (change)="checkTotalUnitPrice(depositIndex,'percentage',i)"
+                                                class="form-control" placeholder="" id="percentage" type="number"
+                                                min="0" formControlName="percentage">
+                                        </div>
+                                        <div *ngSwitchCase="3"><input
+                                                (change)="checkTotalUnitPrice(depositIndex,'balanceto',i)"
+                                                class="form-control" placeholder="" id="balance" type="number" min="0"
+                                                formControlName="balanceto"></div>
+                                      
+                                    </div>
+                                </div>
+                                <div [ngSwitch]="item.get('installmentType')?.value" class="col-3 form-group">
+
+                                    <div *ngSwitchCase="'Days'">
+                                        <label class="sub-heading-04" for="time">Days</label> <input
+                                            (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                            id="time" type="number" min="0" formControlName="time"
+                                            (change)="checkDueOn($event,'time',depositIndex,i)">
+                                    </div>
+                                    <div *ngSwitchCase="'Weeks'">
+                                        <label class="sub-heading-04" for="time">Weeks</label> <input
+                                            (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                            id="time" type="number" min="0" formControlName="time"
+                                            (change)="checkDueOn($event,'time',depositIndex,i)">
+                                    </div>
+                                    <div *ngSwitchCase="'Months'">
+                                        <label class="sub-heading-04" for="time">Months (30 Days)</label> <input
+                                            (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                            id="time" type="number" min="0" formControlName="time"
+                                            (change)="checkDueOn($event,'time',depositIndex,i)">
+                                    </div>
+                                    <div *ngSwitchCase="''">
+                                        <label class="sub-heading-04" for="time">Time</label> <input
+                                            (keydown)="keydownEvent($event)" class="form-control" placeholder=""
+                                            id="time" type="number" min="0" formControlName="time">
+                                    </div>
+                                    <div *ngSwitchCase="'Fixed Date'">
+                                        <label class="sub-heading-04" for="time">Fixed Date</label>
+                                            <div class="position-relative">
+                                                <input (dateChange)="checkDueOn($event,'fixedDate',depositIndex,i)" (keydown)="keydownEvent($event)" (click)="fixedDatepicker.open()" placeholder="Select date" readonly id="fixedDate" class="form-control"
+                                                    [matDatepicker]="fixedDatepicker" formControlName="fixedDate">
+                                                <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                    [for]="fixedDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #fixedDatepicker></mat-datepicker>
+                                              </div>
+                                    </div>
+                                   
+
+                                    <div *ngSwitchCase="'Signing'">
+                                        <label class="sub-heading-04" for="time">Signing</label> 
+                                        <input readonly
+                                            id="signing" type="number" value="" class="form-control input-disabled">
+                                    </div>
+                                    <div *ngSwitchCase="'Occupancy'">
+                                        <label class="sub-heading-04" for="time">Occupancy</label>
+                                         <input readonly class="form-control input-disabled"
+                                            id="occupancy" type="number" value="">
+                                    </div>
+
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label class="sub-heading-04" for="installmentType">Due On</label>
+                                    <select class="form-control" placeholder="" id="installmentType" type="text"
+                                        formControlName="installmentType">
+                                        <!-- <option value="">Select Due On Type</option> -->
+                                        <option value="Days">Days</option>
+                                        <option value="Weeks">Weeks</option>
+                                        <option value="Months">Months</option>
+                                        <option value="Occupancy">Occupancy</option>
+                                        <option value="Fixed Date">Fixed Date</option>
+                                        <!-- <option value="Date from Agreement">Date from Agreement </option> -->
+                                        <option value="Signing">Signing</option>
+
+                                    </select>
+                                </div>
+                                <div class="align-items-center d-flex form-group h-100 m-0 position-absolute pt-3 right-0"
+                                    style="right: -1.2%;">
+                                    <!-- dStructure?.value?.totalDepositRequiredType -->
+                                    <!-- <ng-container
+                                        *ngIf="dStructure?.value?.depositType == 3 && i < 3;else removeRowButton"> -->
+                                    <!-- no remove button -->
+                                    <!-- </ng-container> -->
+                                    <!-- <ng-template #removeRowButton> -->
+                                    <button (click)="removeDepositDetails(depositIndex,i)"
+                                        class="align-items-center bg-color-transparent border-0 color-01 cursor-pointer d-flex justify-content-center">
+                                        <span
+                                            class="material-icons sub-heading-02 font-style-italic color-03">close</span>
+                                    </button>
+                                    <!-- </ng-template> -->
+
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="col-12 d-flex justify-content-between my-3">
+                        <div class="d-flex">
+                            <ng-container *ngIf="depositDetails(depositIndex)?.controls?.length">
+                                <p *ngIf="getTotal(depositDetails(depositIndex)?.value,2) && dStructure?.value?.totalDepositRequiredType === '$'"
+                                    class="color-03 paragraph-02 m-0 mr-3">Dollar value:
+                                    {{getTotal(depositDetails(depositIndex)?.value,2, 0, depositIndex)}}
+                                </p>
+                                <p *ngIf="getTotal(depositDetails(depositIndex)?.value) && dStructure?.value?.totalDepositRequiredType === '%'"
+                                    class="color-03 paragraph-02 m-0">Percentage value:
+                                    {{getTotal(depositDetails(depositIndex)?.value, 1, 0, depositIndex)}}                                
+                                </p>
+                                <span *ngIf="(totalPercentageSubmit == dStructure?.value?.totalDepositRequired && dStructure?.value?.totalDepositRequiredType === '%')
+                                || (totalDepositSubmit == dStructure?.value?.totalDepositRequired  && dStructure?.value?.totalDepositRequiredType === '$')" 
+                                class="material-icons mt-2 text-success position-top">check_circle</span>
+                                <span *ngIf="(totalPercentageSubmit != dStructure?.value?.totalDepositRequired && dStructure?.value?.totalDepositRequiredType === '%')
+                                || (totalDepositSubmit != dStructure?.value?.totalDepositRequired  && dStructure?.value?.totalDepositRequiredType === '$')" 
+                                class="material-icons mt-2 text-danger position-top">cancel</span>
+                                <!-- <p class="color-03 paragraph-02 m-0">Deposit Structure matches Total Deposit</p> -->
+                            </ng-container>                        
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <!-- <button
+                                [disabled]="!dStructure?.value?.totalDepositRequired || (addRowTrack && addRowTrack[depositIndex] && addRowTrack[depositIndex]?.addRowDisabled)"
+                                class="bg-color-02 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                mat-stroked-button
+                                (click)="addDepositeDetails(depositIndex, dStructure?.value?.depositType)">
+                                Add Row
+                            </button>
+                            <button [disabled]="dStructure?.invalid"
+                                class="bg-color-07 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                mat-stroked-button (click)="saveDepositeStructure(depositIndex)">
+                                Save
+                            </button> -->
+                            <button
+                                class="bg-color-02 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                mat-stroked-button
+                                (click)="addDepositeDetails(depositIndex, dStructure?.value?.depositType)">
+                                Add Row
+                            </button>
+                            <button
+                                class="bg-color-07 border-0 color-white letter-spacing-1 mat-button-base mat-focus-indicator mat-stroked-button mr-2 paragraph-03 py-1"
+                                mat-stroked-button (click)="saveDepositeStructure(depositIndex)">
+                                Save
+                            </button>
+                        </div>
+
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+
+    </ng-container>
+
+    <div class="bg-color-06 m-0 row">
+        <ng-container *ngFor="let item of depositStructureItem?.value; let depositIndex=index">
+            <div class="col-4 p-0" *ngIf="item.saved">
+                <div class="bg-color-19 d-block p-3 m-2 position-relative h-100">
+                    <button (click)="saveDepositeStructure(depositIndex,true)"
+                        class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-4 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                        <span class="material-icons paragraph-01">edit</span>
+                    </button>
+                    <button (click)="removeDepositStructure(depositIndex)"
+                        class="color-13-hover bg-color-transparent border-0 color-01 cursor-pointer mr-1 mt-2 p-0 position-absolute right-0 top-0 z-index-1">
+                        <span class="material-icons paragraph-01 color-03">delete</span>
+                    </button>
+                    <p class="font-weight-medium letter-spacing-1 m-0 paragraph-01">
+                        <!-- <ng-container *ngIf="item?.depositType == 1">Percentage - </ng-container>
+                        <ng-container *ngIf="item?.depositType == 2">Fixed Dollar Value - </ng-container>
+                        <ng-container *ngIf="item?.depositType == 3">Hybrid - </ng-container> -->
+                        {{item?.depositName}}
+                    </p>
+                    <p class="font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                        <!-- <ng-container *ngIf="item?.amoutType == 2">$</ng-container>
+                        {{item?.amount}}
+                        <ng-container *ngIf="item?.amoutType == 1">%</ng-container> -->
+                        {{item?.description}}
+                    </p>
+                    <ul class="font-weight-medium letter-spacing-1 mt-2 paragraph-03">
+                        <ng-container *ngFor="let childItem of item?.projectDepositStructureDetails">
+                            <li
+                                *ngIf="(childItem?.typeOfDeposit == 1 && childItem?.percentage) || (childItem?.typeOfDeposit == 2 && childItem?.dollarValue) || (childItem?.typeOfDeposit == 3 && childItem?.balanceto)">
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 2">${{childItem?.dollarValue}}
+                                </ng-container>
+                                <!-- {{childItem?.amount}} -->
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 1">{{childItem?.percentage}}%
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 3">{{childItem?.balanceto}}%
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Days'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Weeks'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Months'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Occupancy'">on {{childItem?.time
+                                    ==0? "" : childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Fixed Date'">at {{childItem?.fixedDate}}</ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Date from Agreement'">at {{childItem?.datefromAgreement}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Signing'">on 
+                                    <!-- {{childItem?.time}} -->
+                                </ng-container>
+
+                                {{childItem.installmentType}}
+
+                            </li>
+                        </ng-container>
+
+                    </ul>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="d-flex justify-content-end w-100">
+        <button class="align-items-center bg-color-transparent border-0 color-01 d-flex paragraph-03 my-3"
+            (click)="addDepositStructure()">
+            <mat-icon class="paragraph-01">add</mat-icon>
+            <span class="text-decoration-underline">Add another deposit structure</span>
+        </button>
+    </div>
+</form>

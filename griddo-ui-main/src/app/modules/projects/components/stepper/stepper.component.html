@@ -1,0 +1,77 @@
+<mat-progress-bar *ngIf="isProcessing" mode="buffer"></mat-progress-bar>
+
+<ng-container *ngIf="component">
+    <app-unit-pricing-detail *ngIf="component?.section === 'unit-pricing'" (onSaveData)="saveUnitPricing($event)"
+        (stepperChange)="stepChange($event)" (formEmitter)="outPut($event,2)" [form]="buildGridForm">
+    </app-unit-pricing-detail>
+    <app-unit-numbers *ngIf="component?.section === 'unit-numbers'" (onSaveData)="saveUnitPricing($event)"
+        (stepperChange)="stepChange($event)" [selectedBlockIndex]="component?.blockIndex"
+        [selectedTowerIndex]="component?.towerIndex" (formEmitter)="outPut($event,2)" [form]="buildGridForm">
+    </app-unit-numbers>
+</ng-container>
+<section class="mx-auto p-0 m-0 mt-3" [ngClass]="{'d-none': component?.section}">
+
+    <div class="row m-0">
+        <div class="col-12">
+            <h1 class="font-weight-medium heading-03 my-3">{{title}}</h1>
+        </div>
+    </div>
+    <mat-stepper  [selectedIndex]="selectedIndex" labelPosition="bottom" #stepper [linear]="true" (selectionChange)="stepSelectionChange($event)">
+        <mat-step [stepControl]="projectForm" label="Project Details">
+            <div class="h-100 overflow-auto">
+                <app-add-project (formEmitter)="outPut($event,1)"> </app-add-project>
+            </div>
+        </mat-step>
+        <mat-step class=" col-md-10 p-0 m-0">
+            <ng-template matStepLabel>Build Grid</ng-template>
+            <app-build-grid (formEmitter)="outPut($event,2)" (stepperChange)="stepChange($event)"> </app-build-grid>
+        </mat-step>
+        <!-- <mat-step class=" col-md-10 p-0 m-0" [stepControl]="levelDetailForm">
+    <ng-template matStepLabel>Add Units</ng-template>
+     <app-level-detail (formEmitter)="outPut($event,3)"></app-level-detail>
+  </mat-step> -->
+        <mat-step class=" col-md-10 p-0 m-0" [stepControl]="depositForm">
+            <ng-template matStepLabel>Deposits</ng-template>
+            <app-deposit [buildGridVal]="buildGridComponent?.form?.value" (formEmitter)="outPut($event,3)"></app-deposit>
+        </mat-step>
+        <mat-step class=" col-md-10 p-0 m-0" [stepControl]="depositForm">
+            <ng-template matStepLabel>Commissions</ng-template>
+            <app-commissions  [buildGridVal]="buildGridComponent?.form?.value" (formEmitter)="outPut($event,9)"></app-commissions>
+        </mat-step>
+        <mat-step class=" col-md-10 p-0 m-0" [stepControl]="worksheetBuyersForm">
+            <ng-template matStepLabel>Worksheet And Buyer Rules</ng-template>
+            <app-worksheet-buyer-rules (formEmitter)="outPut($event,4)"></app-worksheet-buyer-rules>
+        </mat-step>
+        <mat-step class="col-md-10 p-0 m-0" [stepControl]="salesTeamForm">
+            <ng-template matStepLabel>Internal Sales Team</ng-template>
+            <app-sales-team (formEmitter)="outPut($event,5)"></app-sales-team>
+        </mat-step>
+        <mat-step class="col-md-10 p-0 m-0" [stepControl]="salesTeamForm">
+            <ng-template matStepLabel>External Brokers</ng-template>
+            <app-external-brokers [commisionform]="commissionForm?.value" (formEmitter)="outPut($event,6)"></app-external-brokers>
+        </mat-step>
+        <mat-step class=" col-md-8 p-0 m-0" [stepControl]="projectDocumentForm">
+            <ng-template matStepLabel>Document Template</ng-template>
+            <app-document-template (formEmitter)="outPut($event,7)">
+            </app-document-template>
+        </mat-step>
+        <mat-step class=" col-md-8 p-0 m-0" [stepControl]="marketingAssetsForm">
+            <ng-template matStepLabel>Marketing Assets</ng-template>
+            <app-marketing-assets (formEmitter)="outPut($event,8)">
+            </app-marketing-assets>
+        </mat-step>
+
+    </mat-stepper>
+
+    <div  class="d-flex justify-content-center">
+        <button [disabled]="isProcessing" *ngIf="stepper.selectedIndex>1 && stepper.selectedIndex <8 "
+            class="actionButtons border border-warning text-warning bg-light " (click)="nextStep()">Skip For
+            Now</button>
+        <button [disabled]="isProcessing" *ngIf="stepper.selectedIndex>1" class="actionButtons border border-primary text-primary bg-light  "
+            (click)="confirmDialog()">Save & Exit</button>
+        <!-- <button class="actionButtons border border-danger text-danger bg-light " (click)="stepper.reset()">Cancel</button> -->
+        <button [disabled]="isProcessing" *ngIf="stepper.selectedIndex>0" class="actionButtons border border-primary text-primary bg-light ml-2"
+            (click)="backButton(stepper)">Back</button>
+        <button [disabled]="isProcessing" class="actionButtons ml-2" *ngIf="stepper.selectedIndex < 8" (click)="nextStep()">Next</button>
+    </div>
+</section>

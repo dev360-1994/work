@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee7ab02bd46e4b89a33e31541d3cfc6d" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="HostelManagmentModel.Courses" Width="1.5" PointX="5.75" PointY="4.125" />
+        <EntityTypeShape EntityType="HostelManagmentModel.HostelRoom" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="HostelManagmentModel.User_Courses" Width="1.5" PointX="5.75" PointY="7.125" />
+        <EntityTypeShape EntityType="HostelManagmentModel.User_Room_Bed" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="HostelManagmentModel.User_Rooms" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Room_Bed_HostelRooms" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Rooms_HostelRooms" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Room_Bed_User_Room_Bed" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Courses_Courses" />
+        <EntityTypeShape EntityType="HostelManagmentModel.Bed" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Room_Bed_HostelRooms1" />
+        <EntityTypeShape EntityType="HostelManagmentModel.Gender" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HostelManagmentModel.City" Width="1.5" PointX="13.875" PointY="0.625" />
+        <EntityTypeShape EntityType="HostelManagmentModel.Country" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HostelManagmentModel.State" Width="1.5" PointX="11.625" PointY="0.5" />
+        <AssociationConnector Association="HostelManagmentModel.FK_City_States" />
+        <AssociationConnector Association="HostelManagmentModel.FK_States_Country" />
+        <EntityTypeShape EntityType="HostelManagmentModel.User_Address" Width="1.5" PointX="16.125" PointY="4.125" />
+        <AssociationConnector Association="HostelManagmentModel.FK__User_Addr__CityI__66603565" />
+        <AssociationConnector Association="HostelManagmentModel.FK__User_Addr__Count__68487DD7" />
+        <AssociationConnector Association="HostelManagmentModel.FK__User_Addr__State__6754599E" />
+        <EntityTypeShape EntityType="HostelManagmentModel.User" Width="1.5" PointX="0.75" PointY="4" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Address_Users" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Courses_Users" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Room_Bed_Users" />
+        <AssociationConnector Association="HostelManagmentModel.FK_User_Rooms_Users" />
+        <EntityTypeShape EntityType="HostelManagmentModel.AccessLog" Width="1.5" PointX="3" PointY="8.25" />
+        <AssociationConnector Association="HostelManagmentModel.FK_AccessLog_Users" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

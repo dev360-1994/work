@@ -1,0 +1,561 @@
+<mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+<a routerLink="../" class="back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+    <mat-icon>keyboard_backspace</mat-icon> Back to All Projects 
+</a>
+<div class="d-block w-100" *ngIf="!isProgressing">
+    <div class="align-items-baseline d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-baseline">
+            <p class="color-01 d-flex letter-spacing-01 m-0 sub-heading-01 mr-3">{{project?.projectName | uppercase}}
+            </p>
+            <p class="paragraph-02 font-style-italic color-03 letter-spacing-1 m-0">
+                <ng-container [ngSwitch]="project?.projectStatus">
+                    <ng-container *ngSwitchCase="'1'">Active</ng-container>
+                    <ng-container *ngSwitchCase="'2'">Launching Soon</ng-container>
+                    <ng-container *ngSwitchCase="'3'">On Hold</ng-container>
+                    <ng-container *ngSwitchCase="'4'">Inactive</ng-container>
+                    <ng-container *ngSwitchCase="'5'">Complete</ng-container>
+                </ng-container>
+            </p>
+        </div>
+        <a *ngIf="user?.role?.toLowerCase() === 'masteradmin'" routerLink="edit" class="color-03 letter-spacing-1 paragraph-02 text-decoration-underline">Edit Project</a>
+    </div>
+    <div class="row m-0">
+        <div class="project-imgs col-3 pl-0">
+            <img class="w-100" [src]="project?.heroImage|| 'https://www.tpf.eu/wp-content/uploads/2012/05/BLACK-PEARLV2-LANDSCAPE.jpg'" alt="">
+        </div>
+        <div class="project-imgs col-3 pr-0">
+            <img class="w-100" [src]="project?.logo || 'https://www.tpf.eu/wp-content/uploads/2012/05/BLACK-PEARLV2-LANDSCAPE.jpg'" alt="">
+        </div>
+        <div class="col-6 pl-4 pr-0">
+            <div class="bg-color-white border-1 border-color-19 py-3 row h-100 m-0">
+                <div class="d-flex align-items-center col-6 mb-3">
+                    <span class="material-icons mr-2">today</span>
+                    <div>
+                        <p class="color-03 font-weight-bold m-0 paragraph-03">Start Date: <span class="font-weight-normal">{{project?.startDate | date:'shortDate'}}</span></p>
+                        <p class="color-03 font-weight-bold m-0 paragraph-03">End Date: <span class="font-weight-normal">{{project?.completionDate | date:'shortDate'}}</span></p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center col-6 mb-3">
+                    <span class="material-icons mr-2">language</span>
+                    <div class="d-block">
+                        <a class="color-03 font-weight-normal m-0 paragraph-03 d-block" target="_blank" [href]="project?.websiteUrl">{{project?.websiteUrl}}</a>
+                        <a class="color-03 font-weight-normal m-0 paragraph-03 d-block" target="_blank" [href]="project?.miniSiteURL">{{project?.miniSiteURL}}</a>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center col-6">
+                    <span class="material-icons mr-2">home</span>
+                    <div>
+                        <p class="color-03 font-weight-normal m-0 paragraph-03">{{project?.address | titlecase}}, {{project?.city}}, {{project?.zipCode}}, {{project?.country}}
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center col-6">
+                    <span class="material-icons mr-2">engineering</span>
+                    <div>
+                        <p class="color-03 font-weight-normal m-0 paragraph-03">{{project?.builderName | titlecase}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3">
+        <div class="col-12">
+            <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Building Details</h3>
+        </div>
+        <div class="col-3">
+            <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Height: <span class="font-weight-normal">{{project?.buildingHeight}}m</span></p>
+            <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Towers: <span *ngIf="project?.generalSetting?.numberofTowers" class="font-weight-normal">{{project?.generalSetting?.numberofTowers}}</span></p>
+        </div>
+        <div class="col-9">
+            <div class="row m-0">
+                <div class="col-6 pl-0">
+                    <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Unit Types: <span class="font-weight-normal">Studio, IB+D, 2B, 2B+D, Type 3</span></p>
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Ceiling Height</p>
+                    <p class="color-03 font-weight-normal mb-2 paragraph-03"
+                        *ngFor="let item of project?.projectTower; let i= index">
+                        <span class="tower">{{item?.towerName | titlecase}}</span> : <ng-container *ngIf="item?.ceilingHeight">{{item?.ceilingHeight || 'N/A'}}<span
+                            *ngIf="item?.ceilingHeight">ft</span></ng-container>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Taxes:
+                        <span class="font-weight-normal">
+                            <ng-container *ngFor="let tax of project?.projectTax;let isLast= last">
+                                {{tax?.taxType | uppercase}} ({{tax?.value}})
+                                <ng-container *ngIf="!isLast">, </ng-container>
+                            </ng-container>
+                        </span>
+                    </p>
+                    <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Amenities: <span class="font-weight-normal">
+                            <ng-container *ngFor="let amenity of amenties;let isLast= last">
+                                {{amenity?.text}}<ng-container *ngIf="!isLast">,</ng-container>
+                            </ng-container>
+                            <!-- Swimming Pool , Gymnasium, Playground, Swimming Pool, Gymnasium,
+                            Playground -->
+                        </span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 my-3">
+            <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Total Number of Floors</p>
+            <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.projectTower">
+                {{item?.towerName | titlecase}}: <ng-container *ngIf="item?.numberofFloors">{{item?.numberofFloors !=0 ? item?.numberofFloors : ""}}</ng-container>
+
+            </p>
+        </div>
+        <div class="col-9 my-3">
+            <div class="row m-0">
+                <div class="col-6 pl-0">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Total Number of Blocks</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.projectTower">
+                        {{item?.towerName | titlecase}}: <ng-container *ngIf="item?.numberofUniqueBlocks">{{item?.numberofUniqueBlocks !=0?
+                            item?.numberofUniqueBlocks : ""}}</ng-container>
+                    </p>
+                    <!-- <p class="color-03 font-weight-normal m-0 paragraph-03">Tower 2: 12</p> -->
+                </div>
+                <div class="col-6">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Total Number of Units</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.projectTower">
+                        {{item?.towerName | titlecase}}: <ng-container *ngIf="item?.totalUnits">{{item?.totalUnits !=0 ? item?.totalUnits : ""}}</ng-container>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <!-- <p class="color-03 font-weight-semi-bold mb-2 paragraph-03">Building Description: <span class="font-weight-normal">{{project?.buildingDescription}}</span></p>
+             -->
+
+             <div class="form-group ">
+                <label class="labels" for="buildingDescription">Building Description</label>
+                <!-- <input class="form-control" placeholder="" id="country" type="text" > -->
+                <textarea class="form-control" [textContent]="project?.buildingDescription" 
+                     disabled="true" rows="3" cols="80">
+
+                  </textarea>
+            </div>
+
+        </div>
+    </div>
+    <div class="row m-0 pb-4">
+        <div class="col-6 pl-0">
+            <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3 h-100">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">The Team</h3>
+                </div>
+                <div class="col-6 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Landscaping:</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.landscaping">
+                        {{item?.email}}</p>
+                </div>
+                <div class="col-6 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Interior Designer(s):</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03"
+                        *ngFor="let item of project?.interiorDesigners">{{item?.email}}</p>
+                </div>
+                <div class="col-6 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Marketing Company:</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03"
+                        *ngFor="let item of project?.marketingCompany">{{item?.email}}</p>
+                </div>
+                <div class="col-6 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Architect(s):</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.architects">
+                        {{item?.email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 pr-0">
+            <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3 h-100">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Sales Office</h3>
+                </div>
+                <div class="col-12 mb-2 border-bottom-1 color-19">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Address:</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03 mb-1">
+                        {{(project?.projectSalesOfficeDetails?.address | titlecase) | trimstring}}<ng-container
+                            *ngIf="project?.projectSalesOfficeDetails?.city">,</ng-container>
+                        {{project?.projectSalesOfficeDetails?.city | trimstring}}<ng-container
+                            *ngIf="project?.projectSalesOfficeDetails?.zipCode">,</ng-container>
+                        {{project?.projectSalesOfficeDetails?.zipCode | trimstring}}<ng-container
+                            *ngIf="project?.projectSalesOfficeDetails?.country">,</ng-container>
+                        {{project?.projectSalesOfficeDetails?.country | trimstring}}
+                    </p>
+                </div>
+                <div class="col-12 mb-2 border-bottom-1 color-19" *ngIf="project?.projectSalesOfficeDetails?.phoneNumber?.number">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03 mb-1"
+                    >Phone</p>
+                <p class="color-03 font-weight-normal m-0 paragraph-03">
+                    {{project?.projectSalesOfficeDetails?.phoneNumber?.number}}
+                </p>
+                </div>
+                <div class="col-12 mb-2 border-bottom-1 color-19" *ngIf="project?.projectSalesOfficeDetails?.email">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03"
+                    >Email</p>
+                <p class="color-03 font-weight-normal m-0 paragraph-03 word-break-break-all">
+                    {{project?.projectSalesOfficeDetails?.email}}
+                </p>
+                </div>
+                <div class="col-12 mb-2" *ngIf="project?.projectSalesOfficeDetails?.workingHours?.length">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Working Hours: </p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03 border-bottom-1 border-color-white bg-color-06"
+                        *ngFor="let item of project?.projectSalesOfficeDetails?.workingHours">{{item?.day}}
+                        <span class="font-weight-medium">{{item?.startTime}} to {{item?.endTime}}</span>
+                    </p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="row m-0  bg-color-white border-1 border-color-19 my-3 py-3">
+        <div class="col-12 d-flex">
+            <h3 class="color-01 col-6 p-0 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Sales Grid <span class="color-05 ml-2 paragraph-03">(preview)</span></h3>
+            <div class="col-6 text-right">
+                <button (click)="onSelectTower(item)" mat-stroked-button *ngFor="let item of project?.projectTower;let towerIndex = index" class="border-2 border-color-07 font-weight-medium letter-spacing-1 paragraph-03 px-3 ml-2" [class.bg-color-white]="item.towerId != tower?.towerId"
+                    [class.color-07]="item.towerId != tower?.towerId" [class.bg-color-07]="item.towerId == tower?.towerId" [class.color-white]="item.towerId == tower?.towerId">{{item?.towerName | titlecase}}{{towerIndex+1}}</button>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex">
+            <div class="d-flex" *ngFor="let item of indicators">
+                <p class="align-items-center d-flex m-0 mr-3 font-weight-light paragraph-03"><span class="d-block indicator mr-1" [style.backgroundColor]="item?.bgColor"></span> {{item?.title | titlecase}}
+                </p>
+            </div>
+        </div>
+        <div class="col-12 pl-0 main grid d-flex position-relative sales-grid-blocks">
+            <div class="floor-numbers bg-color-06 left-0 position-sticky z-index-2 pt-4">
+                <div class="d-block bg-color-white" *ngFor="let block of tower?.projectBlocks">
+                    <p class="visibility-hidden">1</p>
+                    <div class="d-flex flex-column my-2" *ngFor="let floor  of block?.projectFloorDetails">
+                        <p class="floor-number color-01 font-weight-medium letter-spacing-1 m-0 ml-3 mr-2 paragraph-03">
+                            {{floor?.floorNo}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="d-block" *ngFor="let block of tower?.projectBlocks">
+                    <div class="align-items-center border-bottom-1 border-color-19 d-flex justify-content-between m-1 mb-1 mt-3">
+                        <div class="align-items-center d-flex position-sticky block-title">
+                            <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">
+                                {{block?.blockName}}
+                            </p>
+                            <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">{{block?.count}}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- <div class="d-flex flex-column" *ngFor="let floor  of block?.floors"> -->
+                    <div class="d-flex flex-column" *ngFor="let floor  of block?.projectFloorDetails">
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <button [class.selected]="unit.selected" [class.visibility-hidden]="unit?.visibilityHidden" class="cursor-pointer color-03 m-1 sales-grid-box p-2 position-relative border-radius-none text-left border-0" [matTooltipDisabled]="!unit?.assignAgentId" matTooltip="Assign agent: {{unit?.agentName || unit?.assignAgentId}}"
+                                    [ngStyle]="{'background-color': unit?.bgColor}" *ngFor="let unit  of floor?.projectUnitFlats">
+                                    <!-- <button (click)="toggleUnitSelection(unit)"
+                                        [class.color-white-hover]="!unit.selected" [class.color-18]="unit.selected"
+                                        class="bg-color-transparent pl-0 pt-0 border-0 check-mark color-06  position-absolute z-index-1 cursor-pointer">
+                                        <span class="material-icons"
+                                            [class.sub-heading-03]="unit.selected">check_circle</span>
+                                    </button> -->
+                                <div>
+                                    <!-- <span
+                            class="align-items-center bg-color-13 color-white count d-flex justify-content-center paragraph-04 position-absolute">
+                            3
+                          </span> -->
+
+                                    <p class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-04 line-clamp line-clamp-1 text-center" [ngStyle]="{'color': unit?.bgColor,'filter':'brightness(2.5)'}">
+                                        {{unit?.flatNo}}</p>
+                                    <!-- <p
+                                            class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                                            ${{unit?.price || 0}}
+                                        </p> -->
+                                    <!-- <p
+                                            class="font-weight-normal letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                                            {{unit?.unitName || 'n/a'}}</p> -->
+                                    <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                            Radiant
+                            Radiant </p> -->
+                                    <!-- <p
+                                            class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                                            {{unit.interiorSize}} + {{unit?.balconySize}} sq.ft</p>
+                                        <p
+                                            class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                                            {{unit?.view}}</p> -->
+                                    <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">2bd+d, 2ba, SW</p> -->
+                                </div>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="d-flex stack-numbers bottom-0 bg-color-06 position-sticky z-index-1">
+                    <div class="d-flex">
+                        <div class="mx-1 mt-1 mb-0 p-0 stack-number color-01 font-weight-medium letter-spacing-1 paragraph-03" *ngFor="let stack  of stacks">{{stack}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-8 pl-0 h-100">
+            <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3 h-100">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Amenities</h3>
+                </div>
+                <div class="col-12 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Current Incentives</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03">{{project?.currentIncentive}}</p>
+                </div>
+                <div class="col-12 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Features & Finishes</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let item of project?.featuresAndFinishes;let isLast = last">
+                        {{item?.items}}
+                        <ng-container *ngIf="!isLast">, </ng-container>
+                    </p>
+                </div>
+                <div class="col-12 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">Amenities</p>
+                    <p class="color-03 font-weight-normal m-0 paragraph-03" *ngFor="let amenity of amenties;let isLast= last">
+                        {{amenity?.text}}
+                        <ng-container *ngIf="!isLast">,</ng-container>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pr-0  h-100">
+            <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3 h-100">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Worksheet & Buyer Rules
+                    </h3>
+                </div>
+                <div class="col-12 mb-3">
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">
+                        Number of choices for worksheet: <span *ngIf="project?.projectWorkSheetAndBuyer?.numberofChoicesWorksheet" class="font-weight-normal">
+                            {{project?.projectWorkSheetAndBuyer?.numberofChoicesWorksheet}}
+                        </span>
+                    </p>
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">
+                        Cooling off Days: <span *ngIf="project?.projectWorkSheetAndBuyer?.coolingOffDays"
+                            class="font-weight-normal">{{project?.projectWorkSheetAndBuyer?.coolingOffDays !=0 ?
+                            project?.projectWorkSheetAndBuyer?.coolingOffDays :""}}</span>
+                    </p>
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">
+                        Number of Buyers: <span *ngIf="project?.projectWorkSheetAndBuyer?.numberOfBuyersPerWorksheet"
+                            class="font-weight-normal">{{project?.projectWorkSheetAndBuyer?.numberOfBuyersPerWorksheet
+                            !=0 ? project?.projectWorkSheetAndBuyer?.numberOfBuyersPerWorksheet :""}}</span>
+                    </p>
+                    <p class="color-03 font-weight-semi-bold m-0 paragraph-03">
+                        Unit of Measurement: <span *ngIf="project?.projectWorkSheetAndBuyer?.unitOfMeasurement"
+                            class="font-weight-normal">{{project?.projectWorkSheetAndBuyer?.unitOfMeasurement}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-8 pl-0 h-100">
+            <div class="row m-0 bg-color-white border-1 border-color-19 my-3 py-3 h-100">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Deposits</h3>
+                </div>
+
+                <div class="col-6 mb-3" *ngFor="let item of project?.depositStructure">
+                    <div class="bg-color-19 d-block p-3 m-2">
+                        <p class="font-weight-medium letter-spacing-1 m-0 paragraph-01">
+
+                            {{item?.depositName}}
+                        </p>
+                        <p class="font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                            <!-- <ng-container *ngIf="item?.amoutType == 2">$</ng-container>
+                            {{item?.amount}}
+                            <ng-container *ngIf="item?.amoutType == 1">%</ng-container> -->
+                            {{item?.description}}
+                        </p>
+                        <ul class="font-weight-medium letter-spacing-1 mt-2 paragraph-03">
+                            <li *ngFor="let childItem of item?.projectDepositStructureDetails">
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 2">{{childItem?.dollarValue  | currency: 'USD':'symbol':'0.0-2'}}
+                                </ng-container>
+                                <!-- {{childItem?.amount}} -->
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 1">{{childItem?.percentage | number:'1.0-2'}}%
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.typeOfDeposit == 3">{{childItem?.balanceto | number:'1.0-2'}}%
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Days'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Weeks'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Months'">in {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Occupancy'">at {{childItem?.time}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Fixed Date'">at {{childItem?.fixedDate}}
+                                </ng-container>
+                                <ng-container *ngIf="childItem?.installmentType == 'Date from Agreement'">at {{childItem?.datefromAgreement}}
+                                </ng-container>
+                                {{childItem.installmentType}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 pr-0 h-100">
+            <div class="row m-0 my-3">
+                <div class="col-12 p-0 mb-3 bg-color-white border-1 border-color-19">
+                    <div class="row m-0">
+                        <div class="col-12">
+                            <h3 class="color-01 font-weight-bold mt-2 paragraph-01 letter-spacing-1">Internal Sales Team
+                            </h3>
+                        </div>
+                        <div class="col-6 mb-3 color-03 font-weight-normal letter-spacing-1 m-0 paragraph-03" *ngFor="let item of project?.projectInternalSalesTeam?.assignedBuilderToProject">
+                            <img class="avatar mr-2" [src]="item?.companyLogoPath || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU'" alt="">
+                            <span>{{item?.fullName}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 p-0 bg-color-white border-1 border-color-19">
+                    <div class="row m-0">
+                        <div class="col-12">
+                            <h3 class="color-01 font-weight-bold mt-2 paragraph-01 letter-spacing-1">Listing Agency
+                            </h3>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="row m-0">
+                                <div class="col-6 p-0 color-03 font-weight-semi-bold letter-spacing-1 m-0 paragraph-03">
+                                    Name
+                                </div>
+                                <div class="col-6 p-0 color-03 font-weight-semi-bold letter-spacing-1 m-0 paragraph-03">
+                                    Commission
+                                </div>
+                            </div>
+                            <div class="row m-0" *ngFor="let item of project?.projectInternalSalesTeam?.projectSalesAgencies">
+                                <div class="col-6 p-0 color-03 font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                                    {{item?.agencyName}}
+                                </div>
+                                <div class="col-6 p-0 color-03 font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                                    {{item?.brokerageCommission}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12 p-0 mb-3 bg-color-white border-1 border-color-19">
+            <div class="row m-0">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mt-2 paragraph-01 letter-spacing-1">External Agents
+                    </h3>
+                </div>
+                <ng-container *ngFor="let item of project?.projectExternalSalesTeam">
+                    <div class="col-12">
+                        <p>{{item.brokerGroupName}} Commission {{item?.brokerCommission||0}}%</p>
+                    </div>
+                    <div *ngFor="let childItem of item?.projectExternalTeamBroker" class="col-3 mb-3 color-03 font-weight-normal letter-spacing-1 m-0 paragraph-03">
+                        <img class="avatar mr-2" [src]="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK1UhUMG9MTojpNTLV0XoDh-3cWX2XxTcPng&usqp=CAU'" alt="">
+                        <span>{{childItem?.fullName}}</span>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12 p-0 mb-3 bg-color-white border-1 border-color-19">
+            <div class="row m-0">
+                <div class="col-12">
+                    <h3 class="color-01 font-weight-bold mt-2 paragraph-01 letter-spacing-1">Marketing Assets
+                    </h3>
+                </div>
+                <div class="col-12 d-flex justify-content-between mx-3 pt-2">
+                    <ng-container *ngIf="!folder?.selected">
+                        <p class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03">Folders ({{folders?.length || 0}})</p>
+                    </ng-container>
+                    <div *ngIf="folder?.selected" class="d-flex align-items-center">
+                        <button (click)="allFolders()" class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03 cursor-pointer bg-color-white border-0">All
+                            Folders
+                            ({{folders?.length ||
+                            0}})</button>
+                        <p class="color-02 font-weight-medium letter-spacing-1 m-0 paragraph-03 d-flex align-items-center">
+                            <span class="material-icons">chevron_right</span> {{folder?.name}}
+                        </p>
+                    </div>
+                </div>
+                <!-- <div class="d-flex justify-content-center" *ngIf="!folders?.length">
+                    <p class="color-04 m-0 my-5 sub-heading-02">You are yet to add folders to Marketing Assets</p>
+                </div> -->
+                <div class="w-100 row m-0" *ngIf="!folder?.selected">
+                    <div class="col-2 p-0" *ngFor="let folder of folders;let folderIndex = index">
+                        <div class="align-items-center d-flex flex-column folder justify-content-between border-radius m-2 mx-auto cursor-pointer" (click)="selectFolder(folderIndex)">
+                            <div class="folder-icon pt-4 pb-3 text-center w-100 border-radius" [ngClass]="{'color-15 border-color-15 bg-color-08 border-1' : folder?.selected, 'color-02 bg-color-06 border-0' : !folder?.selected}">
+                                <span class="material-icons">folder</span>
+                            </div>
+                            <p class="m-0 paragraph-04 text-center mt-1" [ngClass]="{'color-15 font-weight-semi-bold':folder?.selected,'color-02':!folder?.selected}">
+                                {{folder?.name}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <section *ngIf="folder?.selected" class="bg-white border-radius box-shadow-1 my-3">
+                    <div class="w-100 row m-0">
+                        <div class="col-3 p-0 position-relative" *ngFor="let fileItem of folder?.files;let fileIndex = index">
+                            <div class="file-item m-2">
+                                <div class="d-flex file-item-img border-radius border-1 border-color-19">
+                                    <!-- <button class="bg-color-transparent border-0 color-05 position-absolute right-0 top-0 cursor-pointer"
+                              (click)="removeFile(fileIndex)">
+                              <span class="border-radius material-icons">cancel</span>
+                            </button> -->
+                                    <ng-container *ngIf="fileItem?.preview" [ngSwitch]="fileItem?.type">
+                                        <ng-container *ngSwitchCase="'img'">
+                                            <img class="w-100 h-100 cursor-pointer" [src]="fileItem?.preview" alt="" (click)="preview(previewTemplate,fileItem)">
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'video'">
+                                            <video class="w-100 h-100 cursor-pointer" [src]="fileItem?.preview" alt="" controls (click)="preview(previewTemplate,fileItem)"></video>
+                                        </ng-container>
+                                        <!-- <ng-container *ngSwitchCase="'doc'">...</ng-container>
+                              <ng-container *ngSwitchCase="'pdf'">...</ng-container> -->
+                                        <ng-container *ngSwitchDefault>
+                                            <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{fileItem?.type}}.png" alt="">
+                                        </ng-container>
+                                    </ng-container>
+                                    <ng-container *ngIf="!fileItem?.preview">
+                                        <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{fileItem?.type}}.png" alt="">
+                                    </ng-container>
+                                </div>
+                                <p class="m-0 paragraph-04 text-right mt-1 color-02">
+                                    <!-- {{fileItem?.type}} -->
+                                    {{fileItem?.name}}
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #previewTemplate>
+    <mat-dialog-content class="preview-mat-content">
+        <div class="d-block text-center bg-color-01">
+            <button class="bg-color-white border-0 border-radius color-01 d-flex p-0 position-absolute right-0 top-0 cursor-pointer" mat-dialog-close><span class="material-icons">highlight_off</span></button>
+            <ng-container *ngIf="folderFile?.preview" [ngSwitch]="folderFile?.type">
+                <ng-container *ngSwitchCase="'img'">
+                    <img style="max-height: 100vh;max-width: 100%;margin: auto;" [src]="folderFile?.preview" alt="">
+                </ng-container>
+                <ng-container *ngSwitchCase="'video'">
+                    <video style="max-height: 100vh;max-width: 100%;margin: auto;" [src]="folderFile?.preview" alt="" controls></video>
+                </ng-container>
+                <!-- <ng-container *ngSwitchCase="'doc'">...</ng-container>
+          <ng-container *ngSwitchCase="'pdf'">...</ng-container> -->
+                <ng-container *ngSwitchDefault>
+                    <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{folderFile?.type}}.png" alt="">
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!folderFile?.preview">
+                <img class="w-100 h-100" src="/assets/imgs/marketing-assets/{{folderFile?.type}}.png" alt="">
+            </ng-container>
+        </div>
+    </mat-dialog-content>
+</ng-template>

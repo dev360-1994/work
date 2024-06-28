@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{heading}}</h2>
+
+<mat-dialog-content>
+    <section class="d-block">
+        <div class="ml-5">
+            <h3>{{content}}</h3>
+        </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button (click)="onConfirm()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Yes</button>
+    <button (click)="onCancel()" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">No</button>
+</mat-dialog-actions>

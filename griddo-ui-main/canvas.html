@@ -1,0 +1,109 @@
+<style>
+    .unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>
+<canvas id="myCanvas" width="500" height="160" style="border:1px solid"></canvas>
+<p>Some text after the canvas</p>
+<button onclick="start()">
+    start Selection
+</button>
+<button onclick="finish()">
+    Finish Selection
+</button>
+
+
+
+
+<script>
+
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var drawing = false;
+    var selection = false;
+    var points = [];
+    var start = function () {
+        selection = true;
+        points = [];
+    }
+    var finish = function () {
+        selection = false;
+        if (points.length < 4) {
+            return alert('Please select minimum 4 points')
+        }
+        console.log(points);
+        ctx.fillStyle = '#f00';
+        ctx.beginPath();
+
+        points.forEach((point, i) => {
+
+            if (i == 0) {
+                ctx.moveTo(point.x, point.y);
+            } else if (points.length - 1 == i) {
+                ctx.lineTo(point.x, point.y);
+                ctx.closePath();
+                ctx.fill();
+            } else {
+                ctx.lineTo(point.x, point.y);
+            }
+
+
+
+            // ctx.lineTo(100, 50);
+            // ctx.lineTo(50, 100);
+            // ctx.lineTo(0, 90);
+
+        })
+        points = [];
+    }
+
+    canvas.onmousedown = function (e) {
+
+        // Dissable text selection
+        document.body.classList.add('unselectable')
+
+        if (!drawing) {
+            drawing = true;
+            ctx.beginPath();
+        }
+    }
+
+    canvas.onclick = function (e) {
+        var x = e.clientX - canvas.offsetLeft;
+        var y = e.clientY - canvas.offsetTop;
+
+        ctx.fillStyle = 'green';
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+        points.push({ x, y })
+    }
+
+    canvas.onmousemove = function (e) {
+        var x = e.clientX - canvas.offsetLeft;
+        var y = e.clientY - canvas.offsetTop;
+
+        if (drawing) {
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+    }
+
+    canvas.onmouseup = function (e) {
+
+        // Enable text selection
+        document.body.classList.remove('unselectable')
+        drawing = false;
+    }
+
+    canvas.onmouseout = function (e) {
+        drawing = false;
+    }
+</script>

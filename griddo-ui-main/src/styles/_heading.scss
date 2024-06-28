@@ -1,0 +1,33 @@
+$panelHeadlineProps: (
+	(heading,'01', 3.0519rem, 4.5625rem),
+	(heading,'02', 2.4413rem, 3.6875rem),
+	(heading,'03', 1.9531rem, 2.9375rem),
+
+	('sub-heading','01', 1.5625rem, 2.3125rem),
+	('sub-heading','02', 1.25rem, 1.875rem),
+	('sub-heading','03', 1rem, 1.5rem),
+
+	(paragraph,'01', 1rem, 1.5rem),
+	(paragraph,'02', 0.875rem, 1.3125rem),
+	(paragraph,'03', 0.8rem, 1.1875rem),
+	(paragraph,'04', 0.64rem, 0.9375rem),
+	(paragraph,'05', 0.5119rem, 0.625rem),
+
+	('label','01', 0.4094rem, 0.625rem),
+
+	);
+
+
+@each $prefix, $index, $fontSize, $lineHeight in $panelHeadlineProps {
+  .#{$prefix}-#{$index}, %#{$prefix}-#{$index} {
+      font-size: $fontSize !important;
+      font-weight:inherit;
+      font-style: inherit;
+      line-height:#{$lineHeight} !important;
+      letter-spacing: inherit;
+    }
+  }
+
+
+
+    

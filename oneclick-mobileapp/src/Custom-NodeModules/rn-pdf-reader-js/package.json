@@ -1,0 +1,70 @@
+{
+  "_from": "https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+  "_id": "rn-pdf-reader-js@0.2.1",
+  "_inBundle": false,
+  "_integrity": "sha512-4k/fGE0pejj43a63MHZKr8VslZDwDRIwgVfVvr0mEoDizFomh6HB8zQvVONTrms4kht353B9KBWLybbfRLTRRg==",
+  "_location": "/rn-pdf-reader-js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "rn-pdf-reader-js@https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+    "name": "rn-pdf-reader-js",
+    "escapedName": "rn-pdf-reader-js",
+    "rawSpec": "https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+    "saveSpec": "https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+    "fetchSpec": "https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+  "_shasum": "d1cd82543aa03da9f7b8fa35a12cd6621d222f29",
+  "_spec": "rn-pdf-reader-js@https://github.com/wiadev/rn-pdf-reader-js/archive/0.2.6.tar.gz",
+  "_where": "E:\\Neeraj\\Projects\\Projects\\ReactApp\\OneClickHseApp\\OneClickHseApp",
+  "author": {
+    "name": "Xavier Carpentier",
+    "email": "xcapetir@gmail.com",
+    "url": "https://xaviercarpentier.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/xcarpentier/rn-pdf-reader-js/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "buffer": "5.1.0",
+    "js-base64": "2.4.5"
+  },
+  "deprecated": false,
+  "description": "PDF reader for Expo",
+  "devDependencies": {
+    "crypto": "1.0.1",
+    "flow-bin": "0.73.0"
+  },
+  "homepage": "https://github.com/xcarpentier/rn-pdf-reader-js#readme",
+  "keywords": [
+    "React-Native",
+    "PDF",
+    "pdfjs",
+    "reader",
+    "pdf-reader",
+    "pdf-viewer",
+    "react-pdf",
+    "expo"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "rn-pdf-reader-js",
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xcarpentier/rn-pdf-reader-js.git"
+  },
+  "scripts": {
+    "bundle": "./scripts/gen_bundle_string.js"
+  },
+  "version": "0.2.1"
+}

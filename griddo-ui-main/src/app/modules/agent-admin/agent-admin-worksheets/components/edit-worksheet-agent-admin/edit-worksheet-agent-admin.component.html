@@ -1,0 +1,254 @@
+<mat-progress-bar *ngIf="isProcessing" mode="buffer"></mat-progress-bar>
+<section *ngIf="!isProcessing" class="add-agent-section px-5">
+    <div class="row m-0">
+        <div class="col-12 pl-0">
+            <h1 class="color-01 font-weight-semi-bold letter-spacing-1 sub-heading-01">Add a new Worksheet</h1>
+        </div>
+    </div>
+    <form class="row m-0 mt-3 mx-auto" [formGroup]="form">
+        <div class="col-12 p-0">
+            <div class="row m-0">
+                <div class="align-items-center col-6 d-flex form-group mb-1 pl-0">
+                    <label class="color-01 m-0 d-flex font-weight-normal paragraph-03"><span class="white-space-nowrap">Worksheet
+              Number</span> <span
+              class="bg-color-transparent border-0 color-03 font-weight-normal form-control letter-spacing-1 m-0 ml-4 p-0 paragraph-03 w-50">{{worksheetNo}}</span></label>
+                </div>
+                <div class="align-items-center col-6 d-flex">
+                    <label class="color-01 font-weight-normal paragraph-03 white-space-nowrap m-0 mr-3" for="projectId">Project
+            Name <span style="color:#ff0000">*</span></label>
+                    <select class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="projectId" formControlName="projectId">
+                        <option value=null>Select Project.. </option>
+            <option *ngFor="let option of projects" [value]="option?.value">{{option?.text || option?.value || 'N/A'}}
+            </option>
+          </select>
+                </div>
+            </div>
+        </div>
+        <div class="bg-color-white col-12 mt-3 p-0">
+            <div class="m-0 mt-4 mb-5 row">
+                <div class="col-3">
+                    <label class="color-01 font-weight-normal paragraph-03" for="model">Model <span style="color:#ff0000">*</span></label>
+                    <select class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="model" type="text" formControlName="model">
+            <option value=null>Select Model</option>
+            <option value="Waterfall">Waterfall</option>
+          </select>
+                </div>
+                <div class="col-3">
+                    <label class="color-01 font-weight-normal paragraph-03" for="model">Floor Range <span style="color:#ff0000">*</span></label>
+                    <select class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="floor" type="text" formControlName="floor">
+                        <option value=null>Select Floor</option>
+            <option value="Low">Low</option>
+            <option value="High">High</option>
+            <option value="Mid">Mid</option>
+          </select>
+                </div>
+                <div class="align-content-center align-items-end col-3 d-flex justify-content-start">
+                    <button class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07" (click)="saveModel()">Save</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-3 p-0">
+            <div class="m-0 row">
+                <div class="bg-color-white col-2 mb-2 mr-2 p-2 position-relative" *ngFor="let projectWorkSheetChoise of modelInfo; let i = index">
+                    <button class="position-absolute right-0 top-0 bg-color-transparent border-0 color-01 cursor-pointer"><span
+              class="material-icons paragraph-01" (click)="deleteModelInfo(i)">close</span></button>
+                    <p class="m-0 paragraph-02 pr-3 color-01">{{projectWorkSheetChoise.model}}</p>
+                    <p class="m-0 paragraph-03 color-03">{{projectWorkSheetChoise.floor}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 p-0">
+            <div class="m-0 mt-4 mb-5 row">
+                <div class="col-12 p-0">
+                    <h2 class="align-items-center color-01 d-flex font-weight-medium justify-content-between paragraph-01">
+                        Extras
+                    </h2>
+                </div>
+                <div class="col-12 p-0 d-flex border-bottom-1 border-color-19 pb-2">
+                    <!-- <div class="form-group mb-1">
+            <label class="color-01 font-weight-normal paragraph-03" for="model">Model</label>
+            <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder=""
+              id="model" type="text" formControlName="model">
+          </div> -->
+                    <div class="align-items-center d-flex form-group mb-1 mr-4">
+                        <input class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03" id="isParking" type="checkbox" formControlName="isParking">
+                        <label class="color-01 font-weight-normal m-0 ml-1 paragraph-03" for="isParking">Parking</label>
+                    </div>
+                    <div class="align-items-center d-flex form-group mb-1 mr-4">
+                        <input class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03" id="locker" type="checkbox" formControlName="locker">
+                        <label class="color-01 font-weight-normal m-0 ml-1 paragraph-03" for="locker">Locker</label>
+                    </div>
+                    <div class="align-items-center d-flex form-group mb-1 mr-4">
+                        <input class="color-03 font-weight-normal letter-spacing-1 m-0  paragraph-03" id="storage" type="checkbox" formControlName="storage">
+                        <label class="color-01 font-weight-normal m-0 ml-1 paragraph-03" for="storage">Storage</label>
+                    </div>
+                </div>
+                <!-- <div class="col-6 px-5" formArrayName="projectWorkSheetPurchaserChoise">
+          <ng-container
+            *ngFor="let projectWorkSheetPurchaserChoisForm of projectWorkSheetPurchaserChoise.controls; let i=index">
+            <div class="row" [formGroupName]="i">
+              <div class="col-6">
+                <div class="form-group mb-1">
+                  <label class="color-01 font-weight-normal paragraph-03" for="floor">Floor</label>
+                  <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder="" id="floor" type="text" formControlName="floor">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mb-1">
+                  <label class="color-01 font-weight-normal paragraph-03" for="choice">Choice</label>
+                  <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                    placeholder="" id="choice" type="text" formControlName="choice">
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div> -->
+            </div>
+        </div>
+
+        <div class="col-12 p-0" formArrayName="projectWorkSheetPurchasers">
+            <h2 class="align-items-center mb-3 color-01 d-flex font-weight-semi-bold justify-content-between paragraph-01">
+                Buyer Details
+                <!-- <button mat-icon-button (click)="removeField(i)"><span
+          class="material-icons">close</span></button> -->
+            </h2>
+            <div class="m-0 row" *ngFor="let projectWorkSheetPurchaser of projectWorkSheetPurchasers.controls; let i=index" [formGroupName]="i">
+                <div class="col-4" *ngIf="!projectWorkSheetPurchasers?.value[i].saved && i == projectWorkSheetPurchasers.length - 1">
+                    <div class="row m-0">
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="fullName">Full Name <span style="color:#ff0000">*</span></label>
+                            <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="fullName" type="text" formControlName="fullName">
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="idType">ID Type <span style="color:#ff0000">*</span></label>
+                            <select class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="idType" type="number" formControlName="docID">
+                                <option value="">Select ID</option>
+                                <option value="1">ID 1</option>
+                                <option value="2">ID 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="address">Address (Apartment, suite,
+                etc.) <span style="color:#ff0000">*</span></label>
+                            <input formControlName="address" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" formControlName="address" ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event,i)" />
+                        </div>
+
+                        <div class="row m-0">
+                            <div class="col-6 form-group mb-1 pl-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="country">Country <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="country" type="text" formControlName="country">
+                            </div>
+                            <div class="col-6 form-group mb-1 pr-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="zipCode">Zip Code <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="zipCode" type="text" formControlName="zipCode">
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="phoneNo">Cell Number <span style="color:#ff0000">*</span></label>
+                            <ngx-intl-tel-input class="d-block" cssClass="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" [separateDialCode]="true" [selectedCountryISO]="CountryISO.Canada" [preferredCountries]="[CountryISO.Canada, CountryISO.India, CountryISO.UnitedStates]"
+                                name="phoneNo" formControlName="phoneNo" maxLength="15" [phoneValidation]="true" [inputId]="'phoneNo'"></ngx-intl-tel-input>
+                            <!-- <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="cellNumber" type="phone" formControlName="cellNumber"> -->
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="governmentIDFile"> Upload government ID <span style="color:#ff0000">*</span></label>
+                            <input type="file" id="governmentIDFile" name="filename" [ngClass]="{'is-invalid':  projectWorkSheetPurchaser['controls'].governmentIDFile.invalid == true && projectWorkSheetPurchaser['controls'].governmentIDFile.touched == true}" (change)="onGovernmentFileChange($event, i)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4" *ngIf="!projectWorkSheetPurchasers?.value[i].saved && i == projectWorkSheetPurchasers.length - 1">
+                    <div class="row m-0">
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="dob">Date of Birth <span style="color:#ff0000">*</span></label>
+                            <div class="position-relative">
+                                <input (click)="dateOfBirthpicker.open()" placeholder="Select date" readonly id="dateOfBirth" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                                    [matDatepicker]="dateOfBirthpicker" formControlName="dateOfBirth">
+                                <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                    [for]="dateOfBirthpicker"></mat-datepicker-toggle>
+                                <mat-datepicker #dateOfBirthpicker></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="driverLicense">Government Id<span style="color:#ff0000">*</span></label>
+                            <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="driverLicense" type="text" formControlName="driverLicenseNumber">
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="dob">Expiry Date<span style="color:#ff0000">*</span></label>
+                            <div class="position-relative">
+                                <input (click)="expiryDatepicker.open()" placeholder="Select date" readonly id="expiryDate" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03"
+                                    [matDatepicker]="expiryDatepicker" formControlName="expiryDate">
+                                <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                    [for]="expiryDatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #expiryDatepicker></mat-datepicker>
+                            </div>
+                        </div>
+
+
+                        <div class="row m-0">
+                            <div class="col-6 form-group mb-1 pl-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="city">City <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="city" type="text" formControlName="city">
+                            </div>
+                            <div class="col-6 form-group mb-1 pr-0">
+                                <label class="color-01 font-weight-normal paragraph-03" for="province">Province <span style="color:#ff0000">*</span></label>
+                                <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="province" type="text" formControlName="province">
+                            </div>
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="occupation">Occupation <span style="color:#ff0000">*</span></label>
+                            <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="occupation" type="text" formControlName="occupation">
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="emailID">Email <span style="color:#ff0000">*</span></label>
+                            <input class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="emailID" type="email" formControlName="emailID">
+                        </div>
+                        <div class="form-group mb-1 col-12 p-0">
+                            <label class="color-01 font-weight-normal paragraph-03" for="uploadPicture">Upload picture of draft/cheque (pdf, png) <span style="color:#ff0000">*</span></label>
+                            <input type="file" id="uploadPicture" name="filename" [ngClass]="{'is-invalid':  projectWorkSheetPurchaser['controls'].otherDocFile.invalid == true && projectWorkSheetPurchaser['controls'].otherDocFile.touched == true}" (change)="onPictureFileChange($event, i)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group pt-4 text-right">
+                <button class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07" (click)="saveBuyerInfo()">Save</button>
+                <!-- <button *ngIf="isUpdate" class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07" (click)="saveBuyerInfo()">Update</button> -->
+            </div>
+            <div class="form-group pt-4" style="text-align: -webkit-right;">
+                <button [disabled]="projectWorkSheetPurchasers.length >= 3" mat-flat-button class="bg-white border-0 color-01 d-flex font-weight-medium mat-button-base mat-flat-button mat-focus-indicator paragraph-02" (click)="createNewBuyerForm()">
+          <span class="material-icons sub-heading-02">add</span>
+          <span class="text-decoration-underline">
+            {{projectWorkSheetPurchasers.length ? 'Add Another Purchaser': 'Add Purchaser'}}
+          </span>
+        </button>
+            </div>
+            <div class="form-group mb-1 col-12 p-0">
+                <label class="color-01 font-weight-normal paragraph-03" for="notes">Notes</label>
+                <textarea class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="notes" type="text" formControlName="notes"></textarea>
+            </div>
+        </div>
+        <div class="col-12 mt-3 p-0">
+            <div class="m-0 row">
+                <div class="bg-color-white col-2 mb-2 mr-2 p-2 position-relative" *ngFor="let buyer of buyerInfo; let i = index">
+                    <button class="position-absolute right-0 top-0 bg-color-transparent border-0 color-01 cursor-pointer" (click)="deleteByuerInfo(i)"><span 
+                      class="material-icons paragraph-01">close</span></button>
+                    <button class="mr-3 position-absolute right-0 top-0 bg-color-transparent border-0 color-01 cursor-pointer" (click)="editByuerInfo(i)"><span 
+                        class="material-icons paragraph-01">edit</span></button>
+                    <p class="m-0 paragraph-02 pr-3 color-01">Purchaser {{i+1}}:</p>
+                    <p class="mt-1 mb-1 paragraph-03 color-02">{{buyer.fullName}}</p>
+                    <p class="m-0 paragraph-03 color-03">{{buyer.emailID}}</p>
+                    <p class="m-0 paragraph-03 color-03">{{buyer.address}}</p>
+                    <p class="m-0 paragraph-03 color-03">{{buyer.cellNumber}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group pt-4 text-right">
+                <button mat-flat-button [disabled]="buyerInfo.length==0 || !form.valid" class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07" (click)="save()">Create</button>
+            </div>
+        </div>
+    </form>
+</section>

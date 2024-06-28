@@ -1,0 +1,321 @@
+<mat-progress-bar *ngIf="isProcessing" mode="buffer"></mat-progress-bar>
+<section class="add-agent-section px-5" *ngIf="worksheet && !isProcessing">
+
+    <div class="row">
+        <a *ngIf="!isCommissionView" routerLink="../../" class="mb-3 back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+            <mat-icon>keyboard_backspace</mat-icon> Back to Deals
+        </a>
+        <a *ngIf="isCommissionView" (click)="backToDeal()" class="mb-3 back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+            <mat-icon>keyboard_backspace</mat-icon> Back to Deal
+        </a>
+        <div class="d-flex justify-content-between align-items-baseline col-12">
+            <div class="d-flex">
+                <h2 class="font-weight-medium color-04">#{{worksheet?.projectWorkSheetNo}}</h2>
+            </div>
+            <!-- <div class="d-flex">
+            <button class="cursor-notallowed bg-color-09 border-0 border-radius color-white color-white-hover font-weight-nomal mr-2 paragraph-03 px-4 white-space-nowrap">Assign Unit</button>
+            <select class="form-control mr-2 paragraph-03 cursor-notallowed"></select>
+        </div> -->
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline col-12">
+            <div *ngIf="!isCommissionView" class="d-flex">
+                <div class="d-flex">
+                    <p class="mr-2 font-weight-semi-bold paragraph-01 color-03">Total Unit Price</p>
+                    <p class="font-weight-medium paragraph-01 color-04 ml-3">
+                        {{flatPrice  | currency: 'USD':'symbol':'0.0-2'}}
+                    </p>
+                    <span class="material-icons text-info" (click)="openPriceDialog(worksheet)">info_outlined</span>
+                    <a class="ml-3 view-grid" (click)="openDialog()">Unit Detail</a>
+                </div>
+                <!-- <h2 class="font-weight-semi-bold color-01" style="width:40%;">$
+                    <input type="number" style="width:89%;" class="color-03 font-weight-normal letter-spacing-1" 
+                    [ngClass]="{'price-input': !isPriceEditable == true}" (click)="openPriceDialog(worksheet)" 
+                    [disabled]="!isPriceEditable" [(ngModel)]="flatPrice">
+                </h2> -->
+                <!-- <button *ngIf="!isPriceEditable" (click)="editPrice(true)" mat-flat-button class="color-white ml-5 px-4 paragraph-03 mb-1 mr-2 bg-color-07 border-3 border-color-07 ">
+                    Edit Price 
+                </button>
+                <button *ngIf="isPriceEditable" (click)="updateFlatPrice()" mat-flat-button class="color-white ml-2 px-4 paragraph-03 mb-1 mr-2 bg-color-07 border-3 border-color-07">
+                    Update
+                </button>
+                <button *ngIf="isPriceEditable" (click)="editPrice(false)" mat-flat-button class="color-white ml-2 px-4 paragraph-03 mb-1 mr-2 bg-color-07 border-3 border-color-07">
+                    Cancel
+                </button> -->
+                <!-- <button (click)="openDialog()" mat-flat-button class="color-white ml-2 px-4 paragraph-03 mb-1 mr-2 bg-color-07 border-3 border-color-07">
+                    Unit Detail
+                </button> -->
+                <!-- <p class="view-grid ml-5" (click)="editPrice()">{{isPriceEditable ? 'Update Price' : 'Edit Price'}}</p> -->
+            </div>
+            <div *ngIf="isCommissionView">
+                <h2 class="font-weight-semi-bold color-01">$ {{worksheet?.flatPrice}}
+                </h2>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline col-12 pt-3">
+            <div class="d-flex">
+                <p class="font-weight-semi-bold paragraph-01 color-03">Sales Status</p>
+                <p class="font-weight-medium paragraph-01 color-04 ml-5">{{dealStatus}} {{projectDeal?.status == '2' ? (projectDeal?.scheduleDate | date:'shortDate')  : ''}}</p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline col-12">
+            <div class="d-flex">
+                <p class="font-weight-semi-bold paragraph-01 color-03">Buyer Name</p>
+                <p class="font-weight-medium paragraph-01 color-04 ml-5">{{buyerName}}</p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-baseline col-12">
+            <div class="d-flex">
+                <p class="font-weight-semi-bold paragraph-01 color-03">Agent Name</p>
+                <p class="font-weight-medium paragraph-01 color-04 ml-5">{{worksheet?.agentName}}</p>
+            </div>
+        </div>
+    </div>
+
+    <section *ngIf="!isCommissionView" class="d-block py-3">
+        <h2 class="align-items-center mb-3 color-01 d-flex font-weight-semi-bold justify-content-between">
+            Buyer Details
+        </h2>
+        <div class="m-0 row">
+            <div class="col-3" *ngFor="let item of worksheet?.projectWorkSheetPurchasers; let i=index">
+                <h2 class="border-color-05 color-01 font-weight-medium paragraph-03">Purchaser {{i+1}}:</h2>
+                <p class="color-03 font-weight-medium mb-0 paragraph-03">{{item?.fullName}}</p>
+                <a class="color-03 color-03-hover font-style-italic font-weight-nomal letter-spacing-1 mb-0 paragraph-04" href="mailto:{{item?.emailID}}">{{item?.emailID}}</a>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">{{item?.address}} {{item?.province}} {{item?.city}} {{item?.zipCode}} {{item?.country}}</p>
+                <a class="color-03 color-03-hover font-weight-normal mb-0 paragraph-03 font-style-italic" href="tel:{{item?.phoneNo?.internationalNumber}}">{{item?.phoneNo?.internationalNumber}}</a>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">{{item?.dateOfBirth | date: 'shortDate'}}</p>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">Government ID: {{item?.driverLicenseNumber}}</p>
+                <p class="color-03 font-weight-normal mb-0 paragraph-03">Expiry: {{item?.expiryDate | date: 'shortDate'}}</p>
+                <!-- <div class="align-items-center d-flex img-box mr-3"><img alt="" class="project-img" [src]="item?.governmentID"></div> -->
+            </div>
+        </div>
+
+        <!-- <div class="m-0 mt-4 row">
+            <div class="col-4">
+                <p class="font-weight-semi-bold paragraph-01 color-01">Draft/Cheque/Other Documents</p>
+                <div class="align-items-center d-flex img-box mr-3"><img alt="" class="project-img" src="{{worksheet?.projectWorkSheetPurchasers[0].otherDoc}}"></div>
+                <p class="color-01 paragraph-03 m-0 mt-3 font-weight-medium">Notes: <span class="color-03 font-weight-medium paragraph-03">{{worksheet.notes}}</span></p>
+            </div>
+
+            <div class="col-4" *ngIf="!worksheet.isCreatedByAgent && !worksheet.isAgentAssign">
+                <p class="font-weight-semi-bold paragraph-01 color-03">Select Unit</p>
+
+                <select (change)="onChangeAgentId($event)" class="color-03 font-weight-normal form-control letter-spacing-1 m-0  paragraph-03" placeholder="" id="agentId">
+                    <option value=null>Select Agent.. </option>
+        <option *ngFor="let option of agentList" [value]="option?.value">{{option?.text || option?.value || 'N/A'}}
+        </option>
+      </select>
+            </div>
+        </div> -->
+
+
+    </section>
+
+    <!-- Assign Agreement Section -->
+    <section *ngIf="!isCommissionView" id="assign-agreement" class="py-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex">
+                    <h3>Assign Agreement/s</h3>
+                    <h4 class="ml-4 mt-1">Select an agreement template</h4>
+                </div>
+            </div>
+            <div class="col-2" *ngFor="let template of projectDocumentTemplates">
+                <!-- <label class="my-5" >PDF Images Here</label> -->
+                <input type="checkbox" [(ngModel)]="template.isChecked" (change)="selectMultipleAggreement($event.target)" /><label class="m-0 pl-1"></label>
+                <img alt="{{template?.documentFileName}}" class="project-img" src="/assets/imgs/docx.png">
+                <!-- <span>{{template?.documentFileName}}</span> -->
+                <div>
+                    <a href="{{template?.documentFilePath}}" target="_blank" class="view-grid">
+                        {{template?.documentFileName}}
+                        <!-- click here to view -->
+                    </a>
+                </div>
+                <!-- <ngx-doc-viewer disableContent="all" [url]="template?.documentFilePath" style="width:8rem;height:8rem;"></ngx-doc-viewer> -->
+                <!-- <iframe scrolling="no" class="project-img" [src]="template?.documentFilePath | safe"></iframe> -->
+            </div>
+        </div>
+    </section>
+
+    <form class="row m-0 mt-3 mx-auto" [formGroup]="form">
+        <!-- Assign Deposit Structure Section -->
+        <section *ngIf="!isCommissionView" id="assign-agreement">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <div class="d-flex align-items-center">
+                        <h3 class="m-0">Assign Deposit Structure</h3>
+                        <div class="form-group m-0 ml-4 w-25">
+                            <select (change)="onDepositChange($event.target)" [(ngModel)]="depositId" class="form-control" id="exampleFormControlSelect1" formControlName="projectDepositId">
+                      <option value="0">Select Deposit</option>
+                      <option *ngFor="let option of projectDeposit; let i=index" [value]="option?.projectDepositStructureId">{{option?.depositName}}</option>
+                    </select>
+                        </div>
+                        <p class="text-black m-0 ml-3">Total Deposit: {{totalDeposit | currency: 'USD':'symbol':'0.0-2' }}</p>
+                        <p class="text-black m-0 ml-3">Total Percentage: {{((totalDeposit/flatPrice)*100)| number:'1.0-2'}}%</p>
+                    </div>
+                </div>
+                <!-- <div class="col-12 mt-2">
+                    <div class="d-flex">
+                        <h5>Total Deposit</h5>
+                        <h5 class="ml-5">Total Deposit: (4%)${{worksheet?.flatPrice}}</h5>
+                    </div>
+                </div> -->
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Deposit</th>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                    <th>Date</th>
+                                    <th>Due on</th>
+                                    <th>Amount</th>
+                                    <th>Cheque</th>
+                                    <th>Approve</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="projectWorkSheetDeposit">
+                                <tr *ngFor="let deposit of projectWorkSheetDeposit['controls']; let i=index" [formGroupName]="i">
+                                    <td width="110px">Deposit {{i+1}}</td>
+                                    <td>{{depositTypeEnum[deposit['controls'].type.value]}}</td>
+                                    <td>
+                                        <ng-container *ngIf="deposit['controls'].type.value == 2">{{deposit['controls'].typeValue.value | currency: 'USD':'symbol':'0.0-2'}}</ng-container>
+                                        <ng-container *ngIf="deposit['controls'].type.value != 2">{{deposit['controls'].typeValue.value| number:'1.0-2'}}%</ng-container>
+                                        <!-- {{deposit['controls'].type.value == 2 ? '$' : ''}}
+                                        {{deposit['controls'].typeValue.value}}{{deposit['controls'].type.value != 2 ? '%' : ''}} -->
+                                    </td>
+                                    <td>
+                                        <div class="position-relative">
+                                            <input (click)="dateOfDepositpicker.open()" placeholder="Select date" readonly id="dateOfDeposit" class="form-control"
+                                                [matDatepicker]="dateOfDepositpicker" formControlName="dateOfDeposit">
+                                            <mat-datepicker-toggle class="position-absolute right-0 top-0" matSuffix
+                                                [for]="dateOfDepositpicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #dateOfDepositpicker></mat-datepicker>
+                                          </div>
+                                    </td>
+
+                                    <td>
+                                        {{deposit['controls'].installmentType.value}}
+                                    </td>
+                                    <td>{{deposit['controls'].amount.value | currency: 'USD':'symbol':'0.0-2'}}</td>
+
+                                    <td class="d-flex">
+                                        <input type="text" placeholder="Chq #103881" class="form-control" formControlName="chequeNumber">
+                                        <label id="deposit-cheque{{i}}" [ngClass]="{'file-validation': deposit['controls'].chequeFile.invalid == true && deposit['controls'].chequeFile.touched == true}" for="file-input{{i}}">
+                                            <span class="material-icons mx-2 mt-2 text-danger">picture_as_pdf</span>
+                                        </label>
+
+                                        <input id="file-input{{i}}" class="hide-file" [ngClass]="{'file-validation':  deposit['controls'].chequeFile.invalid == true && deposit['controls'].chequeFile.touched == true}"  type="file" (change)="onChequeChange($event, i)" />
+                                        <!-- <span class="material-icons mx-2 mt-2 text-danger">picture_as_pdf</span> -->
+                                        <span *ngIf="deposit['controls'].isChequeApprove.value && deposit['controls'].chequeFile.value" class="material-icons mt-2 text-success">check_circle</span>
+                                        <span *ngIf="!deposit['controls'].isChequeApprove.value || !deposit['controls'].chequeFile.value" class="material-icons mt-2 text-danger">cancel</span>
+
+                                    </td>
+                                    <td>
+                                        <mat-slide-toggle [checked]="deposit['controls'].isChequeApprove.value" (change)="toggleApproveStatus($event, i, 'isChequeApprove')" class="mx-2"></mat-slide-toggle>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Assign Deposit Structure Section -->
+        <section id="assign-agreement" class="w-100">
+            <div class="row" *ngIf="isCommissionView">
+                <div class="col-12 mb-3">
+                    <div class="d-flex align-items-center">
+                        <h3 class="m-0">Assign Commission Structure</h3>
+                        <div class="form-group m-0 ml-4 w-25">
+                            <select (change)="onCommissionChange($event.target)" [(ngModel)]="commissionId" class="form-control" id="exampleFormControlSelect2" formControlName="projectCommissionId">
+                                <option *ngFor="let option of projectCommission; let i=index" [value]="option?.projectCommisionStructureId">{{option?.commisionName}}</option>
+                              </select>
+                        </div>
+                        <p class="text-black m-0 ml-3">Total Commission: ({{commissionValue}}%) {{totalCommission | currency}}</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Percent</th>
+                                    <th>Amount</th>
+                                    <th>Due</th>
+                                    <th>Invoice</th>
+                                    <th>Amount Paid</th>
+                                    <th>Cheque</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="projectWorkSheetCommission">
+                                <tr *ngFor="let commission of projectWorkSheetCommission['controls']; let i=index" [formGroupName]="i">
+                                    <td>Payment {{i+1}}</td>
+                                    <td>{{commission['controls'].percentage.value}}%</td>
+                                    <td>${{commission['controls'].amount.value}}</td>
+                                    <td>
+                                        {{commission['controls'].dueDate.value | date:'shortDate'}}
+                                    </td>
+                                    <td>
+                                        <label id="commission-cheque{{i}}" [ngClass]="{'file-validation': commission['controls'].invoiceFile.invalid == true && commission['controls'].invoiceFile.touched == true}" for="commission-input{{i}}">
+                                            <span class="material-icons mx-2 mt-2 text-danger">picture_as_pdf</span>
+                                             </label>
+
+                                        <input id="commission-input{{i}}" class="hide-file" type="file" (change)="onCommissionInvoiceChange($event, i)" />
+                                    </td>
+                                    <td><input type="text" placeholder="Amount" class="form-control" formControlName="amountPaid"></td>
+                                    <td class="d-flex">
+                                        <label id="commission-invoice{{i}}" [ngClass]="{'file-validation': commission['controls'].commissionChequeFile.invalid == true && commission['controls'].commissionChequeFile.touched == true}" for="commission-cheque-input{{i}}">
+                                            <span class="material-icons mx-2 mt-2 text-danger">picture_as_pdf</span>
+                                             </label>
+
+                                        <input id="commission-cheque-input{{i}}" class="hide-file" type="file" (change)="onCommissionChequeChange($event, i)" />
+
+                                        <input type="checkbox" class="mt-2" style="width: 20px;height: 20px;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex">
+                        <label class="mr-3 mt-2"><h3>Bonus</h3></label>
+                            <div class="form-group m-0 ml-4 w-25">
+                                <select class="form-control" id="bonusSelectionId" formControlName="projectBonusId">
+                                    <option *ngFor="let option of bonusStructures; let i=index" [value]="option?.projectCommisionBonusId">{{option?.bonusType}}</option>
+                                  </select>
+                            </div>
+                    </div>
+                </div>
+                <!-- <div class="col-12">
+                    <h3 class="my-5">Suite History</h3>
+                </div> -->
+            </div>
+
+            <div class="row">
+
+                <div class="col-12 text-right">
+                    <button *ngIf="!isCommissionView && (projectDeal?.status == '1')" [disabled]="!isDealEnable" class="btn btn-primary w-100" (click)="checkDepositValidation()">Create Deal</button>
+                    <button *ngIf="isCommissionView" class="btn btn-primary mr-2" (click)="checkCommissionValidation(true)">Schedule Later</button>
+                    <button *ngIf="isCommissionView" class="btn btn-primary" (click)="checkCommissionValidation(false)">Schedule Now</button>
+                    <button *ngIf="!isCommissionView && (projectDeal?.status == '2' || projectDeal?.status == '3')" class="btn btn-primary mr-2" (click)="markAsFirm(projectDeal?.dealID)">Mark As Firm</button>
+                    <button *ngIf="!isCommissionView && (projectDeal?.status == '2' || projectDeal?.status == '3')" class="btn btn-primary mr-2" (click)="checkDepositValidation()">Extend Deal</button>
+                    <button *ngIf="!isCommissionView && (projectDeal?.status != '1' && projectDeal?.status != '5')" class="btn btn-primary mr-2" (click)="cancelDeal(projectDeal?.dealID)">Cancel Deal</button>
+                    <button *ngIf="!isCommissionView && (projectDeal?.status == '4')" class="btn btn-primary mr-2">Publish to Blockchain</button>
+                </div>
+            </div>
+        </section>
+
+    </form>
+
+    <!-- <div class="col-12">
+        <div class="form-group pt-4 text-right">
+            <button mat-flat-button class="px-4 paragraph-03 py-1 mb-1 bg-color-07 border-3 border-color-07">Create Deal</button>
+        </div>
+    </div> -->
+
+</section>

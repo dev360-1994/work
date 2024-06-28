@@ -1,0 +1,319 @@
+<section class="builder-detail-page flex-column row px-3">
+  <a routerLink="../../"
+    class="back-link color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 mt-3 paragraph-01">
+    <mat-icon>keyboard_backspace</mat-icon> Back to Sales Grid
+  </a>
+
+  <!-- <div class="border-bottom-1 border-color-19 border-top-1 d-flex justify-content-around my-2 py-2">
+    <div class="d-flex color-02 flex-column text-center" *ngFor="let action of topActions">
+      <span class="material-icons">{{action?.icon}}</span>
+      <p class="m-0 paragraph-03">{{action?.title}}</p>
+    </div>
+  </div> -->
+  <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+  <!-- <div class="d-flex p-3">
+    <div class="align-items-center border-radius color-13 bg-color-20 d-flex flex-auto px-3 py-2">
+      <span class="material-icons mr-3 sub-heading-02">warning</span>
+      <p class="m-0 paragraph-03">3 Items require admin approval. View all reconciliations </p>
+    </div>
+  </div> -->
+  <div class="row m-0 border-bottom-1 border-color-19 mt-4">
+    <div class="col-6 d-flex flex-column justify-content-between pr-5 border-right-1 border-color-19">
+      <div class="d-block">
+        <p class="font-weight-semi-bold m-0 sub-heading-03">#{{flat?.flatDetail?.flatNo}}</p>
+        <p class="font-weight-semi-bold m-0 sub-heading-03 mb-1">{{flat?.totalPrice | currency}}</p>
+        <div class="d-flex justify-content-between mb-1">
+          <p class="m-0 paragraph-02 color-02">Sales Status</p>
+          <p class="color-02 font-weight-medium m-0 paragraph-02 text-decoration-underline"><span
+              class="status-color-block"></span> {{flat?.flatDetail?.flatStatus | titlecase}}</p>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <span class="text-left m-0 paragraph-02 color-02">Buyer Name</span>
+      </div>
+      <div class="col-9" style="text-align: end;">
+        <span class="text-right" *ngFor="let aa of flat?.projectWorkSheetPurchasers; let last = last">
+          <span class="color-02 font-weight-medium m-0 paragraph-02"><span class="text-decoration-underline">{{aa.fullName}}</span> <span *ngIf="!last">  &nbsp; & &nbsp;</span> </span>
+        </span>
+      </div>
+
+
+        </div>
+        <div class="d-flex justify-content-between mb-1">
+          <p class="m-0 paragraph-02 color-02">Agent Name</p>
+          <p class="color-02 font-weight-medium m-0 paragraph-02 text-decoration-underline">{{flat?.agentName |
+            titlecase}}</p>
+        </div>
+      </div>
+      <!-- <div class="d-block">
+        <h2 class="font-weight-semi-bold m-0 sub-heading-02 my-2">Notes</h2>
+        <p class="m-0 paragraph-02 color-02 mb-1" style="word-wrap: break-word;"
+          *ngFor="let note  of flat?.projectSalesGridNote"> {{note.note}}</p>
+        <button mat-stroked-button
+          class="bg-color-09 border-0 color-white font-weight-medium mt-3 mb-3 px-5 py-2 sub-heading-03"
+          (click)="popup = true">Add
+          Note</button>
+      </div> -->
+      <!-- <div class="overlay" *ngIf="popup">
+        <div class="popup">
+          <h2>Add Note</h2>
+          <a class="close" (click)="popup = false">&times;</a>
+          <div class="content">
+            <form (ngSubmit)="onSubmit()" #stdRegForm="ngForm">
+              <div class="example-container" class="form-group">
+                <input class="mb-4" matInput placeholder="Title" [(ngModel)]="note.name" class="form-control"
+                  name="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Name is required
+                </div>
+                <br>
+                <textarea rows="4" cols="50" matInput placeholder="Enter your content" [(ngModel)]="note.note"
+                  class="form-control" name="note" #notes="ngModel" required></textarea>
+
+                <div [hidden]="notes.valid || notes.pristine" class="alert alert-danger">
+                  content is required
+                </div>
+                <div class="text-center mt-4">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="!stdRegForm.form.valid">
+                    Submit</button>
+                  <button class="ml-2" mat-raised-button color="primary" type="button" (click)="cancel()">
+                    cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+
+
+    <div class="col-6 d-flex flex-column justify-content-between pl-5 text-right">
+      <div class="d-block">
+        <h2 class="font-weight-semi-bold m-0 sub-heading-03">Date Signed: October 8th, 2020</h2>
+        <h3 class="m-0 paragraph-02 color-02">Executed Date: October 10th, 2020 (extend...)</h3>
+        <h3 class="m-0 paragraph-02 color-02">Firm Date: October 10th, 2020 (extend...)</h3>
+      </div>
+      <!-- <div class="d-block mb-3">
+        <div class="d-flex justify-content-between" *ngFor="let note  of flat?.projectSalesGridNote">
+          <p class="m-0 paragraph-02 color-02">{{note.createdBy}}</p>
+          <p class="m-0 paragraph-02 color-02">{{note.createdDate| date}}</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+
+  <div class="container-fluid mt-3">
+    <h2 class="font-weight-semi-bold m-0 sub-heading-02 my-2">Notes</h2>
+    <div class="row" *ngFor="let note  of flat?.projectSalesGridNote;let i = index">
+      <div class="col-6">
+        <p style="word-wrap: break-word;">{{note.note}}</p>
+      </div>
+      <div class="col-2">
+        <p>{{note.createdBy}}</p>
+      </div>
+      <div class="col-2">
+        <p>{{note.createdDate| date}}</p>
+      </div>
+    </div>
+    <div class="row">
+
+      <button mat-stroked-button
+        class="bg-color-09 border-0 color-white font-weight-medium mt-3 mb-3 px-5 py-2 sub-heading-03"
+        (click)="popup = true">Add
+        Note</button>
+
+      <div class="overlay" *ngIf="popup">
+        <div class="popup">
+          <h2>Add Note</h2>
+          <a class="close" (click)="popup = false">&times;</a>
+          <div class="content">
+            <form (ngSubmit)="onSubmit()" #stdRegForm="ngForm">
+              <div class="example-container" class="form-group">
+                <input class="mb-4" matInput placeholder="Title" [(ngModel)]="note.name" class="form-control"
+                  name="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Name is required
+                </div>
+                <br>
+                <textarea rows="4" cols="50" matInput placeholder="Enter your content" [(ngModel)]="note.note"
+                  class="form-control" name="note" #notes="ngModel" required></textarea>
+
+                <div [hidden]="notes.valid || notes.pristine" class="alert alert-danger">
+                  content is required
+                </div>
+                <div class="text-center mt-4">
+                  <button mat-raised-button color="accent" type="submit" [disabled]="!stdRegForm.form.valid">
+                    Submit</button>
+                  <button class="ml-2" mat-raised-button color="primary" type="button" (click)="cancel()">
+                    cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row m-0 border-bottom-1 border-color-19 border-top-1">
+    <div class="col-6 pr-5 border-right-1 border-color-19">
+      <h3 class="font-weight-semi-bold m-0 sub-heading-02 my-2 d-flex justify-content-between align-items-center">
+        Agreement Details
+        <!-- <button class="bg-color-transparent border-0 color-01 mr-4"><span
+            class="material-icons sub-heading-02">edit</span></button> -->
+      </h3>
+
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Suite Price</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-3">{{flat?.flatDetail?.price | currency}}</span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Toal Price</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-3">{{flat?.totalPrice | currency}}</span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+    </div>
+    <div class="col-6 pl-5">
+      <h3 class="font-weight-semi-bold m-0 sub-heading-02 my-2 d-flex justify-content-between align-items-center">
+        Suite Details
+        <!-- <button class="bg-color-transparent border-0 color-01 mr-4"><span
+            class="material-icons sub-heading-02">edit</span></button> -->
+      </h3>
+
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Suite Name</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-3">{{flat?.flatDetail?.unitName}}</span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Size</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-3">{{ (flat?.flatDetail?.interiorSize || 0)+ (flat?.flatDetail?.livingRoomSize || 0)+
+            (flat?.flatDetail?.diningRoomSize || 0)+ (flat?.flatDetail?.balconySize || 0) }} sq ft</span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Balcony</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-3">{{flat?.flatDetail?.balconySize || 0}} sq ft</span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+      <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">View</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-4 pr-1">
+            <ng-container [ngSwitch]="flat?.flatDetail?.view">
+              <ng-container *ngSwitchCase="1">East</ng-container>
+              <ng-container *ngSwitchCase="2">West</ng-container>
+              <ng-container *ngSwitchCase="3">South </ng-container>
+              <ng-container *ngSwitchCase="4">North</ng-container>
+              <ng-container *ngSwitchCase="5">South East</ng-container>
+              <ng-container *ngSwitchCase="6">South West</ng-container>
+              <ng-container *ngSwitchCase="7">North East</ng-container>
+              <ng-container *ngSwitchCase="8">North West</ng-container>
+            </ng-container>
+          </span>
+          <!-- <span class="material-icons color-13 sub-heading-03">warning</span> -->
+        </p>
+      </div>
+      <div class="d-flex justify-content-between mb-2 pb-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Ceiling Height</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-4 pr-1">{{flat?.ceilingHeight}}</span>
+        </p>
+      </div>
+      <!-- <div class="d-flex justify-content-between mb-2 pb-1 border-bottom-1 border-color-19">
+        <p class="m-0 paragraph-02 color-02">Assignment Fee</p>
+        <p class="color-02 font-weight-medium m-0 paragraph-02 d-flex align-items-center">
+          <span class="mr-4 pr-1">$56,678</span>
+        </p>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="container-fluid mt-3">
+    <h3 class="font-weight-semi-bold m-0 sub-heading-02 my-2 d-flex justify-content-between align-items-center">
+      Files
+    </h3>
+
+    <div class="d-inline-flex">
+      <img class="mr-2" src="/assets/imgs/file.webp" alt="pdf img" width="40" height="40">
+      <span class="m-0 sub-heading-02 my-2 d-flex justify-content-between align-items-center">
+        Agreement Details
+      </span>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of flat?.projectWorkSheetPurchasers; let i = index">
+        <a href="{{item.governmentID}}" target="_blank" rel="noopener noreferrer"><img src="/assets/imgs/pdf.jpg"
+            alt="pdf img" width="100" height="100"></a>
+        <a href="{{item.otherDoc}}" target="_blank" rel="noopener noreferrer"><img src="/assets/imgs/pdf.jpg"
+            alt="pdf img" width="100" height="100"></a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container-fluid mt-5">
+    <h3 class="font-weight-semi-bold m-0 sub-heading-02 my-2 d-flex justify-content-between align-items-center">
+      <u>Deposits</u>
+    </h3>
+    <div class="row">
+      <table class="table  text-center table-borderless" style="width: 70%">
+        <thead>
+          <tr>
+            <th>Deposit No</th>
+            <th>Type</th>
+            <th>Date</th>
+            <!-- <th>Approve</th> -->
+            <th>Amount</th>
+            <!-- <th>Approve</th> -->
+            <th>Cheque No</th>
+            <th>PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of flat?.worksheetDeposits; let i = index" class="color-02 font-weight-medium m-0 paragraph-02">
+            <td>Deposit {{i+1}}</td>
+            <td>
+
+              <ng-container [ngSwitch]='item.type'>
+                <ng-container *ngSwitchCase="1"><span style="border: 1px solid;padding: 5px;">Bank Draft</span>
+                </ng-container>
+                <ng-container *ngSwitchCase="2"><span style="border: 1px solid;padding: 5px;">Cheque</span>
+                </ng-container>
+                <ng-container *ngSwitchCase="3"><span style="border: 1px solid;padding: 5px;">Cash</span>
+                </ng-container>
+              </ng-container>
+            </td>
+            <td> {{item.dateOfDeposit| date}}</td>
+            <!-- <td><label class="switch">
+                <input type="checkbox" class="form-control" [checked]='item.isApprove'>
+                <span class="slider round"></span>
+              </label></td> -->
+            <td>{{item.amount| currency}}</td>
+            <!-- <td><label class="switch">
+                <input type="checkbox" class="form-control" [checked]='item.isChequeApprove'>
+                <span class="slider round"></span>
+              </label></td> -->
+            <td><span style="border: 1px solid;padding: 5px;">Chq#{{item.chequeNumber}}</span></td>
+            <td><a href="{{item.depositDocumentPath}}" target="_blank" rel="noopener noreferrer"><img
+                  src="/assets/imgs/pdf.jpg" alt="pdf img" width="30" height="30"></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

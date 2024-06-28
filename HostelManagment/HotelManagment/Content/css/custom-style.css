@@ -1,0 +1,722 @@
+﻿/* GENERAL STYLE START */
+.check_box input[type=checkbox] + label {
+    padding-left: 25px;
+    padding-right: 15px;
+    background: transparent url(../images/checkbox.png) no-repeat 0 8px/ 20px auto;
+    line-height: 2.5rem;
+}
+
+.check_box input[type=checkbox]:checked + label {
+    background: transparent url(../images/checked.png) no-repeat 0 8px/ 20px auto;
+}
+a:hover {
+    text-decoration: none;
+}
+/* /GENERAL STYLE END */
+/* CARD HEAD START */
+.card {
+    border: 0 none;
+}
+
+.card_head {
+    padding: 15px;
+    /*margin-bottom: 25px;*/
+    background: #e2e2e2;
+}
+.card_head_white {
+    padding: 15px;
+    /*margin-bottom: 25px;*/
+    background: #ffffff;
+}
+
+    /*.card_head form {
+        display: flex;
+        flex-wrap: wrap;
+    }*/
+
+        /*.card_head form label {
+                    line-height: 2.25rem;
+                    text-transform: uppercase;
+                    margin-bottom: 0;
+                }*/
+
+        .card_head form .select2-container {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0;
+}
+
+    .select2-container .select2-selection--single,
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 2.25rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 2.25rem;
+    }
+
+.card_head form .btn, .card_head .btn {
+    border-radius: 0;
+    /*text-transform: uppercase;*/
+    font-size: 16px;
+    margin: 0 7px;
+    color: #fff !important;
+}
+
+    /*.card_head form .btn.btn-primary:first-child {
+        margin-left: 0;
+    }
+
+    .card_head form .btn.btn-primary:last-child {
+        margin-right: 0;
+    }*/
+
+.card_head form .btn-delete {
+    background: #ed0000;
+    border-color: #ed0000;
+}
+
+@media only screen and (max-width:767px) {
+    .card_head form .select2-container {
+        min-width: 100%;
+        margin: 10px 0;
+    }
+
+    .card_head .btn-group {
+        flex-wrap: wrap;
+        margin: 0 -7px;
+    }
+
+    .card_head form .btn-group .btn.btn-primary {
+        margin: 7px;
+    }
+}
+
+.cstm-card-body {
+    padding: 20px 15px;
+    overflow: auto;
+}
+.form-inline label, .form-inline {
+    margin-right: 5px;
+}
+    .form-inline .form-control {
+        width: 100% !important;
+    }
+/* /CARD HEAD END */
+.p-0 {
+    padding: 0px !important;
+}
+.m-0 {
+    margin: 0px !important;
+}
+.form-control-sm {
+    padding: 6px 10px !important;
+}
+.cstm-card-footer .btn {
+    border-radius: 0;
+    font-size: 16px;
+    color: #fff !important;
+}
+.btn.btn-xs {
+    padding: 8px !important;
+}
+.p-15 {
+    padding: 15px !important;
+}
+.cstm-flex-cont {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0px;
+    background-color: #e2e2e2 !important;
+}
+.select2 {
+    width: 100% !important;
+}
+.sidebar .nav .nav-item.active > .nav-link i {
+    color: #e1b158;
+    text-shadow: 0px 0px 10px rgb(0, 255, 255) !important;
+}
+.sidebar .nav .nav-item.active > .nav-link .menu-title {
+    color: #d6d6d6 !important;
+}
+/*TABS CSTM CSS*/
+#tabs {
+    background: #007b5e;
+    color: #eee;
+}
+
+    #tabs h6.section-title {
+        color: #eee;
+    }
+
+    #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #ffffff;
+        background-color: transparent;
+        border-color: transparent transparent #f3f3f3;
+        border-bottom: 3px solid #31353d !important;
+        font-weight: bold;
+    }
+
+    #tabs .nav-tabs .nav-link {
+        border: 1px solid transparent;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+        color: #eee;
+        font-size: 20px;
+    }
+
+a.nav-item.nav-link {
+    color: #929292;
+    padding: 15px 0px;
+}
+/*Keyboard and multicheckob Css*/
+.ui-keyboard-button {
+    height: 40px;
+    min-width: 40px;
+    margin: .1em;
+    cursor: pointer;
+    overflow: hidden;
+    line-height: 2em;
+    -moz-user-focus: ignore;
+}
+
+.funkyradio {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .funkyradio div {
+        clear: both;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+
+    .funkyradio label {
+        width: 100%;
+        border: 1px solid #D1D3D4;
+        font-weight: normal;
+        font-size: 14px;
+    }
+
+    .funkyradio input[type="radio"]:empty,
+    .funkyradio input[type="checkbox"]:empty {
+        display: none;
+    }
+
+        .funkyradio input[type="radio"]:empty ~ label,
+        .funkyradio input[type="checkbox"]:empty ~ label {
+            position: relative;
+            line-height: 2.5em;
+            text-indent: 3.25em;
+            margin-top: 2em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            padding: 0px 10px 0px 0px;
+        }
+
+            .funkyradio input[type="radio"]:empty ~ label:before,
+            .funkyradio input[type="checkbox"]:empty ~ label:before {
+                position: absolute;
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                width: 2.5em;
+                background: #D1D3D4;
+            }
+
+    .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+        color: #888;
+    }
+
+        .funkyradio input[type="checkbox"]:not(:checked) ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #C2C2C2;
+        }
+
+    .funkyradio input[type="checkbox"]:checked ~ label {
+        color: #777;
+    }
+
+        .funkyradio input[type="checkbox"]:checked ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #333;
+            background-color: #ccc;
+        }
+
+    .funkyradio input[type="checkbox"]:focus ~ label:before {
+        box-shadow: 0 0 0 3px #999;
+    }
+
+.funkyradio-default input[type="checkbox"]:checked ~ label:before {
+    color: #333;
+    background-color: #ccc;
+}
+
+.funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.funkyradio-success input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.funkyradio-info input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5bc0de;
+}
+input[type=checkbox] {
+    display: none;
+}
+.btn {
+    border-radius: 0px !important;
+    font-size: 16px;
+    color: #fff !important;
+}
+span.select2-selection {
+    border-radius: 0px !important;
+}
+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 1px solid #aaa !important;
+    border-radius: 4px;
+    cursor: text;
+}
+.select2-container--default.select2-container--focus{
+    border: solid #80bdff 1px !important;
+    outline: 0;
+}
+/*input.form-control.form-control-sm.mb-2.mr-sm-2.ui-widget-content.ui-corner-all.ui-keyboard-preview {
+    color: #fff !important;
+}*/
+
+input#keyboard {
+    background: #fff !important;
+    border-radius: 0px;
+    border: 1px solid #c9ccd7;
+    color: #000;
+}
+/* END Keyboard and multicheckob Css*/
+/*START TEST CSTM CSS*/
+.pb-15 {
+    padding-bottom: 15px;
+}
+.pull-right {
+    float: right !important;
+}
+.pull-left {
+    float: left !important;
+}
+.form-control-xs {
+    padding: 5px 10px !important;
+    height: 30px !important;
+}
+.field-validation-error {
+    font-size: 12px;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap !important;
+}
+.hiddenBlock {
+    display: none;
+    border-top: 1px dashed rgb(197, 197, 197);
+}
+/* VERTICAL TABS START */
+@media only screen and (min-width: 521px) {
+    .vertical_tabs {
+        display: flex;
+    }
+}
+.vertical_tabs nav{
+    flex: 25%;
+    border-right: 1px solid #e1e1e1;
+}
+.vertical_tabs nav .nav{
+    display: block;
+}
+.vertical_tabs nav .nav-tabs{
+    border-bottom: 0 none;
+}
+.vertical_tabs nav .nav-tabs .nav-link{
+    border-bottom: 1px solid #e1e1e1;
+    border-radius: 0;
+}
+.vertical_tabs .tab-content{
+    flex: 75%;
+    padding: 15px;
+    min-height: 350px;
+}
+.test_btns{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 15px;
+}
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background: #248afd;
+}
+/* /VERTICAL TABS END */
+/* PASSWORD FIELD START */
+.pswd_field{
+    position: relative;
+    display: block;
+}
+.pswd_field i.far{
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    margin-top: -7px;
+    font-size: 15px;
+    color: #31353d;
+}
+.pswd_field i.far.fa-eye-slash{
+    opacity: 0.5;
+}
+.toggle-password{
+    cursor: pointer;
+}
+/* /PASSWORD FIELD END */
+
+/***** START CSTM DATEPICKER CSS *****/
+.datepicker td, .datepicker th {
+    text-align: center;
+    width: 23px;
+    height: 23px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+}
+
+.datepicker {
+    padding: 4px;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+/***** END CSTM DATEPICKER CSS *****/
+/***** START CSTM CSS FOR SELECT2 *****/
+.select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.875rem;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0px 7px;
+    width: 100%;
+}
+/***** START CSTM CSS FOR SELECT2 *****/
+.status-btn {
+    min-width: 70px;
+}
+.forgot-btn-block {
+    display: flex;
+    justify-content: space-between;
+}
+/*input.btn.btn-cacel {
+    border: 2px solid #dfb159;
+    color: #dfb159 !important;
+    background-color: transparent;
+}*/
+.card .cstm-card-title {
+    color: #a0a0a0;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 10px 0px;
+    background-color: #fff;
+}
+
+.cstm-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.widget-author {
+    margin-bottom: 58px;
+}
+
+.author-card {
+    position: relative;
+    padding-bottom: 48px;
+    background-color: #fff;
+    box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
+}
+
+    .author-card .author-card-cover {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+        .author-card .author-card-cover::after {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: '';
+            opacity: 0.5;
+        }
+
+        .author-card .author-card-cover > .btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 0 10px;
+        }
+
+    .author-card .author-card-profile {
+        display: table;
+        position: relative;
+        margin-top: -22px;
+        padding-right: 15px;
+        padding-bottom: 16px;
+        padding-left: 20px;
+        z-index: 5;
+    }
+
+        .author-card .author-card-profile .author-card-avatar, .author-card .author-card-profile .author-card-details {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .author-card .author-card-profile .author-card-avatar {
+            width: 85px;
+            border-radius: 50%;
+            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+            overflow: hidden;
+        }
+
+            .author-card .author-card-profile .author-card-avatar > img {
+                display: block;
+                width: 100%;
+            }
+
+        .author-card .author-card-profile .author-card-details {
+            padding-top: 20px;
+            padding-left: 15px;
+        }
+
+        .author-card .author-card-profile .author-card-name {
+            margin-bottom: 2px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .author-card .author-card-profile .author-card-position {
+            display: block;
+            color: #8c8c8c;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+    .author-card .author-card-info {
+        margin-bottom: 0;
+        padding: 0 25px;
+        font-size: 13px;
+    }
+
+    .author-card .author-card-social-bar-wrap {
+        position: absolute;
+        bottom: -18px;
+        left: 0;
+        width: 100%;
+    }
+
+        .author-card .author-card-social-bar-wrap .author-card-social-bar {
+            display: table;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .11);
+        }
+
+.btn-style-1.btn-white {
+    background-color: #fff;
+}
+
+.list-group-item i {
+    display: inline-block;
+    margin-top: -1px;
+    margin-right: 8px;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.mr-1, .mx-1 {
+    margin-right: .25rem !important;
+}
+
+.list-group-item.active:not(.disabled) {
+    border-color: #e7e7e7;
+    background: #fff;
+    color: #e1b158;
+    cursor: default;
+    pointer-events: none;
+}
+
+.list-group-flush:last-child .list-group-item:last-child {
+    border-bottom: 0;
+}
+
+.list-group-flush .list-group-item {
+    border-right: 0 !important;
+    border-left: 0 !important;
+}
+
+.list-group-flush .list-group-item {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+a.list-group-item, .list-group-item-action {
+    color: #404040;
+    font-weight: 600;
+}
+
+.list-group-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    border: 1px solid #e7e7e7 !important;
+    border-radius: 0 !important;
+    color: #404040;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
+    .list-group-item.active:not(.disabled)::before {
+        background-color: #e1b158;
+    }
+
+    .list-group-item::before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background-color: transparent;
+        content: '';
+    }
+    .mb-30 {
+        margin-bottom: 30px;
+    }
+    .btn-booking {
+        position:absolute;
+        bottom: 100px;
+        right: 10px;
+    }
+
+
+
+
+
+
+
+/***** LOADER CSS *****/
+.boxes {
+    --size: 32px;
+    --duration: 800ms;
+    height: calc(var(--size) * 2);
+    width: calc(var(--size) * 3);
+    position: relative;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    margin-top: calc(var(--size) * 1.5 * -1);
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+}
+    .centered:before {
+        content: '';
+        position: absolute;
+        background-color: rgba(86, 85, 85, 0.75);
+        height: 100%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+    }
+.d-inline-block.font-weight-medium.text-uppercase {
+    width: 170px;
+}
+.d-flex.justify-content-between.align-items-center span {
+    text-align: end;
+}

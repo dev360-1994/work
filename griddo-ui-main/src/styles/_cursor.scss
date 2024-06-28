@@ -1,0 +1,15 @@
+.cursor- {
+  &pointer {
+    cursor: pointer;
+  }
+  &default {
+    cursor: default;
+  }
+  &notallowed {
+    cursor: not-allowed;
+  }
+}
+
+.pointer-events {
+  pointer-events: none;
+}

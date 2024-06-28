@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Upload Document</h2>
+<mat-dialog-content>
+    <section class="d-block">
+        <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+        <div>
+            <div class="form-group">
+                <ng-container>
+                    <label class="mt-4 border-radius d-flex drag-drop-container flex-column justify-content-center cursor-pointer" for="documentupload2">
+                        <p class="paragraph-02 text-center" *ngIf="documentName">{{documentName}}<span></span></p>
+                        <p class="m-0 paragraph-02 text-center"><span
+                                class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                    </label>
+                    <input class="form-control d-none" placeholder="" id="documentupload2" type="file" (change)="fileChangeEvent($event)" accept="application/pdf,application/msword,
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                </ng-container>
+            </div>
+
+        </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button [disabled]="documentName == ''" (click)="saveDocument()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Save</button>
+    <button [mat-dialog-close]="true" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Close</button>
+</mat-dialog-actions>

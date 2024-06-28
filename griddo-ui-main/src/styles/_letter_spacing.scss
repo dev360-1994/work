@@ -1,0 +1,23 @@
+@for $i from 1 through 10 {
+  $prefix: '0.0';
+  $ls :#{$prefix}#{$i}rem;
+  @if $i==10 {
+    $ls: 0.1rem;
+  }
+  .letter-spacing-#{$i} {
+    letter-spacing: $ls;
+  }
+}
+
+@for $i from 1 through 10 {
+  $prefix: '0.';
+  $prefixInClass: '0';
+  $ls :#{$prefix}#{$i}rem;
+  @if $i==10 {
+    $prefixInClass: '';
+    $ls: 1rem;
+  }
+  .letter-spacing-#{$prefixInClass}#{$i} {
+    letter-spacing: $ls;
+  }
+}

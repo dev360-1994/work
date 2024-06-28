@@ -1,0 +1,263 @@
+﻿@using HotelManagment.Models.User;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AquaClaimWebCore</title>
+    <link href="~/content/css/style.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+    <link href="~/content/css/plugins/ti-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/fontawesome-free-5.8.1-web/css/all.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/select2.min.css" rel="stylesheet" />
+    <link href="~/content/css/custom-style.css" rel="stylesheet" />
+    <!-- Bootstrap Date-Picker Plugin -->
+    <link href="~/content/css/plugins/daterangepicker.css" rel="stylesheet" />
+    <link href="~/content/css/plugins/jquery-ui.css" rel="stylesheet" />
+    <link href="~/content/css/keyboard.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100vh !important;
+        }
+    </style>
+</head>
+<body>
+    @{ var user = (UserModel)Session["CurrentUser"];
+        string path = HttpContext.Current.Request.Url.AbsolutePath;
+        if ((user.IsProfileCompleted == null || user.IsProfileCompleted == false) && !path.Contains("MyProfile"))
+        {
+            <div class="modal" id="myModal" data-backdrop="false" style="display:block;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Profile InComplete</h4>
+                            @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Your Profile is not completed yet. Please Complete it first.
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            @*<button type="button" class="btn btn-danger" data-dismiss="modal"></button>*@
+                            <a href="/MyProfile" class="btn btn-danger">My Profile</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="/admin/index"><img src="~/images/SVG/logo.svg" class="mr-2" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="/admin/index"><img src="~/images/svg/small-logo.svg" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="ti-menu"></span>
+                </button>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            @*<img src="~/Content/images/user/face28.jpg" alt="profile" />*@
+                          <p>Welcome</p>  @user.FirstName @user.LastName
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">                           
+                            <a href="/Logout" class="dropdown-item">
+                                <i class="ti-power-off text-primary"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="ti-view-list"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    @{ if (user.IsAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AdminDashBoard">
+                                    <i class="ti-home menu-icon"></i>
+                                    <span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/UserDashBoard">
+                                    <i class="ti-home menu-icon"></i>
+                                    <span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+                        } }
+                    <li class="nav-item">
+                        <a class="nav-link" href="/MyProfile">
+                            <i class="ti-user menu-icon"></i>
+                            <span class="menu-title">My Profile</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Security">
+                            <i class="ti-shield menu-icon"></i>
+                            <span class="menu-title">Security</span>
+                        </a>
+                    </li>
+                    @{ if (user.IsAdmin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <i class="ti-palette menu-icon"></i>
+                                    <span class="menu-title">Rooms</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic" style="">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="/RoomsInfo">All Rooms</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="/AddEditRoom">Add Room</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="/RoomRequests">Assign Rooms</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                                    <i class="ti-book menu-icon"></i>
+                                    <span class="menu-title">Users</span>
+                                    <i class="menu-arrow"></i>
+                                </a>
+                                <div class="collapse" id="ui-basic1" style="">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="/AllUsers">AllUsers</a></li>
+                                        <li class="nav-item"> <a class="nav-link" href="/AddEditUser">Create User</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AllCourses">
+                                    <i class="ti-book menu-icon"></i>
+                                    <span class="menu-title">Courses</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/GetRoom">
+                                    <i class="ti-book menu-icon"></i>
+                                    <span class="menu-title">Book Hostel</span>
+                                </a>
+                            </li>
+                        }
+
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Logout">
+                            <i class="ti-shield menu-icon"></i>
+                            <span class="menu-title">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <partial name="_ToastMessagesPartial" />
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+
+    <div class="col-md-12 loader" style="height: 100vh; width: 100vw; background-color: #fff; position: fixed;">
+        <div class="centered">
+            <div class="boxes">
+                <div class="box">
+                    <div>
+                        <img style="width: 115px;" src="~/Content/images/Spinner-1s-200px.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+
+
+    <script src="~/content/js/plugins/jquery-1.11.3.min.js"></script>
+    <script src="~/content/js/popper.min.js"></script>
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/content/js/perfect-scrollbar.min.js"></script>
+    <script src="~/content/js/plugins/jquery-ui.min.js"></script>
+    <script src="~/content/js/plugins/moment.min.js"></script>
+    <script src="~/content/js/jquery.mousewheel.js"></script>
+    <script src="~/content/js/plugins/daterangepicker.min.js"></script>
+    <script src="~/content/js/plugins/select2.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6/js/select2.min.js"></script>*@
+    <script src="~/content/js/template.js"></script>
+    <script src="~/content/js/off-canvas.js"></script>
+    <script src="~/content/js/hoverable-collapse.js"></script>
+
+    @* On creen keyboard plugin url:-
+        //https://www.jqueryscript.net/other/jQuery-Virtual-Keyboard-Plugin-Keyboard.html
+    *@
+
+    <script src="~/content/js/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/content/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/content/js/jquery-ajax-unobtrusive/package/dist/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/content/js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $('.datepicker').datepicker({
+            dateFormat: ''
+        });
+        $(document).ready(function () {
+            $('#myModal').modal('show');
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.loader').hide();
+        });
+        $('.show-loader').click(function () {
+            $('.loader').show();
+        });
+        $(".cancel").click(function () {
+            window.history.go(-1); return false;
+        });
+    </script>
+
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-title">Heading</p>
+            <!-- CARD HEADER START -->
+            <div class="card_head">
+                <form method="post" class="form-inline">
+                    <label>Label Name</label>
+                    <select class="select2" name="state">
+                        <option value="0">-- Select Location --</option>
+                        <option value="1">Bergen</option>
+                        <option value="6">Eggesbønes</option>
+                        <option selected="selected" value="4">Herøy</option>
+                        <option value="3">Hjelmeland</option>
+                        <option value="7">Jøkelfjord</option>
+                        <option value="2">Trondheim</option>
+                        <option value="5">Ulvan</option>
+                    </select>
+                    <div class="btn-group">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-sm" />
+
+                    </div>
+                </form>
+            </div>
+            <!-- /CARD HEADER END -->
+            <div class="text-muted font-weight-light cstm-card-body">
+                <table id="tblhistory" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Option 1</th>
+                            <th>Option 2</th>
+                            <th>Option 3</th>
+                            <th>Option 4</th>
+                            <th>Option 5</th>
+                            <th>Option 6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>value 1</td>
+                            <td>value 2</td>
+                            <td>value 3</td>
+                            <td>value 4</td>
+                            <td>value 5</td>
+                            <td>value 6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="card border-right-0 border-left-0 border-bottom-0">
+            <div class="d-flex justify-content-center justify-content-md-end">
+                <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblhistory').DataTable({
+                "order": [[2, "desc"]]
+            });
+        });
+
+    </script>
+}
+

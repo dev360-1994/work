@@ -1,0 +1,219 @@
+<section>
+    <div class="border-radius-none box-shadow-1 m-0 mb-3 row border-color-06 pt-3 pb-2" fileDragDrop
+        (filesChangeEmiter)="fileChangeEvent($event,docType)">
+        <div class="col-6 pl-0">
+            <div class="align-items-center d-flex justify-content-center">
+                <p class="color-03 font-weight-medium m-0 mr-2 paragraph-02">Select Document Type </p>
+                <select class="form-control w-50" #docType (change)="markFormRead()">
+                    <option *ngFor="let item of docTypes;let isFirst=first" [value]="item.value" [selected]="isFirst">
+                        {{item.text}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6 pr-0">
+            <div class="d-flex justify-content-center">
+                <label
+                    class="d-flex drag-drop-container border-0 justify-content-center cursor-pointer"
+                    for="documentupload1">
+                    <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                    <p class="color-03 my-2 paragraph-02 text-center mx-3">OR</p>
+                    <p class="m-0 paragraph-02 text-center"><span
+                            class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                </label>
+                <input class="form-control d-none" placeholder="" id="documentupload1" type="file"
+                    (change)="fileChangeEvent($event,docType)" accept="application/pdf,application/msword,text/plain,
+                    application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            </div>
+        </div>
+    </div>
+    <div class="col-12 px-0">
+
+    </div>
+    <form class="row m-0">
+
+        <div class="border-color-06 border-radius-none box-shadow-1 col-12 d-flex justify-content-between mb-2 pt-2 pb-2"
+            *ngFor="let doc of form?.value?.projectDocument;let pdIndex= index">
+            <div class="align-items-center d-flex">
+                <span *ngIf="doc?.documentFileName?.split('.')[1] == 'pdf'" class="color-13 material-icons mr-2 sub-heading-01">picture_as_pdf</span>
+                <span *ngIf="['png','jpg','jpeg'].includes(doc?.documentFileName?.split('.')[1])" class="material-icons mr-2 sub-heading-01">image</span>               
+                <img *ngIf="doc?.documentFileName?.split('.')[1]=='docx'" class="color-13 material-icons mr-2 sub-heading-01 project-img" src="/assets/imgs/docx.png">
+                <p class="m-0 paragraph-02 font-weight-medium color-03">{{doc?.documentFileName}}</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <p class="color-03 font-style-italic font-weight-light m-0 paragraph-03 mr-2 text-left">uploaded on
+                    {{doc?.createdDate | date:'short'}}</p>
+                <a *ngIf="doc?.documentFilePath" target="_blank" [href]="doc?.documentFilePath"
+                    class="mr-2 cursor-pointer"><span
+                        class="material-icons color-03 paragraph-01">remove_red_eye</span></a>
+                <button class="cursor-pointer border-0 bg-color-transparent" (click)="removeDoc(pdIndex)"><span
+                        class="material-icons color-03 paragraph-01">close</span></button>
+            </div>
+        </div>
+        <!-- <div class="d-flex card-body">
+            <div class="col-md-4 ">
+                <div class="form-group">
+                    <label class="document-lbl">Document template-Worksheet</label>
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="fileChangeEvent($event,1)"
+                            class="border-radius  d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload1">
+                            <ng-container></ng-container>
+                            <p *ngIf="document1">{{document1}}<span></span></p>
+
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload1" type="file"
+                            (change)="fileChangeEvent($event,1)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="document-lbl">Document template -Worksheet
+                    </label>
+
+
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="onFileChange($event,2)"
+                            class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload2">
+                            <p *ngIf="document2">{{document2}}<span></span></p>
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload2" type="file"
+                            (change)="fileChangeEvent($event,2)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group flex-auto">
+                    <label class="document-lbl">Document template
+                        -Worksheet</label>
+
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="onFileChange($event,3)"
+                            class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload3">
+                            <ng-container></ng-container>
+                            <p *ngIf="document3">{{document3}}<span></span></p>
+
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload3" type="file"
+                            (change)="fileChangeEvent($event,3)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex card-body">
+            <div class="col-md-4 ">
+                <div class="form-group">
+                    <label class="document-lbl">Document template
+                        -Worksheet</label>
+
+
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="onFileChange($event,4)"
+                            class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload4">
+                            <ng-container></ng-container>
+                            <p *ngIf="document4">{{document4}}<span></span></p>
+
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload4" type="file"
+                            (change)="fileChangeEvent($event,4)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="document-lbl">Document template
+                        -Worksheet</label>
+
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="onFileChange($event,5)"
+                            class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload5">
+                            <p *ngIf="document5">{{document5}}<span></span></p>
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload5" type="file"
+                            (change)="fileChangeEvent($event,5)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group flex-auto">
+                    <label class="document-lbl">Document template
+                        -Worksheet</label>
+
+
+                    <ng-container>
+                        <label fileDragDrop (filesChangeEmiter)="onFileChange($event,6)"
+                            class="border-radius d-flex drag-drop-container flex-column form-control justify-content-center cursor-pointer"
+                            for="documentupload6">
+                            <p *ngIf="document6">{{document6}}<span></span></p>
+                            <p class="color-03 m-0 paragraph-02 text-center">Drag & Drop file here</p>
+                            <p class="color-03 my-2 paragraph-02 text-center">OR</p>
+                            <p class="m-0 paragraph-02 text-center"><span
+                                    class="bg-color-08 border-radius color-07 px-3 py-1">Upload</span></p>
+                        </label>
+                        <input class="form-control d-none" placeholder="" id="documentupload6" type="file"
+                            (change)="fileChangeEvent($event,6)" accept="application/pdf,application/msword,text/plain,
+                            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </ng-container>
+                </div>
+
+            </div>
+
+        </div> -->
+    </form>
+    <ng-template #imgCropperTemplate1>
+        <h2 class="d-flex justify-content-between mat-dialog-title" mat-dialog-title>Editor
+            <button class="bg-transparent border-0 d-flex" mat-dialog-close><i class="material-icons">close</i></button>
+        </h2>
+        <mat-dialog-content>
+            <ckeditor id="editor1" [config]="ckeConfig" (namespaceLoaded)="onNamespaceLoaded($event)"
+                [(data)]="editorData">
+            </ckeditor>
+
+        </mat-dialog-content>
+        <mat-dialog-actions class="d-flex justify-content-center mat-dialog-actions ng-star-inserted px-4">
+            <button class="cropper-btn" mat-stroked-button aria-label="button with a check icon" (click)="onSave()">
+                <mat-icon>check</mat-icon>
+            </button>
+
+
+            <button class="cropper-btn" mat-stroked-button aria-label="button with a close icon"
+                (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-dialog-actions>
+    </ng-template>
+</section>

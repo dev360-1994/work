@@ -1,0 +1,95 @@
+<section class="d-block">
+    <button (click)="backToGrid()"
+        class="bg-color-transparent border-0 color-01 color-01-hover d-flex font-weight-medium letter-spacing-1 paragraph-01">
+        <span class="material-icons mr-1 paragraph-01">keyboard_backspace</span> Back to Grid
+    </button>
+</section>
+
+<div class="d-block mt-4">
+    <div class="align-items-center d-flex justify-content-between pl-4">
+        <div class="align-items-center d-flex">
+            <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">UNIT NUMBERS</p>
+            <!-- <select
+                class="bg-color-transparent border-0 color-03 font-weight-medium letter-spacing-1 m-0 paragraph-03 mx-2"
+                [(ngModel)]="selectedTowerIndex" (change)="onTowerChange()">
+                <option *ngFor="let tower of towers;let i = index" [value]="i">{{tower?.title | titlecase}}</option>
+            </select> -->
+            <select *ngIf="selectedTower?.blocks?.length"
+                class="bg-color-transparent border-0 color-03 font-weight-medium letter-spacing-1 m-0 paragraph-03 mx-2"
+                [(ngModel)]="selectedBlockIndex" (change)="onChangeBlock()">
+                <option *ngFor="let block of selectedTower?.blocks;let i = index" [value]="i">{{block?.title |
+                    titlecase}}</option>
+            </select>
+        </div>
+        <div class="align-items-center d-flex">
+            <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-02">{{selectedBlock?.count}}</p>
+        </div>
+    </div>
+</div>
+<div class="main grid d-flex position-relative sales-grid-blocks my-2">
+    <div class="floor-numbers left-0 bg-color-06 position-sticky z-index-2 pt-1">
+        <div class="d-block">
+            <!-- alreadySelected -->
+            <ng-container *ngFor="let floor  of selectedBlock?.floors">
+                <div class="floor-number bg-color-white d-flex mb-2 align-items-center"
+                    [class.floorNumberAlreadySelected]="floor?.alreadySelected">
+                    <p class="color-05 font-weight-normal letter-spacing-1 m-0 mr-2 paragraph-04"
+                        *ngIf="!floor?.alreadySelected">
+                        {{floor?.number}}</p>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+    <div class="">
+        <div class="d-block">
+            <ng-container *ngFor="let floor  of selectedBlock?.floors">
+                <div class="d-flex flex-column" [class.floorAlreadySelected]="floor?.alreadySelected">
+                    <div class="d-flex" *ngIf="!floor?.alreadySelected">
+                        <div class="d-flex">
+                            <div [class.bg-color-05]="unit?.unitSelected || unit?.isSkip"
+                                [class.bg-color-08]="!unit?.unitSelected && !unit?.isSkip"
+                                [class.alreadySelected]="unit?.isSkip"
+                                class="align-items-center color-03 d-flex justify-content-center m-1 paragraph-02 unit-box border-color-05"
+                                *ngFor="let unit  of floor?.units">
+                                <ng-container *ngIf="!unit?.isSkip">{{unit?.flatNo}}</ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+        <div class="d-flex stack-numbers bottom-0 bg-color-06 position-sticky z-index-1">
+            <div class="d-flex">
+                <ng-container *ngFor="let stack  of stacks">
+                    <div [class.alreadySelectedStackNumber]="stack?.alreadySelected"
+                        class="stack-number color-05 d-flex font-weight-normal justify-content-center letter-spacing-1 m-0 mr-2 paragraph-04">
+                        <ng-container *ngIf="!stack?.alreadySelected">{{stack.name}}</ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-end">
+    <!-- <select class="bg-color-transparent border-0 color-03 font-weight-medium letter-spacing-1 m-0 paragraph-03 mx-2"
+        [(ngModel)]="selectedSkipType" (change)="updateSkipOptionInUnits()">
+        <option *ngFor="let skipType of skipTypes;let i = index" [value]="skipType.val">{{skipType?.title |
+            titlecase}}</option>
+    </select> -->
+    <div class="d-flex align-items-center">
+        <div class="align-items-center color-03 d-flex mx-2" *ngFor="let skipOption of skipOptions">
+            <input type="checkbox" [(ngModel)]="skipOption.checked" (ngModelChange)="updateSkipOptionInUnits($event)">
+            <p class="m-0 paragraph-03 ml-2">{{skipOption?.title}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row m-0 form-group my-3 justify-content-end" *ngIf="this.selectedTower?.blocks?.length">
+    <button *ngIf="selectedBlockIndex < this.selectedTower?.blocks?.length-1" (click)="nextBlock()" mat-stroked-button
+        class="ml-2 bg-color-01 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">NEXT BLOCK</button>
+    <button (click)="onSave()" mat-stroked-button
+        class="ml-2 bg-color-11 border-0 color-white paragraph-03 px-5 py-2 font-weight-medium">SAVE</button>
+</div>

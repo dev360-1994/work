@@ -1,0 +1,244 @@
+﻿@model HotelManagment.Models.RoomRequestModel
+@{
+    ViewBag.Title = "AssignRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+<div class="col-md-5 grid-margin stretch-card">
+    <div class="w-100 pb-5">
+        <div class="wizard">
+            <nav class="list-group list-group-flush">
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="hidden" id="requestId" value="@Model.RequestId" />
+                        <div>
+                            <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Student Name</div>
+                        </div><span>@Model.FirstName @Model.LastName</span>
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Email</div>
+                        </div><span>@Model.Email</span>
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Budget</div>
+                        </div><span>@Model.Budegt</span>
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fe-icon-heart mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Address</div>
+                        </div><span>@Model.Address</span>
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="fe-icon-tag mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Cource Name</div>
+                        </div><span class="badge badge-secondary">@Model.Course</span>
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                        </div>
+                        <input type="text" class="form-control" id="message" placeholder="request cancel reason" />
+                    </div>
+                </a>
+                <a class="list-group-item" href="#">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                        </div>
+                        <input type="button" class="form-control" id="cancl-reqst" value="Cancel Request" />
+                    </div>
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-7 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Rooms Information</p>
+            <!-- CARD HEADER START -->
+            <div class="card_head">
+                <form class="form-sample">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Rooms</label>
+                                <div class="col-sm-9">
+                                    <select id="room-option" class="form-control">
+                                        <option value="0">Select Room</option>
+                                        @{
+                                            foreach (var room in Model.RoomModel)
+                                            {
+                                                <option value="@room.Roomid">@room.RoomNo</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 room-info">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Total Beds</label>
+                                <div class="col-sm-9">
+                                    <span id="totalbed"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 room-info">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Availabe beds</label>
+                                <div class="col-sm-9">
+                                    <span id="availbeds"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 room-info">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Room Charges</label>
+                                <div class="col-sm-9">
+                                    <span id="charges"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 room-info">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Floor</label>
+                                <div class="col-sm-9">
+                                    <span id="floor"></span>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+                    <div class="text-right room-info">
+                        <button type="button" id="assignroom" class="btn btn-primary mr-2">Assign</button>
+                        <button class="btn btn-light cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /CARD HEADER END -->
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".room-info").hide();
+    });
+    $("#room-option").change(function () {
+        var roomid = $("#room-option option:selected").val();
+        if (roomid == 0) {
+            $(".room-info").hide();
+            return false;
+        }
+        var data = { "roomid": roomid };
+        $('.loader').show();
+        $.ajax({
+            type: "Get",
+            url: "/Hostel/GetRoomInfo",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Floor != undefined) {
+                    $("#floor").text(result.Floor);
+                    $("#charges").text(result.RoomChangres);
+                    $("#availbeds").text(result.VacantBeds);
+                    $("#totalbed").text(result.NoOfBeds);
+                    $(".room-info").show();
+                    if (result.VacantBeds == 0) {
+                        $("#assignroom").hide();
+                    } else {
+                        $("#assignroom").show();
+                    }
+                    return;
+                }
+                if (!result.Success) {
+                    alert(result.Message);
+                }
+                else
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result.Message);
+            }
+        });
+    });
+
+    $("#assignroom").click(function () 
+        var roomid = $("#room-option option:selected").val();
+//        var userId = $("#userid").val();
+        var requestId = $("#requestId").val();
+        var data = { "roomId": roomid, "requestID": requestId };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Hostel/AssignRoomToUser",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    alert(result.Message);
+                    window.location.href = '@Url.Action("Index","Hostel")';
+                }
+                if (!result.Success) {
+                    alert(result.Message);
+                }
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result.Message);
+            }
+        });
+    });
+
+    $("#cancl-reqst").click(function () {
+        var requestId = $("#requestId").val();
+        var mess = $("#message").val();
+        if (mess == "") {
+            alert("Please enter cancel request reason.")
+            return false;
+        }
+        var data = { "requestID": requestId, "message": mess };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Hostel/CancelRoomRequest",
+            cache: false,
+            data: data,
+            success: function (result) {
+                if (result.Success) {
+                    alert(result.Message);
+                    window.location.href = '@Url.Action("Index","Hostel")';
+                }
+                if (!result.Success) {
+                    alert(result.Message);
+                }
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result.Message);
+            }
+        });
+    });
+</script>

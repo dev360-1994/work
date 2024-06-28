@@ -1,0 +1,54 @@
+﻿@model IEnumerable<HotelManagment.Models.RoomRequestModel>
+
+@{
+    ViewBag.Title = "RoomsRequest";
+}
+
+@* ACCESS LOGS SECTION *@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Room Request</p>
+            <div class="text-muted font-weight-light cstm-card-body">
+                <table id="tblhistory" class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>UserId</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Course</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{foreach (var cors in Model)
+                            {
+                                <tr>
+                                    <td>@cors.UserId</td>
+                                    <td>@cors.FirstName @cors.LastName</td>
+                                    <td>@cors.Email</td>
+                                    <td>@cors.Mobile</td>
+                                    <td>@cors.Course</td>
+                                    <td><a href="/AssignRoom?requestId=@cors.RequestId">Assign Room</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/content/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="~/content/js/plugins/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datatable').DataTable();
+        });
+
+    </script>
+}

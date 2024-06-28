@@ -1,0 +1,89 @@
+<mat-dialog-content>
+    <section class="d-block">
+        <mat-progress-bar *ngIf="isProgressing" mode="buffer"></mat-progress-bar>
+        <div class="row m-0  bg-color-white border-1 border-color-19 my-3 py-3">
+            <div class="col-12 d-flex">
+                <h3 class="color-01 col-6 p-0 font-weight-bold mb-2 paragraph-01 letter-spacing-1">Grid <span class="color-05 ml-2 paragraph-03">(preview)</span></h3>
+                <div class="col-6 text-right">
+                    <button (click)="onSelectTower(item)" mat-stroked-button *ngFor="let item of project?.projectTower; let i = index" class="border-2 border-color-07 font-weight-medium letter-spacing-1 paragraph-03 px-3 ml-2" [class.bg-color-white]="item.towerId != tower?.towerId"
+                        [class.color-07]="item.towerId != tower?.towerId" [class.bg-color-07]="item.towerId == tower?.towerId" [class.color-white]="item.towerId == tower?.towerId">{{item?.towerName | titlecase}} {{i+1}}</button>
+                </div>
+            </div>
+
+            <div class="col-12 pl-0 main grid d-flex position-relative sales-grid-blocks">
+                <div class="floor-numbers bg-color-06 left-0 position-sticky z-index-2 pt-4">
+                    <div class="d-block bg-color-white" *ngFor="let block of tower?.projectBlocks">
+                        <p class="visibility-hidden">1</p>
+                        <div class="d-flex flex-column my-2" *ngFor="let floor  of block?.projectFloorDetails">
+                            <p class="floor-number color-01 font-weight-medium letter-spacing-1 m-0 ml-3 mr-2 paragraph-03">
+                                {{floor?.floorNo}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="d-block" *ngFor="let block of tower?.projectBlocks">
+                        <div class="align-items-center border-bottom-1 border-color-19 d-flex justify-content-between m-1 mb-1 mt-3">
+                            <div class="align-items-center d-flex position-sticky block-title">
+                                <p class="color-01 font-weight-medium letter-spacing-1 m-0 mr-2 paragraph-02">
+                                    {{block?.blockName}}
+                                </p>
+                                <p class="color-03 font-weight-normal letter-spacing-1 m-0 paragraph-04">{{block?.count}}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="d-flex flex-column" *ngFor="let floor  of block?.floors"> -->
+                        <div class="d-flex flex-column" *ngFor="let floor  of block?.projectFloorDetails">
+                            <div class="d-flex">
+                                <div class="d-flex">
+                                    <button [class.selected]="unit.selected" (click)="openDialog(unit)" [class.visibility-hidden]="unit?.visibilityHidden" class="cursor-pointer color-03 m-1 sales-grid-box p-2 position-relative border-radius-none text-left border-0" [matTooltipDisabled]="!unit?.assignAgentId"
+                                        matTooltip="Assign agent: {{unit?.agentName || unit?.assignAgentId}}" [ngStyle]="{'background-color': unit?.bgColor}" *ngFor="let unit  of floor?.projectUnitFlats">
+                                            <button [class.color-white-hover]="!unit.selected" [class.color-18]="unit.selected"
+                                                class="bg-color-transparent pl-0 pt-0 border-0 check-mark color-06  position-absolute z-index-1 cursor-pointer">
+                                                <span class="material-icons" [class.sub-heading-03]="unit.selected">check_circle</span>
+                                            </button>
+                                    <div>
+                                        <!-- <span
+                                    class="align-items-center bg-color-13 color-white count d-flex justify-content-center paragraph-04 position-absolute">
+                                    3
+                                  </span> -->
+
+                                        <p class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-04 line-clamp line-clamp-1 text-center" [ngStyle]="{'color': unit?.bgColor,'filter':'brightness(2.5)'}">
+                                            {{unit?.flatNo}}</p>
+                                        <!-- <p
+                                                    class="font-weight-semi-bold letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                                                    ${{unit?.price || 0}}
+                                                </p> -->
+                                        <!-- <p
+                                                    class="font-weight-normal letter-spacing-1 m-0 paragraph-03 line-clamp line-clamp-1">
+                                                    {{unit?.unitName || 'n/a'}}</p> -->
+                                        <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                                    Radiant
+                                    Radiant </p> -->
+                                        <!-- <p
+                                                    class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                                                    {{unit.interiorSize}} + {{unit?.balconySize}} sq.ft</p>
+                                                <p
+                                                    class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">
+                                                    {{unit?.view}}</p> -->
+                                        <!-- <p class="font-weight-normal letter-spacing-1 m-0 paragraph-04 color-03 line-clamp line-clamp-1">2bd+d, 2ba, SW</p> -->
+                                    </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="d-flex stack-numbers bottom-0 bg-color-06 position-sticky z-index-1">
+                        <div class="d-flex">
+                            <div class="mx-1 mt-1 mb-0 p-0 stack-number color-01 font-weight-medium letter-spacing-1 paragraph-03" *ngFor="let stack  of stacks">{{stack}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button [disabled]="flatId == 0" (click)="selectUnit()" class="bg-color-transparent border-0 colo color-09 mr-2 paragraph-03 text-decoration-underline cursor-pointer">Select</button>
+    <button [mat-dialog-close]="true" class="bg-color-transparent border-0 colo color-09 paragraph-03 text-decoration-underline cursor-pointer">Close</button>
+</mat-dialog-actions>

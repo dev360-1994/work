@@ -1,0 +1,124 @@
+﻿@model HotelManagment.Database_Model.Courses
+@{
+    ViewBag.Title = "AddCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body p-0">
+            <p class="card-title">Add Course Details</p>
+            <!-- CARD HEADER START -->
+            <div class="card_head">
+                <form class="form-sample">
+                    <input type="hidden" value="@Model.Id" id="courseId" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Course Name</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control name" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-check form-check-primary">
+                                    <label class="form-check-label">
+                                        Is Active
+                                        @{
+                                            if (Model.IsActive)
+                                            {
+                                                <input type="checkbox" class="isactive form-check-input" checked="">
+                                                <i class="input-helper"></i>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" class="isactive form-check-input">
+                                                <i class="input-helper"></i>
+                                            }
+
+                                        }
+                                       
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Course Description</label>
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(x => x.Description, new { @class = "desc form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Course Fees</label>
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(x => x.Fees, new { @class = "fees form-control number" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        @{ if (Model.Id>0)
+                            {
+                                <button type="button" id="savecourse" class="btn btn-primary mr-2">Update Course</button>    }
+                            else
+                            {
+                                <button type="button" id="savecourse" class="btn btn-primary mr-2">Add Course</button>
+                            }}
+                        
+                        <button class="btn btn-light cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /CARD HEADER END -->
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //called when key is pressed in textbox
+        $(".number").keypress(function (e) {
+            //if the letter is not digit then display error and don't type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+    $("#savecourse").click(function () {
+        var name = $(".name").val();
+        var desc = $(".desc").val();
+        var fees = $(".fees").val();
+        var isactive = $(".isactive").is(":checked")?true:false;
+        var data = { "Id": $("#courseId").val(), "Name": name, "Description": desc, "Fees": fees, "IsActive": isactive };
+        $('.loader').show();
+        $.ajax({
+            type: "Post",
+            url: "/Course/SaveCourse",
+            cache: false,
+            data: data,
+            success: function (result) {
+                $('.loader').hide();
+                if (result.Success) {
+                    alert(result.Message);
+                    window.location.href = '@Url.Action("AllCourses", "Course")';
+                }
+                else 
+                    alert(result.Message);
+            },
+            error: function (result) {
+                $('.loader').hide();
+                alert(result);
+            }
+        });
+
+    });
+</script>
